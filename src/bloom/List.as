@@ -23,7 +23,7 @@ package bloom
 {
 	import flash.display.DisplayObjectContainer;
 	
-	import bloom.core.ThemeBase;
+	import bloom.themes.ThemeBase;
 	
 	/**
 	 * List

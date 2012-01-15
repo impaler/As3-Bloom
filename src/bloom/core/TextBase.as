@@ -28,6 +28,7 @@ package bloom.core
 	
 	import bloom.brushes.TextBrush;
 	import bloom.events.BrushEvent;
+	import bloom.themes.ThemeBase;
 	
 	/**
 	 * TextBase

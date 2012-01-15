@@ -28,7 +28,9 @@ package bloom.core
 	
 	import bloom.brushes.BMDBrush;
 	import bloom.brushes.ColorBrush;
+	import bloom.core.ScaleBitmap;
 	import bloom.events.BrushEvent;
+	import bloom.themes.ThemeBase;
 	
 	/**
 	 * ButtonBase
@@ -70,6 +72,7 @@ package bloom.core
 			
 			var bmdBrush:BMDBrush;
 			var colorBrush:ColorBrush;
+			var scale:ScaleBitmap;
 			
 			_bg.graphics.clear();
 			
@@ -90,13 +93,19 @@ package bloom.core
 				bmdBrush = brush as BMDBrush;
 				switch(_state) {
 					case 0:
-						_bg.graphics.beginBitmapFill(bmdBrush.bitmapData[0], null, bmdBrush.repeat);
+						scale = bmdBrush.bitmapData[0];
+						scale.setSize(_width, _height);
+						_bg.graphics.beginBitmapFill(scale.bitmapData);
 						break;
 					case 1:
-						_bg.graphics.beginBitmapFill(bmdBrush.bitmapData[1], null, bmdBrush.repeat);
+						scale = bmdBrush.bitmapData[1];
+						scale.setSize(_width, _height);
+						_bg.graphics.beginBitmapFill(scale.bitmapData);
 						break;
 					case 2:
-						_bg.graphics.beginBitmapFill(bmdBrush.bitmapData[2], null, bmdBrush.repeat);
+						scale = bmdBrush.bitmapData[2];
+						scale.setSize(_width, _height);
+						_bg.graphics.beginBitmapFill(scale.bitmapData);
 						break;
 				}
 			}

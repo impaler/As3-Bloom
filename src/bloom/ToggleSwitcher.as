@@ -32,7 +32,8 @@ package bloom
 	import bloom.brushes.ColorBrush;
 	import bloom.core.ButtonBase;
 	import bloom.core.Component;
-	import bloom.core.ThemeBase;
+	import bloom.core.ScaleBitmap;
+	import bloom.themes.ThemeBase;
 	
 	/** 
 	 * Dispatched when the value has changed.
@@ -50,6 +51,7 @@ package bloom
 		
 		protected var _value:Boolean;
 		protected var _rect:Rectangle;
+		protected var _rect2:Rectangle;
 		
 		protected var _slider:Sprite;
 		protected var _bg:Shape;
@@ -67,6 +69,7 @@ package bloom
 			addChild(_slider);
 			
 			_rect = new Rectangle();
+			_rect2 = new Rectangle();
 			
 			_value = value;
 			
@@ -84,10 +87,14 @@ package bloom
 				return;
 			}
 			
-			_rect.width = _width - 20;
+			_rect.width = _width - _height;
+			_rect2.width = _width;
+			_rect2.height = _height;
+			scrollRect = _rect2;
 			
 			var bmdBrush:BMDBrush;
 			var colorBrush:ColorBrush;
+			var scale:ScaleBitmap;
 			
 			graphics.clear();
 			_bg.graphics.clear();
@@ -95,31 +102,34 @@ package bloom
 			
 			if (brush is ColorBrush) {
 				colorBrush = brush as ColorBrush;
-				graphics.beginFill(colorBrush.colors[1]);
-				_bg.graphics.beginFill(colorBrush.colors[2]);
+				graphics.beginFill(colorBrush.colors[2]);
+				_bg.graphics.beginFill(colorBrush.colors[1]);
 				_slider.graphics.beginFill(colorBrush.colors[0]);
 			} else if (brush is BMDBrush) {
 				bmdBrush = brush as BMDBrush;
-				graphics.beginBitmapFill(bmdBrush.bitmapData[1], null, bmdBrush.repeat);
-				_bg.graphics.beginBitmapFill(bmdBrush.bitmapData[2], null, bmdBrush.repeat);
-				_slider.graphics.beginBitmapFill(bmdBrush.bitmapData[0], null, bmdBrush.repeat);
+				scale = bmdBrush.bitmapData[2];
+				scale.setSize(_width, _height);
+				graphics.beginBitmapFill(scale.bitmapData);
+				
+				scale = bmdBrush.bitmapData[1];
+				scale.setSize(_width, _height);
+				_bg.graphics.beginBitmapFill(scale.bitmapData);
+				
+				scale = bmdBrush.bitmapData[0];
+				scale.setSize(_height, _height);
+				_slider.graphics.beginBitmapFill(scale.bitmapData);
 			}
 			
 			graphics.drawRect(0, 0, _width, _height);
 			graphics.endFill();
 			
-			_bg.graphics.drawRect(0, 0, 1, _height);
+			_bg.graphics.drawRect(0, 0, _width, _height);
 			_bg.graphics.endFill();
 			
-			_slider.graphics.drawRect(0, 0, 20, _height);
+			_slider.graphics.drawRect(0, 0, _height, _height);
 			_slider.graphics.endFill();
 			
-			update();
-		}
-		
-		protected function update():void {
-			_slider.x = _value ? 0 : _width - 20;
-			_bg.width = _slider.x;
+			_bg.x = _slider.x = _value ? 0 : _width - 20;
 		}
 		
 		protected function onMouseDown(e:MouseEvent):void {
@@ -129,7 +139,7 @@ package bloom
 		}
 		
 		protected function onMouseMove(e:MouseEvent):void {
-			_bg.width = _slider.x;
+			_bg.x = _slider.x;
 		}
 		
 		protected function onMouseUp(e:MouseEvent):void {
@@ -150,7 +160,7 @@ package bloom
 		public function set value(b:Boolean):void {
 			if (_value != b) {
 				_value = b;
-				update();
+				_bg.x = _slider.x = _value ? 0 : _width - 20;
 				dispatchEvent(new Event("change"));
 			}
 		}

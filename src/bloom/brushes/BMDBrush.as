@@ -21,29 +21,25 @@
  */
 package bloom.brushes 
 {
-	import flash.display.BitmapData;
-	
+	import bloom.core.ScaleBitmap;
 	import bloom.events.BrushEvent;
 	
 	[BrushEvent(name = "redraw", type = "bloom.events.BrushEvent")]
 	
 	/**
 	 * BMDBrush
-	 * <p>BitmapData Brush.</p>
+	 * <p>ScaleBitmap Brush.</p>
 	 * 
-	 * @date 2012/1/10 20:18
-	 * @author sindney
+	 * @date 2012/1/15 13:54
+	 * @author sindney, impaler
 	 */
 	public class BMDBrush extends Brush {
 		
-		private var _repeat:Boolean;
+		public var bitmapData:Vector.<ScaleBitmap>;
 		
-		public var bitmapData:Vector.<BitmapData>;
-		
-		public function BMDBrush(bitmapData:Vector.<BitmapData> = null) {
+		public function BMDBrush(bitmapData:Vector.<ScaleBitmap> = null) {
 			super();
 			this.bitmapData = bitmapData;
-			_repeat = false;
 		}
 		
 		/**
@@ -54,27 +50,12 @@ package bloom.brushes
 		}
 		
 		override public function clone():Brush {
-			var data:Vector.<BitmapData> = new Vector.<BitmapData>(bitmapData.length, true);
+			var data:Vector.<ScaleBitmap> = new Vector.<ScaleBitmap>(bitmapData.length, true);
 			var i:int, j:int = bitmapData.length;
 			for (i = 0; i < j; i++) {
 				data[i] = bitmapData[i].clone();
 			}
 			return new BMDBrush(data);
-		}
-		
-		///////////////////////////////////
-		// getter/setters
-		///////////////////////////////////
-		
-		public function set repeat(value:Boolean):void {
-			if (_repeat != value) {
-				_repeat = value;
-				update();
-			}
-		}
-		
-		public function get repeat():Boolean {
-			return _repeat;
 		}
 		
 		///////////////////////////////////

@@ -34,7 +34,8 @@ package bloom
 	import bloom.core.ButtonBase;
 	import bloom.core.Component;
 	import bloom.core.TextBase;
-	import bloom.core.ThemeBase;
+	import bloom.core.ScaleBitmap;
+	import bloom.themes.ThemeBase;
 	
 	/**
 	 * Dispatched when the value has changed.
@@ -171,46 +172,47 @@ package bloom
 			
 			var bmdBrush:BMDBrush;
 			var colorBrush:ColorBrush;
+			var scale:ScaleBitmap;
 			
 			_bg.graphics.clear();
 			_increase_shape.graphics.clear();
 			_decrease_shape.graphics.clear();
 			
-			if (brush is ColorBrush) {
-				colorBrush = brush as ColorBrush;
-				_bg.graphics.beginFill(colorBrush.colors[0]);
-				_increase_shape.graphics.beginFill(colorBrush.colors[1]);
-				_decrease_shape.graphics.beginFill(colorBrush.colors[1]);
-			} else if (brush is BMDBrush) {
-				bmdBrush = brush as BMDBrush;
-				_bg.graphics.beginBitmapFill(bmdBrush.bitmapData[0], null, bmdBrush.repeat);
-				_increase_shape.graphics.beginBitmapFill(bmdBrush.bitmapData[1], null, bmdBrush.repeat);
-				_decrease_shape.graphics.beginBitmapFill(bmdBrush.bitmapData[1], null, bmdBrush.repeat);
-			}
-			
-			_increase_shape.graphics.moveTo(3, 0);
-			_increase_shape.graphics.lineTo(6, 5);
-			_increase_shape.graphics.lineTo(0, 5);
-			_increase_shape.graphics.lineTo(3, 0);
-			_increase_shape.graphics.endFill();
-			
-			_decrease_shape.graphics.moveTo(0, 0);
-			_decrease_shape.graphics.lineTo(6, 0);
-			_decrease_shape.graphics.lineTo(3, 5);
-			_decrease_shape.graphics.lineTo(0, 0);
-			_decrease_shape.graphics.endFill();
-			
-			_bg.graphics.drawRect(0, 0, _width - _height, _height);
-			_bg.graphics.endFill();
-			
 			_increase.x = _decrease.x = _width - _height;
 			_increase.width = _decrease.width = _height;
 			_increase.height = _decrease.height = _decrease.y = _height * 0.5;
 			
-			_increase_shape.x = (_increase.width - _increase_shape.width) * 0.5;
-			_increase_shape.y = (_increase.height - _increase_shape.height) * 0.5;
-			_decrease_shape.x = (_decrease.width - _decrease_shape.width) * 0.5;
-			_decrease_shape.y = (_decrease.height - _decrease_shape.height) * 0.5;
+			if (brush is ColorBrush) {
+				colorBrush = brush as ColorBrush;
+				_bg.graphics.beginFill(colorBrush.colors[0]);
+				
+				_increase_shape.graphics.beginFill(colorBrush.colors[1]);
+				_increase_shape.graphics.moveTo(3, 0);
+				_increase_shape.graphics.lineTo(6, 5);
+				_increase_shape.graphics.lineTo(0, 5);
+				_increase_shape.graphics.lineTo(3, 0);
+				_increase_shape.graphics.endFill();
+				
+				_decrease_shape.graphics.beginFill(colorBrush.colors[1]);
+				_decrease_shape.graphics.moveTo(0, 0);
+				_decrease_shape.graphics.lineTo(6, 0);
+				_decrease_shape.graphics.lineTo(3, 5);
+				_decrease_shape.graphics.lineTo(0, 0);
+				_decrease_shape.graphics.endFill();
+				
+				_increase_shape.x = (_increase.width - _increase_shape.width) * 0.5;
+				_increase_shape.y = (_increase.height - _increase_shape.height) * 0.5;
+				_decrease_shape.x = (_decrease.width - _decrease_shape.width) * 0.5;
+				_decrease_shape.y = (_decrease.height - _decrease_shape.height) * 0.5;
+			} else if (brush is BMDBrush) {
+				bmdBrush = brush as BMDBrush;
+				scale = bmdBrush.bitmapData[0];
+				scale.setSize(_width - _height, _height);
+				_bg.graphics.beginBitmapFill(scale.bitmapData);
+			}
+			
+			_bg.graphics.drawRect(0, 0, _width - _height, _height);
+			_bg.graphics.endFill();
 			
 			_textBase.size(_width - _height, _height);
 		}
@@ -222,7 +224,7 @@ package bloom
 				_textBase.text = String(_value);
 				dispatchEvent(new Event("change"));
 			} else {
-				throw(new Error("Invalidate max or min value."));
+				_value = _min = _max;
 			}
 		}
 		

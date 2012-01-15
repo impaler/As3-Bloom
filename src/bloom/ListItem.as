@@ -24,8 +24,8 @@ package bloom
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
 	
-	import bloom.core.ThemeBase;
 	import bloom.events.BrushEvent;
+	import bloom.themes.ThemeBase;
 	
 	/**
 	 * ListItem

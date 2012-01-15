@@ -25,9 +25,9 @@ package bloom
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
-	import bloom.core.ThemeBase;
 	import bloom.core.ButtonBase;
 	import bloom.events.BrushEvent;
+	import bloom.themes.ThemeBase;
 	
 	/**
 	 * Button

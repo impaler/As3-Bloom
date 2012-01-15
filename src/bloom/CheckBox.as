@@ -28,9 +28,9 @@ package bloom
 	
 	import bloom.brushes.BMDBrush;
 	import bloom.brushes.ColorBrush;
-	import bloom.core.ThemeBase;
 	import bloom.core.Component;
 	import bloom.events.BrushEvent;
+	import bloom.themes.ThemeBase;
 	
 	/** 
 	 * Dispatched when the value has changed.
@@ -100,12 +100,13 @@ package bloom
 				}
 			} else if (brush is BMDBrush) {
 				bmdBrush = brush as BMDBrush;
-				_bg.graphics.beginBitmapFill(bmdBrush.bitmapData[0], null, bmdBrush.repeat);
-				_bg.graphics.drawRect(5, 5, 10, 10);
-				_bg.graphics.endFill();
 				if (_value) {
-					_bg.graphics.beginBitmapFill(bmdBrush.bitmapData[1], null, bmdBrush.repeat);
-					_bg.graphics.drawRect(7, 7, 6, 6);
+					_bg.graphics.beginBitmapFill(bmdBrush.bitmapData[1].bitmapData);
+					_bg.graphics.drawRect(0, 0, 20, 20);
+					_bg.graphics.endFill();
+				} else {
+					_bg.graphics.beginBitmapFill(bmdBrush.bitmapData[0].bitmapData);
+					_bg.graphics.drawRect(0, 0, 20, 20);
 					_bg.graphics.endFill();
 				}
 			}

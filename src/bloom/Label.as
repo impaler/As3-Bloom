@@ -25,8 +25,8 @@ package bloom
 	import flash.events.Event;
 	import flash.text.TextFormat;
 	
-	import bloom.core.ThemeBase;
 	import bloom.core.TextBase;
+	import bloom.themes.ThemeBase;
 	
 	/**
 	 * Label

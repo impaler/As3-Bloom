@@ -28,6 +28,7 @@ package bloom.core
 	
 	import bloom.brushes.Brush;
 	import bloom.events.BrushEvent;
+	import bloom.themes.ThemeBase;
 	
 	/** 
 	 * Dispatched when this Component has resized.

@@ -70,11 +70,11 @@ package bloom
 				}
 				_working = true;
 			} else {
+				value = 0;
 				_rect.width = 0;
 				_rect.height = 0;
 				_bt.move(0, 0);
 				_bt.size(0, 0);
-				_value = 0;
 				if(_autoHide) _bg.graphics.clear();
 				_working = false;
 			}

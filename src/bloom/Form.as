@@ -32,7 +32,8 @@ package bloom
 	import bloom.brushes.BMDBrush;
 	import bloom.brushes.ColorBrush;
 	import bloom.core.Component;
-	import bloom.core.ThemeBase;
+	import bloom.core.ScaleBitmap;
+	import bloom.themes.ThemeBase;
 	
 	/** 
 	 * Dispatched when the target has changed.
@@ -106,6 +107,7 @@ package bloom
 			
 			var bmdBrush:BMDBrush;
 			var colorBrush:ColorBrush;
+			var scale:ScaleBitmap;
 			
 			_bg.graphics.clear();
 			
@@ -114,7 +116,9 @@ package bloom
 				_bg.graphics.beginFill(colorBrush.colors[0]);
 			} else if (brush is BMDBrush) {
 				bmdBrush = brush as BMDBrush;
-				_bg.graphics.beginBitmapFill(bmdBrush.bitmapData[0], null, bmdBrush.repeat);
+				scale = bmdBrush.bitmapData[0];
+				scale.setSize(_width, _height);
+				_bg.graphics.beginBitmapFill(scale.bitmapData);
 			}
 			
 			_bg.graphics.drawRect(0, 0, _width, _height);
@@ -136,13 +140,13 @@ package bloom
 			}
 		}
 		
-		public function scrollTo(value:int):void {
+		/*public function scrollTo(value:int):void {
 			_scrollBar.value = value;
 		}
 		
 		public function scrollToTarget():void {
 			_scrollBar.value = _index;
-		}
+		}*/
 		
 		///////////////////////////////////
 		// protected methods
