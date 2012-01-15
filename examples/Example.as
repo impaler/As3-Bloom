@@ -47,7 +47,7 @@ package
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.showDefaultContextMenu = false;
 			
-			ThemeBase.setTheme(new DefaultTheme());
+			ThemeBase.setTheme(new ColorTheme());
 			
 			var i:int;
 			var data:Array = [];

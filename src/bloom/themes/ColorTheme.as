@@ -111,13 +111,19 @@ package bloom.themes
 			data[1] = 0xffffff;
 			ThemeBase.NumericStepper = new ColorBrush(data);
 			
-			// NS_Button
+			// NS_Buttons
 			data = new Vector.<uint>(3, true);
 			data[0] = 0x3E3E72;
 			data[1] = 0x3E3E72;
 			data[2] = 0xF1BA44;
-			ThemeBase.NS_Button = new ColorBrush(data);
-			
+			ThemeBase.NS_INCREASE_Button = new ColorBrush(data);
+
+			data = new Vector.<uint>(3, true);
+			data[0] = 0x3E3E72;
+			data[1] = 0x3E3E72;
+			data[2] = 0xF1BA44;
+			ThemeBase.NS_DECREASE_Button = new ColorBrush(data);
+
 			// ProgressBar
 			data = new Vector.<uint>(2, true);
 			data[0] = 0x333333;

@@ -21,7 +21,10 @@
  */
 package bloom 
 {
-	import flash.display.DisplayObjectContainer;
+
+import bloom.brushes.Brush;
+
+import flash.display.DisplayObjectContainer;
 	import flash.display.Shape;
 	import flash.events.Event;
 	import flash.events.FocusEvent;
@@ -73,9 +76,10 @@ package bloom
 			super(p);
 			
 			this.step = step;
-			
+
+            // Move to Effects Brush?
 			_bg = new Shape();
-			_bg.filters = [ThemeBase.SHAOW];
+//			_bg.filters = [ThemeBase.SHADOW];
 			addChild(_bg);
 			
 			_textBase = new TextBase(this);
@@ -87,12 +91,12 @@ package bloom
 			_textBase.addEventListener(Event.CHANGE, onTextChange);
 			
 			_increase = new ButtonBase(this);
-			_increase.brush = ThemeBase.NS_Button;
+			_increase.brush = ThemeBase.NS_INCREASE_Button;
 			_increase.addEventListener(MouseEvent.CLICK, onIncreaseClick);
 			_increase.addEventListener(MouseEvent.MOUSE_DOWN, onIncreasePress);
 			
 			_decrease = new ButtonBase(this);
-			_decrease.brush = ThemeBase.NS_Button;
+			_decrease.brush = ThemeBase.NS_DECREASE_Button;
 			_decrease.addEventListener(MouseEvent.CLICK, onDecreaseClick);
 			_decrease.addEventListener(MouseEvent.MOUSE_DOWN, onDecreasePress);
 			
@@ -206,6 +210,12 @@ package bloom
 				_decrease_shape.y = (_decrease.height - _decrease_shape.height) * 0.5;
 			} else if (brush is BMPBrush) {
 				bmpBrush = brush as BMPBrush;
+
+                var _increase_size:BMPBrush = ThemeBase.NS_INCREASE_Button as BMPBrush;
+                scale = _increase_size.bitmap[0];
+                _increase.width = _decrease.width = scale.getOriginalBitmapData().width;
+                _increase.height = _decrease.height = scale.getOriginalBitmapData().height;
+
 				scale = bmpBrush.bitmap[0];
 				scale.setSize(_width - _height, _height);
 				_bg.graphics.beginBitmapFill(scale.bitmapData);
@@ -213,8 +223,11 @@ package bloom
 			
 			_bg.graphics.drawRect(0, 0, _width - _height, _height);
 			_bg.graphics.endFill();
-			
-			_textBase.size(_width - _height, _height);
+
+			_textBase.size(_width - _height, _textBase.height = _decrease.height);
+            _textBase.y = _height*.5 - _textBase.height *.5;
+            _textBase.x = 10;
+
 		}
 		
 		protected function fixValue():void {

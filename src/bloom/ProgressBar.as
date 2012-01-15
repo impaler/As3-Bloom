@@ -51,7 +51,7 @@ package bloom
 			super(p);
 			
 			_bg = new Sprite();
-			_bg.filters = [ThemeBase.SHAOW];
+			_bg.filters = [ThemeBase.SHADOW];
 			_progress = new Shape();
 			addChild(_bg);
 			addChild(_progress);

@@ -45,7 +45,7 @@ package bloom.themes
 		// Gloabal
 		///////////////////////////////////
 		
-		public static const SHAOW:DropShadowFilter = new DropShadowFilter(2, 45, 0, 1, 4, 4, 1, 1, true);
+		public static const SHADOW:DropShadowFilter = new DropShadowFilter(2, 45, 0, 1, 4, 4, 1, 1, true);
 		
 		public static var ALPHA:Number = 0.8;
 		
@@ -102,7 +102,8 @@ package bloom.themes
 		
 		// NumericStepper
 		public static var NumericStepper:Brush;
-		public static var NS_Button:Brush;
+        public static var NS_INCREASE_Button:Brush;
+        public static var NS_DECREASE_Button:Brush;
 		
 		// ProgressBar
 		public static var ProgressBar:Brush;
