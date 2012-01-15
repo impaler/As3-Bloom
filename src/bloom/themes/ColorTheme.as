@@ -25,14 +25,14 @@ package bloom.themes
 	import bloom.brushes.TextBrush;
 	
 	/**
-	 * DefaultTheme
+	 * ColorTheme
 	 * 
 	 * @date 2012/1/15 14:47
 	 * @author sindney, impaler
 	 */
-	public class DefaultTheme implements ITheme {
+	public class ColorTheme implements ITheme {
 		
-		public function DefaultTheme() {
+		public function ColorTheme() {
 			
 		}
 		
@@ -184,6 +184,19 @@ package bloom.themes
 			data[1] = 0x6495ED;
 			data[2] = 0xFF0000;
 			ThemeBase.ToggleSwitcher = new ColorBrush(data);
+			
+			// Window
+			data = new Vector.<uint>(1, true);
+			data[0] = 0x3E3E50;
+			ThemeBase.Window_Header = new ColorBrush(data);
+			
+			data = new Vector.<uint>(1, true);
+			data[0] = 0x666666;
+			ThemeBase.Window_Scaler = new ColorBrush(data);
+			
+			data = new Vector.<uint>(1, true);
+			data[0] = 0xB4B4B4;
+			ThemeBase.Window_Footer = new ColorBrush(data);
 		}
 		
 	}

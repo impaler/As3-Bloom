@@ -26,7 +26,7 @@ package bloom
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
-	import bloom.brushes.BMDBrush;
+	import bloom.brushes.BMPBrush;
 	import bloom.brushes.ColorBrush;
 	import bloom.core.Component;
 	import bloom.events.BrushEvent;
@@ -83,7 +83,7 @@ package bloom
 				return;
 			}
 			
-			var bmdBrush:BMDBrush;
+			var bmpBrush:BMPBrush;
 			var colorBrush:ColorBrush;
 			
 			_bg.graphics.clear();
@@ -98,14 +98,14 @@ package bloom
 					_bg.graphics.drawRect(7, 7, 6, 6);
 					_bg.graphics.endFill();
 				}
-			} else if (brush is BMDBrush) {
-				bmdBrush = brush as BMDBrush;
+			} else if (brush is BMPBrush) {
+				bmpBrush = brush as BMPBrush;
 				if (_value) {
-					_bg.graphics.beginBitmapFill(bmdBrush.bitmapData[1].bitmapData);
+					_bg.graphics.beginBitmapFill(bmpBrush.bitmap[1].bitmapData);
 					_bg.graphics.drawRect(0, 0, 20, 20);
 					_bg.graphics.endFill();
 				} else {
-					_bg.graphics.beginBitmapFill(bmdBrush.bitmapData[0].bitmapData);
+					_bg.graphics.beginBitmapFill(bmpBrush.bitmap[0].bitmapData);
 					_bg.graphics.drawRect(0, 0, 20, 20);
 					_bg.graphics.endFill();
 				}

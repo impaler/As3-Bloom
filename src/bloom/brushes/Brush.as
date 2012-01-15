@@ -43,6 +43,10 @@ package bloom.brushes
 			return null;
 		}
 		
+		public function destory():void {
+			
+		}
+		
 		///////////////////////////////////
 		// toString
 		///////////////////////////////////

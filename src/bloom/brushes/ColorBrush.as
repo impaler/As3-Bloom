@@ -56,6 +56,10 @@ package bloom.brushes
 			return new ColorBrush(data);
 		}
 		
+		override public function destory():void {
+			colors = null;
+		}
+		
 		///////////////////////////////////
 		// toString
 		///////////////////////////////////

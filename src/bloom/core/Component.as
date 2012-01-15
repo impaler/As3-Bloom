@@ -21,6 +21,8 @@
  */
 package bloom.core 
 {
+	import bloom.brushes.BMPBrush;
+	import bloom.brushes.ColorBrush;
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -138,8 +140,12 @@ package bloom.core
 		
 		public function set brush(b:Brush):void {
 			if (_brush != b) {
-				if (_brush) _brush.removeEventListener(BrushEvent.REDRAW, onBrushChanged);
+				if (_brush) {
+					if (_brush is BMPBrush)_brush.destory();
+					_brush.removeEventListener(BrushEvent.REDRAW, onBrushChanged);
+				}
 				_brush = b;
+				if (_brush is BMPBrush)_brush = b.clone();
 				if (_brush) {
 					_changed = true;
 					invalidate();

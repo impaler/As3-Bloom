@@ -55,7 +55,16 @@ package
 				data[i] = ["NO." + i.toString()];
 			}
 			
-			scrollContainer = new ScrollContainer(this);
+			scrollContainer = new ScrollContainer(null);
+			
+			var window:Window = new Window(this, scrollContainer);
+			window.minWidth = 200;
+			window.minHeight = 200;
+			window.headerSize = 30;
+			window.footerSize = 30;
+			window.size(200, 200);
+			window.move(10, 10);
+			window.footer.addChild(new Label(null, "Status"));
 			
 			var label:Label = new Label(scrollContainer.content, "I'v been busy, really.");
 			
@@ -90,15 +99,7 @@ package
 			scrollContainer.calculateContentSize();
 			scrollContainer.setScrollBar(true, true);
 			
-			//container.enabled = false;
-			
-			onResize(null);
-			stage.addEventListener(Event.RESIZE, onResize);
-		}
-		
-		private function onResize(e:Event):void {
-			scrollContainer.move(5, 5);
-			scrollContainer.size(Math.max(stage.stageWidth - 10, 100), Math.max(stage.stageHeight - 10, 100));
+			//window.enabled = false;
 		}
 		
 	}

@@ -29,7 +29,7 @@ package bloom
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 	
-	import bloom.brushes.BMDBrush;
+	import bloom.brushes.BMPBrush;
 	import bloom.brushes.ColorBrush;
 	import bloom.core.ButtonBase;
 	import bloom.core.Component;
@@ -170,7 +170,7 @@ package bloom
 				return;
 			}
 			
-			var bmdBrush:BMDBrush;
+			var bmpBrush:BMPBrush;
 			var colorBrush:ColorBrush;
 			var scale:ScaleBitmap;
 			
@@ -204,9 +204,9 @@ package bloom
 				_increase_shape.y = (_increase.height - _increase_shape.height) * 0.5;
 				_decrease_shape.x = (_decrease.width - _decrease_shape.width) * 0.5;
 				_decrease_shape.y = (_decrease.height - _decrease_shape.height) * 0.5;
-			} else if (brush is BMDBrush) {
-				bmdBrush = brush as BMDBrush;
-				scale = bmdBrush.bitmapData[0];
+			} else if (brush is BMPBrush) {
+				bmpBrush = brush as BMPBrush;
+				scale = bmpBrush.bitmap[0];
 				scale.setSize(_width - _height, _height);
 				_bg.graphics.beginBitmapFill(scale.bitmapData);
 			}

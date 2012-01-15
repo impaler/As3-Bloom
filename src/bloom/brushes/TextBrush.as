@@ -51,6 +51,10 @@ package bloom.brushes
 			return new TextBrush(_textFormat.font, int(_textFormat.size), uint(_textFormat.color), Boolean(_textFormat.bold), Boolean(_textFormat.italic), Boolean(_textFormat.underline));
 		}
 		
+		override public function destory():void {
+			_textFormat = null;
+		}
+		
 		///////////////////////////////////
 		// getter/setters
 		///////////////////////////////////

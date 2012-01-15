@@ -28,7 +28,7 @@ package bloom
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
 	
-	import bloom.brushes.BMDBrush;
+	import bloom.brushes.BMPBrush;
 	import bloom.brushes.ColorBrush;
 	import bloom.core.ButtonBase;
 	import bloom.core.Component;
@@ -92,7 +92,7 @@ package bloom
 			_rect2.height = _height;
 			scrollRect = _rect2;
 			
-			var bmdBrush:BMDBrush;
+			var bmpBrush:BMPBrush;
 			var colorBrush:ColorBrush;
 			var scale:ScaleBitmap;
 			
@@ -105,17 +105,17 @@ package bloom
 				graphics.beginFill(colorBrush.colors[2]);
 				_bg.graphics.beginFill(colorBrush.colors[1]);
 				_slider.graphics.beginFill(colorBrush.colors[0]);
-			} else if (brush is BMDBrush) {
-				bmdBrush = brush as BMDBrush;
-				scale = bmdBrush.bitmapData[2];
+			} else if (brush is BMPBrush) {
+				bmpBrush = brush as BMPBrush;
+				scale = bmpBrush.bitmap[2];
 				scale.setSize(_width, _height);
 				graphics.beginBitmapFill(scale.bitmapData);
 				
-				scale = bmdBrush.bitmapData[1];
+				scale = bmpBrush.bitmap[1];
 				scale.setSize(_width, _height);
 				_bg.graphics.beginBitmapFill(scale.bitmapData);
 				
-				scale = bmdBrush.bitmapData[0];
+				scale = bmpBrush.bitmap[0];
 				scale.setSize(_height, _height);
 				_slider.graphics.beginBitmapFill(scale.bitmapData);
 			}

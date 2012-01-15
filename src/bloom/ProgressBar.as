@@ -26,7 +26,7 @@ package bloom
 	import flash.display.Sprite;
 	import flash.events.Event;
 	
-	import bloom.brushes.BMDBrush;
+	import bloom.brushes.BMPBrush;
 	import bloom.brushes.ColorBrush;
 	import bloom.core.Component;
 	import bloom.core.ScaleBitmap;
@@ -70,7 +70,7 @@ package bloom
 				return;
 			}
 			
-			var bmdBrush:BMDBrush;
+			var bmpBrush:BMPBrush;
 			var colorBrush:ColorBrush;
 			var scale:ScaleBitmap;
 			
@@ -81,12 +81,12 @@ package bloom
 				colorBrush = brush as ColorBrush;
 				_bg.graphics.beginFill(colorBrush.colors[0]);
 				_progress.graphics.beginFill(colorBrush.colors[1]);
-			} else if (brush is BMDBrush) {
-				bmdBrush = brush as BMDBrush;
-				scale = bmdBrush.bitmapData[0];
+			} else if (brush is BMPBrush) {
+				bmpBrush = brush as BMPBrush;
+				scale = bmpBrush.bitmap[0];
 				scale.setSize(_width, _height);
 				_bg.graphics.beginBitmapFill(scale.bitmapData);
-				_progress.graphics.beginBitmapFill(bmdBrush.bitmapData[1].bitmapData);
+				_progress.graphics.beginBitmapFill(bmpBrush.bitmap[1].bitmapData);
 			}
 			
 			_bg.graphics.drawRect(0, 0, _width, _height);

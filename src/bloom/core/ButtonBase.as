@@ -26,7 +26,7 @@ package bloom.core
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
-	import bloom.brushes.BMDBrush;
+	import bloom.brushes.BMPBrush;
 	import bloom.brushes.ColorBrush;
 	import bloom.core.ScaleBitmap;
 	import bloom.events.BrushEvent;
@@ -70,7 +70,7 @@ package bloom.core
 				return;
 			}
 			
-			var bmdBrush:BMDBrush;
+			var bmpBrush:BMPBrush;
 			var colorBrush:ColorBrush;
 			var scale:ScaleBitmap;
 			
@@ -89,21 +89,21 @@ package bloom.core
 						_bg.graphics.beginFill(colorBrush.colors[2]);
 						break;
 				}
-			} else if (brush is BMDBrush) {
-				bmdBrush = brush as BMDBrush;
+			} else if (brush is BMPBrush) {
+				bmpBrush = brush as BMPBrush;
 				switch(_state) {
 					case 0:
-						scale = bmdBrush.bitmapData[0];
+						scale = bmpBrush.bitmap[0];
 						scale.setSize(_width, _height);
 						_bg.graphics.beginBitmapFill(scale.bitmapData);
 						break;
 					case 1:
-						scale = bmdBrush.bitmapData[1];
+						scale = bmpBrush.bitmap[1];
 						scale.setSize(_width, _height);
 						_bg.graphics.beginBitmapFill(scale.bitmapData);
 						break;
 					case 2:
-						scale = bmdBrush.bitmapData[2];
+						scale = bmpBrush.bitmap[2];
 						scale.setSize(_width, _height);
 						_bg.graphics.beginBitmapFill(scale.bitmapData);
 						break;

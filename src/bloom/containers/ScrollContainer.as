@@ -27,7 +27,7 @@ package bloom.containers
 	import flash.events.Event;
 	import flash.geom.Rectangle;
 	
-	import bloom.brushes.BMDBrush;
+	import bloom.brushes.BMPBrush;
 	import bloom.brushes.ColorBrush;
 	import bloom.core.IComponent;
 	import bloom.core.ScaleBitmap;
@@ -195,7 +195,7 @@ package bloom.containers
 				return;
 			}
 			
-			var bmdBrush:BMDBrush;
+			var bmpBrush:BMPBrush;
 			var colorBrush:ColorBrush;
 			var scale:ScaleBitmap;
 			
@@ -204,9 +204,9 @@ package bloom.containers
 			if (brush is ColorBrush) {
 				colorBrush = brush as ColorBrush;
 				_bg.graphics.beginFill(colorBrush.colors[0]);
-			} else if (brush is BMDBrush) {
-				bmdBrush = brush as BMDBrush;
-				scale = bmdBrush.bitmapData[0];
+			} else if (brush is BMPBrush) {
+				bmpBrush = brush as BMPBrush;
+				scale = bmpBrush.bitmap[0];
 				scale.setSize(_width, _height);
 				_bg.graphics.beginBitmapFill(scale.bitmapData);
 			}

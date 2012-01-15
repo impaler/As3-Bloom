@@ -25,19 +25,13 @@ package bloom.containers
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
 	
-	import bloom.brushes.BMDBrush;
+	import bloom.brushes.BMPBrush;
 	import bloom.brushes.Brush;
 	import bloom.brushes.ColorBrush;
 	import bloom.core.Component;
 	import bloom.core.IComponent;
 	import bloom.core.ScaleBitmap;
 	import bloom.themes.ThemeBase;
-	
-	/** 
-	 * Dispatched when this Container has resized.
-	 * @eventType flash.events.Event
-	 */
-	[Event(name = "resize", type = "flash.events.Event")]
 	
 	/**
 	 * Conatiner
@@ -50,6 +44,7 @@ package bloom.containers
 		public function Container(p:DisplayObjectContainer = null) {
 			super(p);
 			brush = ThemeBase.Container;
+			size(100, 100);
 		}
 		
 		/**
@@ -66,7 +61,7 @@ package bloom.containers
 				return;
 			}
 			
-			var bmdBrush:BMDBrush;
+			var bmpBrush:BMPBrush;
 			var colorBrush:ColorBrush;
 			var scale:ScaleBitmap;
 			
@@ -75,9 +70,9 @@ package bloom.containers
 			if (brush is ColorBrush) {
 				colorBrush = brush as ColorBrush;
 				graphics.beginFill(colorBrush.colors[0]);
-			} else if (brush is BMDBrush) {
-				bmdBrush = brush as BMDBrush;
-				scale = bmdBrush.bitmapData[0];
+			} else if (brush is BMPBrush) {
+				bmpBrush = brush as BMPBrush;
+				scale = bmpBrush.bitmap[0];
 				scale.setSize(_width, _height);
 				graphics.beginBitmapFill(scale.bitmapData);
 			}
