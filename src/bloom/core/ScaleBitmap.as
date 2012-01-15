@@ -46,11 +46,7 @@ package bloom.core {
            		assignBitmapData ( _originalBitmap.clone () );
         	}
     	}
-
-        override public function get bitmapData ( ):BitmapData {
-            return super.bitmapData.clone();
-     	}
-
+		
 		override public function set width ( w:Number ):void {
 			if ( w != width ) setSize ( w , height );
 		}
