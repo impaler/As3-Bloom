@@ -34,10 +34,9 @@ package
 	/**
 	 * Bloom Example
 	 * 
-	 * @date 2012/1/16 8:26
 	 * @author sindney
 	 */
-	[SWF(backgroundColor = 0x000000, frameRate = 40, width = 400, height = 500)]
+	[SWF(backgroundColor = 0x000000, frameRate = 40, width = 500, height = 500)]
 	public class Example extends Sprite {
 		
 		private var scrollContainer:ScrollContainer;
@@ -62,6 +61,25 @@ package
 				data[i] = ["NO." + i.toString()];
 			}
 			
+			var accordion:Accordion = new Accordion(this);
+			//accordion.multiSelect = true;
+			accordion.size(200, 400);
+			accordion.move(10, 10);
+			
+			var ac:AccordionContent = new AccordionContent();
+			ac.title.addChild(new Label(null, "Button"));
+			ac.content.addChild(new Button(null, "Demo"));
+			ac.content.addChild(new CheckBox(null, "Demo"));
+			ac.content.addChild(new NumericStepper(null));
+			accordion.addContent(ac);
+			
+			ac = new AccordionContent();
+			ac.title.addChild(new Label(null, "Slider"));
+			ac.content.addChild(new Slider(null, Slider.HORIZONTALLY));
+			ac.content.addChild(new Slider(null, Slider.HORIZONTALLY, 50));
+			ac.content.addChild(new Slider(null, Slider.HORIZONTALLY, 100));
+			accordion.addContent(ac);
+			
 			scrollContainer = new ScrollContainer(null);
 			
 			var window:Window = new Window(this, scrollContainer);
@@ -70,7 +88,7 @@ package
 			window.headerSize = 30;
 			window.footerSize = 30;
 			window.size(200, 200);
-			window.move(10, 10);
+			window.move(230, 15);
 			window.footer.addChild(new Label(null, "Status"));
 			
 			var label:Label = new Label(scrollContainer.content, "I'v been busy, really.");
@@ -79,7 +97,7 @@ package
 			
 			var button:Button = new Button(scrollContainer.content, "Button");
 			
-			var slider:Slider = new Slider(scrollContainer.content, "v");
+			var slider:Slider = new Slider(scrollContainer.content, Slider.VERTICALLY);
 			
 			var list:List = new List(scrollContainer.content, data);
 			list.size(200, 100);

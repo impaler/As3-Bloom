@@ -30,10 +30,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 ----------------------------------------------------------------
-Version 0.1.0 r25
+Version 0.1.0 r26
 ----------------------------------------------------------------
 
 History
+
+Version 0.1.0 r26
+ - bloom.container.Accordion added.
 
 Version 0.1.0 r25
  - bloom.containers.Window added.

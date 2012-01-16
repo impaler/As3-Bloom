@@ -21,6 +21,7 @@
  */
 package bloom 
 {
+	import bloom.brushes.Brush;
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
@@ -96,6 +97,24 @@ package bloom
 			addChild(_scrollBar);
 			
 			size(100, 100);
+		}
+		
+		/**
+		 * Use to change FormItems' Brush.
+		 * @param	value
+		 */
+		public function changeItemsBrush(value:Brush):void {
+			var tmp:*;
+			var i:int, j:int = _content.numChildren;
+			for (i = 0; i < j; i++) {
+				tmp = _content.getChildAt(i);
+				tmp.brush = value;
+			}
+			j = _pool.length;
+			for (i = 0; i < j; i++) {
+				tmp = _pool[i];
+				tmp.brush = value;
+			}
 		}
 		
 		override protected function draw(e:Event):void {
@@ -178,7 +197,7 @@ package bloom
 				if (l > 0) {
 					for (i = 0; i < l; i++) {
 						tmp = newItem();
-						tmp.brush = ThemeBase.FormItem;
+						if (!tmp.brush) tmp.brush = ThemeBase.FormItem;
 						tmp.drawDirectly();
 						tmp.addEventListener(MouseEvent.CLICK, onItemClick);
 						_pool.push(tmp);

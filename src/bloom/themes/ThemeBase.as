@@ -71,6 +71,11 @@ package bloom.themes
 		// ColorBrushes
 		///////////////////////////////////
 		
+		// Accordion
+		public static var Accordion:Brush;
+		public static var AC_Title:Brush;
+		public static var AC_Content:Brush;
+		
 		// Button
 		public static var Button:Brush;
 		

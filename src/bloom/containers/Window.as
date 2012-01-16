@@ -88,8 +88,8 @@ package bloom.containers
 			_footer.brush = ThemeBase.Window_Footer;
 			addChild(_footer);
 			
-			_headerSize = 24;
-			_footerSize = 24;
+			_headerSize = 30;
+			_footerSize = 30;
 			
 			this.moveable = moveable;
 			this.resizeable = resizeable;

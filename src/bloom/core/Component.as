@@ -21,13 +21,12 @@
  */
 package bloom.core 
 {
-	import bloom.brushes.BMPBrush;
-	import bloom.brushes.ColorBrush;
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
+	import bloom.brushes.BMPBrush;
 	import bloom.brushes.Brush;
 	import bloom.events.BrushEvent;
 	import bloom.themes.ThemeBase;

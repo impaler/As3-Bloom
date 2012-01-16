@@ -21,6 +21,7 @@
  */
 package bloom.themes 
 {
+	import bloom.brushes.Brush;
 	import bloom.brushes.ColorBrush;
 	import bloom.brushes.TextBrush;
 	
@@ -47,8 +48,21 @@ package bloom.themes
 			ThemeBase.Text_TextInput = new TextBrush("Verdana", 12, 0xffffff, false, false, false);
 			ThemeBase.Text_ToggleButton = new TextBrush("Verdana", 12, 0xffffff, false, false, false);
 			
+			// Accordion
+			var data:Vector.<uint> = new Vector.<uint>(1, true);
+			data[0] = 0xB4B4B4;
+			ThemeBase.Button = new ColorBrush(data);
+			
+			data = new Vector.<uint>(1, true);
+			data[0] = 0x3E3E50;
+			ThemeBase.AC_Title = new ColorBrush(data);
+			
+			data = new Vector.<uint>(1, true);
+			data[0] = 0xE9E9E9;
+			ThemeBase.AC_Content = new ColorBrush(data);
+			
 			// Button
-			var data:Vector.<uint> = new Vector.<uint>(3, true);
+			data = new Vector.<uint>(3, true);
 			data[0] = 0x3E3E72;
 			data[1] = 0x5E5EAC;
 			data[2] = 0xF1BA44;

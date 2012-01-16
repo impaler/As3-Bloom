@@ -66,7 +66,6 @@ package bloom.containers
 						component.y = last + component.margin.top;
 						last = component.y + component.height + component.margin.bottom;
 					}
-					
 				}
 			}
 		}
