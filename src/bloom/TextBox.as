@@ -55,7 +55,6 @@ package bloom
 			super(p);
 			
 			_bg = new Shape();
-			_bg.filters = [ThemeBase.SHAOW];
 			addChild(_bg);
 			
 			_textBase = new TextBase(this);

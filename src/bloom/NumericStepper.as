@@ -75,7 +75,6 @@ package bloom
 			this.step = step;
 			
 			_bg = new Shape();
-			_bg.filters = [ThemeBase.SHAOW];
 			addChild(_bg);
 			
 			_textBase = new TextBase(this);
@@ -87,12 +86,12 @@ package bloom
 			_textBase.addEventListener(Event.CHANGE, onTextChange);
 			
 			_increase = new ButtonBase(this);
-			_increase.brush = ThemeBase.NS_Button;
+			_increase.brush = ThemeBase.NS_Increase;
 			_increase.addEventListener(MouseEvent.CLICK, onIncreaseClick);
 			_increase.addEventListener(MouseEvent.MOUSE_DOWN, onIncreasePress);
 			
 			_decrease = new ButtonBase(this);
-			_decrease.brush = ThemeBase.NS_Button;
+			_decrease.brush = ThemeBase.NS_Decrease;
 			_decrease.addEventListener(MouseEvent.CLICK, onDecreaseClick);
 			_decrease.addEventListener(MouseEvent.MOUSE_DOWN, onDecreasePress);
 			

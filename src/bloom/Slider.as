@@ -73,7 +73,6 @@ package bloom
 			
 			_bg = new Sprite();
 			_bg.tabEnabled = tabEnabled = false;
-			_bg.filters = [ThemeBase.SHAOW];
 			
 			_type = type;
 			_max = max;
@@ -114,7 +113,7 @@ package bloom
 				_bg.graphics.beginFill(colorBrush.colors[0]);
 			} else if (brush is BMPBrush) {
 				bmpBrush = brush as BMPBrush;
-				scale = bmpBrush.bitmap[0];
+				scale = bmpBrush.bitmap[_type == "v" ? 1 : 0];
 				scale.setSize(_width, _height);
 				_bg.graphics.beginBitmapFill(scale.bitmapData);
 			}

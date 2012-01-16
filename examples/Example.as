@@ -34,7 +34,7 @@ package
 	/**
 	 * Bloom Example
 	 * 
-	 * @date 2012/1/14 22:40
+	 * @date 2012/1/16 8:26
 	 * @author sindney
 	 */
 	[SWF(backgroundColor = 0x000000, frameRate = 40, width = 400, height = 500)]
@@ -47,7 +47,14 @@ package
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.showDefaultContextMenu = false;
 			
-			ThemeBase.setTheme(new DefaultTheme());
+			// default color style
+			ThemeBase.setTheme(new ColorTheme());
+			
+			// default bitmap style
+			//ThemeBase.setTheme(new BMPTheme());
+			
+			// custom style
+			//ThemeBase.setTheme(new CustomTheme());
 			
 			var i:int;
 			var data:Array = [];
