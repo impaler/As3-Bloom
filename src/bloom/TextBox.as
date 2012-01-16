@@ -68,7 +68,7 @@ package bloom
 			_textBase.addEventListener(FocusEvent.FOCUS_IN, onFocusIn);
 			_textBase.addEventListener(FocusEvent.FOCUS_OUT, onFocusOut);
 			
-			_scrollBar = new ScrollBar(this, "v", 0, 0);
+			_scrollBar = new ScrollBar(this, 0, 0, 0);
 			_scrollBar.brush = ThemeBase.TB_ScrollBar;
 			_scrollBar.button.brush = ThemeBase.TB_ScrollBarButton;
 			_scrollBar.step = 1;

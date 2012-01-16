@@ -55,6 +55,9 @@ package bloom
 	 */
 	public class Slider extends Component {
 		
+		public static const VERTICALLY:int = 0;
+		public static const HORIZONTALLY:int = 1;
+		
 		public var step:Number = 10;
 		
 		protected var _bg:Sprite;
@@ -66,9 +69,9 @@ package bloom
 		protected var _max:Number;
 		protected var _min:Number;
 		protected var _rect:Rectangle;
-		protected var _type:String;
+		protected var _type:int;
 		
-		public function Slider(p:DisplayObjectContainer = null, type:String = "v", value:Number = 0, max:Number = 100, min:Number = 0) {
+		public function Slider(p:DisplayObjectContainer = null, type:int = 0, value:Number = 0, max:Number = 100, min:Number = 0) {
 			super(p);
 			
 			_bg = new Sprite();
@@ -88,7 +91,7 @@ package bloom
 			
 			_rect = new Rectangle(0, 0, 0, 0);
 			
-			_type == "v" ? size(20, 100) : size(100, 20);
+			_type == VERTICALLY ? size(20, 100) : size(100, 20);
 			
 			_bt.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
 			_bg.addEventListener(MouseEvent.MOUSE_DOWN, clickOnBg);
@@ -113,7 +116,7 @@ package bloom
 				_bg.graphics.beginFill(colorBrush.colors[0]);
 			} else if (brush is BMPBrush) {
 				bmpBrush = brush as BMPBrush;
-				scale = bmpBrush.bitmap[_type == "v" ? 1 : 0];
+				scale = bmpBrush.bitmap[_type == VERTICALLY ? 1 : 0];
 				scale.setSize(_width, _height);
 				_bg.graphics.beginBitmapFill(scale.bitmapData);
 			}
@@ -125,7 +128,7 @@ package bloom
 		}
 		
 		protected function refresh():void {
-			if (_type == "h") {
+			if (_type == HORIZONTALLY) {
 				_bt.size(_height, _height);
 				_rect.width = _width - _height;
 				_bt.move((_value - _min) / (_max - _min) * _rect.width, 0);
@@ -156,7 +159,7 @@ package bloom
 		}
 		
 		protected function onMouseMove(e:MouseEvent):void {
-			if (_type == "h" ) {
+			if (_type == HORIZONTALLY) {
 				_value = _bt.x / (_width - _height) * (_max - _min) + _min;
 			} else {
 				_value = (_height - _width - _bt.y) / (_height - _width) * (_max - _min) + _min;
@@ -173,7 +176,7 @@ package bloom
 		}
 		
 		protected function clickOnBg(e:MouseEvent):void {
-			if (_type == "h") {
+			if (_type == HORIZONTALLY) {
 				value = ((mouseX - (_height >> 1)) / (_width - _height)) * (_max - _min) + _min;
 			} else {
 				value = (_height - (_width >> 1) - mouseY) / (_height - _width) * (_max - _min) + _min;
@@ -241,7 +244,7 @@ package bloom
 			return _value;
 		}
 		
-		public function set type(value:String):void {
+		public function set type(value:int):void {
 			if (_type != value) {
 				_type = value;
 				_rect = new Rectangle(0, 0, 0, 0);
@@ -250,7 +253,7 @@ package bloom
 			}
 		}
 		
-		public function get type():String {
+		public function get type():int {
 			return _type;
 		}
 		

@@ -41,21 +41,19 @@ package bloom
 		private var _working:Boolean = true;
 		private var _autoHide:Boolean = true;
 		
-		public function ScrollBar(p:DisplayObjectContainer = null, type:String = "v", page:Number = 100, content:Number = 100) {
+		public function ScrollBar(p:DisplayObjectContainer = null, type:int = 0, page:Number = 100, content:Number = 100) {
 			super(p, type, 0, content);
 			
 			_realSize = 0;
 			_minSize = 20;
 			_pageSize = page;
 			_contentSize = content;
-			
-			_bg.filters = [];
 		}
 		
 		override protected function refresh():void {
 			_max = Math.max(_contentSize - _pageSize, 0);
 			if (_max > 0) {
-				if (_type == "h") {
+				if (_type == HORIZONTALLY) {
 					_realSize = (_pageSize * _width) / (_max + _pageSize);
 					_bt.size(Math.max(_realSize, _minSize), _height);
 					_rect.width = _width - _bt.width;
@@ -85,7 +83,7 @@ package bloom
 		///////////////////////////////////
 		
 		override protected function onMouseMove(e:MouseEvent):void {
-			if (_type == "h" ) {
+			if (_type == HORIZONTALLY) {
 				_value = _bt.x / _rect.width * _max;
 			} else {
 				_value = _bt.y / _rect.height * _max;
@@ -95,7 +93,7 @@ package bloom
 		}
 		
 		override protected function clickOnBg(e:MouseEvent):void {
-			if (_type == "h") {
+			if (_type == HORIZONTALLY) {
 				value = (mouseX - (_bt.width >> 1)) / _rect.width * _max;
 			} else {
 				value = (mouseY - (_bt.height >> 1)) / _rect.height * _max;
@@ -103,7 +101,7 @@ package bloom
 		}
 		
 		override protected function onMouseWheel(e:MouseEvent):void {
-			if (_type == "h") {
+			if (_type == HORIZONTALLY) {
 				value += (e.delta > 0 ? 1 : -1) * step;
 			} else {
 				value -= (e.delta > 0 ? 1 : -1) * step;

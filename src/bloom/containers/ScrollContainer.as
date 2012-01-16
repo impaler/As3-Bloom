@@ -70,7 +70,7 @@ package bloom.containers
 			
 			_target = _content;
 			
-			h_scrollBar = new ScrollBar(null, "h");
+			h_scrollBar = new ScrollBar(null, HORIZONTALLY);
 			h_scrollBar.autoHide = false;
 			h_scrollBar.step = 20;
 			h_scrollBar.brush = ThemeBase.SC_ScrollBar;
@@ -78,7 +78,7 @@ package bloom.containers
 			h_scrollBar.addEventListener(Event.CHANGE, onHScrollBarMove);
 			h_scrollBar.addEventListener(Event.SCROLL, onHScrollBarMove);
 			
-			v_scrollBar = new ScrollBar(null, "v");
+			v_scrollBar = new ScrollBar(null, VERTICALLY);
 			v_scrollBar.autoHide = false;
 			v_scrollBar.step = 20;
 			v_scrollBar.brush = ThemeBase.SC_ScrollBar;
