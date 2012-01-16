@@ -46,24 +46,42 @@ package
 			ThemeBase.setTheme(new BMPTheme());
 			
 			var button:Button = new Button(this, "Demo");
-			button.size(120, 30);
+			button.size(120, 40);
 			button.move(10, 10);
 			
 			var sliderv:Slider = new Slider(this);
 			sliderv.size(30, 120);
-			sliderv.move(10, 50);
+			sliderv.move(10, 60);
 			
 			var sliderh:Slider = new Slider(this, Slider.HORIZONTALLY);
-			sliderh.size(120, 30);
-			sliderh.move(10, 180);
+			sliderh.size(200, 30);
+			sliderh.move(10, 190);
 			
 			var numericStepper:NumericStepper = new NumericStepper(this);
-			numericStepper.size(100, 30);
-			numericStepper.move(10, 220);
+			numericStepper.size(80, 30);
+			numericStepper.move(10, 230);
 			
 			numericStepper = new NumericStepper(this);
-			numericStepper.size(100, 30);
-			numericStepper.move(120, 220);
+			numericStepper.size(80, 30);
+			numericStepper.move(100, 230);
+			
+			var checkBox:CheckBox = new CheckBox(this, "CheckBox");
+			checkBox.move(10, 270);
+			
+			progressBar = new ProgressBar(this, 0);
+			progressBar.size(200, 30);
+			progressBar.move(10, 300);
+			
+			addEventListener(Event.ENTER_FRAME, onLoop);
+		}
+		
+		private var decrease:Boolean = false;
+		private var progressBar:ProgressBar;
+		
+		private function onLoop(e:Event):void {
+			if (progressBar.value == 100) decrease = true;
+			if (progressBar.value == 0) decrease = false;
+			progressBar.value += decrease ? -1 : 1;
 		}
 		
 	}

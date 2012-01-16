@@ -37,7 +37,7 @@ package bloom
 	/**
 	 * ProgressBar
 	 * 
-	 * @date 2012/1/6 22:21
+	 * @date 2012/1/16 20:20
 	 * @author sindney
 	 */
 	public class ProgressBar extends Component {
@@ -69,6 +69,10 @@ package bloom
 				return;
 			}
 			
+			_value = _value > 100 ? 100 : _value;
+			_value = _value < 0 ? 0 : _value;
+			if (_value == 100) dispatchEvent(new Event("complete"));
+			
 			var bmpBrush:BMPBrush;
 			var colorBrush:ColorBrush;
 			var scale:ScaleBitmap;
@@ -85,26 +89,17 @@ package bloom
 				scale = bmpBrush.bitmap[0];
 				scale.setSize(_width, _height);
 				_bg.graphics.beginBitmapFill(scale.bitmapData);
-				_progress.graphics.beginBitmapFill(bmpBrush.bitmap[1].bitmapData);
+				
+				scale = bmpBrush.bitmap[1];
+				scale.setSize((_width * _value) * 0.01, _height);
+				_progress.graphics.beginBitmapFill(scale.bitmapData);
 			}
 			
 			_bg.graphics.drawRect(0, 0, _width, _height);
 			_bg.graphics.endFill();
 			
-			_progress.graphics.drawRect(0, 0, 10, _height);
+			_progress.graphics.drawRect(0, 0, (_width * _value) * 0.01, _height);
 			_progress.graphics.endFill();
-			
-			update();
-		}
-		
-		private function update():void {
-			_value = Math.min(100, _value);
-			_value = Math.max(0, _value);
-			
-			_progress.width = (_width * _value) * 0.01;
-			_progress.height = height;
-			
-			if (_value == 100) dispatchEvent(new Event("complete"));
 		}
 		
 		///////////////////////////////////
@@ -114,7 +109,8 @@ package bloom
 		public function set value(value:int):void {
 			if (_value != value) {
 				_value = value;
-				update();
+				_changed = true;
+				invalidate();
 			}
 		}
 		

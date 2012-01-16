@@ -70,7 +70,7 @@ package bloom.containers
 		public function removeContentAt(index:int):AccordionContent {
 			var object:AccordionContent = _content[index];
 			if (object) {
-				object = _content.splice(index, 1)[0];
+				_content.splice(index, 1)[0];
 				object.title.removeEventListener(MouseEvent.CLICK, onContentClick);
 				removeChild(object);
 				update();

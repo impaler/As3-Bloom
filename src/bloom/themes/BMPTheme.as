@@ -49,6 +49,24 @@ package bloom.themes
 		private var button_over:Class;
 		private var button_over_bit:Bitmap = new button_over();
 		
+		// checkBox
+		[Embed(source="../assets/default/checkbox_on.png")]
+		private var checkbox_on:Class;
+		private var checkbox_on_bit:Bitmap = new checkbox_on();
+		
+		[Embed(source="../assets/default/checkbox_off.png")]
+		private var checkbox_off:Class;
+		private var checkbox_off_bit:Bitmap = new checkbox_off();
+		
+		// progressBar
+		[Embed(source="../assets/default/progress_bg.png")]
+		private var progress_bg:Class;
+		private var progress_bg_bit:Bitmap = new progress_bg();
+		
+		[Embed(source="../assets/default/progress_bar.png")]
+		private var progress_bar:Class;
+		private var progress_bar_bit:Bitmap = new progress_bar();
+		
 		// slider
 		[Embed(source="../assets/default/slider_bg_v.png")]
 		private var slider_bg_v_normal:Class;
@@ -109,95 +127,125 @@ package bloom.themes
 		}
 		
 		public function initialize():void {
-			ThemeBase.Text_Button = new TextBrush ("Verdana" , 12 , 0xffffff , false , false , false);
-            ThemeBase.Text_NumericStepper = new TextBrush("Verdana", 20, 0x000000, false, false, false);
+			ThemeBase.Text_Button = new TextBrush("Verdana", 14, 0xffffff, true, false, false);
+			ThemeBase.Text_CheckBox = new TextBrush("Verdana", 14, 0x000000, true, false, false);
+			ThemeBase.Text_Label = new TextBrush("Verdana", 12, 0x000000, false, false, false);
+			ThemeBase.Text_List = new TextBrush("Verdana", 12, 0x000000, false, false, false);
+			ThemeBase.Text_NumericStepper = new TextBrush("Verdana", 20, 0x000000, false, false, false);
+			ThemeBase.Text_TextBox = new TextBrush("Verdana", 12, 0xffffff, false, false, false);
+			ThemeBase.Text_TextInput = new TextBrush("Verdana", 12, 0xffffff, false, false, false);
+			ThemeBase.Text_ToggleButton = new TextBrush("Verdana", 12, 0xffffff, false, false, false);
+			
+			var scaleBMP0:ScaleBitmap;
+			var scaleBMP1:ScaleBitmap;
+			var scaleBMP2:ScaleBitmap;
+			
+			var data:Vector.<ScaleBitmap>
 			
         	// Button
-        	var normal:ScaleBitmap = new ScaleBitmap( button_normal_bit.bitmapData );
-        	normal.scale9Grid =  new Rectangle( 15, 15, 70, 14 );
+        	scaleBMP0 = new ScaleBitmap(button_normal_bit.bitmapData);
+        	scaleBMP0.scale9Grid = new Rectangle(15, 15, 70, 14);
         	
-        	var down:ScaleBitmap = new ScaleBitmap( button_down_bit.bitmapData );
-        	down.scale9Grid =  new Rectangle( 15, 15, 70, 14 );
+        	scaleBMP1 = new ScaleBitmap(button_over_bit.bitmapData);
+        	scaleBMP1.scale9Grid = new Rectangle(15, 15, 70, 14);
         	
-        	var over:ScaleBitmap = new ScaleBitmap( button_over_bit.bitmapData );
-        	over.scale9Grid =  new Rectangle( 15, 15, 70, 14 );
+        	scaleBMP2 = new ScaleBitmap(button_down_bit.bitmapData);
+        	scaleBMP2.scale9Grid = new Rectangle(15, 15, 70, 14);
         	
-        	var bit_data:Vector.<ScaleBitmap> = new Vector.<ScaleBitmap>(3, true);
-        	bit_data[0] =  normal;
-        	bit_data[1] =  over;
-        	bit_data[2] =  down;
-        	ThemeBase.Button = new BMPBrush ( bit_data );
+        	data = new Vector.<ScaleBitmap>(3, true);
+        	data[0] = scaleBMP0;
+        	data[1] = scaleBMP1;
+        	data[2] = scaleBMP2;
+        	ThemeBase.Button = new BMPBrush(data);
         	
+			// CheckBox
+			data = new Vector.<ScaleBitmap>(2, true);
+			data[0] = new ScaleBitmap(checkbox_on_bit.bitmapData);
+        	data[1] = new ScaleBitmap(checkbox_off_bit.bitmapData);
+        	ThemeBase.CheckBox = new BMPBrush(data);
+			
+			// ProgressBar
+			scaleBMP0 = new ScaleBitmap(progress_bg_bit.bitmapData);
+			scaleBMP0.scale9Grid = new Rectangle(8, 6, 82, 7);
+			
+			scaleBMP1 = new ScaleBitmap(progress_bar_bit.bitmapData);
+			scaleBMP1.scale9Grid = new Rectangle(8, 4, 149, 11);
+			
+			data = new Vector.<ScaleBitmap>(2, true);
+			data[0] = scaleBMP0;
+			data[1] = scaleBMP1;
+			ThemeBase.ProgressBar = new BMPBrush(data);
+			
         	// Slider
-        	var slider_bg_h:ScaleBitmap = new ScaleBitmap( slider_bg_h_normal_bit.bitmapData );
-            slider_bg_h.scale9Grid =  new Rectangle( 16, 13, 86, 3 );
+        	scaleBMP0 = new ScaleBitmap(slider_bg_h_normal_bit.bitmapData);
+            scaleBMP0.scale9Grid = new Rectangle(16, 13, 86, 3);
 			
-            var slider_bg_v:ScaleBitmap = new ScaleBitmap( slider_bg_v_normal_bit.bitmapData );
-            slider_bg_v.scale9Grid =  new Rectangle( 3, 13, 3, 86 );
+            scaleBMP1 = new ScaleBitmap(slider_bg_v_normal_bit.bitmapData);
+            scaleBMP1.scale9Grid = new Rectangle(3, 13, 3, 86);
 			
-        	bit_data = new Vector.<ScaleBitmap> ( 2 , true );
-        	bit_data[0] = slider_bg_h;
-        	bit_data[1] = slider_bg_v;
-        	ThemeBase.Slider = new BMPBrush ( bit_data );
+        	data = new Vector.<ScaleBitmap>(2, true);
+        	data[0] = scaleBMP0;
+        	data[1] = scaleBMP1;
+        	ThemeBase.Slider = new BMPBrush (data);
         	
         	// Slider Button
-        	var slider_button_normal_scale:ScaleBitmap = new ScaleBitmap( slider_button_normal_bit.bitmapData );
-        	slider_button_normal_scale.scale9Grid =  new Rectangle( 2, 2, 1, 1 );
+        	scaleBMP0 = new ScaleBitmap(slider_button_normal_bit.bitmapData);
+        	scaleBMP0.scale9Grid = new Rectangle(2, 2, 1, 1);
         	
-        	var slider_button_down_scale:ScaleBitmap = new ScaleBitmap( slider_button_down_bit.bitmapData );
-        	slider_button_down_scale.scale9Grid =  new Rectangle( 2, 2, 1, 1 );
+        	scaleBMP1 = new ScaleBitmap(slider_button_over_bit.bitmapData);
+        	scaleBMP1.scale9Grid = new Rectangle(2, 2, 1, 1);
         	
-        	var slider_button_over_scale:ScaleBitmap = new ScaleBitmap( slider_button_over_bit.bitmapData );
-        	slider_button_over_scale.scale9Grid =  new Rectangle( 2, 2, 1, 1 );
+        	scaleBMP2 = new ScaleBitmap(slider_button_down_bit.bitmapData);
+        	scaleBMP2.scale9Grid = new Rectangle(2, 2, 1, 1);
         	
-        	bit_data = new Vector.<ScaleBitmap> ( 3 , true );
-        	bit_data[0] = slider_button_normal_scale;
-        	bit_data[1] = slider_button_over_scale;
-        	bit_data[2] = slider_button_down_scale;
-        	ThemeBase.SliderButton = new BMPBrush ( bit_data );
+        	data = new Vector.<ScaleBitmap>(3, true);
+        	data[0] = scaleBMP0;
+        	data[1] = scaleBMP1;
+        	data[2] = scaleBMP2;
+        	ThemeBase.SliderButton = new BMPBrush(data);
 			
 			// NumericStepper
-            var ns_bg_normal_bit_scale:ScaleBitmap = new ScaleBitmap( ns_bg_normal_bit.bitmapData );
-            ns_bg_normal_bit_scale.scale9Grid =  new Rectangle( 13, 15, 51, 12 );
+            scaleBMP0 = new ScaleBitmap(ns_bg_normal_bit.bitmapData);
+            scaleBMP0.scale9Grid = new Rectangle(13, 15, 51, 12);
 			
-            var ns_bg_active_bit_scale:ScaleBitmap = new ScaleBitmap( ns_bg_active_bit.bitmapData );
-            ns_bg_active_bit_scale.scale9Grid =  new Rectangle( 13, 15, 51, 12 );
+            scaleBMP1 = new ScaleBitmap(ns_bg_active_bit.bitmapData);
+            scaleBMP1.scale9Grid = new Rectangle(13, 15, 51, 12);
 			
-            bit_data = new Vector.<ScaleBitmap> ( 2 , true );
-           	bit_data[0] = ns_bg_normal_bit_scale;
-           	bit_data[1] = ns_bg_active_bit_scale;
-           	ThemeBase.NumericStepper = new BMPBrush ( bit_data );
+            data = new Vector.<ScaleBitmap>(2, true);
+           	data[0] = scaleBMP0;
+           	data[1] = scaleBMP1;
+           	ThemeBase.NumericStepper = new BMPBrush (data);
 			
 			// NS_Buttons
-            var ns_decrease_button_normal_scale:ScaleBitmap = new ScaleBitmap( ns_decrease_button_normal_bit.bitmapData );
-            ns_decrease_button_normal_scale.scale9Grid =  new Rectangle( 2, 2, 1, 1 );
+            scaleBMP0 = new ScaleBitmap(ns_decrease_button_normal_bit.bitmapData);
+            scaleBMP0.scale9Grid = new Rectangle(2, 2, 1, 1);
 			
-           	var ns_decrease_button_down_scale:ScaleBitmap = new ScaleBitmap( ns_decrease_button_down_bit.bitmapData );
-           	ns_decrease_button_down_scale.scale9Grid =  new Rectangle( 2, 2, 1, 1 );
+           	scaleBMP1 = new ScaleBitmap(ns_decrease_button_down_bit.bitmapData);
+           	scaleBMP1.scale9Grid = new Rectangle(2, 2, 1, 1);
 			
-           	var ns_decrease_button_over_scale:ScaleBitmap = new ScaleBitmap( ns_decrease_button_over_bit.bitmapData );
-           	ns_decrease_button_over_scale.scale9Grid =  new Rectangle( 2, 2, 1, 1 );
+           	scaleBMP2 = new ScaleBitmap(ns_decrease_button_over_bit.bitmapData);
+           	scaleBMP2.scale9Grid = new Rectangle(2, 2, 1, 1);
 			
-           	bit_data = new Vector.<ScaleBitmap> ( 3 , true );
-           	bit_data[0] = ns_decrease_button_normal_scale;
-           	bit_data[1] = ns_decrease_button_over_scale;
-           	bit_data[2] = ns_decrease_button_down_scale;
-           	ThemeBase.NS_Decrease = new BMPBrush ( bit_data );
+           	data = new Vector.<ScaleBitmap>(3, true);
+           	data[0] = scaleBMP0;
+           	data[1] = scaleBMP1;
+           	data[2] = scaleBMP2;
+           	ThemeBase.NS_Decrease = new BMPBrush (data);
 			
-            var ns_increase_button_normal_scale:ScaleBitmap = new ScaleBitmap( ns_increase_button_normal_bit.bitmapData );
-            ns_increase_button_normal_scale.scale9Grid =  new Rectangle( 2, 2, 1, 1 );
+            scaleBMP0 = new ScaleBitmap(ns_increase_button_normal_bit.bitmapData);
+            scaleBMP0.scale9Grid = new Rectangle(2, 2, 1, 1);
 			
-           	var ns_increase_button_down_scale:ScaleBitmap = new ScaleBitmap( ns_increase_button_down_bit.bitmapData );
-           	ns_increase_button_down_scale.scale9Grid =  new Rectangle( 2, 2, 1, 1 );
+           	scaleBMP1 = new ScaleBitmap(ns_increase_button_down_bit.bitmapData);
+           	scaleBMP1.scale9Grid = new Rectangle(2, 2, 1, 1);
 			
-           	var ns_increase_button_over_scale:ScaleBitmap = new ScaleBitmap( ns_increase_button_over_bit.bitmapData );
-           	ns_increase_button_over_scale.scale9Grid =  new Rectangle( 2, 2, 1, 1 );
+           	scaleBMP2 = new ScaleBitmap(ns_increase_button_over_bit.bitmapData);
+           	scaleBMP2.scale9Grid = new Rectangle(2, 2, 1, 1);
 			
-           	bit_data = new Vector.<ScaleBitmap> ( 3 , true );
-           	bit_data[0] = ns_increase_button_normal_scale;
-           	bit_data[1] = ns_increase_button_over_scale;
-           	bit_data[2] = ns_increase_button_down_scale;
-           	ThemeBase.NS_Increase = new BMPBrush ( bit_data );
+           	data = new Vector.<ScaleBitmap> (3, true);
+           	data[0] = scaleBMP0;
+           	data[1] = scaleBMP1;
+           	data[2] = scaleBMP2;
+           	ThemeBase.NS_Increase = new BMPBrush (data);
 		}
 		
 	}
