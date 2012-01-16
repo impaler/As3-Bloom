@@ -58,22 +58,23 @@ package bloom.containers
 		
 		public function addContent(value:AccordionContent):void {
 			_content.push(value);
-			addChild(value);
 			value.title.addEventListener(MouseEvent.CLICK, onContentClick);
+			addChild(value);
 			update();
 		}
 		
 		public function removeContent(value:AccordionContent):void {
-			var index:int = _content.indexOf(value);
-			if (index != -1) _content.splice(index, 1)[0].title.removeEventListener(MouseEvent.CLICK, onContentClick);
-			update();
+			removeContentAt(_content.indexOf(value));
 		}
 		
 		public function removeContentAt(index:int):AccordionContent {
 			var object:AccordionContent = _content[index];
-			if (object) object = _content.splice(index, 1)[0];
-			object.title.removeEventListener(MouseEvent.CLICK, onContentClick);
-			update();
+			if (object) {
+				object = _content.splice(index, 1)[0];
+				object.title.removeEventListener(MouseEvent.CLICK, onContentClick);
+				removeChild(object);
+				update();
+			}
 			return object;
 		}
 		
