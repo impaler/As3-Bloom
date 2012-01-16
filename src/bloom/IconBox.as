@@ -62,7 +62,7 @@ package bloom
 		public function set enabled(value:Boolean):void {
 			if (_enabled != value) {
 				_enabled = value;
-				alpha = _enabled ? 0 : ThemeBase.ALPHA;
+				alpha = _enabled ? 1 : ThemeBase.ALPHA;
 			}
 		}
 		
