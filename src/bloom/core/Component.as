@@ -171,7 +171,9 @@ package bloom.core
 		public function get margin():Margin {
 			return _margin;
 		}
-        
+
+        //margins are not yet implemented in containers, they will be very usefull :)
+        //some containers need margin setting in their contructor now
         public function set margin(m:Margin):void {
     	    _margin = m;
             invalidate();

@@ -34,7 +34,7 @@ package bloom.core
 		public var left:Number;
 		public var bottom:Number;
 		public var right:Number;
-		
+
 		public function Margin(top:Number = 5, left:Number = 5, bottom:Number = 5, right:Number = 5) {
 			this.top = top;
 			this.left = left;

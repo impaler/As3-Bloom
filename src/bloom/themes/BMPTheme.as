@@ -137,6 +137,10 @@ import flash.display.Bitmap;
         [Embed(source="../assets/default/window_header.png")]
         private var window_header:Class;
         private var window_header_bit:Bitmap = new window_header();
+
+        [Embed(source="../assets/default/sizer.png")]
+        private var sizer:Class;
+        private var sizer_bit:Bitmap = new sizer();
 		
 		public function BMPTheme() {
 			
@@ -263,8 +267,7 @@ import flash.display.Bitmap;
            	data[2] = scaleBMP1;
            	ThemeBase.NS_Increase = new BMPBrush (data);
 
-            
-
+            // Window
             scaleBMP0 = new ScaleBitmap(window_header_bit.bitmapData);
            	scaleBMP0.scale9Grid = new Rectangle(9, 9, 182, 4);
 
@@ -279,29 +282,27 @@ import flash.display.Bitmap;
             data[0] = scaleBMP0;
             ThemeBase.Window_Footer = new BMPBrush(data);
 
-
             scaleBMP0 = new ScaleBitmap(window_bg_bit.bitmapData);
-           	scaleBMP0.scale9Grid = new Rectangle(9, 6, 182, 4);
-
+           	scaleBMP0.scale9Grid = new Rectangle(11, 1, 180, 2);
             data = new Vector.<ScaleBitmap> (1, true);
             data[0] = scaleBMP0;
             ThemeBase.ScrollContainer = new BMPBrush(data);
 
-
+            scaleBMP0 = new ScaleBitmap(sizer_bit.bitmapData);
+           	scaleBMP0.scale9Grid = new Rectangle(0, 0, 0, 0);
+            data = new Vector.<ScaleBitmap> (1, true);
+            data[0] = scaleBMP0;
+            ThemeBase.Window_Scaler = new BMPBrush(data);
 
             // Window
             var uint_data:Vector.<uint>;
 
-			uint_data = new Vector.<uint>(1, true);
-            uint_data[0] = 0x666666;
-			ThemeBase.Window_Scaler = new ColorBrush(uint_data);
-
-
-
-
+            uint_data = new Vector.<uint>(2, true);
+            uint_data[0] = 0x000033;
+            uint_data[1] = 0xaf96cc;
+            ThemeBase.Window_Scaler_Fill = new ColorBrush(uint_data);
 
 	        // ScrollContainer
-
 			uint_data = new Vector.<uint>(1, true);
 			uint_data[0] = 0x222222;
 			ThemeBase.SC_ScrollBar = new ColorBrush(uint_data);

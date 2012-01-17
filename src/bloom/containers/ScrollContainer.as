@@ -21,7 +21,10 @@
  */
 package bloom.containers 
 {
-	import flash.display.DisplayObject;
+
+import bloom.core.Margin;
+
+import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -58,6 +61,9 @@ package bloom.containers
 		public function ScrollContainer(p:DisplayObjectContainer = null) {
 			super(p);
 			graphics.clear();
+
+            //ColorTheme needs this if margins are implimented in Component.as
+            margin = new Margin(0,0,0,0);
 			
 			_rect = new Rectangle(0, 0, 100, 100);
 			
@@ -108,22 +114,24 @@ package bloom.containers
 			
 			if (horizontal) {
 				if (vertical) {
-					_rect.width = _width - 20;
-					_rect.height = _height - 20;
-					h_scrollBar.size(_width - 20, 20);
-					v_scrollBar.size(20, _height - 20);
+					_rect.width = _width - 20 - (margin.right+margin.left);
+					_rect.height = _height - 20 - (margin.bottom+margin.top);
+					h_scrollBar.size(_width-(margin.right+margin.left) - 20, 20);
+					v_scrollBar.size(20, _height - 20 -(margin.bottom+margin.top) );
 					v_scrollBar.mouseWheelTarget = _bg;
 					if (!v_scrollBar.parent) addChild(v_scrollBar);
 				} else {
+                    //todo test margins
 					_rect.width = _width;
 					_rect.height = _height - 20;
-					h_scrollBar.size(_width, 20);
+					h_scrollBar.size(_width-(margin.right+margin.left), 20);
 					v_scrollBar.size(0, 0);
 					v_scrollBar.mouseWheelTarget = null;
 					if (v_scrollBar.parent) removeChild(v_scrollBar);
 				}
 				if (!h_scrollBar.parent) addChild(h_scrollBar);
 			} else {
+                //todo test margins
 				if (vertical) {
 					_rect.width = _width - 20;
 					_rect.height = _height;
@@ -214,9 +222,12 @@ package bloom.containers
 			_bg.graphics.drawRect(0, 0, _width, _height);
 			_bg.graphics.endFill();
 			
-			h_scrollBar.move(0, _height - 20);
-			v_scrollBar.move(_width - 20, 0);
-			
+			h_scrollBar.move(margin.right, _height - margin.top - 20);
+			v_scrollBar.move(_width - 20 -margin.right, 0);
+
+            _content.x = margin.left;
+            _content.y = margin.top;
+
 			setScrollBar(h_scrollBar_enabled, v_scrollBar_enabled);
 			
 			update();

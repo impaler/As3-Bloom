@@ -209,9 +209,14 @@ package bloom.themes
 			data[0] = 0x666666;
 			ThemeBase.Window_Scaler = new ColorBrush(data);
 			
-			data = new Vector.<uint>(1, true);
-			data[0] = 0xB4B4B4;
-			ThemeBase.Window_Footer = new ColorBrush(data);
+			data = new Vector.<uint>(2, true);
+			data[0] = 0x000033;
+			data[1] = 0xaf96cc;
+			ThemeBase.Window_Scaler_Fill = new ColorBrush(data);
+
+            data = new Vector.<uint>(1, true);
+ 			data[0] = 0xB4B4B4;
+ 			ThemeBase.Window_Footer = new ColorBrush(data);
 		}
 		
 	}

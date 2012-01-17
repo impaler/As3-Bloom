@@ -52,7 +52,7 @@ import flash.display.DisplayObject;
 
             scrollContainer = new ScrollContainer(null);
             scrollContainer.direction = ScrollContainer.VERTICALLY;
-            scrollContainer.margin = new Margin(30,40,30,30);
+            scrollContainer.margin = new Margin(0,9,0,9);
 
             var window:Window = new Window(this, scrollContainer);
             window.minWidth = 200;
@@ -62,7 +62,6 @@ import flash.display.DisplayObject;
             window.size(200, 200);
             window.move(230, 15);
             window.footer.addChild(new Label(null, "Status"));
-
 
 			var button:Button = new Button(scrollContainer.content, "Demo");
 			button.size(120, 40);

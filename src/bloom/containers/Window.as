@@ -21,11 +21,15 @@
  */
 package bloom.containers 
 {
-	import flash.display.DisplayObjectContainer;
+
+import bloom.core.Margin;
+
+import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import flash.geom.Rectangle;
+import flash.geom.Point;
+import flash.geom.Rectangle;
 	
 	import bloom.brushes.BMPBrush;
 	import bloom.brushes.Brush;
@@ -61,15 +65,16 @@ package bloom.containers
 		private var _content:FlowContainer;
 		private var _footer:FlowContainer;
 		private var _scaler:Sprite;
+        private var _sizePreview:Sprite;
 		
 		public function Window(p:DisplayObjectContainer = null, content:FlowContainer = null, moveable:Boolean = true, resizeable:Boolean = true) {
 			super(p);
-			
+
 			_maxWidth = Number.MAX_VALUE;
 			_minWidth = 100;
 			_maxHeight = Number.MAX_VALUE;
 			_minHeight = 100;
-			
+
 			_header = new FlowContainer();
 			_header.brush = ThemeBase.Window_Header;
 			_header.addEventListener(MouseEvent.MOUSE_DOWN, onStartDarg);
@@ -77,16 +82,19 @@ package bloom.containers
 			
 			_content = content;
 			if (_content) addChild(_content);
-			
+
+			_footer = new FlowContainer();
+			_footer.brush = ThemeBase.Window_Footer;
+			addChild(_footer);
+
+            _sizePreview = new Sprite();
+            addChild(_sizePreview);
+
 			_scaler = new Sprite();
 			_scaler.buttonMode = true;
 			_scaler.useHandCursor = true;
 			_scaler.tabEnabled = false;
 			_scaler.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
-			
-			_footer = new FlowContainer();
-			_footer.brush = ThemeBase.Window_Footer;
-			addChild(_footer);
 			
 			_headerSize = 30;
 			_footerSize = 30;
@@ -94,7 +102,7 @@ package bloom.containers
 			this.moveable = moveable;
             _header.buttonMode = moveable;
 			this.resizeable = resizeable;
-			
+
 			_rect = new Rectangle();
 			
 			brush = ThemeBase.Window_Scaler;
@@ -105,12 +113,17 @@ package bloom.containers
 		private function onMouseDown(e:MouseEvent):void {
 			stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
 			_scaler.startDrag();
+
+            stage.addEventListener(MouseEvent.MOUSE_MOVE, drawSizePreview);
 		}
 		
 		private function onMouseUp(e:MouseEvent):void {
 			stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
 			size(_scaler.x + _footerSize, _scaler.y + _footerSize);
 			_scaler.stopDrag();
+
+            stage.removeEventListener(MouseEvent.MOUSE_MOVE, drawSizePreview);
+            _sizePreview.graphics.clear();
 		}
 		
 		private function onStartDarg(e:MouseEvent):void {
@@ -119,6 +132,17 @@ package bloom.containers
 				startDrag();
 			}
 		}
+
+        private function drawSizePreview ( event:MouseEvent ):void {
+            var colorBrush:ColorBrush = ThemeBase.Window_Scaler_Fill as ColorBrush;
+            _sizePreview.graphics.clear();
+            _sizePreview.graphics.lineStyle(.3,colorBrush.colors[0],.4);
+            _sizePreview.graphics.beginFill(colorBrush.colors[1],.2);
+            var size:Point = this.globalToLocal( new Point( event.stageX, event.stageY ) );
+            _sizePreview.graphics.drawRect(0,0,size.x , size.y);
+            _sizePreview.graphics.endFill();
+
+        }
 		
 		private function onStopDarg(e:MouseEvent):void {
 			stage.removeEventListener(MouseEvent.MOUSE_UP, onStopDarg);
@@ -136,8 +160,8 @@ package bloom.containers
 			}
 			_footer.move(0, _headerSize + (_content ? _content.height : 0));
 			_footer.size(_width, _footerSize);
-			_scaler.x = _width - _footerSize;
-			_scaler.y = _height - _footerSize;
+			_scaler.x = _width - 10 - _footerSize;
+			_scaler.y = _height - 10 - _footerSize;
 		}
 		
 		override public function size(w:Number, h:Number):void {
@@ -183,7 +207,7 @@ package bloom.containers
 				_scaler.graphics.drawRect(0, 0, _footerSize, _footerSize);
 				_scaler.graphics.endFill();
 			}
-			
+
 			update();
 		}
 		
