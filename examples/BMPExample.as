@@ -71,17 +71,22 @@ package
 			progressBar = new ProgressBar(this, 0);
 			progressBar.size(200, 30);
 			progressBar.move(10, 300);
-			
-			addEventListener(Event.ENTER_FRAME, onLoop);
+            progressBar.addEventListener(Event.ENTER_FRAME, onLoop);
+
+            progressBar = new ProgressBar(this, 0);
+     	    progressBar.size(60, 60);
+     		progressBar.move(10, 350);
+			progressBar.addEventListener(Event.ENTER_FRAME, onLoop);
 		}
 		
 		private var decrease:Boolean = false;
 		private var progressBar:ProgressBar;
-		
+
 		private function onLoop(e:Event):void {
-			if (progressBar.value == 100) decrease = true;
-			if (progressBar.value == 0) decrease = false;
-			progressBar.value += decrease ? -1 : 1;
+            var bar:ProgressBar = e.target as ProgressBar;
+			if (bar.value == 100) decrease = true;
+			if (bar.value == 0) decrease = false;
+            bar.value += decrease ? -1 : 1;
 		}
 		
 	}

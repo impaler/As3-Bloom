@@ -166,10 +166,10 @@ package bloom.themes
 			
 			// ProgressBar
 			scaleBMP0 = new ScaleBitmap(progress_bg_bit.bitmapData);
-			scaleBMP0.scale9Grid = new Rectangle(8, 6, 82, 7);
+			scaleBMP0.scale9Grid = new Rectangle(7, 7, 2, 2);
 			
 			scaleBMP1 = new ScaleBitmap(progress_bar_bit.bitmapData);
-			scaleBMP1.scale9Grid = new Rectangle(8, 4, 149, 11);
+			scaleBMP1.scale9Grid = new Rectangle(7, 7, 2, 2);
 			
 			data = new Vector.<ScaleBitmap>(2, true);
 			data[0] = scaleBMP0;
