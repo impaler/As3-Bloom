@@ -25,7 +25,7 @@ package bloom.core
 	/**
 	 * Margin
 	 * 
-	 * @date 2012/1/10 19:44
+	 * @date 2012/1/17 12:04
 	 * @author sindney
 	 */
 	public class Margin {
@@ -36,6 +36,13 @@ package bloom.core
 		public var right:Number;
 		
 		public function Margin(top:Number = 5, left:Number = 5, bottom:Number = 5, right:Number = 5) {
+			this.top = top;
+			this.left = left;
+			this.bottom = bottom;
+			this.right = right;
+		}
+		
+		public function reset(top:Number, left:Number, bottom:Number, right:Number):void {
 			this.top = top;
 			this.left = left;
 			this.bottom = bottom;

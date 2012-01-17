@@ -26,7 +26,7 @@ package bloom.themes
 	/**
 	 * ThemeBase
 	 * 
-	 * @date 2012/1/15 14:47
+	 * @date 2012/1/17 12:43
 	 * @author sindney, impaler
 	 */
 	public final class ThemeBase {
@@ -72,7 +72,6 @@ package bloom.themes
 		///////////////////////////////////
 		
 		// Accordion
-		public static var Accordion:Brush;
 		public static var AC_Title:Brush;
 		public static var AC_Content:Brush;
 		

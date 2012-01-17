@@ -62,23 +62,31 @@ package
 			}
 			
 			var accordion:Accordion = new Accordion(this);
-			//accordion.multiSelect = true;
-			accordion.size(200, 400);
-			accordion.move(10, 10);
+			accordion.multiSelect = true;
+			accordion.x = 10;
+			accordion.y = 10;
 			
 			var ac:AccordionContent = new AccordionContent();
-			ac.title.addChild(new Label(null, "Button"));
+			ac.title.addChild(new Label(null, "+"));
+			ac.title.size(110, 30);
 			ac.content.addChild(new Button(null, "Demo"));
 			ac.content.addChild(new CheckBox(null, "Demo"));
 			ac.content.addChild(new NumericStepper(null));
+			ac.content.size(110, 100);
+			ac.selected = true;
 			accordion.addContent(ac);
 			
 			ac = new AccordionContent();
-			ac.title.addChild(new Label(null, "Slider"));
+			ac.title.addChild(new Label(null, "+"));
+			ac.title.size(110, 30);
 			ac.content.addChild(new Slider(null, Slider.HORIZONTALLY));
 			ac.content.addChild(new Slider(null, Slider.HORIZONTALLY, 50));
 			ac.content.addChild(new Slider(null, Slider.HORIZONTALLY, 100));
+			ac.content.size(110, 100);
+			ac.selected = true;
 			accordion.addContent(ac);
+			
+			accordion.update();
 			
 			scrollContainer = new ScrollContainer(null);
 			
@@ -87,8 +95,9 @@ package
 			window.minHeight = 200;
 			window.headerSize = 30;
 			window.footerSize = 30;
-			window.size(200, 200);
-			window.move(230, 15);
+			window.size(200, 260);
+			window.move(130, 10);
+			window.header.addChild(new Label(null, "+"));
 			window.footer.addChild(new Label(null, "Status"));
 			
 			var label:Label = new Label(scrollContainer.content, "I'v been busy, really.");

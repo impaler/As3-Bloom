@@ -22,111 +22,79 @@
 package bloom.containers 
 {
 	import flash.display.DisplayObjectContainer;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
+	import bloom.core.IChild;
+	import bloom.core.Margin;
 	import bloom.themes.ThemeBase;
 	
-	/** 
-	 * Dispatched when this Component is selected.
-	 * @eventType flash.events.Event
-	 */
 	[Event(name = "select", type = "flash.events.Event")]
+	
+	[Event(name = "change", type = "flash.events.Event")]
 	
 	/**
 	 * AccordionContent
 	 * 
-	 * @date 2012/1/16 14:08
+	 * @date 2012/1/17 12:42
 	 * @author sindney
 	 */
-	public class AccordionContent extends Container {
+	public class AccordionContent extends Sprite implements IChild {
 		
 		private var _selected:Boolean;
-		private var _headerSize:Number;
-		private var _contentSize:Number;
+		private var _enabled:Boolean;
+		private var _margin:Margin;
 		
 		private var _title:FlowContainer;
 		private var _content:FlowContainer;
 		
 		public function AccordionContent(p:DisplayObjectContainer = null) {
-			super(p);
+			super();
+			_margin = new Margin();
+			if (p) p.addChild(this);
+			
 			_title = new FlowContainer(this);
 			_title.brush = ThemeBase.AC_Title;
+			_title.size(100, 30);
 			_title.addEventListener(MouseEvent.CLICK, onMouseClick);
 			
 			_content = new FlowContainer();
 			_content.brush = ThemeBase.AC_Content;
 			_content.direction = FlowContainer.VERTICALLY;
 			
+			_enabled = true;
 			_selected = false;
-			_headerSize = 30;
-			_content.height = _contentSize = 100;
-			
-			size(100, 30);
 		}
 		
 		private function onMouseClick(e:MouseEvent):void {
 			selected = !_selected;
 		}
 		
-		override public function update():void {
-			_title.size(_width, _headerSize);
-			_content.y = _headerSize;
-			_content.width = _width;
-			_height = _headerSize + _selected ? _contentSize : 0;
-		}
-		
-		override protected function draw(e:Event):void {
-			if (_changed) {
-				_changed = false;
-			} else {
-				return;
-			}
-			
-			update();
-		}
-		
 		///////////////////////////////////
 		// getter/setters
 		///////////////////////////////////
+		
+		override public function get height():Number {
+			return _title.height + (_selected ? _content.height : 0);
+		}
 		
 		public function set selected(value:Boolean):void {
 			if (_selected != value) {
 				_selected = value;
 				if (_selected) {
+					_content.y = _title.height;
 					addChild(_content);
 					dispatchEvent(new Event("select"));
 				} else {
 					removeChild(_content);
 				}
-				update();
+				dispatchEvent(new Event("change"));
 			}
 		}
 		
 		public function get selected():Boolean {
 			return _selected;
-		}
-		
-		public function set headerSize(value:Number):void {
-			if (_headerSize != value) {
-				_headerSize = value;
-				update();
-			}
-		}
-		
-		public function get headerSize():Number {
-			return _headerSize;
-		}
-		
-		public function set contentSize(value:Number):void {
-			if (_contentSize != value) {
-				_content.height = _contentSize = value;
-				update();
-			}
-		}
-		
-		public function get contentSize():Number {
-			return _contentSize;
 		}
 		
 		public function get title():FlowContainer {
@@ -135,6 +103,21 @@ package bloom.containers
 		
 		public function get content():FlowContainer {
 			return _content;
+		}
+		
+		public function set enabled(value:Boolean):void {
+			if (_enabled != value) {
+				_enabled = mouseEnabled = mouseChildren = value;
+				alpha = _enabled ? 1 : ThemeBase.ALPHA;
+			}
+		}
+		
+		public function get enabled():Boolean {
+			return _enabled;
+		}
+		
+		public function get margin():Margin {
+			return _margin;
 		}
 		
 		///////////////////////////////////

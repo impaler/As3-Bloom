@@ -23,21 +23,26 @@ package bloom.core
 {
 	
 	/**
-	 * IComponent
+	 * IChild
 	 * 
-	 * @date 2012/1/10 19:31
+	 * @date 2012/1/17 11:35
 	 * @author sindney
 	 */
-	public interface IComponent extends IChild {
+	public interface IChild {
 		
-		function move(x:Number, y:Number):void;
+		function set x(value:Number):void;
+		function get x():Number;
 		
-		function size(w:Number, h:Number):void;
+		function set y(value:Number):void;
+		function get y():Number;
 		
-		function set enabled(value:Boolean):void;
-		function get enabled():Boolean;
+		function set width(value:Number):void;
+		function get width():Number;
 		
-		function toString():String;
+		function set height(value:Number):void;
+		function get height():Number;
+		
+		function get margin():Margin;
 		
 	}
 	

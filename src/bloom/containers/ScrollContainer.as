@@ -29,7 +29,7 @@ package bloom.containers
 	
 	import bloom.brushes.BMPBrush;
 	import bloom.brushes.ColorBrush;
-	import bloom.core.IComponent;
+	import bloom.core.IChild;
 	import bloom.core.ScaleBitmap;
 	import bloom.themes.ThemeBase;
 	import bloom.ScrollBar;
@@ -161,12 +161,12 @@ package bloom.containers
 			var height:Number = 0;
 			
 			var object:DisplayObject;
-			var component:IComponent;
+			var component:IChild;
 			var i:int, j:int = _content.numChildren;
 			for (i = 0; i < j; i++) {
 				object = _content.getChildAt(i);
-				if (object is IComponent) {
-					component = object as IComponent;
+				if (object is IChild) {
+					component = object as IChild;
 					if (_direction == HORIZONTALLY) {
 						width += component.width + component.margin.left + component.margin.right;
 						height = Math.max(component.height + component.margin.top + component.margin.bottom, height);

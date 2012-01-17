@@ -24,7 +24,7 @@ package bloom.containers
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	
-	import bloom.core.IComponent;
+	import bloom.core.IChild;
 	
 	/**
 	 * FlowContainer
@@ -51,12 +51,12 @@ package bloom.containers
 			var last:Number = 0;
 			
 			var object:DisplayObject;
-			var component:IComponent;
+			var component:IChild;
 			var i:int, j:int = _target.numChildren;
 			for (i = 0; i < j; i++) {
 				object = _target.getChildAt(i);
-				if (object is IComponent) {
-					component = object as IComponent;
+				if (object is IChild) {
+					component = object as IChild;
 					if (_direction == HORIZONTALLY) {
 						component.x = last + component.margin.left;
 						component.y = component.margin.top;
