@@ -21,7 +21,10 @@
  */
 package bloom.themes 
 {
-	import flash.display.Bitmap;
+
+import bloom.brushes.ColorBrush;
+
+import flash.display.Bitmap;
 	import flash.geom.Rectangle;
 	
 	import bloom.brushes.BMPBrush;
@@ -121,6 +124,19 @@ package bloom.themes
         [Embed(source="../assets/default/ns_increase_button_down.png")]
         private var ns_increase_button_down:Class;
         private var ns_increase_button_down_bit:Bitmap = new ns_increase_button_down();
+
+        //Window
+        [Embed(source="../assets/default/window_bg.png")]
+        private var window_bg:Class;
+        private var window_bg_bit:Bitmap = new window_bg();
+
+        [Embed(source="../assets/default/window_footer.png")]
+        private var window_footer:Class;
+        private var window_footer_bit:Bitmap = new window_footer();
+
+        [Embed(source="../assets/default/window_header.png")]
+        private var window_header:Class;
+        private var window_header_bit:Bitmap = new window_header();
 		
 		public function BMPTheme() {
 			
@@ -140,7 +156,7 @@ package bloom.themes
 			var scaleBMP1:ScaleBitmap;
 			var scaleBMP2:ScaleBitmap;
 			
-			var data:Vector.<ScaleBitmap>
+			var data:Vector.<ScaleBitmap>;
 			
         	// Button
         	scaleBMP0 = new ScaleBitmap(button_normal_bit.bitmapData);
@@ -246,6 +262,59 @@ package bloom.themes
            	data[1] = scaleBMP2;
            	data[2] = scaleBMP1;
            	ThemeBase.NS_Increase = new BMPBrush (data);
+
+            
+
+            scaleBMP0 = new ScaleBitmap(window_header_bit.bitmapData);
+           	scaleBMP0.scale9Grid = new Rectangle(9, 9, 182, 4);
+
+            data = new Vector.<ScaleBitmap> (1, true);
+            data[0] = scaleBMP0;
+            ThemeBase.Window_Header = new BMPBrush(data);
+
+            scaleBMP0 = new ScaleBitmap(window_footer_bit.bitmapData);
+           	scaleBMP0.scale9Grid = new Rectangle(9, 6, 182, 4);
+
+            data = new Vector.<ScaleBitmap> (1, true);
+            data[0] = scaleBMP0;
+            ThemeBase.Window_Footer = new BMPBrush(data);
+
+
+            scaleBMP0 = new ScaleBitmap(window_bg_bit.bitmapData);
+           	scaleBMP0.scale9Grid = new Rectangle(9, 6, 182, 4);
+
+            data = new Vector.<ScaleBitmap> (1, true);
+            data[0] = scaleBMP0;
+            ThemeBase.ScrollContainer = new BMPBrush(data);
+
+
+
+            // Window
+            var uint_data:Vector.<uint>;
+
+			uint_data = new Vector.<uint>(1, true);
+            uint_data[0] = 0x666666;
+			ThemeBase.Window_Scaler = new ColorBrush(uint_data);
+
+
+
+
+
+	        // ScrollContainer
+
+			uint_data = new Vector.<uint>(1, true);
+			uint_data[0] = 0x222222;
+			ThemeBase.SC_ScrollBar = new ColorBrush(uint_data);
+			
+			uint_data = new Vector.<uint>(3, true);
+			uint_data[0] = 0x3E3E72;
+			uint_data[1] = 0x3E3E72;
+			uint_data[2] = 0xF1BA44;
+			ThemeBase.SC_ScrollBarButton = new ColorBrush(uint_data);
+
+            
+
+
 		}
 		
 	}

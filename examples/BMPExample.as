@@ -21,7 +21,10 @@
  */
 package  
 {
-	import flash.display.DisplayObject;
+
+import bloom.core.Margin;
+
+import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
@@ -37,46 +40,68 @@ package
 	 * @author sindney, impaler
 	 */
 	public class BMPExample extends Sprite {
-		
+
+        private var scrollContainer:ScrollContainer;
+
 		public function BMPExample() {
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.showDefaultContextMenu = false;
 			
 			ThemeBase.setTheme(new BMPTheme());
-			
-			var button:Button = new Button(this, "Demo");
+
+            scrollContainer = new ScrollContainer(null);
+            scrollContainer.direction = ScrollContainer.VERTICALLY;
+            scrollContainer.margin = new Margin(30,40,30,30);
+
+            var window:Window = new Window(this, scrollContainer);
+            window.minWidth = 200;
+            window.minHeight = 200;
+            window.headerSize = 30;
+            window.footerSize = 30;
+            window.size(200, 200);
+            window.move(230, 15);
+            window.footer.addChild(new Label(null, "Status"));
+
+
+			var button:Button = new Button(scrollContainer.content, "Demo");
 			button.size(120, 40);
 			button.move(10, 10);
 			
-			var sliderv:Slider = new Slider(this);
+			var sliderv:Slider = new Slider(scrollContainer.content);
 			sliderv.size(30, 120);
 			sliderv.move(10, 60);
 			
-			var sliderh:Slider = new Slider(this, Slider.HORIZONTALLY);
+			var sliderh:Slider = new Slider(scrollContainer.content, Slider.HORIZONTALLY);
 			sliderh.size(200, 30);
 			sliderh.move(10, 190);
 			
-			var numericStepper:NumericStepper = new NumericStepper(this);
+			var numericStepper:NumericStepper = new NumericStepper(scrollContainer.content);
 			numericStepper.size(80, 30);
 			numericStepper.move(10, 230);
 			
-			numericStepper = new NumericStepper(this);
+			numericStepper = new NumericStepper(scrollContainer.content);
 			numericStepper.size(80, 30);
 			numericStepper.move(100, 230);
 			
-			var checkBox:CheckBox = new CheckBox(this, "CheckBox");
+			var checkBox:CheckBox = new CheckBox(scrollContainer.content, "CheckBox");
 			checkBox.move(10, 270);
 			
-			progressBar = new ProgressBar(this, 0);
+			progressBar = new ProgressBar(scrollContainer.content, 0);
 			progressBar.size(200, 30);
 			progressBar.move(10, 300);
             progressBar.addEventListener(Event.ENTER_FRAME, onLoop);
 
-            progressBar = new ProgressBar(this, 0);
+            progressBar = new ProgressBar(scrollContainer.content, 0);
      	    progressBar.size(60, 60);
      		progressBar.move(10, 350);
 			progressBar.addEventListener(Event.ENTER_FRAME, onLoop);
+
+			// run this once, when you have changes in scrollContainer.content.
+			// or you can set content's size to a certain value by scrollContainer.setContainerSize(x,x);
+			scrollContainer.calculateContentSize();
+			scrollContainer.setScrollBar(true, true);
+
 		}
 		
 		private var decrease:Boolean = false;

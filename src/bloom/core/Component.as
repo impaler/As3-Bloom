@@ -171,7 +171,11 @@ package bloom.core
 		public function get margin():Margin {
 			return _margin;
 		}
-		
+        
+        public function set margin(m:Margin):void {
+    	    _margin = m;
+            invalidate();
+    	}
 		///////////////////////////////////
 		// toString
 		///////////////////////////////////

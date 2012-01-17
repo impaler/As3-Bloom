@@ -92,6 +92,7 @@ package bloom.containers
 			_footerSize = 30;
 			
 			this.moveable = moveable;
+            _header.buttonMode = moveable;
 			this.resizeable = resizeable;
 			
 			_rect = new Rectangle();
