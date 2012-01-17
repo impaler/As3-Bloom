@@ -218,33 +218,33 @@ package bloom.themes
 			
 			// NS_Buttons
             scaleBMP0 = new ScaleBitmap(ns_decrease_button_normal_bit.bitmapData);
-            scaleBMP0.scale9Grid = new Rectangle(2, 2, 1, 1);
-			
+            scaleBMP0.scale9Grid = new Rectangle(2, 2, 13, 4);
+
            	scaleBMP1 = new ScaleBitmap(ns_decrease_button_down_bit.bitmapData);
-           	scaleBMP1.scale9Grid = new Rectangle(2, 2, 1, 1);
+           	scaleBMP1.scale9Grid = new Rectangle(2, 2, 13, 4);
 			
            	scaleBMP2 = new ScaleBitmap(ns_decrease_button_over_bit.bitmapData);
-           	scaleBMP2.scale9Grid = new Rectangle(2, 2, 1, 1);
+           	scaleBMP2.scale9Grid = new Rectangle(2, 2, 13, 4);
 			
            	data = new Vector.<ScaleBitmap>(3, true);
            	data[0] = scaleBMP0;
-           	data[1] = scaleBMP1;
-           	data[2] = scaleBMP2;
+           	data[1] = scaleBMP2;
+           	data[2] = scaleBMP1;
            	ThemeBase.NS_Decrease = new BMPBrush (data);
 			
             scaleBMP0 = new ScaleBitmap(ns_increase_button_normal_bit.bitmapData);
-            scaleBMP0.scale9Grid = new Rectangle(2, 2, 1, 1);
-			
+            scaleBMP0.scale9Grid = new Rectangle(2, 4, 13, 4);
+
            	scaleBMP1 = new ScaleBitmap(ns_increase_button_down_bit.bitmapData);
-           	scaleBMP1.scale9Grid = new Rectangle(2, 2, 1, 1);
+           	scaleBMP1.scale9Grid = new Rectangle(2, 4, 13, 4);
 			
            	scaleBMP2 = new ScaleBitmap(ns_increase_button_over_bit.bitmapData);
-           	scaleBMP2.scale9Grid = new Rectangle(2, 2, 1, 1);
+           	scaleBMP2.scale9Grid = new Rectangle(2, 4, 13, 4);
 			
            	data = new Vector.<ScaleBitmap> (3, true);
            	data[0] = scaleBMP0;
-           	data[1] = scaleBMP1;
-           	data[2] = scaleBMP2;
+           	data[1] = scaleBMP2;
+           	data[2] = scaleBMP1;
            	ThemeBase.NS_Increase = new BMPBrush (data);
 		}
 		
