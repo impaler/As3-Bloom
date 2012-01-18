@@ -36,7 +36,7 @@ Version 0.1.0 r26
 History
 
 Version 0.1.0 r26
- - bloom.container.Accordion added.
+ - bloom.containers.Accordion added.
 
 Version 0.1.0 r25
  - bloom.containers.Window added.

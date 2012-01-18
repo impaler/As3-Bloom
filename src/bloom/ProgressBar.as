@@ -37,7 +37,7 @@ package bloom
 	/**
 	 * ProgressBar
 	 * 
-	 * @date 2012/1/16 20:20
+	 * @date 2012/1/17 23:52
 	 * @author sindney
 	 */
 	public class ProgressBar extends Component {
@@ -71,7 +71,6 @@ package bloom
 			
 			_value = _value > 100 ? 100 : _value;
 			_value = _value < 0 ? 0 : _value;
-			if (_value == 100) dispatchEvent(new Event("complete"));
 			
 			var bmpBrush:BMPBrush;
 			var colorBrush:ColorBrush;
@@ -111,6 +110,7 @@ package bloom
 				_value = value;
 				_changed = true;
 				invalidate();
+				if (_value >= 100) dispatchEvent(new Event("complete"));
 			}
 		}
 		

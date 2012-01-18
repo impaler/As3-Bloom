@@ -25,6 +25,7 @@ package bloom.themes
 	import flash.geom.Rectangle;
 	
 	import bloom.brushes.BMPBrush;
+	import bloom.brushes.ColorBrush;
 	import bloom.brushes.TextBrush;
 	import bloom.core.ScaleBitmap;
 	
@@ -122,6 +123,23 @@ package bloom.themes
         private var ns_increase_button_down:Class;
         private var ns_increase_button_down_bit:Bitmap = new ns_increase_button_down();
 		
+		//Window
+        [Embed(source="../assets/default/window_bg.png")]
+        private var window_bg:Class;
+        private var window_bg_bit:Bitmap = new window_bg();
+		
+        [Embed(source="../assets/default/window_footer.png")]
+        private var window_footer:Class;
+        private var window_footer_bit:Bitmap = new window_footer();
+		
+        [Embed(source="../assets/default/window_header.png")]
+        private var window_header:Class;
+        private var window_header_bit:Bitmap = new window_header();
+		
+        [Embed(source="../assets/default/sizer.png")]
+        private var sizer:Class;
+        private var sizer_bit:Bitmap = new sizer();
+		
 		public function BMPTheme() {
 			
 		}
@@ -140,7 +158,7 @@ package bloom.themes
 			var scaleBMP1:ScaleBitmap;
 			var scaleBMP2:ScaleBitmap;
 			
-			var data:Vector.<ScaleBitmap>
+			var data:Vector.<ScaleBitmap>;
 			
         	// Button
         	scaleBMP0 = new ScaleBitmap(button_normal_bit.bitmapData);
@@ -186,7 +204,7 @@ package bloom.themes
         	data = new Vector.<ScaleBitmap>(2, true);
         	data[0] = scaleBMP0;
         	data[1] = scaleBMP1;
-        	ThemeBase.Slider = new BMPBrush (data);
+        	ThemeBase.Slider = new BMPBrush(data);
         	
         	// Slider Button
         	scaleBMP0 = new ScaleBitmap(slider_button_normal_bit.bitmapData);
@@ -214,12 +232,12 @@ package bloom.themes
             data = new Vector.<ScaleBitmap>(2, true);
            	data[0] = scaleBMP0;
            	data[1] = scaleBMP1;
-           	ThemeBase.NumericStepper = new BMPBrush (data);
+           	ThemeBase.NumericStepper = new BMPBrush(data);
 			
 			// NS_Buttons
             scaleBMP0 = new ScaleBitmap(ns_decrease_button_normal_bit.bitmapData);
             scaleBMP0.scale9Grid = new Rectangle(2, 2, 13, 4);
-
+			
            	scaleBMP1 = new ScaleBitmap(ns_decrease_button_down_bit.bitmapData);
            	scaleBMP1.scale9Grid = new Rectangle(2, 2, 13, 4);
 			
@@ -230,22 +248,50 @@ package bloom.themes
            	data[0] = scaleBMP0;
            	data[1] = scaleBMP2;
            	data[2] = scaleBMP1;
-           	ThemeBase.NS_Decrease = new BMPBrush (data);
+           	ThemeBase.NS_Decrease = new BMPBrush(data);
 			
             scaleBMP0 = new ScaleBitmap(ns_increase_button_normal_bit.bitmapData);
             scaleBMP0.scale9Grid = new Rectangle(2, 4, 13, 4);
-
+			
            	scaleBMP1 = new ScaleBitmap(ns_increase_button_down_bit.bitmapData);
            	scaleBMP1.scale9Grid = new Rectangle(2, 4, 13, 4);
 			
            	scaleBMP2 = new ScaleBitmap(ns_increase_button_over_bit.bitmapData);
            	scaleBMP2.scale9Grid = new Rectangle(2, 4, 13, 4);
 			
-           	data = new Vector.<ScaleBitmap> (3, true);
+           	data = new Vector.<ScaleBitmap>(3, true);
            	data[0] = scaleBMP0;
            	data[1] = scaleBMP2;
            	data[2] = scaleBMP1;
-           	ThemeBase.NS_Increase = new BMPBrush (data);
+           	ThemeBase.NS_Increase = new BMPBrush(data);
+			
+			// Window
+            scaleBMP0 = new ScaleBitmap(window_header_bit.bitmapData);
+           	scaleBMP0.scale9Grid = new Rectangle(9, 9, 182, 4);
+			
+            data = new Vector.<ScaleBitmap>(1, true);
+            data[0] = scaleBMP0;
+            ThemeBase.Window_Header = new BMPBrush(data);
+			
+            scaleBMP0 = new ScaleBitmap(window_footer_bit.bitmapData);
+           	scaleBMP0.scale9Grid = new Rectangle(9, 6, 182, 4);
+			
+            data = new Vector.<ScaleBitmap>(1, true);
+            data[0] = scaleBMP0;
+            ThemeBase.Window_Footer = new BMPBrush(data);
+			
+            scaleBMP0 = new ScaleBitmap(sizer_bit.bitmapData);
+           	scaleBMP0.scale9Grid = new Rectangle(0, 0, 0, 0);
+            data = new Vector.<ScaleBitmap>(1, true);
+            data[0] = scaleBMP0;
+            ThemeBase.Window_Scaler = new BMPBrush(data);
+			
+			// Window Content
+			scaleBMP0 = new ScaleBitmap(window_bg_bit.bitmapData);
+           	scaleBMP0.scale9Grid = new Rectangle(11, 1, 180, 2);
+            data = new Vector.<ScaleBitmap>(1, true);
+            data[0] = scaleBMP0;
+            ThemeBase.WC_Container = new BMPBrush(data);
 		}
 		
 	}

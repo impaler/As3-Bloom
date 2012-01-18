@@ -38,13 +38,12 @@ package bloom.containers
 	/**
 	 * Window
 	 * 
-	 * @date 2012/1/15 20:41
+	 * @date 2012/1/18 9:38
 	 * @author sindney
 	 */
 	public class Window extends Component {
 		
-		public var moveable:Boolean;
-		
+		private var _moveable:Boolean;
 		private var _resizeable:Boolean;
 		
 		private var _maxWidth:Number;
@@ -72,6 +71,7 @@ package bloom.containers
 			
 			_header = new FlowContainer();
 			_header.brush = ThemeBase.Window_Header;
+			_header.tabEnabled = false;
 			_header.addEventListener(MouseEvent.MOUSE_DOWN, onStartDarg);
 			addChild(_header);
 			
@@ -299,6 +299,16 @@ package bloom.containers
 				invalidate();
 				dispatchEvent(new Event("resize"));
 			}
+		}
+		
+		public function set moveable(value:Boolean):void {
+			if (_moveable != value) {
+				_moveable = _header.buttonMode = _header.useHandCursor = value;
+			}
+		}
+		
+		public function get moveable():Boolean {
+			return _moveable;
 		}
 		
 		///////////////////////////////////

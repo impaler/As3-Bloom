@@ -210,6 +210,11 @@ package bloom.themes
 			data = new Vector.<uint>(1, true);
 			data[0] = 0xB4B4B4;
 			ThemeBase.Window_Footer = new ColorBrush(data);
+			
+			// Window Containers
+			data = new Vector.<uint>(1, true);
+			data[0] = 0xE9E9E9;
+			ThemeBase.WC_Container = new ColorBrush(data);
 		}
 		
 	}

@@ -36,6 +36,7 @@ package
 	 * 
 	 * @author sindney, impaler
 	 */
+	[SWF(backgroundColor = 0xffffff, frameRate = 40, width = 500, height = 500)]
 	public class BMPExample extends Sprite {
 		
 		public function BMPExample() {
@@ -72,16 +73,24 @@ package
 			progressBar.size(200, 30);
 			progressBar.move(10, 300);
             progressBar.addEventListener(Event.ENTER_FRAME, onLoop);
-
+			
             progressBar = new ProgressBar(this, 0);
      	    progressBar.size(60, 60);
      		progressBar.move(10, 350);
 			progressBar.addEventListener(Event.ENTER_FRAME, onLoop);
+			
+			var container:FlowContainer = new FlowContainer();
+			container.brush = ThemeBase.WC_Container;
+			
+			var window:Window = new Window(this, container);
+			window.move(200, 10);
+			
+			window.header.addChild(new Label(null, "Whatever"));
 		}
 		
 		private var decrease:Boolean = false;
 		private var progressBar:ProgressBar;
-
+		
 		private function onLoop(e:Event):void {
             var bar:ProgressBar = e.target as ProgressBar;
 			if (bar.value == 100) decrease = true;
