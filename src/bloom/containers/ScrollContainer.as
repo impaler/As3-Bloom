@@ -61,9 +61,6 @@ import flash.display.DisplayObject;
 		public function ScrollContainer(p:DisplayObjectContainer = null) {
 			super(p);
 			graphics.clear();
-
-            //ColorTheme needs this if margins are implimented in Component.as
-            margin = new Margin(0,0,0,0);
 			
 			_rect = new Rectangle(0, 0, 100, 100);
 			
@@ -77,7 +74,7 @@ import flash.display.DisplayObject;
 			_target = _content;
 			
 			h_scrollBar = new ScrollBar(null, HORIZONTALLY);
-			h_scrollBar.autoHide = false;
+			h_scrollBar.autoHide = true;
 			h_scrollBar.step = 20;
 			h_scrollBar.brush = ThemeBase.SC_ScrollBar;
 			h_scrollBar.button.brush = ThemeBase.SC_ScrollBarButton;
@@ -85,7 +82,7 @@ import flash.display.DisplayObject;
 			h_scrollBar.addEventListener(Event.SCROLL, onHScrollBarMove);
 			
 			v_scrollBar = new ScrollBar(null, VERTICALLY);
-			v_scrollBar.autoHide = false;
+			v_scrollBar.autoHide = true;
 			v_scrollBar.step = 20;
 			v_scrollBar.brush = ThemeBase.SC_ScrollBar;
 			v_scrollBar.button.brush = ThemeBase.SC_ScrollBarButton;
@@ -99,6 +96,10 @@ import flash.display.DisplayObject;
 			setContentSize(100, 100);
 			
 			size(100, 100);
+
+           //ColorTheme needs this if margins are implimented in Component.as
+            margin = new Margin(0,0,0,0);
+
 		}
 		
 		public function getScrollBar(direction:int):ScrollBar {
@@ -111,7 +112,20 @@ import flash.display.DisplayObject;
 		public function setScrollBar(horizontal:Boolean, vertical:Boolean):void {
 			h_scrollBar_enabled = horizontal;
 			v_scrollBar_enabled = vertical;
-			
+
+
+            //set the right margin to 0 when there is no scrollbar?
+//            var right:Number;
+//            var _max:Number = Math.max(	v_scrollBar.contentSize - v_scrollBar.pageSize, 0);
+//
+//            !(_max > 0) ? right = 9 : right = 0;
+//
+//            margin = new Margin(0,9,0,right);
+//
+//
+//
+
+
 			if (horizontal) {
 				if (vertical) {
 					_rect.width = _width - 20 - (margin.right+margin.left);
@@ -154,6 +168,8 @@ import flash.display.DisplayObject;
 			v_scrollBar.pageSize = _rect.height;
 			
 			_content.scrollRect = _rect;
+
+
 		}
 		
 		public function setContentSize(width:Number, height:Number):void {
@@ -231,6 +247,7 @@ import flash.display.DisplayObject;
 			setScrollBar(h_scrollBar_enabled, v_scrollBar_enabled);
 			
 			update();
+
 		}
 		
 		protected function onVScrollBarMove(e:Event):void {

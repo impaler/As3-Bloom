@@ -78,7 +78,10 @@ import flash.display.Bitmap;
         [Embed(source="../assets/default/slider_bg_h.png")]
         private var slider_bg_h_normal:Class;
         private var slider_bg_h_normal_bit:Bitmap = new slider_bg_h_normal();
-		
+
+
+
+
 		[Embed(source="../assets/default/slider_button_normal.png")]
 		private var slider_button_normal:Class;
 		private var slider_button_normal_bit:Bitmap = new slider_button_normal();
@@ -90,7 +93,13 @@ import flash.display.Bitmap;
 		[Embed(source="../assets/default/slider_button_over.png")]
 		private var slider_button_over:Class;
 		private var slider_button_over_bit:Bitmap = new slider_button_over();
-		
+
+
+
+
+
+
+
 		// Numeric Stepper
         [Embed(source="../assets/default/ns_bg_normal.png")]
         private var ns_bg_normal:Class;
@@ -141,6 +150,44 @@ import flash.display.Bitmap;
         [Embed(source="../assets/default/sizer.png")]
         private var sizer:Class;
         private var sizer_bit:Bitmap = new sizer();
+
+        [Embed(source="../assets/default/scroll_bar_bg_h.png")]
+        private var scroll_bar_bg_h:Class;
+        private var scroll_bar_bg_h_bit:Bitmap = new scroll_bar_bg_h();
+
+        [Embed(source="../assets/default/scroll_bar_bg_v.png")]
+        private var scroll_bar_bg_v:Class;
+        private var scroll_bar_bg_v_bit:Bitmap = new scroll_bar_bg_v();
+
+
+
+
+            [Embed(source="../assets/default/progress_bg.png")]
+      		private var scrollbutton:Class;
+      		private var scrollbutton_bit:Bitmap = new scrollbutton();
+
+      		[Embed(source="../assets/default/progress_bar.png")]
+      		private var scrollbutton_active:Class;
+      		private var scrollbutton_active_bit:Bitmap = new scrollbutton_active();
+
+
+
+
+
+        [Embed(source="../assets/default/scroll_button_down.png")]
+        private var scroll_button_down:Class;
+        private var scroll_button_down_bit:Bitmap = new scroll_button_down();
+
+        [Embed(source="../assets/default/scroll_button_normal.png")]
+  		private var scroll_button_normal:Class;
+  		private var scroll_button_normal_bit:Bitmap = new scroll_button_normal();
+
+
+        [Embed(source="../assets/default/scroll_button_over.png")]
+  		private var scroll_button_over:Class;
+  		private var scroll_button_over_bit:Bitmap = new scroll_button_over();
+
+
 		
 		public function BMPTheme() {
 			
@@ -294,6 +341,39 @@ import flash.display.Bitmap;
             data[0] = scaleBMP0;
             ThemeBase.Window_Scaler = new BMPBrush(data);
 
+
+	        // ScrollContainer
+            scaleBMP0 = new ScaleBitmap(scroll_bar_bg_h_bit.bitmapData);
+            scaleBMP0.scale9Grid = new Rectangle(7, 7, 2, 2);
+
+            scaleBMP1 = new ScaleBitmap(scroll_bar_bg_v_bit.bitmapData);
+            scaleBMP1.scale9Grid = new Rectangle(7, 7, 2, 2);
+
+
+            data = new Vector.<ScaleBitmap> (2, true);
+            data[0] = scaleBMP0;
+            data[1] = scaleBMP1;
+			ThemeBase.SC_ScrollBar = new BMPBrush(data);
+
+
+
+
+
+            scaleBMP0 = new ScaleBitmap(scroll_button_normal_bit.bitmapData);
+            scaleBMP0.scale9Grid = new Rectangle(7, 7, 2, 2);
+
+           	scaleBMP1 = new ScaleBitmap(scroll_button_over_bit.bitmapData);
+            scaleBMP1.scale9Grid = new Rectangle(7, 7, 2, 2);
+
+           	scaleBMP2 = new ScaleBitmap(scroll_button_down_bit.bitmapData);
+           	scaleBMP2.scale9Grid = new Rectangle(7, 7, 2, 2);
+
+            data = new Vector.<ScaleBitmap> (3, true);
+            data[0] = scaleBMP0;
+            data[1] = scaleBMP1;
+            data[2] = scaleBMP2;
+            ThemeBase.SC_ScrollBarButton = new BMPBrush(data);
+
             // Window
             var uint_data:Vector.<uint>;
 
@@ -302,16 +382,9 @@ import flash.display.Bitmap;
             uint_data[1] = 0xaf96cc;
             ThemeBase.Window_Scaler_Fill = new ColorBrush(uint_data);
 
-	        // ScrollContainer
-			uint_data = new Vector.<uint>(1, true);
-			uint_data[0] = 0x222222;
-			ThemeBase.SC_ScrollBar = new ColorBrush(uint_data);
+
 			
-			uint_data = new Vector.<uint>(3, true);
-			uint_data[0] = 0x3E3E72;
-			uint_data[1] = 0x3E3E72;
-			uint_data[2] = 0xF1BA44;
-			ThemeBase.SC_ScrollBarButton = new ColorBrush(uint_data);
+
 
             
 
