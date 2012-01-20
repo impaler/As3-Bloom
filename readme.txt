@@ -30,10 +30,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 ----------------------------------------------------------------
-Version 0.1.0 r26
+Version 0.1.0 r27
 ----------------------------------------------------------------
 
 History
+
+Version 0.1.0 r27
+ - You can adjust window's content's margin to make some special effect now.
+ - List bug fixed and some minor changes.
 
 Version 0.1.0 r26
  - bloom.containers.Accordion added.

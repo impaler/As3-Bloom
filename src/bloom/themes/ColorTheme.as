@@ -28,7 +28,7 @@ package bloom.themes
 	/**
 	 * ColorTheme
 	 * 
-	 * @date 2012/1/15 14:47
+	 * @date 2012/1/20 14:11
 	 * @author sindney, impaler
 	 */
 	public class ColorTheme implements ITheme {
@@ -199,22 +199,18 @@ package bloom.themes
 			ThemeBase.ToggleSwitcher = new ColorBrush(data);
 			
 			// Window
+			data = new Vector.<uint>(2, true);
+			data[0] = 0xE9E9E9;
+			data[1] = 0xE9E9E9;
+			ThemeBase.Window = new ColorBrush(data);
+			
 			data = new Vector.<uint>(1, true);
 			data[0] = 0x3E3E50;
 			ThemeBase.Window_Header = new ColorBrush(data);
 			
 			data = new Vector.<uint>(1, true);
-			data[0] = 0x666666;
-			ThemeBase.Window_Scaler = new ColorBrush(data);
-			
-			data = new Vector.<uint>(1, true);
 			data[0] = 0xB4B4B4;
 			ThemeBase.Window_Footer = new ColorBrush(data);
-			
-			// Window Containers
-			data = new Vector.<uint>(1, true);
-			data[0] = 0xE9E9E9;
-			ThemeBase.WC_Container = new ColorBrush(data);
 		}
 		
 	}

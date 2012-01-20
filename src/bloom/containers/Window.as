@@ -38,10 +38,12 @@ package bloom.containers
 	/**
 	 * Window
 	 * 
-	 * @date 2012/1/18 9:38
+	 * @date 2012/1/20 14:16
 	 * @author sindney
 	 */
 	public class Window extends Component {
+		
+		public var liveResize:Boolean;
 		
 		private var _moveable:Boolean;
 		private var _resizeable:Boolean;
@@ -93,21 +95,28 @@ package bloom.containers
 			
 			this.moveable = moveable;
 			this.resizeable = resizeable;
+			liveResize = false;
 			
 			_rect = new Rectangle();
 			
-			brush = ThemeBase.Window_Scaler;
+			brush = ThemeBase.Window;
 			
 			size(100, 100);
 		}
 		
 		private function onMouseDown(e:MouseEvent):void {
 			stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+			stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 			_scaler.startDrag();
+		}
+		
+		private function onMouseMove(e:MouseEvent):void {
+			if (liveResize) size(_scaler.x + _footerSize, _scaler.y + _footerSize);
 		}
 		
 		private function onMouseUp(e:MouseEvent):void {
 			stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+			stage.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 			size(_scaler.x + _footerSize, _scaler.y + _footerSize);
 			_scaler.stopDrag();
 		}
@@ -130,10 +139,10 @@ package bloom.containers
 		public function update():void {
 			_header.size(_width, _headerSize);
 			if (_content) {
-				_content.move(0, _headerSize);
-				_content.size(_width, _height - _headerSize - _footerSize);
+				_content.move(_content.margin.left, _headerSize + _content.margin.top);
+				_content.size(_width - _content.margin.left - content.margin.right, _height - _content.margin.top - _content.margin.bottom - _headerSize - _footerSize);
 			}
-			_footer.move(0, _headerSize + (_content ? _content.height : 0));
+			_footer.move(0, _headerSize + (_content ? _content.height + _content.margin.top + _content.margin.bottom : 0));
 			_footer.size(_width, _footerSize);
 			_scaler.x = _width - _footerSize;
 			_scaler.y = _height - _footerSize;
@@ -164,11 +173,14 @@ package bloom.containers
 			var colorBrush:ColorBrush;
 			var scale:ScaleBitmap;
 			
+			graphics.clear();
 			_scaler.graphics.clear();
 			
 			if (brush is ColorBrush) {
 				colorBrush = brush as ColorBrush;
-				_scaler.graphics.beginFill(colorBrush.colors[0]);
+				graphics.beginFill(colorBrush.colors[0]);
+				
+				_scaler.graphics.beginFill(colorBrush.colors[1]);
 				_scaler.graphics.moveTo(0, _footerSize);
 				_scaler.graphics.lineTo(_footerSize, _footerSize);
 				_scaler.graphics.lineTo(_footerSize, 0);
@@ -177,11 +189,18 @@ package bloom.containers
 			} else if (brush is BMPBrush) {
 				bmpBrush = brush as BMPBrush;
 				scale = bmpBrush.bitmap[0];
+				scale.setSize(_width, _height - _headerSize - _footerSize);
+				graphics.beginBitmapFill(scale.bitmapData);
+				
+				scale = bmpBrush.bitmap[1];
 				scale.setSize(_footerSize, _footerSize);
 				_scaler.graphics.beginBitmapFill(scale.bitmapData);
 				_scaler.graphics.drawRect(0, 0, _footerSize, _footerSize);
 				_scaler.graphics.endFill();
 			}
+			
+			graphics.drawRect(0, _headerSize, _width, _height - _headerSize - _footerSize);
+			graphics.endFill();
 			
 			update();
 		}

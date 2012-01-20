@@ -132,12 +132,9 @@ package bloom.themes
 		public static var ToggleSwitcher:Brush;
 		
 		// Window
+		public static var Window:Brush;
 		public static var Window_Header:Brush;
 		public static var Window_Footer:Brush;
-		public static var Window_Scaler:Brush;
-		
-		// Windows content
-		public static var WC_Container:Brush;
 		
 	}
 

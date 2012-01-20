@@ -235,6 +235,7 @@ package bloom
 				tmp = _content.getChildAt(j);
 				tmp.data = _data[i];
 				tmp.selected = (i == _index);
+				if (tmp.selected)_target = tmp.data;
 				tmp.drawDirectly();
 				i++;
 				j++;
