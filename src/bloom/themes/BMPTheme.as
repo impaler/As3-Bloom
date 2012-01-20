@@ -171,6 +171,7 @@ package bloom.themes
 			ThemeBase.Text_Label = new TextBrush("Verdana", 12, 0x000000, false, false, false);
 			ThemeBase.Text_List = new TextBrush("Verdana", 12, 0x000000, false, false, false);
 			ThemeBase.Text_NumericStepper = new TextBrush("Verdana", 20, 0x000000, false, false, false);
+			ThemeBase.Text_TabBox = new TextBrush("Verdana", 12, 0x000000, false, false, false);
 			ThemeBase.Text_TextBox = new TextBrush("Verdana", 12, 0xffffff, false, false, false);
 			ThemeBase.Text_TextInput = new TextBrush("Verdana", 12, 0xffffff, false, false, false);
 			ThemeBase.Text_ToggleButton = new TextBrush("Verdana", 12, 0xffffff, false, false, false);

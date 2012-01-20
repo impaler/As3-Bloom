@@ -26,7 +26,7 @@ package bloom.themes
 	/**
 	 * ThemeBase
 	 * 
-	 * @date 2012/1/17 12:43
+	 * @date 2012/1/20 19:46
 	 * @author sindney, impaler
 	 */
 	public final class ThemeBase {
@@ -60,6 +60,8 @@ package bloom.themes
 		public static var Text_List:TextBrush;
 		
 		public static var Text_NumericStepper:TextBrush;
+		
+		public static var Text_TabBox:TextBrush;
 		
 		public static var Text_TextBox:TextBrush;
 		
@@ -116,6 +118,10 @@ package bloom.themes
 		// Slider
 		public static var Slider:Brush;
 		public static var SliderButton:Brush;
+		
+		// TabBox
+		public static var TabBox:Brush;
+		public static var TabBox_Title:Brush;
 		
 		// TextBox
 		public static var TextBox:Brush;

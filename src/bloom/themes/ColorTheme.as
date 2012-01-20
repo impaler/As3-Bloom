@@ -44,6 +44,7 @@ package bloom.themes
 			ThemeBase.Text_Label = new TextBrush("Verdana", 12, 0x000000, false, false, false);
 			ThemeBase.Text_List = new TextBrush("Verdana", 12, 0x000000, false, false, false);
 			ThemeBase.Text_NumericStepper = new TextBrush("Verdana", 12, 0xffffff, false, false, false);
+			ThemeBase.Text_TabBox = new TextBrush("Verdana", 12, 0x000000, false, false, false);
 			ThemeBase.Text_TextBox = new TextBrush("Verdana", 12, 0xffffff, false, false, false);
 			ThemeBase.Text_TextInput = new TextBrush("Verdana", 12, 0xffffff, false, false, false);
 			ThemeBase.Text_ToggleButton = new TextBrush("Verdana", 12, 0xffffff, false, false, false);
@@ -162,6 +163,17 @@ package bloom.themes
 			data[1] = 0x3E3E72;
 			data[2] = 0xF1BA44;
 			ThemeBase.SliderButton = new ColorBrush(data);
+			
+			// TabBox
+			data = new Vector.<uint>(1, true);
+			data[0] = 0x666666;
+			ThemeBase.TabBox = new ColorBrush(data);
+			
+			// TabBox_Title
+			data = new Vector.<uint>(2, true);
+			data[0] = 0xE9E9E9;
+			data[1] = 0x666666;
+			ThemeBase.TabBox_Title = new ColorBrush(data);
 			
 			// TextBox
 			data = new Vector.<uint>(1, true);

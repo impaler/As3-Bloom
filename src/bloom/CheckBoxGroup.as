@@ -37,7 +37,7 @@ package bloom
 	/**
 	 * CheckBoxGroup
 	 *  
-	 * @date 2012/1/10 20:11
+	 * @date 2012/1/20 20:01
 	 * @author sindney
 	 */
 	public class CheckBoxGroup extends EventDispatcher {
@@ -50,17 +50,16 @@ package bloom
 		public function CheckBoxGroup(index:int, ...rest) {
 			_index = index;
 		    
-			if (rest.length == 1 && rest[0] is Array) {
-				_content = rest[0];
-			}
-			
-			if( rest.length > 1) {
-				_content = rest;
-			}
-			
-			var i:int, j:int = numChildren;
-			for (i = 0; i < j; i++) {
-				(_content[i] as CheckBox).addEventListener(MouseEvent.CLICK, onChange);
+			if (_index == -1) {
+				_content = [];
+			} else {
+				if (rest.length == 1 && rest[0] is Array) _content = rest[0];
+				if( rest.length > 1) _content = rest;
+				
+				var i:int, j:int = numChildren;
+				for (i = 0; i < j; i++) {
+					(_content[i] as CheckBox).addEventListener(MouseEvent.CLICK, onChange);
+				}
 			}
 			
 			update();

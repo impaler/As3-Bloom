@@ -27,6 +27,7 @@ package
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	
+	import bloom.brushes.ColorBrush;
 	import bloom.containers.*;
 	import bloom.themes.*;
 	import bloom.*;
@@ -39,52 +40,67 @@ package
 	[SWF(backgroundColor = 0xffffff, frameRate = 40, width = 500, height = 500)]
 	public class BMPExample extends Sprite {
 		
+		[Embed(source="background.jpg")]
+        private var background:Class;
+		
 		public function BMPExample() {
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.showDefaultContextMenu = false;
 			
+			addChild(new background());
+			
 			ThemeBase.setTheme(new BMPTheme());
 			
-			var button:Button = new Button(this, "Demo");
+			var container:ScrollContainer = new ScrollContainer();
+			
+			var white:Vector.<uint> = new Vector.<uint>(1, true);
+			white[0] = 0xE9E9E9;
+			container.brush = new ColorBrush(white);
+			
+			container.direction = ScrollContainer.VERTICALLY;
+			container.margin.reset(2, 10, 2, 10);
+			
+			var window:Window = new Window(this, container);
+			window.liveResize = true;
+			window.footerSize = 20;
+			window.size(300, 200);
+			window.move(100, 150);
+			
+			var button:Button = new Button(container.content, "Demo");
 			button.size(120, 40);
 			button.move(10, 10);
 			
-			var sliderv:Slider = new Slider(this);
+			var sliderv:Slider = new Slider(container.content);
 			sliderv.size(30, 120);
 			sliderv.move(10, 60);
 			
-			var sliderh:Slider = new Slider(this, Slider.HORIZONTALLY);
+			var sliderh:Slider = new Slider(container.content, Slider.HORIZONTALLY);
 			sliderh.size(200, 30);
 			sliderh.move(10, 190);
 			
-			var numericStepper:NumericStepper = new NumericStepper(this);
+			var numericStepper:NumericStepper = new NumericStepper(container.content);
 			numericStepper.size(80, 30);
 			numericStepper.move(10, 230);
 			
-			numericStepper = new NumericStepper(this);
+			numericStepper = new NumericStepper(container.content);
 			numericStepper.size(80, 30);
 			numericStepper.move(100, 230);
 			
-			var checkBox:CheckBox = new CheckBox(this, "CheckBox");
+			var checkBox:CheckBox = new CheckBox(container.content, "CheckBox");
 			checkBox.move(10, 270);
 			
-			progressBar = new ProgressBar(this, 0);
+			progressBar = new ProgressBar(container.content, 0);
 			progressBar.size(200, 30);
 			progressBar.move(10, 300);
             progressBar.addEventListener(Event.ENTER_FRAME, onLoop);
 			
-            progressBar = new ProgressBar(this, 0);
+            progressBar = new ProgressBar(container.content, 0);
      	    progressBar.size(60, 60);
      		progressBar.move(10, 350);
 			progressBar.addEventListener(Event.ENTER_FRAME, onLoop);
 			
-			var container:FlowContainer = new FlowContainer();
-			container.brush = ThemeBase.WC_Container;
-			
-			var window:Window = new Window(this, container);
-			window.move(200, 10);
-			
+			container.calculateContentSize();
 			window.header.addChild(new Label(null, "Whatever"));
 		}
 		

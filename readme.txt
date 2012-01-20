@@ -30,10 +30,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 ----------------------------------------------------------------
-Version 0.1.0 r27
+Version 0.1.1 r28
 ----------------------------------------------------------------
 
 History
+
+Version 0.1.1 r28
+ - TabBox added.
+ - CheckBoxGroup fix.
+ - Now there's only 2 things left todo. Bug fix && Finish the BMPTheme. Guys, get ready to say "hello" to Bloom's first stable release ;)
 
 Version 0.1.0 r27
  - You can adjust window's content's margin to make some special effect now.

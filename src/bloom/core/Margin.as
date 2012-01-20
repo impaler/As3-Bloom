@@ -49,6 +49,13 @@ package bloom.core
 			this.right = right;
 		}
 		
+		public function copyForm(margin:Margin):void {
+			this.top = margin.top;
+			this.left = margin.left;
+			this.bottom = margin.bottom;
+			this.right = margin.right;
+		}
+		
 		///////////////////////////////////
 		// toString
 		///////////////////////////////////

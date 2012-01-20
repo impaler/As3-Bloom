@@ -21,6 +21,7 @@
  */
 package 
 {
+	import bloom.core.Margin;
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
@@ -36,7 +37,7 @@ package
 	 * 
 	 * @author sindney
 	 */
-	[SWF(backgroundColor = 0x000000, frameRate = 40, width = 500, height = 500)]
+	[SWF(backgroundColor = 0x000000, frameRate = 40, width = 700, height = 300)]
 	public class Example extends Sprite {
 		
 		private var scrollContainer:ScrollContainer;
@@ -88,9 +89,41 @@ package
 			
 			accordion.update();
 			
+			// TabBox
+			var tabBox:TabBox = new TabBox(this);
+			tabBox.size(300, 200);
+			tabBox.move(340, 10);
+			
+			var margin:Margin = new Margin(4, 4, 0, 0);
+			
+			var flowContainer:FlowContainer = new FlowContainer();
+			flowContainer.direction = FlowContainer.VERTICALLY;
+			flowContainer.addChild(new Button(null, "Button"));
+			flowContainer.addChild(new NumericStepper());
+			
+			tabBox.addContent("Tab 0", flowContainer, margin);
+			
+			flowContainer = new FlowContainer();
+			flowContainer.addChild(new Button(null, "Button"));
+			flowContainer.addChild(new NumericStepper());
+			
+			tabBox.addContent("Tab 1", flowContainer, margin);
+			
+			flowContainer = new FlowContainer();
+			flowContainer.addChild(new Slider());
+			flowContainer.addChild(new Slider(null, 1, 50));
+			
+			tabBox.addContent("Tab 2", flowContainer, margin);
+			
+			tabBox.addContent("Tab 3", new FlowContainer(), margin);
+			
+			tabBox.toggleTab("Tab 0");
+			
+			// Window
 			scrollContainer = new ScrollContainer(null);
 			
 			var window:Window = new Window(this, scrollContainer);
+			window.liveResize = true;
 			window.minWidth = 200;
 			window.minHeight = 200;
 			window.headerSize = 30;
