@@ -21,7 +21,7 @@
  */
 package  
 {
-	import flash.display.DisplayObject;
+	import bloom.core.Margin;
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
@@ -51,7 +51,46 @@ package
 			addChild(new background());
 			
 			ThemeBase.setTheme(new BMPTheme());
-			
+
+	        // TabBox
+			var tabBox:TabBox = new TabBox(this);
+			tabBox.size(300, 200);
+			tabBox.move(40, 40);
+
+			var margin:Margin = new Margin(4, 4, 0, 0);
+
+            //TabBox
+			var flowContainer:FlowContainer = new FlowContainer();
+			flowContainer.direction = FlowContainer.VERTICALLY;
+            var but:Button = new Button(null, "Button");
+            but.size(120,40);
+            flowContainer.addChild(but);
+			flowContainer.addChild(new NumericStepper());
+
+			tabBox.addContent("Tab 0", flowContainer, margin);
+
+			flowContainer = new FlowContainer();
+			var but:Button = new Button(null, "Button");
+            but.size(120,40);
+			flowContainer.addChild(but);
+			flowContainer.addChild(new NumericStepper());
+
+			tabBox.addContent("Tab 1", flowContainer, margin);
+
+			flowContainer = new FlowContainer();
+            var slide:Slider = new Slider();
+            slide.size(30, 100);
+			flowContainer.addChild(slide);
+            var slide:Slider = new Slider(null, 1, 50);
+            slide.size(100, 30);
+			flowContainer.addChild(slide);
+
+			tabBox.addContent("Tab 2", flowContainer, margin);
+
+			tabBox.addContent("Tab 3", new FlowContainer(), margin);
+
+			tabBox.toggleTab("Tab 0");
+
 			var container:ScrollContainer = new ScrollContainer();
 			
 			var white:Vector.<uint> = new Vector.<uint>(1, true);

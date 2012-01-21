@@ -42,7 +42,8 @@ package bloom.containers
 	public class TabBox extends Container {
 		
 		private var _headerSize:Number;
-		
+        private var _headerPadding:Number;
+
 		private var _group:CheckBoxGroup;
 		
 		private var _header:FlowContainer;
@@ -50,7 +51,7 @@ package bloom.containers
 		private var _contents:Vector.<IChild>;
 		
 		private var _pool:Vector.<IChild>;
-		
+
 		public function TabBox(p:DisplayObjectContainer = null) {
 			super(p);
 			_header = new FlowContainer(this);
@@ -63,6 +64,8 @@ package bloom.containers
 			_group.addEventListener(Event.CHANGE, onTabChanged);
 			
 			_headerSize = 30;
+			_headerPadding = 20;
+
 			update();
 		}
 		
@@ -84,7 +87,7 @@ package bloom.containers
 			title.brush = ThemeBase.TabBox_Title;
 			title.title.brush = ThemeBase.Text_TabBox;
 			
-			title.size(title.title.width + (title.height - title.title.height), _headerSize);
+			title.size(title.title.width + (title.height - title.title.height) + _headerPadding, _headerSize);
 			
 			_group.addChild(title);
 			_header.addChild(title);
@@ -97,7 +100,7 @@ package bloom.containers
 			var result:Container;
 			var title:ToggleButton = _header.getChildAt(index) as ToggleButton;
 			if (title) {
-				result = _contents.splice(index, 1)[0];
+				result = Container ( _contents.splice ( index , 1 )[0] );
 				returnToggleButton(title);
 				_header.update();
 			}
@@ -111,7 +114,7 @@ package bloom.containers
 			for (i = 0; i < j; i++) {
 				title = _header.getChildAt(i) as ToggleButton;
 				if (title.title.text == name) {
-					result = _contents.splice(i, 1)[0];
+					result = Container ( _contents.splice ( i , 1 )[0] );
 					returnToggleButton(title);
 					_header.update();
 					break;
@@ -186,7 +189,7 @@ package bloom.containers
 		}
 		
 		private function getToggleButton():ToggleButton {
-			return _pool.length > 0 ? _pool.pop() : new ToggleButton();
+			return _pool.length > 0 ? ToggleButton ( _pool.pop () ) : new ToggleButton();
 		}
 		
 		///////////////////////////////////
