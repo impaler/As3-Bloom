@@ -36,7 +36,7 @@ package bloom.containers
 	/**
 	 * TabBox
 	 * 
-	 * @date 2012/1/20 20:32
+	 * @date 2012/1/21 11:01
 	 * @author sindney
 	 */
 	public class TabBox extends Container {
@@ -91,7 +91,7 @@ package bloom.containers
 			title.brush = ThemeBase.TabBox_Title;
 			title.title.brush = ThemeBase.Text_TabBox;
 			
-			title.size(title.title.width + (title.height - title.title.height) + _headerPadding, _headerSize);
+			title.size(title.title.width + _headerPadding, _headerSize - title.margin.top);
 			
 			_group.addChild(title);
 			_header.addChild(title);
@@ -180,6 +180,13 @@ package bloom.containers
 			update();
 		}
 		
+		private function updateTitlesSize():void {
+			var title:ToggleButton;
+			for each(title in _header) {
+				title.size(title.title.width + _headerPadding, _headerSize - title.margin.top);
+			}
+		}
+		
 		private function onTabChanged(e:Event):void {
 			if (_content) removeChild(_content);
 			_content = _contents[_group.index] as Container;
@@ -205,15 +212,27 @@ package bloom.containers
 			return "";
 		}
 		
+		public function set headerSize(value:Number):void {
+			if (_headerSize != value) {
+				_headerSize = value;
+				updateTitlesSize();
+				update();
+			}
+		}
+		
 		public function get headerSize():Number {
 			return _headerSize;
 		}
 		
-		public function set headerSize(value:Number):void {
-			if (_headerSize != value) {
-				_headerSize = value;
-				update();
+		public function set headerPadding(value:Number):void {
+			if (_headerPadding != value) {
+				_headerPadding = value;
+				updateTitlesSize();
 			}
+		}
+		
+		public function get headerPadding():Number {
+			return _headerPadding;
 		}
 		
 		///////////////////////////////////

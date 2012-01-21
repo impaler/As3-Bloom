@@ -104,7 +104,7 @@ package bloom.containers
 			
 			size(100, 100);
 		}
-
+		
         private function onStartWindowDrag(e:MouseEvent):void {
             if (moveable) {
                 xOffset = e.stageX - this.x;
@@ -113,18 +113,18 @@ package bloom.containers
                 stage.addEventListener(MouseEvent.MOUSE_UP, onWindowDragMouseUp);
             }
         }
-
-        function onWindowDragMouseMove(e:MouseEvent):void {
+		
+        private function onWindowDragMouseMove(e:MouseEvent):void {
             this.x = e.stageX - xOffset;
             this.y = e.stageY - yOffset;
             e.updateAfterEvent();
         }
-
-        function onWindowDragMouseUp(event:MouseEvent):void {
+		
+        private function onWindowDragMouseUp(event:MouseEvent):void {
             stage.removeEventListener(MouseEvent.MOUSE_MOVE, onWindowDragMouseMove);
             stage.removeEventListener(MouseEvent.MOUSE_UP, onWindowDragMouseUp);
         }
-
+		
         private function onScaleWindowMouseDown(e:MouseEvent):void {
             if (liveResize) {
                 xOffset = e.stageX - _scaler.x;
@@ -133,7 +133,7 @@ package bloom.containers
                 stage.addEventListener(MouseEvent.MOUSE_UP, onScaleWindowMouseUp);
             }
         }
-
+		
 		private function onScaleWindowMouseMove(e:MouseEvent):void {
             _scaler.x = e.stageX - xOffset;
             _scaler.y = e.stageY - yOffset;
@@ -147,7 +147,7 @@ package bloom.containers
 			size(_scaler.x + _footerSize, _scaler.y + _footerSize);
 			_scaler.stopDrag();
 		}
-
+		
 		/**
 		 * Update child's layout.
 		 */

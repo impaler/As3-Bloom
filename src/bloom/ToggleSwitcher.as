@@ -48,12 +48,12 @@ package bloom
 	 */
 	public class ToggleSwitcher extends Component {
 		
-		protected var _value:Boolean;
-		protected var _rect:Rectangle;
-		protected var _rect2:Rectangle;
+		private var _value:Boolean;
+		private var _rect:Rectangle;
+		private var _rect2:Rectangle;
 		
-		protected var _slider:Sprite;
-		protected var _bg:Shape;
+		private var _slider:Sprite;
+		private var _bg:Shape;
 		
 		public function ToggleSwitcher(p:DisplayObjectContainer = null, value:Boolean = false) {
 			super(p);
@@ -131,17 +131,17 @@ package bloom
 			_bg.x = _slider.x = _value ? 0 : _width - 20;
 		}
 		
-		protected function onMouseDown(e:MouseEvent):void {
+		private function onMouseDown(e:MouseEvent):void {
 			_slider.startDrag(false, _rect);
 			stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 			stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
 		}
 		
-		protected function onMouseMove(e:MouseEvent):void {
+		private function onMouseMove(e:MouseEvent):void {
 			_bg.x = _slider.x;
 		}
 		
-		protected function onMouseUp(e:MouseEvent):void {
+		private function onMouseUp(e:MouseEvent):void {
 			if (_value) {
 				if (_slider.x != 0) value = false;
 			} else {

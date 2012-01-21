@@ -21,7 +21,6 @@
  */
 package 
 {
-	import bloom.core.Margin;
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
@@ -29,6 +28,7 @@ package
 	import flash.events.Event;
 	
 	import bloom.containers.*;
+	import bloom.core.Margin;
 	import bloom.themes.*;
 	import bloom.*;
 	
@@ -52,9 +52,6 @@ package
 			
 			// default bitmap style
 			//ThemeBase.setTheme(new BMPTheme());
-			
-			// custom style
-			//ThemeBase.setTheme(new CustomTheme());
 			
 			var i:int;
 			var data:Array = [];
@@ -121,6 +118,7 @@ package
 			
 			// Window
 			scrollContainer = new ScrollContainer(null);
+			scrollContainer.margin.reset(0, 0, 0, 0);
 			
 			var window:Window = new Window(this, scrollContainer);
 			window.liveResize = true;
