@@ -92,7 +92,7 @@ package bloom.containers
 			
 			setContentSize(100, 100);
 			
-			size(100, 100);
+			drawDirectly();
 		}
 		
 		public function getScrollBar(direction:int):ScrollBar {

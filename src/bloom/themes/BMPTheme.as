@@ -210,8 +210,8 @@ package bloom.themes
         	
 			// CheckBox
 			data = new Vector.<ScaleBitmap>(2, true);
-			data[0] = new ScaleBitmap(checkbox_on_bit.bitmapData);
-        	data[1] = new ScaleBitmap(checkbox_off_bit.bitmapData);
+			data[0] = new ScaleBitmap(checkbox_off_bit.bitmapData);
+        	data[1] = new ScaleBitmap(checkbox_on_bit.bitmapData);
         	ThemeBase.CheckBox = new BMPBrush(data);
 			
 			// ProgressBar
