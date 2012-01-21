@@ -160,17 +160,27 @@ package bloom.themes
         [Embed(source="../assets/default/sizer.png")]
         private var sizer:Class;
         private var sizer_bit:Bitmap = new sizer();
-		
+
+        // Tabs
+        [Embed(source="../assets/default/tabs_bg_normal.png")]
+        private var tabs:Class;
+        private var tabs_bit:Bitmap = new tabs();
+
+        [Embed(source="../assets/default/tabs_bg_down.png")]
+        private var tabs_down:Class;
+        private var tabs_down_bit:Bitmap = new tabs_down();
+
 		public function BMPTheme() {
 			
 		}
 		
 		public function initialize():void {
-			ThemeBase.Text_Button = new TextBrush("Verdana", 14, 0xffffff, true, false, false);
-			ThemeBase.Text_CheckBox = new TextBrush("Verdana", 14, 0x000000, true, false, false);
+			// TextBrushes
+			ThemeBase.Text_Button = new TextBrush("Verdana", 12, 0xffffff, false, false, false);
+			ThemeBase.Text_CheckBox = new TextBrush("Verdana", 12, 0x000000, false, false, false);
 			ThemeBase.Text_Label = new TextBrush("Verdana", 12, 0x000000, false, false, false);
 			ThemeBase.Text_List = new TextBrush("Verdana", 12, 0x000000, false, false, false);
-			ThemeBase.Text_NumericStepper = new TextBrush("Verdana", 20, 0x000000, false, false, false);
+			ThemeBase.Text_NumericStepper = new TextBrush("Verdana", 12, 0xffffff, false, false, false);
 			ThemeBase.Text_TabBox = new TextBrush("Verdana", 12, 0x000000, false, false, false);
 			ThemeBase.Text_TextBox = new TextBrush("Verdana", 12, 0xffffff, false, false, false);
 			ThemeBase.Text_TextInput = new TextBrush("Verdana", 12, 0xffffff, false, false, false);
@@ -339,6 +349,48 @@ package bloom.themes
             data[1] = scaleBMP1;
             data[2] = scaleBMP2;
             ThemeBase.SC_ScrollBarButton = new BMPBrush(data);
+
+            scaleBMP0 = new ScaleBitmap(tabs_bit.bitmapData);
+            scaleBMP0.scale9Grid = new Rectangle(11, 12, 1, 2);
+
+            scaleBMP1 = new ScaleBitmap(tabs_down_bit.bitmapData);
+            scaleBMP1.scale9Grid = new Rectangle(11, 12, 1, 2);
+
+			// TabBox_Title
+            data = new Vector.<ScaleBitmap>(2, true);
+            data[0] = scaleBMP0;
+            data[1] = scaleBMP1;
+			ThemeBase.TabBox_Title = new BMPBrush(data);
+
+            var uint_data:Vector.<uint> = new Vector.<uint>(1, true);
+	        // TabBox
+			uint_data = new Vector.<uint>(1, true);
+			uint_data[0] = 0x666666;
+			ThemeBase.TabBox = new ColorBrush(uint_data);
+
+			// Container
+            uint_data = new Vector.<uint>(1, true);
+            uint_data[0] = 0xE9E9E9;
+			ThemeBase.Container = new ColorBrush(uint_data);
+
+
+			// TextBox
+			uint_data = new Vector.<uint>(1, true);
+			uint_data[0] = 0x666666;
+			ThemeBase.TextBox = new ColorBrush(uint_data);
+
+			// TB_ScrollBar
+			uint_data = new Vector.<uint>(1, true);
+			uint_data[0] = 0x222222;
+			ThemeBase.TB_ScrollBar = new ColorBrush(uint_data);
+
+			// TB_ScrollBarButton
+			uint_data = new Vector.<uint>(3, true);
+			uint_data[0] = 0x3E3E72;
+			uint_data[1] = 0x3E3E72;
+			uint_data[2] = 0xF1BA44;
+			ThemeBase.TB_ScrollBarButton = new ColorBrush(uint_data);
+
 		}
 		
 	}
