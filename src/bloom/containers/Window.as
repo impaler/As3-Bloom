@@ -28,10 +28,8 @@ package bloom.containers
 	import flash.geom.Rectangle;
 	
 	import bloom.brushes.BMPBrush;
-	import bloom.brushes.Brush;
 	import bloom.brushes.ColorBrush;
 	import bloom.core.Component;
-	import bloom.core.IComponent;
 	import bloom.core.ScaleBitmap;
 	import bloom.themes.ThemeBase;
 	
@@ -62,6 +60,9 @@ package bloom.containers
 		private var _content:FlowContainer;
 		private var _footer:FlowContainer;
 		private var _scaler:Sprite;
+
+        private var xOffset:Number;
+        private var yOffset:Number;
 		
 		public function Window(p:DisplayObjectContainer = null, content:FlowContainer = null, moveable:Boolean = true, resizeable:Boolean = true) {
 			super(p);
@@ -74,7 +75,7 @@ package bloom.containers
 			_header = new FlowContainer();
 			_header.brush = ThemeBase.Window_Header;
 			_header.tabEnabled = false;
-			_header.addEventListener(MouseEvent.MOUSE_DOWN, onStartDarg);
+			_header.addEventListener(MouseEvent.MOUSE_DOWN, onStartWindowDrag);
 			addChild(_header);
 			
 			_content = content;
@@ -84,7 +85,7 @@ package bloom.containers
 			_scaler.buttonMode = true;
 			_scaler.useHandCursor = true;
 			_scaler.tabEnabled = false;
-			_scaler.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+            _scaler.addEventListener(MouseEvent.MOUSE_DOWN, onScaleWindowMouseDown);
 			
 			_footer = new FlowContainer();
 			_footer.brush = ThemeBase.Window_Footer;
@@ -103,36 +104,50 @@ package bloom.containers
 			
 			size(100, 100);
 		}
-		
-		private function onMouseDown(e:MouseEvent):void {
-			stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
-			stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
-			_scaler.startDrag();
+
+        private function onStartWindowDrag(e:MouseEvent):void {
+            if (moveable) {
+                xOffset = e.stageX - this.x;
+                yOffset = e.stageY - this.y;
+                stage.addEventListener(MouseEvent.MOUSE_MOVE, onWindowDragMouseMove);
+                stage.addEventListener(MouseEvent.MOUSE_UP, onWindowDragMouseUp);
+            }
+        }
+
+        function onWindowDragMouseMove(e:MouseEvent):void {
+            this.x = e.stageX - xOffset;
+            this.y = e.stageY - yOffset;
+            e.updateAfterEvent();
+        }
+
+        function onWindowDragMouseUp(event:MouseEvent):void {
+            stage.removeEventListener(MouseEvent.MOUSE_MOVE, onWindowDragMouseMove);
+            stage.removeEventListener(MouseEvent.MOUSE_UP, onWindowDragMouseUp);
+        }
+
+        private function onScaleWindowMouseDown(e:MouseEvent):void {
+            if (liveResize) {
+                xOffset = e.stageX - _scaler.x;
+                yOffset = e.stageY - _scaler.y;
+                stage.addEventListener(MouseEvent.MOUSE_MOVE, onScaleWindowMouseMove);
+                stage.addEventListener(MouseEvent.MOUSE_UP, onScaleWindowMouseUp);
+            }
+        }
+
+		private function onScaleWindowMouseMove(e:MouseEvent):void {
+            _scaler.x = e.stageX - xOffset;
+            _scaler.y = e.stageY - yOffset;
+            size(_scaler.x + _footerSize, _scaler.y + _footerSize);
+            e.updateAfterEvent();
 		}
 		
-		private function onMouseMove(e:MouseEvent):void {
-			if (liveResize) size(_scaler.x + _footerSize, _scaler.y + _footerSize);
-		}
-		
-		private function onMouseUp(e:MouseEvent):void {
-			stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
-			stage.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+		private function onScaleWindowMouseUp(e:MouseEvent):void {
+			stage.removeEventListener(MouseEvent.MOUSE_UP, onScaleWindowMouseUp);
+			stage.removeEventListener(MouseEvent.MOUSE_MOVE, onScaleWindowMouseMove);
 			size(_scaler.x + _footerSize, _scaler.y + _footerSize);
 			_scaler.stopDrag();
 		}
-		
-		private function onStartDarg(e:MouseEvent):void {
-			if (moveable) {
-				stage.addEventListener(MouseEvent.MOUSE_UP, onStopDarg);
-				startDrag();
-			}
-		}
-		
-		private function onStopDarg(e:MouseEvent):void {
-			stage.removeEventListener(MouseEvent.MOUSE_UP, onStopDarg);
-			stopDrag();
-		}
-		
+
 		/**
 		 * Update child's layout.
 		 */
