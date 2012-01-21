@@ -224,13 +224,11 @@ public class ThemePreviewer extends Sprite {
 
         tabBox.addContent ( "Toggle" , flowContainer , margin );
 
-        // Loaders Tab
+        // Progress Tab
         flowContainer = new FlowContainer ();
         flowContainer.direction = FlowContainer.VERTICALLY;
 
         progressBar = new ProgressBar ( flowContainer , 0 );
-        progressBar.size ( 200 , 30 );
-        progressBar.move ( 10 , 300 );
         progressBar.addEventListener ( Event.ENTER_FRAME , onLoop );
 
         progressBar = new ProgressBar ( flowContainer , 0 );
@@ -238,10 +236,13 @@ public class ThemePreviewer extends Sprite {
 
         progressBar = new ProgressBar ( flowContainer , 0 );
         progressBar.size ( 60 , 60 );
-        progressBar.move ( 10 , 350 );
         progressBar.addEventListener ( Event.ENTER_FRAME , onLoop );
 
-        tabBox.addContent ( "Loaders" , flowContainer , margin );
+        progressBar = new ProgressBar ( flowContainer , 0 );
+        progressBar.size ( 200 , 40 );
+        progressBar.addEventListener ( Event.ENTER_FRAME , onLoop );
+
+        tabBox.addContent ( "Progress" , flowContainer , margin );
 
         tabBox.toggleTab ( "Buttons" );
 
