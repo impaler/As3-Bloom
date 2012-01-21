@@ -30,10 +30,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 ----------------------------------------------------------------
-Version 0.1.1 r28
+Version 0.1.1 r29
 ----------------------------------------------------------------
 
 History
+
+Version 0.1.1 r29
+ - Example "HelloWorld" added.
+ - Minor changes.
 
 Version 0.1.1 r28
  - TabBox added.

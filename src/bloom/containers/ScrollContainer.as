@@ -37,7 +37,7 @@ package bloom.containers
 	/**
 	 * ScrollContainer
 	 * 
-	 * @date 2012/1/14 22:36
+	 * @date 2012/1/21 10:30
 	 * @author sindney
 	 */
 	public class ScrollContainer extends FlowContainer {
@@ -45,15 +45,15 @@ package bloom.containers
 		public static const VERTICALLY:int = 0;
 		public static const HORIZONTALLY:int = 1;
 		
-		protected var h_scrollBar_enabled:Boolean;
-		protected var v_scrollBar_enabled:Boolean;
+		private var h_scrollBar_enabled:Boolean;
+		private var v_scrollBar_enabled:Boolean;
 		
-		protected var h_scrollBar:ScrollBar;
-		protected var v_scrollBar:ScrollBar;
+		private var h_scrollBar:ScrollBar;
+		private var v_scrollBar:ScrollBar;
 		
-		protected var _rect:Rectangle;
-		protected var _content:Sprite;
-		protected var _bg:Sprite;
+		private var _rect:Rectangle;
+		private var _content:Sprite;
+		private var _bg:Sprite;
 		
 		public function ScrollContainer(p:DisplayObjectContainer = null) {
 			super(p);
@@ -222,14 +222,14 @@ package bloom.containers
 			update();
 		}
 		
-		protected function onVScrollBarMove(e:Event):void {
+		private function onVScrollBarMove(e:Event):void {
 			if (v_scrollBar_enabled) {
 				_rect.y = v_scrollBar.value;
 				_content.scrollRect = _rect;
 			}
 		}
 		
-		protected function onHScrollBarMove(e:Event):void {
+		private function onHScrollBarMove(e:Event):void {
 			if (h_scrollBar_enabled) {
 				_rect.x = h_scrollBar.value;
 				_content.scrollRect = _rect;

@@ -21,8 +21,6 @@
  */
 package bloom 
 {
-	import bloom.brushes.Brush;
-	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Shape;
@@ -31,6 +29,7 @@ package bloom
 	import flash.events.MouseEvent;
 	
 	import bloom.brushes.BMPBrush;
+	import bloom.brushes.Brush;
 	import bloom.brushes.ColorBrush;
 	import bloom.core.Component;
 	import bloom.core.ScaleBitmap;
@@ -46,7 +45,7 @@ package bloom
 	 * Form
 	 * <p>It's just a base class for you to extend, so that you can create your own Form.</p>
 	 * 
-	 * @date 2012/1/10 20:11
+	 * @date 2012/1/21 9:45
 	 * @author sindney
 	 */
 	public class Form extends Component {
@@ -158,14 +157,6 @@ package bloom
 				scroll();
 			}
 		}
-		
-		/*public function scrollTo(value:int):void {
-			_scrollBar.value = value;
-		}
-		
-		public function scrollToTarget():void {
-			_scrollBar.value = _index;
-		}*/
 		
 		///////////////////////////////////
 		// protected methods

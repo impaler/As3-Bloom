@@ -53,21 +53,21 @@ package bloom
 		
 		public var step:Number;
 		
-		protected var _value:Number;
-		protected var _max:Number;
-		protected var _min:Number;
+		private var _value:Number;
+		private var _max:Number;
+		private var _min:Number;
 		
-		protected var _increasing:Boolean;
-		protected var _timer:Timer;
+		private var _increasing:Boolean;
+		private var _timer:Timer;
 		
-		protected var _bg:Shape;
-		protected var _textBase:TextBase;
+		private var _bg:Shape;
+		private var _textBase:TextBase;
 		
-		protected var _increase_shape:Shape;
-		protected var _decrease_shape:Shape;
+		private var _increase_shape:Shape;
+		private var _decrease_shape:Shape;
 		
-		protected var _increase:ButtonBase;
-		protected var _decrease:ButtonBase;
+		private var _increase:ButtonBase;
+		private var _decrease:ButtonBase;
 		
 		public function NumericStepper(p:DisplayObjectContainer = null, value:Number = 0, max:Number = 1000, min:Number = -1000, step:Number = 1) {
 			super(p);
@@ -217,14 +217,15 @@ package bloom
 		}
 		
 		protected function fixValue():void {
+			var old:Number = _value;
 			if (_max > _min) {
 				if (_value > _max)_value = _max;
 				if (_value < _min)_value = _min;
-				_textBase.text = String(_value);
-				dispatchEvent(new Event("change"));
 			} else {
 				_value = _min = _max;
 			}
+			_textBase.text = String(_value);
+			if (old != _value) dispatchEvent(new Event("change"));
 		}
 		
 		protected function onFocusIn(e:FocusEvent):void {

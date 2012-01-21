@@ -21,7 +21,6 @@
  */
 package bloom.themes 
 {
-	import bloom.brushes.Brush;
 	import bloom.brushes.ColorBrush;
 	import bloom.brushes.TextBrush;
 	

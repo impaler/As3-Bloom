@@ -30,7 +30,6 @@ package bloom
 	
 	import bloom.brushes.BMPBrush;
 	import bloom.brushes.ColorBrush;
-	import bloom.core.ButtonBase;
 	import bloom.core.Component;
 	import bloom.core.ScaleBitmap;
 	import bloom.themes.ThemeBase;

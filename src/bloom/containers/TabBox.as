@@ -21,7 +21,6 @@
  */
 package bloom.containers 
 {
-	import bloom.core.Margin;
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
@@ -29,6 +28,7 @@ package bloom.containers
 	import bloom.brushes.Brush;
 	import bloom.brushes.TextBrush;
 	import bloom.core.IChild;
+	import bloom.core.Margin;
 	import bloom.themes.ThemeBase;
 	import bloom.CheckBoxGroup;
 	import bloom.ToggleButton;
@@ -72,6 +72,10 @@ package bloom.containers
 		public function changeTitlesBrush(toggltButton:Brush, title:TextBrush):void {
 			var object:ToggleButton;
 			for each(object in _header) {
+				object.brush = toggltButton;
+				object.title.brush = title;
+			}
+			for each(object in _pool) {
 				object.brush = toggltButton;
 				object.title.brush = title;
 			}
