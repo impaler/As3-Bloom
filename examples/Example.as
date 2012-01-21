@@ -48,10 +48,10 @@ package
 			stage.showDefaultContextMenu = false;
 			
 			// default color style
-			ThemeBase.setTheme(new ColorTheme());
+//			ThemeBase.setTheme(new ColorTheme());
 			
 			// default bitmap style
-			//ThemeBase.setTheme(new BMPTheme());
+			ThemeBase.setTheme(new BMPTheme());
 			
 			var i:int;
 			var data:Array = [];

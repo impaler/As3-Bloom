@@ -54,7 +54,8 @@ package bloom
 			super(p);
 			
 			tabChildren = tabEnabled = false;
-			
+            buttonMode = true;
+
 			_bg = new Shape();
 			addChild(_bg);
 			
@@ -66,7 +67,7 @@ package bloom
 			_value = value;
 			
 			brush = ThemeBase.CheckBox;
-			
+
 			size(100, 20);
 			
 			addEventListener(MouseEvent.CLICK, onMouseClick);

@@ -169,6 +169,15 @@ package bloom.themes
         [Embed(source="../assets/default/tabs_bg_down.png")]
         private var tabs_down:Class;
         private var tabs_down_bit:Bitmap = new tabs_down();
+
+        [Embed(source="../assets/default/text_box_bg_normal.png")]
+        private var text_box_bg_normal:Class;
+        var text_box_bg_normal_bit:Bitmap = new text_box_bg_normal();
+
+        [Embed(source="../assets/default/text_input_bg_normal.png")]
+        private var text_input_bg_normal:Class;
+        var text_input_bg_normal_bit:Bitmap = new text_input_bg_normal();
+
 		
 		public function BMPTheme() {
 			
@@ -210,9 +219,9 @@ package bloom.themes
         	
 			// CheckBox
 			data = new Vector.<ScaleBitmap>(2, true);
-			data[0] = new ScaleBitmap(checkbox_on_bit.bitmapData);
-        	data[1] = new ScaleBitmap(checkbox_off_bit.bitmapData);
-        	ThemeBase.CheckBox = new BMPBrush(data);
+        	data[0] = new ScaleBitmap(checkbox_off_bit.bitmapData);
+            data[1] = new ScaleBitmap(checkbox_on_bit.bitmapData);
+            ThemeBase.CheckBox = new BMPBrush(data);
 			
 			// ProgressBar
 			scaleBMP0 = new ScaleBitmap(progress_bg_bit.bitmapData);
@@ -355,14 +364,58 @@ package bloom.themes
 			
             scaleBMP1 = new ScaleBitmap(tabs_down_bit.bitmapData);
             scaleBMP1.scale9Grid = new Rectangle(11, 12, 1, 2);
-			
+
 			// TabBox_Title
             data = new Vector.<ScaleBitmap>(2, true);
             data[0] = scaleBMP0;
             data[1] = scaleBMP1;
 			ThemeBase.TabBox_Title = new BMPBrush(data);
-			
+
+            scaleBMP0 = new ScaleBitmap(text_box_bg_normal_bit.bitmapData);
+            scaleBMP0.scale9Grid = new Rectangle(13, 15, 51, 12);
+
+//			TextBox
+            data = new Vector.<ScaleBitmap>(1, true);
+			data[0] = scaleBMP0;
+			ThemeBase.TextBox = new BMPBrush(data);
+
+            scaleBMP0 = new ScaleBitmap(text_input_bg_normal_bit.bitmapData);
+            scaleBMP0.scale9Grid = new Rectangle(13, 15, 51, 12);
+
+            data = new Vector.<ScaleBitmap>(1, true);
+            data[0] = scaleBMP0;
+            ThemeBase.TextInput = new BMPBrush(data);
+
+
+
+
             var uint_data:Vector.<uint> = new Vector.<uint>(1, true);
+
+
+	        // List
+			uint_data = new Vector.<uint>(1, true);
+			uint_data[0] = 0x666666;
+			ThemeBase.List = new ColorBrush(uint_data);
+
+			uint_data = new Vector.<uint>(1, true);
+			uint_data[0] = 0x222222;
+			ThemeBase.List_ScrollBar = new ColorBrush(uint_data);
+
+			uint_data = new Vector.<uint>(3, true);
+			uint_data[0] = 0x3E3E72;
+			uint_data[1] = 0x3E3E72;
+			uint_data[2] = 0xF1BA44;
+			ThemeBase.List_ScrollBarButton = new ColorBrush(uint_data);
+
+			uint_data = new Vector.<uint>(2, true);
+			uint_data[0] = 0xF1BA44;
+			uint_data[1] = 0xffffff;
+			ThemeBase.ListItem = new ColorBrush(uint_data);
+
+
+
+
+
 	        // TabBox
 			uint_data = new Vector.<uint>(1, true);
 			uint_data[0] = 0x666666;
@@ -372,11 +425,6 @@ package bloom.themes
             uint_data = new Vector.<uint>(1, true);
             uint_data[0] = 0xE9E9E9;
 			ThemeBase.Container = new ColorBrush(uint_data);
-			
-			// TextBox
-			uint_data = new Vector.<uint>(1, true);
-			uint_data[0] = 0x666666;
-			ThemeBase.TextBox = new ColorBrush(uint_data);
 			
 			// TB_ScrollBar
 			uint_data = new Vector.<uint>(1, true);
