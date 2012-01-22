@@ -177,6 +177,8 @@ import bloom.core.Component;
                 componentRegistry.push ( component as Component );
             }
         }
+
+
     }
 
 }

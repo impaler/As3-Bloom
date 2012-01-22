@@ -62,18 +62,31 @@ public class ThemePreviewer extends Sprite {
         ThemeBase.setTheme ( new BMPTheme () );
 		//ThemeBase.setTheme ( new ColorTheme () );
 
-        _enableButton = new Button ( this , "Disable All Components" );
+        var container:FlowContainer = new FlowContainer(this);
+        container.registerComponent = false;
+        container.direction = FlowContainer.HORIZONTALLY;
+
+        _enableButton = new Button ( container , "Disable All Components" );
         _enableButton.registerComponent = false;
         _enableButton.size ( 300 , 40 );
         _enableButton.addEventListener(MouseEvent.MOUSE_DOWN , DisableComponents );
+
+        // Buttons Tab
+        var but:Button = new Button ( container , "BMP" );
+        but.size ( 120 , 40 );
+        but.registerComponent = false;
+        but.addEventListener(MouseEvent.MOUSE_DOWN , BMPThemeChange );
+
+        var but:Button = new Button ( container , "Color" );
+        but.size ( 120 , 40 );
+        but.registerComponent = false;
+        but.addEventListener(MouseEvent.MOUSE_DOWN , ColorThemeChange );
 
 
         var container:FlowContainer = new FlowContainer();
 
         // TabBox
         var tabBox:TabBox = new TabBox ( container );
-//        tabBox.size ( 680 , 480 );
-//        tabBox.move ( 10 , 10 );
 
         var window:Window = new Window(this, container);
         window.liveResize = true;
@@ -83,11 +96,13 @@ public class ThemePreviewer extends Sprite {
         window.resizeable = false;
         tabBox.size ( container.width , container.height );
 
-//        window.addEventListener(Event.RESIZE , updateContainer );
-//
-//        function updateContainer ( event:Event ):void {
-//            tabBox.size ( container.width , container.height );
-//        }
+        //todo with tab size
+        window.addEventListener(Event.RESIZE , updateContainer );
+        window.resizeable = true;
+
+        function updateContainer ( event:Event ):void {
+            tabBox.size ( container.width , container.height );
+        }
 
         // Tab Content margins
         var margin:Margin = new Margin ( 4 , 4 , 0 , 0 );
@@ -100,29 +115,20 @@ public class ThemePreviewer extends Sprite {
 		scrollContainer.direction = ScrollContainer.VERTICALLY;
 		scrollContainer.brush = brush;
 
-        // Buttons Tab
-        var but:Button = new Button ( scrollContainer.content , "BMP" );
-        but.size ( 120 , 40 );
-        but.addEventListener(MouseEvent.MOUSE_DOWN , BMPThemeChange );
+//        var i:int;
+//        var data:Array = [];
+//        for ( i = 0 ; i < 100 ; i ++ ) {
+//            but = new Button ( scrollContainer.content , "Disabled Button" );
+//            but.size ( 120 , 40 );
+//            but.enabled = false;
+//        }
 
-        var but:Button = new Button ( scrollContainer.content , "Color" );
-        but.size ( 120 , 40 );
-        but.addEventListener(MouseEvent.MOUSE_DOWN , ColorThemeChange );
-
-        var i:int;
-        var data:Array = [];
-        for ( i = 0 ; i < 100 ; i ++ ) {
-            but = new Button ( scrollContainer.content , "Disabled Button" );
-            but.size ( 120 , 40 );
-            but.enabled = false;
-        }
-
-        but = new Button ( scrollContainer.content , "Disabled Button" );
-        but.size ( 120 , 40 );
+        var but:Button = new Button ( scrollContainer.content , "Disabled Button" );
+        but.size ( 20 , 20 );
         but.enabled = false;
 
         but = new Button ( scrollContainer.content , ":)" );
-        but.size ( 40 , 120 );
+        but.size ( 260 , 260 );
 
         tabBox.addContent ( "Buttons" , scrollContainer , margin );
 		scrollContainer.calculateContentSize();
@@ -304,6 +310,24 @@ public class ThemePreviewer extends Sprite {
         tabBox.toggleTab ( "Buttons" );
 
     }
+
+    //This is perfect for the focus of the application in a browser or mobile to minimize cpu when inactive
+    //could implement removing listeners and then reapplying them for saving memory
+
+/*
+    stage.addEventListener(Event.ACTIVATE, flashActivate);
+    stage.addEventListener(Event.DEACTIVATE, flashDeactivate);
+
+    private function flashActivate (event:Event):void
+    {
+        ThemeBase.enableComponents( true );
+    }
+
+    private function flashDeactivate (event:Event):void
+    {
+        ThemeBase.enableComponents( false );
+    }
+*/
 
     private function DisableComponents ( event:MouseEvent ):void {
         _enabled ? _enabled = false : _enabled = true;

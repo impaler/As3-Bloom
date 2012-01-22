@@ -41,6 +41,7 @@ import flash.geom.Rectangle;
 		// button
 		[Embed(source="../assets/default/button_normal.png")]
 		private var button_normal:Class;
+		private var button_normal_bit:Bitmap = new button_normal();
 
 		[Embed(source="../assets/default/button_down.png")]
 		private var button_down:Class;
@@ -177,9 +178,13 @@ import flash.geom.Rectangle;
         private var text_input_bg_normal_bit:Bitmap = new text_box_bg_normal();
 
 		// Form
-		private var form_scroll_bg_bit:Bitmap = new scroll_bar_bg_v();
+		[Embed(source="../assets/default/form_scroll_bg.png")]
+        private var form_scroll_bg:Class;
+		private var form_scroll_bg_bit:Bitmap = new form_scroll_bg();
 
-		private var form_scroll_button_bg_bit:Bitmap = new slider_button_normal();
+        [Embed(source="../assets/default/form_scroll_button_bg.png")]
+        private var form_scroll_button_bg:Class;
+		private var form_scroll_button_bg_bit:Bitmap = new form_scroll_button_bg();
 
 		private var form_scroll_button_down_bit:Bitmap = new slider_button_down();
 
@@ -210,7 +215,7 @@ import flash.geom.Rectangle;
             var data:Vector.<ScaleBitmap>;
 
             // Button
-            scaleBMP0 = new ScaleBitmap ( (new button_normal () as Bitmap).bitmapData  );
+            scaleBMP0 = new ScaleBitmap ( button_normal_bit.bitmapData );
             scaleBMP0.scale9Grid = new Rectangle ( 15 , 15 , 70 , 14 );
 
             scaleBMP1 = new ScaleBitmap ( button_over_bit.bitmapData );

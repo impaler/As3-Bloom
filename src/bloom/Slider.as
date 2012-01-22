@@ -73,7 +73,7 @@ package bloom
         protected var _wheelSensitivity:Number;
 
 		public function Slider(p:DisplayObjectContainer = null, type:int = 0, value:Number = 0, max:Number = 100, min:Number = 0) {
-			super(p);
+
 
 			_bg = new Sprite();
 			_bg.tabEnabled = tabEnabled = false;
@@ -86,20 +86,25 @@ package bloom
 			addChild(_bg);
 
 			_bt = new ButtonBase(this);
-			_bt.brush = ThemeBase.SliderButton;
-
-			brush = ThemeBase.Slider;
 
 			_rect = new Rectangle(0, 0, 0, 0);
-
 			_type == VERTICALLY ? size(20, 100) : size(100, 20);
 
 			_bt.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
 			_bg.addEventListener(MouseEvent.MOUSE_DOWN, clickOnBg);
 			addEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
+
+
+            super(p);
 		}
 
-		override protected function draw(e:Event):void {
+        override public function setCoreBrush ():void {
+            super.setCoreBrush ();
+            _bt.brush = ThemeBase.SliderButton;
+         	brush = ThemeBase.Slider;
+        }
+
+        override protected function draw(e:Event):void {
 			if (_changed) {
 				_changed = false;
 			} else {

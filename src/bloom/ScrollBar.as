@@ -21,7 +21,10 @@
  */
 package bloom
 {
-	import flash.display.DisplayObjectContainer;
+
+import bloom.themes.ThemeBase;
+
+import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 
@@ -50,7 +53,7 @@ package bloom
 			_contentSize = content;
 		}
 
-		override protected function refresh():void {
+        override protected function refresh():void {
 			_max = Math.max(_contentSize - _pageSize, 0);
 			if (_max > 0) {
 				if (_type == HORIZONTALLY) {
