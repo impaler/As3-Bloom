@@ -1,16 +1,16 @@
 /**
  * Copyright (c) 2012 - 2100 Sindney
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -19,37 +19,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package bloom 
+package bloom
 {
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	
+
 	/**
 	 * ScrollBar
-	 * 
+	 *
 	 * @date 2012/1/14 22:36
 	 * @author sindney
 	 */
 	public class ScrollBar extends Slider {
-		
+
 		private var _realSize:Number;
 		private var _minSize:Number;
 		private var _contentSize:Number;
 		private var _pageSize:Number;
-		
+
 		private var _working:Boolean = true;
 		private var _autoHide:Boolean = true;
-		
+
 		public function ScrollBar(p:DisplayObjectContainer = null, type:int = 0, page:Number = 100, content:Number = 100) {
 			super(p, type, 0, content);
-			
+
 			_realSize = 0;
 			_minSize = 20;
 			_pageSize = page;
 			_contentSize = content;
 		}
-		
+
 		override protected function refresh():void {
 			_max = Math.max(_contentSize - _pageSize, 0);
 			if (_max > 0) {
@@ -77,11 +77,11 @@ package bloom
 				_working = false;
 			}
 		}
-		
+
 		///////////////////////////////////
 		// Mouse Handle
 		///////////////////////////////////
-		
+
 		override protected function onMouseMove(e:MouseEvent):void {
 			if (_type == HORIZONTALLY) {
 				_value = _bt.x / _rect.width * _max;
@@ -90,84 +90,88 @@ package bloom
 			}
 			fixValue();
 			dispatchEvent(new Event("scroll"));
+
+            e.updateAfterEvent();
 		}
-		
+
 		override protected function clickOnBg(e:MouseEvent):void {
 			if (_type == HORIZONTALLY) {
 				value = (mouseX - (_bt.width >> 1)) / _rect.width * _max;
 			} else {
 				value = (mouseY - (_bt.height >> 1)) / _rect.height * _max;
 			}
+			e.updateAfterEvent();
 		}
-		
+
 		override protected function onMouseWheel(e:MouseEvent):void {
 			if (_type == HORIZONTALLY) {
-				value += (e.delta > 0 ? 1 : -1) * step;
+				value += (e.delta > 0 ? _wheelSensitivity : - _wheelSensitivity) * step;
 			} else {
-				value -= (e.delta > 0 ? 1 : -1) * step;
+				value -= (e.delta > 0 ? _wheelSensitivity : - _wheelSensitivity) * step;
 			}
+            e.updateAfterEvent();
 		}
-		
+
 		///////////////////////////////////
 		// getter/setters
 		///////////////////////////////////
-		
+
 		public function set contentSize(value:Number):void {
 			if (_contentSize != value) {
 				_contentSize = value;
 				drawDirectly();
 			}
 		}
-		
+
 		public function get contentSize():Number {
 			return _contentSize;
 		}
-		
+
 		public function set pageSize(value:Number):void {
 			if (_pageSize != value) {
 				_pageSize = value;
 				drawDirectly();
 			}
 		}
-		
+
 		public function get pageSize():Number {
 			return _pageSize;
 		}
-		
+
 		public function set minSize(value:Number):void {
 			if (_minSize != value) {
 				_minSize = value;
 				refresh();
 			}
 		}
-		
+
 		public function get minSize():Number {
 			return _minSize;
 		}
-		
+
 		public function set autoHide(value:Boolean):void {
 			if (_autoHide != value) {
 				_autoHide = value;
 				drawDirectly();
 			}
 		}
-		
+
 		public function get autoHide():Boolean {
 			return _autoHide;
 		}
-		
+
 		public function get working():Boolean {
 			return _working;
 		}
-		
+
 		///////////////////////////////////
 		// toString
 		///////////////////////////////////
-		
+
 		override public function toString():String {
 			return "[bloom.ScrollBar]";
 		}
-		
+
 	}
 
 }

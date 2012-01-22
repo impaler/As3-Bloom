@@ -70,7 +70,8 @@ package bloom
 		protected var _min:Number;
 		protected var _rect:Rectangle;
 		protected var _type:int;
-		
+        protected var _wheelSensitivity:Number;
+
 		public function Slider(p:DisplayObjectContainer = null, type:int = 0, value:Number = 0, max:Number = 100, min:Number = 0) {
 			super(p);
 			
@@ -110,7 +111,10 @@ package bloom
 			var scale:ScaleBitmap;
 			
 			_bg.graphics.clear();
-			
+			_bg.buttonMode = true;
+
+            _wheelSensitivity = .4;
+
 			if (brush is ColorBrush) {
 				colorBrush = brush as ColorBrush;
 				_bg.graphics.beginFill(colorBrush.colors[0]);
@@ -164,6 +168,8 @@ package bloom
 			} else {
 				_value = (_height - _width - _bt.y) / (_height - _width) * (_max - _min) + _min;
 			}
+            e.updateAfterEvent();
+            
 			fixValue();
 			dispatchEvent(new Event("scroll"));
 		}
@@ -181,10 +187,17 @@ package bloom
 			} else {
 				value = (_height - (_width >> 1) - mouseY) / (_height - _width) * (_max - _min) + _min;
 			}
+
+            _bt.startDrag(false, _rect);
+            stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+            stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+
 		}
-		
-		protected function onMouseWheel(e:MouseEvent):void {
-			value += (e.delta > 0 ? 1 : -1) * step;
+
+        protected function onMouseWheel(e:MouseEvent):void {
+            _wheelSensitivity = _wheelSensitivity;
+            value += (e.delta > 0 ? _wheelSensitivity : - _wheelSensitivity) * step;
+            e.updateAfterEvent();
 		}
 		
 		///////////////////////////////////

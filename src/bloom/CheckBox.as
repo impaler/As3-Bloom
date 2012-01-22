@@ -54,7 +54,8 @@ package bloom
 			super(p);
 			
 			tabChildren = tabEnabled = false;
-			
+            buttonMode = true;
+
 			_bg = new Shape();
 			addChild(_bg);
 			
