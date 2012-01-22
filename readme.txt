@@ -87,7 +87,7 @@ Version 0.0.6 r12
 Version 0.0.6 r11:
  - TextBox bug fixed.
  - List added.
- - Drop shaow filter added.
+ - Drop shadow filter added.
 
 Version 0.0.6 r10:
  - It's close to stable now. And i think i won't change it's core or components' methods/vars/etc.I just need to finish the Theme part and add more comps.
@@ -111,10 +111,10 @@ Version 0.0.3:
  - Button addChild() bug fixed.
 
 Version 0.0.1:
- - Use invalidate() instead of normal draw(), which means all changed graphics will be drawn in the next enterframe.
- - Brush skining system makes it easier to change any component's style.
- - Inproved class structure is more clear and easy to learn for newbies.
- - Now you can make some simple animation on some component, see bloom.animation.* for more informations.
+ - Use invalidate() instead of normal draw(), which means all changed graphics will be drawn in the next EnterFrame.
+ - Brush skinning system makes it easier to change any component's style.
+ - Improved class structure is more clear and easy to learn for newbies.
+ - Now you can make some simple animation on some component, see bloom.animation.* for more information.
  - Still small file size, little memory use.
 
 ----------------------------------------------------------------

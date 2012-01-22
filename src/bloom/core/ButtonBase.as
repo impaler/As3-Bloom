@@ -1,16 +1,16 @@
 /**
  * Copyright (c) 2012 - 2100 Sindney
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -19,63 +19,65 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package bloom.core 
+package bloom.core
 {
-	import flash.display.DisplayObjectContainer;
-	import flash.display.Shape;
-	import flash.events.Event;
-	import flash.events.MouseEvent;
-	
-	import bloom.brushes.BMPBrush;
-	import bloom.brushes.ColorBrush;
-	import bloom.core.ScaleBitmap;
-	import bloom.events.BrushEvent;
-	import bloom.themes.ThemeBase;
-	
-	/**
+
+import bloom.brushes.BMPBrush;
+import bloom.brushes.ColorBrush;
+import bloom.themes.ThemeBase;
+
+import flash.display.DisplayObjectContainer;
+import flash.display.Shape;
+import flash.events.Event;
+import flash.events.MouseEvent;
+
+/**
 	 * ButtonBase
-	 * 
+	 *
 	 * @date 2012/1/10 20:17
 	 * @author sindney
 	 */
 	public class ButtonBase extends Component {
-		
+
 		public static const UP:int = 0;
 		public static const OVER:int = 1;
 		public static const DOWN:int = 2;
-		
+
 		protected var _state:int = 0;
 		protected var _bg:Shape;
-		
+
 		public function ButtonBase(p:DisplayObjectContainer = null) {
 			super(p);
 			buttonMode = true;
 			tabEnabled = false;
-			
+
 			_bg = new Shape();
 			addChild(_bg);
-			
-			brush = ThemeBase.Button;
-			
+
 			size(100, 20);
-			
+
 			addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
 			addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
 		}
-		
-		override protected function draw(e:Event):void {
+
+        override public function setCoreBrush ():void {
+            brush = ThemeBase.Button;
+        }
+
+
+        override protected function draw(e:Event):void {
 			if (_changed) {
 				_changed = false;
 			} else {
 				return;
 			}
-			
+
 			var bmpBrush:BMPBrush;
 			var colorBrush:ColorBrush;
 			var scale:ScaleBitmap;
-			
+
 			_bg.graphics.clear();
-			
+
 			if (brush is ColorBrush) {
 				colorBrush = brush as ColorBrush;
 				switch(_state) {
@@ -109,11 +111,11 @@ package bloom.core
 						break;
 				}
 			}
-			
+
 			_bg.graphics.drawRect(0, 0, _width, _height);
 			_bg.graphics.endFill();
 		}
-		
+
 		protected function onMouseOver(e:MouseEvent):void {
 			if (_state != OVER) {
 				_state = OVER;
@@ -122,7 +124,7 @@ package bloom.core
 				addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 			}
 		}
-		
+
 		protected function onMouseDown(e:MouseEvent):void {
 			if (_state != DOWN) {
 				_state = DOWN;
@@ -132,7 +134,7 @@ package bloom.core
 				removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
 			}
 		}
-		
+
 		protected function onMouseUp(e:MouseEvent):void {
 			_state = UP;
 			_changed = true;
@@ -141,23 +143,23 @@ package bloom.core
 			removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 			stage.removeEventListener (MouseEvent.MOUSE_UP, onMouseUp);
 		}
-		
+
 		protected function onMouseOut(e:MouseEvent):void {
 			if (_state != DOWN) onMouseUp(e);
 		}
-		
+
 		///////////////////////////////////
 		// getter/setters
 		///////////////////////////////////
-		
+
 		public function get state():int {
 			return _state;
 		}
-		
+
 		///////////////////////////////////
 		// toString
 		///////////////////////////////////
-		
+
 		public override function toString():String {
 			return "[bloom.core.ButtonBase]";
 		}

@@ -21,6 +21,8 @@
  */
 package {
 
+import avmplus.factoryXml;
+
 import bloom.*;
 import bloom.brushes.ColorBrush;
 import bloom.brushes.TextBrush;
@@ -32,6 +34,7 @@ import flash.display.Sprite;
 import flash.display.StageAlign;
 import flash.display.StageScaleMode;
 import flash.events.Event;
+import flash.events.MouseEvent;
 
 /**
  * BMPExample
@@ -40,53 +43,90 @@ import flash.events.Event;
  */
 [SWF(backgroundColor = 0xffffff , frameRate = 40 , width = 700 , height = 500)]
 public class ThemePreviewer extends Sprite {
-	
+
     [Embed(source="background.jpg")]
     private var background:Class;
-	
+    private var _themetoggle:Number = 1;
+
+    private var _enableButton:Button;
+    private var _enabled:Boolean = true;
+
     public function ThemePreviewer () {
         stage.align = StageAlign.TOP_LEFT;
         stage.scaleMode = StageScaleMode.NO_SCALE;
         stage.showDefaultContextMenu = false;
-		
+
         addChild ( new background () );
-		
+
+        ThemeBase.registerComponents = true;
         ThemeBase.setTheme ( new BMPTheme () );
 		//ThemeBase.setTheme ( new ColorTheme () );
-		
+
+        _enableButton = new Button ( this , "Disable All Components" );
+        _enableButton.registerComponent = false;
+        _enableButton.size ( 300 , 40 );
+        _enableButton.addEventListener(MouseEvent.MOUSE_DOWN , DisableComponents );
+
+
+        var container:FlowContainer = new FlowContainer();
+
         // TabBox
-        var tabBox:TabBox = new TabBox ( this );
-        tabBox.size ( 680 , 480 );
-        tabBox.move ( 10 , 10 );
-		
+        var tabBox:TabBox = new TabBox ( container );
+//        tabBox.size ( 680 , 480 );
+//        tabBox.move ( 10 , 10 );
+
+        var window:Window = new Window(this, container);
+        window.liveResize = true;
+        window.footerSize = 20;
+        window.size(680, 480);
+        window.move(100, 150);
+        window.resizeable = false;
+        tabBox.size ( container.width , container.height );
+
+//        window.addEventListener(Event.RESIZE , updateContainer );
+//
+//        function updateContainer ( event:Event ):void {
+//            tabBox.size ( container.width , container.height );
+//        }
+
         // Tab Content margins
         var margin:Margin = new Margin ( 4 , 4 , 0 , 0 );
-		
+
 		var color:Vector.<uint> = new Vector.<uint>(1, true);
 		color[0] = 0xE9E9E9;
 		var brush:ColorBrush = new ColorBrush(color);
-		
+
 		var scrollContainer:ScrollContainer = new ScrollContainer();
 		scrollContainer.direction = ScrollContainer.VERTICALLY;
 		scrollContainer.brush = brush;
-		
+
         // Buttons Tab
-        var but:Button = new Button ( scrollContainer.content , "Active Button" );
+        var but:Button = new Button ( scrollContainer.content , "BMP" );
         but.size ( 120 , 40 );
-		
+        but.addEventListener(MouseEvent.MOUSE_DOWN , BMPThemeChange );
+
+        var but:Button = new Button ( scrollContainer.content , "Color" );
+        but.size ( 120 , 40 );
+        but.addEventListener(MouseEvent.MOUSE_DOWN , ColorThemeChange );
+
+        var i:int;
+        var data:Array = [];
+        for ( i = 0 ; i < 100 ; i ++ ) {
+            but = new Button ( scrollContainer.content , "Disabled Button" );
+            but.size ( 120 , 40 );
+            but.enabled = false;
+        }
+
         but = new Button ( scrollContainer.content , "Disabled Button" );
         but.size ( 120 , 40 );
         but.enabled = false;
-		
+
         but = new Button ( scrollContainer.content , ":)" );
         but.size ( 40 , 120 );
-		
-        but = new Button ( scrollContainer.content , "Button" );
-        but.size ( 120 , 120 );
-		
+
         tabBox.addContent ( "Buttons" , scrollContainer , margin );
 		scrollContainer.calculateContentSize();
-		
+
         // Labels Tab
         scrollContainer = new ScrollContainer();
 		scrollContainer.direction = ScrollContainer.VERTICALLY;
@@ -99,7 +139,7 @@ public class ThemePreviewer extends Sprite {
 
         tabBox.addContent ( "Labels" , scrollContainer , margin );
 		scrollContainer.calculateContentSize();
-		
+
         // Sliders Tab
         scrollContainer = new ScrollContainer();
 		scrollContainer.direction = ScrollContainer.VERTICALLY;
@@ -121,27 +161,27 @@ public class ThemePreviewer extends Sprite {
 
         slide = new Slider ( scrollContainer.content , Slider.VERTICALLY , 30 );
         slide.size ( 30 , 200 );
-		
+
         slide = new Slider ( scrollContainer.content , Slider.HORIZONTALLY , 30 );
         slide.size ( 200 , 30 );
-		
+
         tabBox.addContent ( "Sliders" , scrollContainer , margin );
 		scrollContainer.calculateContentSize();
-		
+
         // Numeric Stepper Tab
         scrollContainer = new ScrollContainer();
 		scrollContainer.direction = ScrollContainer.VERTICALLY;
 		scrollContainer.brush = brush;
-		
+
         var stepper:NumericStepper = new NumericStepper ( scrollContainer.content );
-		
+
         stepper = new NumericStepper ( scrollContainer.content );
         stepper.enabled = false;
-		
+
         stepper = new NumericStepper ( scrollContainer.content );
         stepper.textBase.brush = new TextBrush ( "Verdana" , 30 , 0x000000 , false , false , false );
         stepper.size ( 120 , 40 );
-		
+
         tabBox.addContent ( "Steppers" , scrollContainer , margin );
 		scrollContainer.calculateContentSize();
 
@@ -158,27 +198,27 @@ public class ThemePreviewer extends Sprite {
         // with checkboxgroup, you can easily link a group of checkbox object(and he who extends checkbox).
         // set checkBoxGroup.index = -1 means there's no checkbox object currently.
         var checkBoxGroup:CheckBoxGroup = new CheckBoxGroup ( - 1 );
-		
+
         checkBox = new CheckBox ( scrollContainer.content , "CheckBox Group Item 0" );
         checkBoxGroup.addChild ( checkBox );
-		
+
         checkBox = new CheckBox ( scrollContainer.content , "CheckBox Group Item 1" );
         checkBoxGroup.addChild ( checkBox );
-		
+
         checkBox = new CheckBox ( scrollContainer.content , "CheckBox Group Item 2" );
         checkBoxGroup.addChild ( checkBox );
-		
+
         // set target checkbox
         checkBoxGroup.index = 0;
-		
+
         tabBox.addContent ( "CheckBoxes" , scrollContainer , margin );
 		scrollContainer.calculateContentSize();
-		
+
         // Text Tab
         scrollContainer = new ScrollContainer ();
 		scrollContainer.direction = ScrollContainer.VERTICALLY;
 		scrollContainer.brush = brush;
-		
+
         var textbox:TextBox = new TextBox ( scrollContainer.content , "I am a textbox" );
 
         textbox = new TextBox ( scrollContainer.content , "disabled :(" );
@@ -264,17 +304,30 @@ public class ThemePreviewer extends Sprite {
         tabBox.toggleTab ( "Buttons" );
 
     }
-	
+
+    private function DisableComponents ( event:MouseEvent ):void {
+        _enabled ? _enabled = false : _enabled = true;
+        _enabled ? _enableButton.title.text = "Disable All Components" : _enableButton.title.text = "Enable All Components";
+        ThemeBase.enableComponents( _enabled );
+    }
+
+    private function BMPThemeChange ( event:MouseEvent ):void {
+         ThemeBase.setTheme ( new BMPTheme() );
+    }
+
+    private function ColorThemeChange ( event:MouseEvent ):void {
+         ThemeBase.setTheme ( new ColorTheme () );
+    }
     private var decrease:Boolean = false;
     private var progressBar:ProgressBar;
-	
+
     private function onLoop ( e:Event ):void {
         var bar:ProgressBar = e.target as ProgressBar;
         if ( bar.value == 100 ) decrease = true;
         if ( bar.value == 0 ) decrease = false;
         bar.value += decrease ? - 1 : 1;
     }
-	
+
 }
 
 }

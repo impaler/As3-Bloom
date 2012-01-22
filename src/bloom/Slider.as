@@ -197,7 +197,6 @@ package bloom
 		}
 
         protected function onMouseWheel(e:MouseEvent):void {
-            _wheelSensitivity = _wheelSensitivity;
             value += (e.delta > 0 ? _wheelSensitivity : - _wheelSensitivity) * step;
             e.updateAfterEvent();
 		}
