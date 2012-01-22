@@ -89,9 +89,9 @@ package bloom
 				_value = _bt.y / _rect.height * _max;
 			}
 			fixValue();
-			dispatchEvent(new Event("scroll"));
-
             e.updateAfterEvent();
+
+			dispatchEvent(new Event("scroll"));
 		}
 
 		override protected function clickOnBg(e:MouseEvent):void {
@@ -100,7 +100,13 @@ package bloom
 			} else {
 				value = (mouseY - (_bt.height >> 1)) / _rect.height * _max;
 			}
-			e.updateAfterEvent();
+            _bt.startDrag(false, _rect);
+            stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+            stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+
+            e.updateAfterEvent();
+
+            dispatchEvent(new Event("scroll"));
 		}
 
 		override protected function onMouseWheel(e:MouseEvent):void {

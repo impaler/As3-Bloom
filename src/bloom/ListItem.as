@@ -39,7 +39,9 @@ package bloom
 		
 		public function ListItem(p:DisplayObjectContainer = null) {
 			super(p);
-			
+
+             buttonMode = true;
+
 			_title = new Label(this);
 			_title.brush = ThemeBase.Text_List;
 			_title.addEventListener(Event.CHANGE, onTitleChanged);
