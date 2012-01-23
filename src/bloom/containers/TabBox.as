@@ -21,7 +21,10 @@
  */
 package bloom.containers
 {
-	import flash.display.DisplayObject;
+
+import bloom.TabButton;
+
+import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
 
@@ -53,9 +56,7 @@ package bloom.containers
 		private var _pool:Vector.<IChild>;
 
 		public function TabBox(p:DisplayObjectContainer = null) {
-			super(p);
-			_header = new FlowContainer(this);
-			_header.brush = ThemeBase.TabBox;
+            _header = new FlowContainer(this);
 
 			_contents = new Vector.<IChild>();
 			_pool = new Vector.<IChild>();
@@ -66,10 +67,17 @@ package bloom.containers
 			_headerSize = 30;
 			_headerPadding = 20;
 
+            super(p);
+
 			update();
 		}
 
-		/**
+        override public function setCoreBrush ():void {
+            super.setCoreBrush ();
+            _header.brush = ThemeBase.TabBox;
+        }
+
+        /**
 		 * Use to change titles' Brush.
 		 */
 		public function changeTitlesBrush(toggleButton:Brush, title:TextBrush):void {
@@ -85,11 +93,9 @@ package bloom.containers
 		}
 
 		public function addContent(name:String, value:Container, margin:Margin = null):void {
-			var title:ToggleButton = getToggleButton();
+			var title:TabButton = getToggleButton();
 			margin ? title.margin.copyForm(margin) : title.margin.reset(0, 0, 0, 0);
 			title.title.text = name;
-			title.brush = ThemeBase.TabBox_Title;
-			title.title.brush = ThemeBase.Text_TabBox;
 
 			title.size(title.title.width + _headerPadding, _headerSize - title.margin.top);
 
@@ -199,8 +205,8 @@ package bloom.containers
 			_pool.push(value);
 		}
 
-		private function getToggleButton():ToggleButton {
-			return _pool.length > 0 ? ToggleButton ( _pool.pop () ) : new ToggleButton();
+		private function getToggleButton():TabButton {
+			return _pool.length > 0 ? TabButton ( _pool.pop () ) : new TabButton();
 		}
 
 		///////////////////////////////////

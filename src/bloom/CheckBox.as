@@ -1,16 +1,16 @@
 /**
  * Copyright (c) 2012 - 2100 Sindney
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -19,76 +19,79 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package bloom 
+package bloom
 {
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Shape;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	
+
 	import bloom.brushes.BMPBrush;
 	import bloom.brushes.ColorBrush;
 	import bloom.core.Component;
 	import bloom.events.BrushEvent;
 	import bloom.themes.ThemeBase;
-	
-	/** 
+
+	/**
 	 * Dispatched when the value has changed.
 	 * @eventType flash.events.Event
 	 */
 	[Event(name = "change", type = "flash.events.Event")]
-	
+
 	/**
 	 * CheckBox
-	 * 
+	 *
 	 * @date 2012/1/10 20:11
 	 * @author sindney
 	 */
 	public class CheckBox extends Component {
-		
+
 		protected var _value:Boolean;
 		protected var _title:Label;
 		protected var _bg:Shape;
-		
+
 		public function CheckBox(p:DisplayObjectContainer = null, text:String = "", value:Boolean = false) {
-			super(p);
-			
 			tabChildren = tabEnabled = false;
             buttonMode = true;
+            _value = value;
 
 			_bg = new Shape();
 			addChild(_bg);
-			
+
 			_title = new Label(this, text);
-			_title.brush = ThemeBase.Text_CheckBox;
-			_title.addEventListener(Event.CHANGE, onTitleChanged);
-			_title.addEventListener(BrushEvent.REDRAW, onTitleChanged);
-			
-			_value = value;
-			
-			brush = ThemeBase.CheckBox;
-			
+
+            super(p);
+
 			size(100, 20);
-			
+
+            _title.addEventListener(Event.CHANGE, onTitleChanged);
+            _title.addEventListener(BrushEvent.REDRAW, onTitleChanged);
 			addEventListener(MouseEvent.CLICK, onMouseClick);
 		}
-		
-		protected function onTitleChanged(e:Event):void {
+
+        override public function setCoreBrush ():void {
+            super.setCoreBrush ();
+
+            brush = ThemeBase.CheckBox;
+            _title.brush = ThemeBase.Text_CheckBox;
+        }
+
+        protected function onTitleChanged(e:Event):void {
 			_title.move(20, (20 - _title.height) * 0.5);
 		}
-		
+
 		override protected function draw(e:Event):void {
 			if (_changed) {
 				_changed = false;
 			} else {
 				return;
 			}
-			
+
 			var bmpBrush:BMPBrush;
 			var colorBrush:ColorBrush;
-			
+
 			_bg.graphics.clear();
-			
+
 			if (brush is ColorBrush) {
 				colorBrush = brush as ColorBrush;
 				_bg.graphics.beginFill(colorBrush.colors[0]);
@@ -111,22 +114,22 @@ package bloom
 					_bg.graphics.endFill();
 				}
 			}
-			
+
 			_title.move(20, (20 - _title.height) * 0.5);
 		}
-		
+
 		private function onMouseClick(e:MouseEvent):void {
 			value = !_value;
 		}
-		
+
 		///////////////////////////////////
 		// getter/setters
 		///////////////////////////////////
-		
+
 		public function get title():Label {
 			return _title;
 		}
-		
+
 		public function set value(b:Boolean):void {
 			if (_value != b) {
 				_value = b;
@@ -135,15 +138,15 @@ package bloom
 				dispatchEvent(new Event("change"));
 			}
 		}
-		
+
 		public function get value():Boolean {
 			return _value;
 		}
-		
+
 		///////////////////////////////////
 		// toString
 		///////////////////////////////////
-		
+
 		override public function toString():String {
 			return "[bloom.CheckBox]";
 		}

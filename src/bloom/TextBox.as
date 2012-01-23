@@ -52,8 +52,6 @@ package bloom
 		private var _editable:Boolean = true;
 
 		public function TextBox(p:DisplayObjectContainer = null, text:String = "", editable:Boolean = true) {
-			super(p);
-
 			_bg = new Shape();
 			addChild(_bg);
 
@@ -61,30 +59,39 @@ package bloom
 			_textBase.multiline = true;
 			_textBase.wordWrap = true;
 			_textBase.selectable = true;
-			_textBase.brush = ThemeBase.Text_TextBox;
 			_textBase.text = text;
 			_textBase.addEventListener(Event.CHANGE, onTextChange);
 			_textBase.addEventListener(Event.SCROLL, onTextScroll);
 			_textBase.addEventListener(FocusEvent.FOCUS_IN, onFocusIn);
 			_textBase.addEventListener(FocusEvent.FOCUS_OUT, onFocusOut);
 
+            editable = editable;
+
 			_scrollBar = new ScrollBar(this, 0, 0, 0);
-			_scrollBar.brush = ThemeBase.TB_ScrollBar;
-			_scrollBar.button.brush = ThemeBase.TB_ScrollBarButton;
 			_scrollBar.step = 1;
 			_scrollBar.autoHide = false;
 			_scrollBar.mouseWheelTarget = this;
 			_scrollBar.addEventListener(Event.CHANGE, onScrollBarChange);
 			_scrollBar.addEventListener(Event.SCROLL, onScrollBarMove);
 
-			brush = ThemeBase.TextBox;
 
-			this.editable = editable;
+
+            super(p);
 
 			size(100, 100);
 		}
 
-		public function appendText(text:String):void {
+        override public function setCoreBrush ():void {
+            super.setCoreBrush ();
+
+            brush = ThemeBase.TextBox;
+            _textBase.brush = ThemeBase.Text_TextBox;
+            _scrollBar.brush = ThemeBase.TB_ScrollBar;
+            _scrollBar.button.brush = ThemeBase.TB_ScrollBarButton;
+
+        }
+
+        public function appendText(text:String):void {
 			_textBase.appendText(text);
 			onTextChange();
 		}

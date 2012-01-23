@@ -21,41 +21,43 @@
  */
 package bloom
 {
-	import flash.display.DisplayObjectContainer;
-	import flash.events.Event;
-	import flash.text.TextFormat;
 
-	import bloom.core.TextBase;
-	import bloom.themes.ThemeBase;
+import bloom.brushes.BMPBrush;
+import bloom.brushes.ColorBrush;
+import bloom.core.ScaleBitmap;
+import bloom.events.BrushEvent;
+import bloom.themes.ThemeBase;
 
-	/**
-	 * Label
+import flash.display.DisplayObjectContainer;
+import flash.display.Shape;
+import flash.events.Event;
+import flash.events.MouseEvent;
+
+/**
+	 * ToggleButton
 	 *
-	 * @date 2012/1/10 20:11
+	 * @date 2012/1/10 20:13
 	 * @author sindney
 	 */
-	public class Label extends TextBase {
+	public class TabButton extends ToggleButton {
 
-		public function Label(p:DisplayObjectContainer = null, text:String = "") {
-			super(p);
-
-			selectable = mouseEnabled = tabEnabled = false;
-			type = "dynamic";
-			autoSize = "left";
-
-			brush = ThemeBase.Text_Label;
-
-			this.text = text;
+		public function TabButton(p:DisplayObjectContainer = null, text:String = "", value:Boolean = false) {
+            super(p, text, value);
 		}
 
+        override public function setCoreBrush ():void {
+            super.setCoreBrush ();
 
+            brush = ThemeBase.TabBox_Title;
+            title.brush = ThemeBase.Text_TabBox;
+        }
 
-		///////////////////////////////////
+///////////////////////////////////
 		// toString
 		///////////////////////////////////
 
 		override public function toString():String {
-			return "[bloom.Label]";
+			return "[bloom.TabButton]";
 		}
 
 	}

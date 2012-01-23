@@ -61,19 +61,24 @@ package bloom.containers
 		private var _footer:FlowContainer;
 		private var _scaler:Sprite;
 
-        private var xOffset:Number;
-        private var yOffset:Number;
+        private var _xOffset:Number;
+        private var _yOffset:Number;
 
-		public function Window(p:DisplayObjectContainer = null, content:FlowContainer = null, moveable:Boolean = true, resizeable:Boolean = true) {
-			super(p);
+        private var _autoOpen:Boolean;
 
+		public function Window(p:DisplayObjectContainer = null, content:FlowContainer = null, moveable:Boolean = true, resizeable:Boolean = true, autoOpen:Boolean = true) {
 			_maxWidth = Number.MAX_VALUE;
 			_minWidth = 100;
 			_maxHeight = Number.MAX_VALUE;
 			_minHeight = 100;
+            _headerSize = 30;
+            _footerSize = 30;
+            _autoOpen = autoOpen;
+            liveResize = false;
+
+            _rect = new Rectangle();
 
 			_header = new FlowContainer();
-			_header.brush = ThemeBase.Window_Header;
 			_header.tabEnabled = false;
 			_header.addEventListener(MouseEvent.MOUSE_DOWN, onStartWindowDrag);
 			addChild(_header);
@@ -88,35 +93,45 @@ package bloom.containers
             _scaler.addEventListener(MouseEvent.MOUSE_DOWN, onScaleWindowMouseDown);
 
 			_footer = new FlowContainer();
-			_footer.brush = ThemeBase.Window_Footer;
 			addChild(_footer);
 
-			_headerSize = 30;
-			_footerSize = 30;
+            super(p);
 
-			this.moveable = moveable;
-			this.resizeable = resizeable;
-			liveResize = false;
-
-			_rect = new Rectangle();
-
-			brush = ThemeBase.Window;
-
+            this.moveable = moveable;
+            this.resizeable = resizeable;
 			size(100, 100);
+
+            _autoOpen ? open() : close();
 		}
+
+        public function open ():void {
+            this.visible = true;
+        }
+
+        public function close ():void {
+            this.visible = false;
+        }
+
+        override public function setCoreBrush ():void {
+            super.setCoreBrush ();
+
+            brush = ThemeBase.Window;
+            _header.brush = ThemeBase.Window_Header;
+            _footer.brush = ThemeBase.Window_Footer;
+        }
 
         private function onStartWindowDrag(e:MouseEvent):void {
             if (moveable) {
-                xOffset = e.stageX - this.x;
-                yOffset = e.stageY - this.y;
+                _xOffset = e.stageX - this.x;
+                _yOffset = e.stageY - this.y;
                 stage.addEventListener(MouseEvent.MOUSE_MOVE, onWindowDragMouseMove);
                 stage.addEventListener(MouseEvent.MOUSE_UP, onWindowDragMouseUp);
             }
         }
 
         private function onWindowDragMouseMove(e:MouseEvent):void {
-            this.x = e.stageX - xOffset;
-            this.y = e.stageY - yOffset;
+            this.x = e.stageX - _xOffset;
+            this.y = e.stageY - _yOffset;
             e.updateAfterEvent();
         }
 
@@ -127,16 +142,16 @@ package bloom.containers
 
         private function onScaleWindowMouseDown(e:MouseEvent):void {
             if (liveResize) {
-                xOffset = e.stageX - _scaler.x;
-                yOffset = e.stageY - _scaler.y;
+                _xOffset = e.stageX - _scaler.x;
+                _yOffset = e.stageY - _scaler.y;
                 stage.addEventListener(MouseEvent.MOUSE_MOVE, onScaleWindowMouseMove);
                 stage.addEventListener(MouseEvent.MOUSE_UP, onScaleWindowMouseUp);
             }
         }
 
 		private function onScaleWindowMouseMove(e:MouseEvent):void {
-            _scaler.x = e.stageX - xOffset;
-            _scaler.y = e.stageY - yOffset;
+            _scaler.x = e.stageX - _xOffset;
+            _scaler.y = e.stageY - _yOffset;
             size(_scaler.x + _footerSize, _scaler.y + _footerSize);
             e.updateAfterEvent();
 		}
@@ -353,6 +368,6 @@ package bloom.containers
 			return "[bloom.containers.Window]";
 		}
 
-	}
+    }
 
 }

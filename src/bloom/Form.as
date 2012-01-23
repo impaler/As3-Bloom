@@ -221,6 +221,7 @@ package bloom
 			var i:int = _scrollBar.value, j:int = 0;
 			var tmp:*;
 			while (i < a) {
+                //had a recurring error here that j is out of bounds but unable to reproduce
 				tmp = _content.getChildAt(j);
 				tmp.data = _data[i];
 				tmp.selected = (i == _index);

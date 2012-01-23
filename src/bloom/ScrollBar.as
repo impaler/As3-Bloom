@@ -22,6 +22,7 @@
 package bloom
 {
 
+import bloom.core.ButtonBase;
 import bloom.themes.ThemeBase;
 
 import flash.display.DisplayObjectContainer;
@@ -104,9 +105,10 @@ import flash.display.DisplayObjectContainer;
 				value = (mouseY - (_bt.height >> 1)) / _rect.height * _max;
 			}
             _bt.startDrag(false, _rect);
+            _bt.stateAnotherMouseDown = ButtonBase.DOWN;
+
             stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
             stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
-
             e.updateAfterEvent();
 
             dispatchEvent(new Event("scroll"));

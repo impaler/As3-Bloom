@@ -43,7 +43,7 @@ import flash.events.MouseEvent;
 		public static const OVER:int = 1;
 		public static const DOWN:int = 2;
 
-		protected var _state:int = 0;
+		private var _state:int = 0;
 		protected var _bg:Shape;
 
 		public function ButtonBase(p:DisplayObjectContainer = null) {
@@ -156,7 +156,15 @@ import flash.events.MouseEvent;
 			return _state;
 		}
 
-		///////////////////////////////////
+        public function set stateAnotherMouseDown ( value:int ):void {
+            _state = value;
+            _changed = true;
+            removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
+            stage.addEventListener (MouseEvent.MOUSE_UP, onMouseUp);
+            invalidate();
+        }
+
+///////////////////////////////////
 		// toString
 		///////////////////////////////////
 

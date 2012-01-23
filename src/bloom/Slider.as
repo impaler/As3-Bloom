@@ -73,33 +73,30 @@ package bloom
         protected var _wheelSensitivity:Number;
 
 		public function Slider(p:DisplayObjectContainer = null, type:int = 0, value:Number = 0, max:Number = 100, min:Number = 0) {
+            _type = type;
+            _max = max;
+            _min = min;
+            _value = value;
 
-
-			_bg = new Sprite();
-			_bg.tabEnabled = tabEnabled = false;
-
-			_type = type;
-			_max = max;
-			_min = min;
-			_value = value;
-
-			addChild(_bg);
-
+            _bg = new Sprite();
+            _bg.tabEnabled = tabEnabled = false;
+            addChild(_bg);
 			_bt = new ButtonBase(this);
 
 			_rect = new Rectangle(0, 0, 0, 0);
 			_type == VERTICALLY ? size(20, 100) : size(100, 20);
 
-			_bt.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
-			_bg.addEventListener(MouseEvent.MOUSE_DOWN, clickOnBg);
-			addEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
-
-
             super(p);
+
+            _bt.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+            _bg.addEventListener(MouseEvent.MOUSE_DOWN, clickOnBg);
+            addEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
+
 		}
 
         override public function setCoreBrush ():void {
             super.setCoreBrush ();
+
             _bt.brush = ThemeBase.SliderButton;
          	brush = ThemeBase.Slider;
         }
@@ -196,6 +193,7 @@ package bloom
             _bt.startDrag(false, _rect);
             stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
             stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+            _bt.stateAnotherMouseDown = ButtonBase.DOWN;
 
             e.updateAfterEvent();
 
@@ -255,6 +253,7 @@ package bloom
 				_value = value;
 				fixValue();
 				refresh();
+
 				dispatchEvent(new Event("change"));
 			}
 		}
