@@ -19,166 +19,166 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package bloom.themes
-{
-	import bloom.brushes.*;
+package bloom.themes {
+
+import bloom.brushes.*;
 import bloom.core.Component;
 
 /**
-	 * ThemeBase
-	 *
-	 * @date 2012/1/20 19:46
-	 * @author sindney, impaler
+ * ThemeBase
+ *
+ * @date 2012/1/20 19:46
+ * @author sindney, impaler
+ */
+public final class ThemeBase {
+
+	/**
+	 * This setting will let you register all the components you create so that you can manipulate them all at once
+	 * Such as change theme, enable / disable them
 	 */
-	public final class ThemeBase {
+	public static var registerComponents:Boolean = false;
 
-        /**
-         * This setting will let you register all the components you create so that you can manipulate them all at once
-         * Such as change theme, enable / disable them
-         */
-        public static var registerComponents:Boolean = false;
+	/**
+	 * Use this to set your theme. Then new your components.
+	 * @param    theme
+	 */
+	public static function setTheme ( theme:ITheme ):void {
+		theme.initialize ();
 
-		/**
-		 * Use this to set your theme. Then new your components.
-		 * @param	theme
-		 */
-		public static function setTheme(theme:ITheme):void {
-			theme.initialize();
+		//update all registered components
+		if ( registerComponents ) {
+			for each ( var component:Component in componentRegistry ) {
+				if ( component.registerComponent ) component.setCoreBrush ();
 
-            //update all registered components
-            if ( registerComponents ) {
-                for each ( var component:Component in componentRegistry ){
-                    if ( component.registerComponent ) component.setCoreBrush();
-
-                }
-            }
+			}
 		}
+	}
 
-        /**
-         * Enable or Disable all components they have been registered
-         * @param value Boolean
-         */
-        public static function enableComponents (value:Boolean):void {
-              if ( registerComponents ) {
-                  for each ( var component:Component in componentRegistry ){
-                      if ( component.registerComponent ) component.enabled = value;
-                  }
-              } else {
-                  trace( "Error please ThemeBase.registerComponents = true; before using this command" );
-              }
-  		}
-		///////////////////////////////////
-		// Gloabal
-		///////////////////////////////////
+	/**
+	 * Enable or Disable all components they have been registered
+	 * @param value Boolean
+	 */
+	public static function enableComponents ( value:Boolean ):void {
+		if ( registerComponents ) {
+			for each ( var component:Component in componentRegistry ) {
+				if ( component.registerComponent ) component.enabled = value;
+			}
+		} else {
+			trace ( "Error please ThemeBase.registerComponents = true; before using this command" );
+		}
+	}
 
-		public static var ALPHA:Number = 0.8;
+	///////////////////////////////////
+	// Gloabal
+	///////////////////////////////////
 
-		public static var FOCUS:uint = 0xEEDD88;
+	public static var ALPHA:Number = 0.8;
 
-		///////////////////////////////////
-		// TextBrushes
-		///////////////////////////////////
+	public static var FOCUS:uint = 0xEEDD88;
 
-		public static var Text_Button:TextBrush;
+	///////////////////////////////////
+	// TextBrushes
+	///////////////////////////////////
 
-		public static var Text_CheckBox:TextBrush;
+	public static var Text_Button:TextBrush;
 
-		public static var Text_Label:TextBrush;
+	public static var Text_CheckBox:TextBrush;
 
-		public static var Text_List:TextBrush;
+	public static var Text_Label:TextBrush;
 
-		public static var Text_NumericStepper:TextBrush;
+	public static var Text_List:TextBrush;
 
-		public static var Text_TabBox:TextBrush;
+	public static var Text_NumericStepper:TextBrush;
 
-		public static var Text_TextBox:TextBrush;
+	public static var Text_TabBox:TextBrush;
 
-		public static var Text_TextInput:TextBrush;
+	public static var Text_TextBox:TextBrush;
 
-		public static var Text_ToggleButton:TextBrush;
+	public static var Text_TextInput:TextBrush;
 
-		///////////////////////////////////
-		// ColorBrushes
-		///////////////////////////////////
+	public static var Text_ToggleButton:TextBrush;
 
-		// Accordion
-		public static var AC_Title:Brush;
-		public static var AC_Content:Brush;
+	///////////////////////////////////
+	// ColorBrushes
+	///////////////////////////////////
 
-		// Button
-		public static var Button:Brush;
+	// Accordion
+	public static var AC_Title:Brush;
+	public static var AC_Content:Brush;
 
-		// CheckBox
-		public static var CheckBox:Brush;
+	// Button
+	public static var Button:Brush;
 
-		// Container
-		public static var Container:Brush;
+	// CheckBox
+	public static var CheckBox:Brush;
 
-		// Form
-		public static var Form:Brush;
-		public static var Form_ScrollBar:Brush;
-		public static var Form_ScrollBarButton:Brush;
+	// Container
+	public static var Container:Brush;
 
-		// FormItem
-		public static var FormItem:Brush;
+	// Form
+	public static var Form:Brush;
+	public static var Form_ScrollBar:Brush;
+	public static var Form_ScrollBarButton:Brush;
 
-		// List
-		public static var List:Brush;
-		public static var List_ScrollBar:Brush;
-		public static var List_ScrollBarButton:Brush;
+	// FormItem
+	public static var FormItem:Brush;
 
-		// ListItem
-		public static var ListItem:Brush;
+	// List
+	public static var List:Brush;
+	public static var List_ScrollBar:Brush;
+	public static var List_ScrollBarButton:Brush;
 
-		// NumericStepper
-		public static var NumericStepper:Brush;
-		public static var NS_Increase:Brush;
-		public static var NS_Decrease:Brush;
+	// ListItem
+	public static var ListItem:Brush;
 
-		// ProgressBar
-		public static var ProgressBar:Brush;
+	// NumericStepper
+	public static var NumericStepper:Brush;
+	public static var NS_Increase:Brush;
+	public static var NS_Decrease:Brush;
 
-		// ScrollContainer
-		public static var ScrollContainer:Brush;
-		public static var SC_ScrollBar:Brush;
-		public static var SC_ScrollBarButton:Brush;
+	// ProgressBar
+	public static var ProgressBar:Brush;
 
-		// Slider
-		public static var Slider:Brush;
-		public static var SliderButton:Brush;
+	// ScrollContainer
+	public static var ScrollContainer:Brush;
+	public static var SC_ScrollBar:Brush;
+	public static var SC_ScrollBarButton:Brush;
 
-		// TabBox
-		public static var TabBox:Brush;
-		public static var TabBox_Title:Brush;
+	// Slider
+	public static var Slider:Brush;
+	public static var SliderButton:Brush;
 
-		// TextBox
-		public static var TextBox:Brush;
-		public static var TB_ScrollBar:Brush;
-		public static var TB_ScrollBarButton:Brush;
+	// TabBox
+	public static var TabBox:Brush;
+	public static var TabBox_Title:Brush;
 
-		// TextInput
-		public static var TextInput:Brush;
+	// TextBox
+	public static var TextBox:Brush;
+	public static var TB_ScrollBar:Brush;
+	public static var TB_ScrollBarButton:Brush;
 
-		// ToggleButton
-		public static var ToggleButton:Brush;
+	// TextInput
+	public static var TextInput:Brush;
 
-		// ToggleSwitcher
-		public static var ToggleSwitcher:Brush;
+	// ToggleButton
+	public static var ToggleButton:Brush;
 
-		// Window
-		public static var Window:Brush;
-		public static var Window_Header:Brush;
-		public static var Window_Footer:Brush;
+	// ToggleSwitcher
+	public static var ToggleSwitcher:Brush;
 
-        public static var componentRegistry:Vector.<Component> = new Vector.<Component>();
+	// Window
+	public static var Window:Brush;
+	public static var Window_Header:Brush;
+	public static var Window_Footer:Brush;
 
-        public static function registerComponent ( component:* ):void {
-            if ( component is Component ) {
-                componentRegistry.push ( component as Component );
-            }
-        }
+	public static var componentRegistry:Vector.<Component> = new Vector.<Component> ();
 
+	public static function registerComponent ( component:* ):void {
+		if ( component is Component ) {
+			componentRegistry.push ( component as Component );
+		}
+	}
 
-    }
+}
 
 }

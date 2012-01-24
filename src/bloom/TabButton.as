@@ -19,47 +19,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package bloom
-{
+package bloom {
 
-import bloom.brushes.BMPBrush;
-import bloom.brushes.ColorBrush;
-import bloom.core.ScaleBitmap;
-import bloom.events.BrushEvent;
 import bloom.themes.ThemeBase;
 
 import flash.display.DisplayObjectContainer;
-import flash.display.Shape;
-import flash.events.Event;
-import flash.events.MouseEvent;
 
 /**
-	 * ToggleButton
-	 *
-	 * @date 2012/1/10 20:13
-	 * @author sindney
-	 */
-	public class TabButton extends ToggleButton {
+ * ToggleButton
+ *
+ * @date 2012/1/10 20:13
+ * @author sindney
+ */
+public class TabButton extends ToggleButton {
 
-		public function TabButton(p:DisplayObjectContainer = null, text:String = "", value:Boolean = false) {
-            super(p, text, value);
-		}
+	public function TabButton ( p:DisplayObjectContainer = null , text:String = "" , value:Boolean = false ) {
+		super ( p , text , value );
+	}
 
-        override public function setCoreBrush ():void {
-            super.setCoreBrush ();
+	override public function setCoreBrush ():void {
+		super.setCoreBrush ();
 
-            brush = ThemeBase.TabBox_Title;
-            title.brush = ThemeBase.Text_TabBox;
-        }
+		brush = ThemeBase.TabBox_Title;
+		title.brush = ThemeBase.Text_TabBox;
+	}
 
 ///////////////////////////////////
-		// toString
-		///////////////////////////////////
+	// toString
+	///////////////////////////////////
 
-		override public function toString():String {
-			return "[bloom.TabButton]";
-		}
-
+	override public function toString ():String {
+		return "[bloom.TabButton]";
 	}
+
+}
 
 }

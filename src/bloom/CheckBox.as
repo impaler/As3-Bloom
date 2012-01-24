@@ -19,137 +19,136 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package bloom
-{
-	import flash.display.DisplayObjectContainer;
-	import flash.display.Shape;
-	import flash.events.Event;
-	import flash.events.MouseEvent;
+package bloom {
 
-	import bloom.brushes.BMPBrush;
-	import bloom.brushes.ColorBrush;
-	import bloom.core.Component;
-	import bloom.events.BrushEvent;
-	import bloom.themes.ThemeBase;
+import bloom.brushes.BMPBrush;
+import bloom.brushes.ColorBrush;
+import bloom.core.Component;
+import bloom.events.BrushEvent;
+import bloom.themes.ThemeBase;
 
-	/**
-	 * Dispatched when the value has changed.
-	 * @eventType flash.events.Event
-	 */
-	[Event(name = "change", type = "flash.events.Event")]
+import flash.display.DisplayObjectContainer;
+import flash.display.Shape;
+import flash.events.Event;
+import flash.events.MouseEvent;
 
-	/**
-	 * CheckBox
-	 *
-	 * @date 2012/1/10 20:11
-	 * @author sindney
-	 */
-	public class CheckBox extends Component {
+/**
+ * Dispatched when the value has changed.
+ * @eventType flash.events.Event
+ */
+[Event(name="change" , type="flash.events.Event")]
 
-		protected var _value:Boolean;
-		protected var _title:Label;
-		protected var _bg:Shape;
+/**
+ * CheckBox
+ *
+ * @date 2012/1/10 20:11
+ * @author sindney
+ */ public class CheckBox extends Component {
 
-		public function CheckBox(p:DisplayObjectContainer = null, text:String = "", value:Boolean = false) {
-			tabChildren = tabEnabled = false;
-            buttonMode = true;
-            _value = value;
+	protected var _value:Boolean;
+	protected var _title:Label;
+	protected var _bg:Shape;
 
-			_bg = new Shape();
-			addChild(_bg);
+	public function CheckBox ( p:DisplayObjectContainer = null , text:String = "" , value:Boolean = false ) {
+		tabChildren = tabEnabled = false;
+		buttonMode = true;
+		_value = value;
 
-			_title = new Label(this, text);
+		_bg = new Shape ();
+		addChild ( _bg );
 
-            super(p);
+		_title = new Label ( this , text );
 
-			size(100, 20);
+		super ( p );
 
-            _title.addEventListener(Event.CHANGE, onTitleChanged);
-            _title.addEventListener(BrushEvent.REDRAW, onTitleChanged);
-			addEventListener(MouseEvent.CLICK, onMouseClick);
+		size ( 100 , 20 );
+
+		_title.addEventListener ( Event.CHANGE , onTitleChanged );
+		_title.addEventListener ( BrushEvent.REDRAW , onTitleChanged );
+		addEventListener ( MouseEvent.CLICK , onMouseClick );
+	}
+
+	override public function setCoreBrush ():void {
+		super.setCoreBrush ();
+
+		brush = ThemeBase.CheckBox;
+		_title.brush = ThemeBase.Text_CheckBox;
+	}
+
+	protected function onTitleChanged ( e:Event ):void {
+		_title.move ( 20 , (20 - _title.height) * 0.5 );
+	}
+
+	override protected function draw ( e:Event ):void {
+		if ( _changed ) {
+			_changed = false;
+		} else {
+			return;
 		}
 
-        override public function setCoreBrush ():void {
-            super.setCoreBrush ();
+		var bmpBrush:BMPBrush;
+		var colorBrush:ColorBrush;
 
-            brush = ThemeBase.CheckBox;
-            _title.brush = ThemeBase.Text_CheckBox;
-        }
+		_bg.graphics.clear ();
 
-        protected function onTitleChanged(e:Event):void {
-			_title.move(20, (20 - _title.height) * 0.5);
-		}
-
-		override protected function draw(e:Event):void {
-			if (_changed) {
-				_changed = false;
+		if ( brush is ColorBrush ) {
+			colorBrush = brush as ColorBrush;
+			_bg.graphics.beginFill ( colorBrush.colors[0] );
+			_bg.graphics.drawRect ( 5 , 5 , 10 , 10 );
+			_bg.graphics.endFill ();
+			if ( _value ) {
+				_bg.graphics.beginFill ( colorBrush.colors[1] );
+				_bg.graphics.drawRect ( 7 , 7 , 6 , 6 );
+				_bg.graphics.endFill ();
+			}
+		} else if ( brush is BMPBrush ) {
+			bmpBrush = brush as BMPBrush;
+			if ( _value ) {
+				_bg.graphics.beginBitmapFill ( bmpBrush.bitmap[1].bitmapData );
+				_bg.graphics.drawRect ( 0 , 0 , 20 , 20 );
+				_bg.graphics.endFill ();
 			} else {
-				return;
-			}
-
-			var bmpBrush:BMPBrush;
-			var colorBrush:ColorBrush;
-
-			_bg.graphics.clear();
-
-			if (brush is ColorBrush) {
-				colorBrush = brush as ColorBrush;
-				_bg.graphics.beginFill(colorBrush.colors[0]);
-				_bg.graphics.drawRect(5, 5, 10, 10);
-				_bg.graphics.endFill();
-				if (_value) {
-					_bg.graphics.beginFill(colorBrush.colors[1]);
-					_bg.graphics.drawRect(7, 7, 6, 6);
-					_bg.graphics.endFill();
-				}
-			} else if (brush is BMPBrush) {
-				bmpBrush = brush as BMPBrush;
-				if (_value) {
-					_bg.graphics.beginBitmapFill(bmpBrush.bitmap[1].bitmapData);
-					_bg.graphics.drawRect(0, 0, 20, 20);
-					_bg.graphics.endFill();
-				} else {
-					_bg.graphics.beginBitmapFill(bmpBrush.bitmap[0].bitmapData);
-					_bg.graphics.drawRect(0, 0, 20, 20);
-					_bg.graphics.endFill();
-				}
-			}
-
-			_title.move(20, (20 - _title.height) * 0.5);
-		}
-
-		private function onMouseClick(e:MouseEvent):void {
-			value = !_value;
-		}
-
-		///////////////////////////////////
-		// getter/setters
-		///////////////////////////////////
-
-		public function get title():Label {
-			return _title;
-		}
-
-		public function set value(b:Boolean):void {
-			if (_value != b) {
-				_value = b;
-				_changed = true;
-				invalidate();
-				dispatchEvent(new Event("change"));
+				_bg.graphics.beginBitmapFill ( bmpBrush.bitmap[0].bitmapData );
+				_bg.graphics.drawRect ( 0 , 0 , 20 , 20 );
+				_bg.graphics.endFill ();
 			}
 		}
 
-		public function get value():Boolean {
-			return _value;
-		}
+		_title.move ( 20 , (20 - _title.height) * 0.5 );
+	}
 
-		///////////////////////////////////
-		// toString
-		///////////////////////////////////
+	private function onMouseClick ( e:MouseEvent ):void {
+		value = ! _value;
+	}
 
-		override public function toString():String {
-			return "[bloom.CheckBox]";
+	///////////////////////////////////
+	// getter/setters
+	///////////////////////////////////
+
+	public function get title ():Label {
+		return _title;
+	}
+
+	public function set value ( b:Boolean ):void {
+		if ( _value != b ) {
+			_value = b;
+			_changed = true;
+			invalidate ();
+			dispatchEvent ( new Event ( "change" ) );
 		}
 	}
+
+	public function get value ():Boolean {
+		return _value;
+	}
+
+	///////////////////////////////////
+	// toString
+	///////////////////////////////////
+
+	override public function toString ():String {
+		return "[bloom.CheckBox]";
+	}
+}
 
 }

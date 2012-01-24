@@ -19,63 +19,63 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package bloom
-{
-	import flash.display.DisplayObjectContainer;
-	import flash.events.Event;
-	import flash.events.MouseEvent;
+package bloom {
 
-	import bloom.core.ButtonBase;
-	import bloom.events.BrushEvent;
-	import bloom.themes.ThemeBase;
+import bloom.core.ButtonBase;
+import bloom.events.BrushEvent;
+import bloom.themes.ThemeBase;
 
-	/**
-	 * Button
-	 *
-	 * @date 2012/1/10 20:11
-	 * @author sindney
-	 */
-	public class Button extends ButtonBase {
+import flash.display.DisplayObjectContainer;
+import flash.events.Event;
+import flash.events.MouseEvent;
 
-		private var _title:Label;
+/**
+ * Button
+ *
+ * @date 2012/1/10 20:11
+ * @author sindney
+ */
+public class Button extends ButtonBase {
 
-		public function Button(p:DisplayObjectContainer = null, text:String = "", click:Function = null) {
-			super(p);
+	private var _title:Label;
 
-			_title = new Label(this, text);
-			_title.brush = ThemeBase.Text_Button;
-			_title.addEventListener(Event.CHANGE, onTitleChanged);
-			_title.addEventListener(BrushEvent.REDRAW, onTitleChanged);
+	public function Button ( p:DisplayObjectContainer = null , text:String = "" , click:Function = null ) {
+		super ( p );
 
-			if (click != null) addEventListener(MouseEvent.CLICK, click);
-			size(100, 20);
-		}
+		_title = new Label ( this , text );
+		_title.brush = ThemeBase.Text_Button;
+		_title.addEventListener ( Event.CHANGE , onTitleChanged );
+		_title.addEventListener ( BrushEvent.REDRAW , onTitleChanged );
 
-		protected function onTitleChanged(e:Event):void {
-			_title.move((_width - _title.width) * 0.5, (_height - _title.height) * 0.5);
-		}
-
-		override protected function draw(e:Event):void {
-			super.draw(null);
-			_title.move((_width - _title.width) * 0.5, (_height - _title.height) * 0.5);
-		}
-
-		///////////////////////////////////
-		// getter/setters
-		///////////////////////////////////
-
-		public function get title():Label {
-			return _title;
-		}
-
-		///////////////////////////////////
-		// toString
-		///////////////////////////////////
-
-		override public function toString():String {
-			return "[bloom.Button]";
-		}
-
+		if ( click != null ) addEventListener ( MouseEvent.CLICK , click );
+		size ( 100 , 20 );
 	}
+
+	protected function onTitleChanged ( e:Event ):void {
+		_title.move ( (_width - _title.width) * 0.5 , (_height - _title.height) * 0.5 );
+	}
+
+	override protected function draw ( e:Event ):void {
+		super.draw ( null );
+		_title.move ( (_width - _title.width) * 0.5 , (_height - _title.height) * 0.5 );
+	}
+
+	///////////////////////////////////
+	// getter/setters
+	///////////////////////////////////
+
+	public function get title ():Label {
+		return _title;
+	}
+
+	///////////////////////////////////
+	// toString
+	///////////////////////////////////
+
+	override public function toString ():String {
+		return "[bloom.Button]";
+	}
+
+}
 
 }

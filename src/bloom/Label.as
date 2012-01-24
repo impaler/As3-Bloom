@@ -19,45 +19,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package bloom
-{
-	import flash.display.DisplayObjectContainer;
-	import flash.events.Event;
-	import flash.text.TextFormat;
+package bloom {
 
-	import bloom.core.TextBase;
-	import bloom.themes.ThemeBase;
+import bloom.core.TextBase;
+import bloom.themes.ThemeBase;
 
-	/**
-	 * Label
-	 *
-	 * @date 2012/1/10 20:11
-	 * @author sindney
-	 */
-	public class Label extends TextBase {
+import flash.display.DisplayObjectContainer;
 
-		public function Label(p:DisplayObjectContainer = null, text:String = "") {
-			super(p);
+/**
+ * Label
+ *
+ * @date 2012/1/10 20:11
+ * @author sindney
+ */
+public class Label extends TextBase {
 
-			selectable = mouseEnabled = tabEnabled = false;
-			type = "dynamic";
-			autoSize = "left";
+	public function Label ( p:DisplayObjectContainer = null , text:String = "" ) {
+		super ( p );
 
-			brush = ThemeBase.Text_Label;
+		selectable = mouseEnabled = tabEnabled = false;
+		type = "dynamic";
+		autoSize = "left";
 
-			this.text = text;
-		}
+		brush = ThemeBase.Text_Label;
 
-
-
-		///////////////////////////////////
-		// toString
-		///////////////////////////////////
-
-		override public function toString():String {
-			return "[bloom.Label]";
-		}
-
+		this.text = text;
 	}
+
+	///////////////////////////////////
+	// toString
+	///////////////////////////////////
+
+	override public function toString ():String {
+		return "[bloom.Label]";
+	}
+
+}
 
 }

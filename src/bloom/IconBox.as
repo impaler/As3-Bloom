@@ -19,69 +19,70 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package bloom
-{
-	import flash.display.BitmapData;
+package bloom {
 
-	import bloom.core.IComponent;
-	import bloom.core.Margin;
-	import bloom.core.ScaleBitmap;
-	import bloom.themes.ThemeBase;
+import bloom.core.IComponent;
+import bloom.core.Margin;
+import bloom.core.ScaleBitmap;
+import bloom.themes.ThemeBase;
 
-	/**
-	 * IconBox
-	 * <p>You can add iconBox to Window's title. And use it's margin method.</p>
-	 *
-	 * @date 2012/1/16 10:47
-	 * @author sindney
-	 */
-	public class IconBox extends ScaleBitmap implements IComponent {
+import flash.display.BitmapData;
 
-		private var _enabled:Boolean = true;
-		protected var _margin:Margin;
+/**
+ * IconBox
+ * <p>You can add iconBox to Window's title. And use it's margin method.</p>
+ *
+ * @date 2012/1/16 10:47
+ * @author sindney
+ */
+public class IconBox extends ScaleBitmap implements IComponent {
 
-		public function IconBox(bitmapData:BitmapData = null, pixelSnapping:String = "auto", smoothing:Boolean = false) {
-			super(bitmapData, pixelSnapping, smoothing);
-			_margin = new Margin();
-		}
+	private var _enabled:Boolean = true;
+	protected var _margin:Margin;
 
-		public function move(_x:Number, _y:Number):void {
-			x = _x;
-			y = _y;
-		}
-
-		public function size(w:Number, h:Number):void {
-			width = w;
-			height = h;
-		}
-
-		///////////////////////////////////
-		// getter/setters
-		///////////////////////////////////
-
-		public function set enabled(value:Boolean):void {
-			if (_enabled != value) {
-				_enabled = value;
-				alpha = _enabled ? 1 : ThemeBase.ALPHA;
-			}
-		}
-
-		public function get enabled():Boolean {
-			return _enabled;
-		}
-
-		public function get margin():Margin {
-			return _margin;
-		}
-
-		///////////////////////////////////
-		// toString
-		///////////////////////////////////
-
-		override public function toString():String {
-			return "[bloom.IconBox]";
-		}
-
+	public function IconBox ( bitmapData:BitmapData = null , pixelSnapping:String = "auto" ,
+	                          smoothing:Boolean = false ) {
+		super ( bitmapData , pixelSnapping , smoothing );
+		_margin = new Margin ();
 	}
+
+	public function move ( _x:Number , _y:Number ):void {
+		x = _x;
+		y = _y;
+	}
+
+	public function size ( w:Number , h:Number ):void {
+		width = w;
+		height = h;
+	}
+
+	///////////////////////////////////
+	// getter/setters
+	///////////////////////////////////
+
+	public function set enabled ( value:Boolean ):void {
+		if ( _enabled != value ) {
+			_enabled = value;
+			alpha = _enabled ? 1 : ThemeBase.ALPHA;
+		}
+	}
+
+	public function get enabled ():Boolean {
+		return _enabled;
+	}
+
+	public function get margin ():Margin {
+		return _margin;
+	}
+
+	///////////////////////////////////
+	// toString
+	///////////////////////////////////
+
+	override public function toString ():String {
+		return "[bloom.IconBox]";
+	}
+
+}
 
 }

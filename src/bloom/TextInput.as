@@ -19,123 +19,123 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package bloom
-{
-	import flash.display.DisplayObjectContainer;
-	import flash.display.Shape;
-	import flash.events.Event;
-	import flash.events.FocusEvent;
+package bloom {
 
-	import bloom.brushes.BMPBrush;
-	import bloom.brushes.ColorBrush;
-	import bloom.core.Component;
-	import bloom.core.ScaleBitmap;
-	import bloom.core.TextBase;
-	import bloom.themes.ThemeBase;
+import bloom.brushes.BMPBrush;
+import bloom.brushes.ColorBrush;
+import bloom.core.Component;
+import bloom.core.ScaleBitmap;
+import bloom.core.TextBase;
+import bloom.themes.ThemeBase;
 
-	/**
-	 * TextInput
-	 *
-	 * @date 2012/1/10 20:12
-	 * @author sindney
-	 */
-	public class TextInput extends Component {
+import flash.display.DisplayObjectContainer;
+import flash.display.Shape;
+import flash.events.Event;
+import flash.events.FocusEvent;
 
-		protected var _bg:Shape;
-		protected var _textBase:TextBase;
+/**
+ * TextInput
+ *
+ * @date 2012/1/10 20:12
+ * @author sindney
+ */
+public class TextInput extends Component {
 
-		public function TextInput(p:DisplayObjectContainer = null, text:String = "") {
-			_bg = new Shape();
-			addChild(_bg);
+	protected var _bg:Shape;
+	protected var _textBase:TextBase;
 
-			_textBase = new TextBase(this);
-			_textBase.selectable = true;
-			_textBase.multiline = false;
-			_textBase.type = "input";
-			_textBase.text = text;
+	public function TextInput ( p:DisplayObjectContainer = null , text:String = "" ) {
+		_bg = new Shape ();
+		addChild ( _bg );
 
-            super(p);
+		_textBase = new TextBase ( this );
+		_textBase.selectable = true;
+		_textBase.multiline = false;
+		_textBase.type = "input";
+		_textBase.text = text;
 
-			size(100, 20);
+		super ( p );
 
-			_textBase.addEventListener(FocusEvent.FOCUS_IN, onFocusIn);
-			_textBase.addEventListener(FocusEvent.FOCUS_OUT, onFocusOut);
-		}
+		size ( 100 , 20 );
 
-        override public function setCoreBrush ():void {
-            super.setCoreBrush ();
-
-            brush = ThemeBase.TextInput;
-            _textBase.brush = ThemeBase.Text_TextInput;
-        }
-
-        override protected function draw(e:Event):void {
-			if (_changed) {
-				_changed = false;
-			} else {
-				return;
-			}
-
-			var bmpBrush:BMPBrush;
-			var colorBrush:ColorBrush;
-			var scale:ScaleBitmap;
-
-			_bg.graphics.clear();
-
-			if (brush is ColorBrush) {
-				colorBrush = brush as ColorBrush;
-				_bg.graphics.beginFill(colorBrush.colors[0]);
-			} else if (brush is BMPBrush) {
-				bmpBrush = brush as BMPBrush;
-				scale = bmpBrush.bitmap[0];
-				scale.setSize(_width, _height);
-				_bg.graphics.beginBitmapFill(scale.bitmapData);
-			}
-
-			_bg.graphics.drawRect(0, 0, _width, _height);
-			_bg.graphics.endFill();
-
-			_textBase.size(_width, _height);
-		}
-
-		///////////////////////////////////
-		// protected methods
-		///////////////////////////////////
-
-		protected function onFocusIn(e:FocusEvent):void {
-			graphics.clear();
-			graphics.lineStyle(2, ThemeBase.FOCUS);
-			graphics.drawRect( -1, -1, _width + 2, _height + 2);
-			graphics.endFill();
-		}
-
-		protected function onFocusOut(e:FocusEvent):void {
-			graphics.clear();
-		}
-
-		///////////////////////////////////
-		// getter/setters
-		///////////////////////////////////
-
-		public function set text(value:String):void {
-			_textBase.text = value;
-		}
-
-		public function get text():String {
-			return _textBase.text;
-		}
-
-		public function get textBase():TextBase {
-			return _textBase;
-		}
-
-		///////////////////////////////////
-		// toString
-		///////////////////////////////////
-
-		override public function toString():String {
-			return "[bloom.TextInput]";
-		}
+		_textBase.addEventListener ( FocusEvent.FOCUS_IN , onFocusIn );
+		_textBase.addEventListener ( FocusEvent.FOCUS_OUT , onFocusOut );
 	}
+
+	override public function setCoreBrush ():void {
+		super.setCoreBrush ();
+
+		brush = ThemeBase.TextInput;
+		_textBase.brush = ThemeBase.Text_TextInput;
+	}
+
+	override protected function draw ( e:Event ):void {
+		if ( _changed ) {
+			_changed = false;
+		} else {
+			return;
+		}
+
+		var bmpBrush:BMPBrush;
+		var colorBrush:ColorBrush;
+		var scale:ScaleBitmap;
+
+		_bg.graphics.clear ();
+
+		if ( brush is ColorBrush ) {
+			colorBrush = brush as ColorBrush;
+			_bg.graphics.beginFill ( colorBrush.colors[0] );
+		} else if ( brush is BMPBrush ) {
+			bmpBrush = brush as BMPBrush;
+			scale = bmpBrush.bitmap[0];
+			scale.setSize ( _width , _height );
+			_bg.graphics.beginBitmapFill ( scale.bitmapData );
+		}
+
+		_bg.graphics.drawRect ( 0 , 0 , _width , _height );
+		_bg.graphics.endFill ();
+
+		_textBase.size ( _width , _height );
+	}
+
+	///////////////////////////////////
+	// protected methods
+	///////////////////////////////////
+
+	protected function onFocusIn ( e:FocusEvent ):void {
+		graphics.clear ();
+		graphics.lineStyle ( 2 , ThemeBase.FOCUS );
+		graphics.drawRect ( - 1 , - 1 , _width + 2 , _height + 2 );
+		graphics.endFill ();
+	}
+
+	protected function onFocusOut ( e:FocusEvent ):void {
+		graphics.clear ();
+	}
+
+	///////////////////////////////////
+	// getter/setters
+	///////////////////////////////////
+
+	public function set text ( value:String ):void {
+		_textBase.text = value;
+	}
+
+	public function get text ():String {
+		return _textBase.text;
+	}
+
+	public function get textBase ():TextBase {
+		return _textBase;
+	}
+
+	///////////////////////////////////
+	// toString
+	///////////////////////////////////
+
+	override public function toString ():String {
+		return "[bloom.TextInput]";
+	}
+}
 
 }

@@ -19,95 +19,95 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package bloom.containers
-{
-	import flash.display.DisplayObject;
-	import flash.display.DisplayObjectContainer;
-	import flash.events.Event;
+package bloom.containers {
 
-	import bloom.brushes.BMPBrush;
-	import bloom.brushes.ColorBrush;
-	import bloom.core.Component;
-	import bloom.core.IComponent;
-	import bloom.core.ScaleBitmap;
-	import bloom.themes.ThemeBase;
+import bloom.brushes.BMPBrush;
+import bloom.brushes.ColorBrush;
+import bloom.core.Component;
+import bloom.core.IComponent;
+import bloom.core.ScaleBitmap;
+import bloom.themes.ThemeBase;
+
+import flash.display.DisplayObject;
+import flash.display.DisplayObjectContainer;
+import flash.events.Event;
+
+/**
+ * Container
+ *
+ * @date 2012/1/14 10:48
+ * @author sindney
+ */
+public class Container extends Component {
+
+	public function Container ( p:DisplayObjectContainer = null ) {
+		super ( p );
+		brush = ThemeBase.Container;
+		size ( 100 , 100 );
+	}
 
 	/**
-	 * Container
-	 *
-	 * @date 2012/1/14 10:48
-	 * @author sindney
+	 * Update child's layout.
 	 */
-	public class Container extends Component {
-
-		public function Container(p:DisplayObjectContainer = null) {
-			super(p);
-			brush = ThemeBase.Container;
-			size(100, 100);
-		}
-
-		/**
-		 * Update child's layout.
-		 */
-		public function update():void {
-
-		}
-
-		override protected function draw(e:Event):void {
-			if (_changed) {
-				_changed = false;
-			} else {
-				return;
-			}
-
-			var bmpBrush:BMPBrush;
-			var colorBrush:ColorBrush;
-			var scale:ScaleBitmap;
-
-			graphics.clear();
-
-			if (brush is ColorBrush) {
-				colorBrush = brush as ColorBrush;
-				graphics.beginFill(colorBrush.colors[0]);
-			} else if (brush is BMPBrush) {
-				bmpBrush = brush as BMPBrush;
-				scale = bmpBrush.bitmap[0];
-				scale.setSize(_width, _height);
-				graphics.beginBitmapFill(scale.bitmapData);
-			}
-
-			graphics.drawRect(0, 0, _width, _height);
-			graphics.endFill();
-
-			update();
-		}
-
-		///////////////////////////////////
-		// getter/setters
-		///////////////////////////////////
-
-		override public function set enabled(value:Boolean):void {
-			if (_enabled != value) {
-				_enabled = tabChildren = mouseEnabled = mouseChildren = value;
-
-				// make changes in it's children.
-				var i:int;
-				var child:DisplayObject;
-				for (i = 0; i < numChildren; i++) {
-					child = getChildAt(i);
-					if (child is IComponent) (child as IComponent).enabled = value;
-				}
-			}
-		}
-
-		///////////////////////////////////
-		// toString
-		///////////////////////////////////
-
-		override public function toString():String {
-			return "[bloom.containers.Container]";
-		}
+	public function update ():void {
 
 	}
+
+	override protected function draw ( e:Event ):void {
+		if ( _changed ) {
+			_changed = false;
+		} else {
+			return;
+		}
+
+		var bmpBrush:BMPBrush;
+		var colorBrush:ColorBrush;
+		var scale:ScaleBitmap;
+
+		graphics.clear ();
+
+		if ( brush is ColorBrush ) {
+			colorBrush = brush as ColorBrush;
+			graphics.beginFill ( colorBrush.colors[0] );
+		} else if ( brush is BMPBrush ) {
+			bmpBrush = brush as BMPBrush;
+			scale = bmpBrush.bitmap[0];
+			scale.setSize ( _width , _height );
+			graphics.beginBitmapFill ( scale.bitmapData );
+		}
+
+		graphics.drawRect ( 0 , 0 , _width , _height );
+		graphics.endFill ();
+
+		update ();
+	}
+
+	///////////////////////////////////
+	// getter/setters
+	///////////////////////////////////
+
+	override public function set enabled ( value:Boolean ):void {
+		if ( _enabled != value ) {
+			_enabled = tabChildren = mouseEnabled = mouseChildren = value;
+
+			// make changes in it's children.
+			var i:int;
+			var child:DisplayObject;
+			for ( i = 0 ; i < numChildren ; i ++ ) {
+				child = getChildAt ( i );
+				if ( child is IComponent ) (child as IComponent).enabled = value;
+			}
+		}
+	}
+
+	///////////////////////////////////
+	// toString
+	///////////////////////////////////
+
+	override public function toString ():String {
+		return "[bloom.containers.Container]";
+	}
+
+}
 
 }

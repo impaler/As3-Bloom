@@ -19,117 +19,116 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package bloom
-{
-	import flash.display.DisplayObjectContainer;
-	import flash.display.Shape;
-	import flash.display.Sprite;
-	import flash.events.Event;
+package bloom {
 
-	import bloom.brushes.BMPBrush;
-	import bloom.brushes.ColorBrush;
-	import bloom.core.Component;
-	import bloom.core.ScaleBitmap;
-	import bloom.themes.ThemeBase;
+import bloom.brushes.BMPBrush;
+import bloom.brushes.ColorBrush;
+import bloom.core.Component;
+import bloom.core.ScaleBitmap;
+import bloom.themes.ThemeBase;
 
-	[Event(name = "complete", type = "flash.events.Event")]
+import flash.display.DisplayObjectContainer;
+import flash.display.Shape;
+import flash.display.Sprite;
+import flash.events.Event;
 
-	/**
-	 * ProgressBar
-	 *
-	 * @date 2012/1/17 23:52
-	 * @author sindney
-	 */
-	public class ProgressBar extends Component {
+[Event(name="complete" , type="flash.events.Event")]
 
-		private var _bg:Sprite;
-		private var _progress:Shape;
+/**
+ * ProgressBar
+ *
+ * @date 2012/1/17 23:52
+ * @author sindney
+ */ public class ProgressBar extends Component {
 
-		private var _value:int;
+	private var _bg:Sprite;
+	private var _progress:Shape;
 
-		public function ProgressBar(p:DisplayObjectContainer = null, value:int = 0) {
-            _value = value;
+	private var _value:int;
 
-            _bg = new Sprite();
-            addChild(_bg);
+	public function ProgressBar ( p:DisplayObjectContainer = null , value:int = 0 ) {
+		_value = value;
 
-            _progress = new Shape();
-			addChild(_progress);
+		_bg = new Sprite ();
+		addChild ( _bg );
 
-            super(p);
+		_progress = new Shape ();
+		addChild ( _progress );
 
-			size(100, 20);
+		super ( p );
+
+		size ( 100 , 20 );
+	}
+
+	override public function setCoreBrush ():void {
+		super.setCoreBrush ();
+
+		brush = ThemeBase.ProgressBar;
+	}
+
+	override protected function draw ( e:Event ):void {
+		if ( _changed ) {
+			_changed = false;
+		} else {
+			return;
 		}
 
-        override public function setCoreBrush ():void {
-            super.setCoreBrush ();
+		_value = _value > 100 ? 100 : _value;
+		_value = _value < 0 ? 0 : _value;
 
-            brush = ThemeBase.ProgressBar;
-        }
+		var bmpBrush:BMPBrush;
+		var colorBrush:ColorBrush;
+		var scale:ScaleBitmap;
 
-        override protected function draw(e:Event):void {
-			if (_changed) {
-				_changed = false;
-			} else {
-				return;
-			}
+		_bg.graphics.clear ();
+		_progress.graphics.clear ();
 
-			_value = _value > 100 ? 100 : _value;
-			_value = _value < 0 ? 0 : _value;
+		if ( brush is ColorBrush ) {
+			colorBrush = brush as ColorBrush;
+			_bg.graphics.beginFill ( colorBrush.colors[0] );
+			_progress.graphics.beginFill ( colorBrush.colors[1] );
+		} else if ( brush is BMPBrush ) {
+			bmpBrush = brush as BMPBrush;
+			scale = bmpBrush.bitmap[0];
+			scale.setSize ( _width , _height );
+			_bg.graphics.beginBitmapFill ( scale.bitmapData );
 
-			var bmpBrush:BMPBrush;
-			var colorBrush:ColorBrush;
-			var scale:ScaleBitmap;
-
-			_bg.graphics.clear();
-			_progress.graphics.clear();
-
-			if (brush is ColorBrush) {
-				colorBrush = brush as ColorBrush;
-				_bg.graphics.beginFill(colorBrush.colors[0]);
-				_progress.graphics.beginFill(colorBrush.colors[1]);
-			} else if (brush is BMPBrush) {
-				bmpBrush = brush as BMPBrush;
-				scale = bmpBrush.bitmap[0];
-				scale.setSize(_width, _height);
-				_bg.graphics.beginBitmapFill(scale.bitmapData);
-
-				scale = bmpBrush.bitmap[1];
-				scale.setSize((_width * _value) * 0.01, _height);
-				_progress.graphics.beginBitmapFill(scale.bitmapData);
-			}
-
-			_bg.graphics.drawRect(0, 0, _width, _height);
-			_bg.graphics.endFill();
-
-			_progress.graphics.drawRect(0, 0, (_width * _value) * 0.01, _height);
-			_progress.graphics.endFill();
+			scale = bmpBrush.bitmap[1];
+			scale.setSize ( (_width * _value) * 0.01 , _height );
+			_progress.graphics.beginBitmapFill ( scale.bitmapData );
 		}
 
-		///////////////////////////////////
-		// getter/setters
-		///////////////////////////////////
+		_bg.graphics.drawRect ( 0 , 0 , _width , _height );
+		_bg.graphics.endFill ();
 
-		public function set value(value:int):void {
-			if (_value != value) {
-				_value = value;
-				_changed = true;
-				invalidate();
-				if (_value >= 100) dispatchEvent(new Event("complete"));
-			}
-		}
+		_progress.graphics.drawRect ( 0 , 0 , (_width * _value) * 0.01 , _height );
+		_progress.graphics.endFill ();
+	}
 
-		public function get value():int {
-			return _value;
-		}
+	///////////////////////////////////
+	// getter/setters
+	///////////////////////////////////
 
-		///////////////////////////////////
-		// toString
-		///////////////////////////////////
-
-		override public function toString():String {
-			return "[bloom.ProgressBar]";
+	public function set value ( value:int ):void {
+		if ( _value != value ) {
+			_value = value;
+			_changed = true;
+			invalidate ();
+			if ( _value >= 100 ) dispatchEvent ( new Event ( "complete" ) );
 		}
 	}
+
+	public function get value ():int {
+		return _value;
+	}
+
+	///////////////////////////////////
+	// toString
+	///////////////////////////////////
+
+	override public function toString ():String {
+		return "[bloom.ProgressBar]";
+	}
+}
 
 }

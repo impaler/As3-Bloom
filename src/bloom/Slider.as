@@ -19,269 +19,269 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package bloom
-{
-	import flash.display.DisplayObjectContainer;
-	import flash.display.DisplayObject;
-	import flash.display.Sprite;
-	import flash.events.Event;
-	import flash.events.MouseEvent;
-	import flash.geom.Rectangle;
+package bloom {
 
-	import bloom.brushes.BMPBrush;
-	import bloom.brushes.ColorBrush;
-	import bloom.core.ButtonBase;
-	import bloom.core.Component;
-	import bloom.core.ScaleBitmap;
-	import bloom.themes.ThemeBase;
+import bloom.brushes.BMPBrush;
+import bloom.brushes.ColorBrush;
+import bloom.core.ButtonBase;
+import bloom.core.Component;
+import bloom.core.ScaleBitmap;
+import bloom.themes.ThemeBase;
 
-	/**
-	 * Dispatched when the value has changed.
-	 * @eventType flash.events.Event
-	 */
-	[Event(name = "change", type = "flash.events.Event")]
+import flash.display.DisplayObject;
+import flash.display.DisplayObjectContainer;
+import flash.display.Sprite;
+import flash.events.Event;
+import flash.events.MouseEvent;
+import flash.geom.Rectangle;
 
-	/**
-	 * Dispatched when scrolling.
-	 * @eventType flash.events.Event
-	 */
-	[Event(name = "scroll", type = "flash.events.Event")]
+/**
+ * Dispatched when the value has changed.
+ * @eventType flash.events.Event
+ */
+[Event(name="change" , type="flash.events.Event")]
 
-	/**
-	 * Slider
-	 *
-	 * @date 2012/1/10 20:12
-	 * @author sindney
-	 */
-	public class Slider extends Component {
+/**
+ * Dispatched when scrolling.
+ * @eventType flash.events.Event
+ */
+[Event(name="scroll" , type="flash.events.Event")]
 
-		public static const VERTICALLY:int = 0;
-		public static const HORIZONTALLY:int = 1;
+/**
+ * Slider
+ *
+ * @date 2012/1/10 20:12
+ * @author sindney
+ */ public class Slider extends Component {
 
-		public var step:Number = 10;
+	public static const VERTICALLY:int = 0;
+	public static const HORIZONTALLY:int = 1;
 
-		protected var _bg:Sprite;
-		protected var _bt:ButtonBase;
+	public var step:Number = 10;
 
-		protected var _mouseWheelTarget:DisplayObject;
+	protected var _bg:Sprite;
+	protected var _bt:ButtonBase;
 
-		protected var _value:Number;
-		protected var _max:Number;
-		protected var _min:Number;
-		protected var _rect:Rectangle;
-		protected var _type:int;
-        protected var _wheelSensitivity:Number;
+	protected var _mouseWheelTarget:DisplayObject;
 
-		public function Slider(p:DisplayObjectContainer = null, type:int = 0, value:Number = 0, max:Number = 100, min:Number = 0) {
-            _type = type;
-            _max = max;
-            _min = min;
-            _value = value;
+	protected var _value:Number;
+	protected var _max:Number;
+	protected var _min:Number;
+	protected var _rect:Rectangle;
+	protected var _type:int;
+	protected var _wheelSensitivity:Number;
 
-            _bg = new Sprite();
-            _bg.tabEnabled = tabEnabled = false;
-            addChild(_bg);
-			_bt = new ButtonBase(this);
+	public function Slider ( p:DisplayObjectContainer = null , type:int = 0 , value:Number = 0 , max:Number = 100 ,
+	                         min:Number = 0 ) {
+		_type = type;
+		_max = max;
+		_min = min;
+		_value = value;
 
-			_rect = new Rectangle(0, 0, 0, 0);
-			_type == VERTICALLY ? size(20, 100) : size(100, 20);
+		_bg = new Sprite ();
+		_bg.tabEnabled = tabEnabled = false;
+		addChild ( _bg );
+		_bt = new ButtonBase ( this );
 
-            super(p);
+		_rect = new Rectangle ( 0 , 0 , 0 , 0 );
+		_type == VERTICALLY ? size ( 20 , 100 ) : size ( 100 , 20 );
 
-            _bt.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
-            _bg.addEventListener(MouseEvent.MOUSE_DOWN, clickOnBg);
-            addEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
+		super ( p );
 
+		_bt.addEventListener ( MouseEvent.MOUSE_DOWN , onMouseDown );
+		_bg.addEventListener ( MouseEvent.MOUSE_DOWN , clickOnBg );
+		addEventListener ( MouseEvent.MOUSE_WHEEL , onMouseWheel );
+
+	}
+
+	override public function setCoreBrush ():void {
+		super.setCoreBrush ();
+
+		_bt.brush = ThemeBase.SliderButton;
+		brush = ThemeBase.Slider;
+	}
+
+	override protected function draw ( e:Event ):void {
+		if ( _changed ) {
+			_changed = false;
+		} else {
+			return;
 		}
 
-        override public function setCoreBrush ():void {
-            super.setCoreBrush ();
+		var bmpBrush:BMPBrush;
+		var colorBrush:ColorBrush;
+		var scale:ScaleBitmap;
 
-            _bt.brush = ThemeBase.SliderButton;
-         	brush = ThemeBase.Slider;
-        }
+		_bg.graphics.clear ();
+		_bg.buttonMode = true;
 
-        override protected function draw(e:Event):void {
-			if (_changed) {
-				_changed = false;
-			} else {
-				return;
-			}
+		_wheelSensitivity = .4;
 
-			var bmpBrush:BMPBrush;
-			var colorBrush:ColorBrush;
-			var scale:ScaleBitmap;
-
-			_bg.graphics.clear();
-			_bg.buttonMode = true;
-
-            _wheelSensitivity = .4;
-
-			if (brush is ColorBrush) {
-				colorBrush = brush as ColorBrush;
-				_bg.graphics.beginFill(colorBrush.colors[0]);
-			} else if (brush is BMPBrush) {
-				bmpBrush = brush as BMPBrush;
-				scale = bmpBrush.bitmap[_type == VERTICALLY ? 1 : 0];
-				scale.setSize(_width, _height);
-				_bg.graphics.beginBitmapFill(scale.bitmapData);
-			}
-
-			_bg.graphics.drawRect(0, 0, _width, _height);
-			_bg.graphics.endFill();
-
-			refresh();
+		if ( brush is ColorBrush ) {
+			colorBrush = brush as ColorBrush;
+			_bg.graphics.beginFill ( colorBrush.colors[0] );
+		} else if ( brush is BMPBrush ) {
+			bmpBrush = brush as BMPBrush;
+			scale = bmpBrush.bitmap[_type == VERTICALLY ? 1 : 0];
+			scale.setSize ( _width , _height );
+			_bg.graphics.beginBitmapFill ( scale.bitmapData );
 		}
 
-		protected function refresh():void {
-			if (_type == HORIZONTALLY) {
-				_bt.size(_height, _height);
-				_rect.width = _width - _height;
-				_bt.move((_value - _min) / (_max - _min) * _rect.width, 0);
-			} else {
-				_bt.size(_width, _width);
-				_rect.height = _height - _width;
-				_bt.move(0, _rect.height - (_value - _min) / (_max - _min) * _rect.height);
-			}
-		}
+		_bg.graphics.drawRect ( 0 , 0 , _width , _height );
+		_bg.graphics.endFill ();
 
-		protected function fixValue():void {
-			if (_max > _min) {
-				if (_value > _max)_value = _max;
-				if (_value < _min)_value = _min;
-			} else {
-				_value = _min = _max;
-			}
-		}
+		refresh ();
+	}
 
-		///////////////////////////////////
-		// Mouse Handle
-		///////////////////////////////////
-
-		protected function onMouseDown(e:MouseEvent):void {
-			_bt.startDrag(false, _rect);
-			stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
-			stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
-		}
-
-		protected function onMouseMove(e:MouseEvent):void {
-			if (_type == HORIZONTALLY) {
-				_value = _bt.x / (_width - _height) * (_max - _min) + _min;
-			} else {
-				_value = (_height - _width - _bt.y) / (_height - _width) * (_max - _min) + _min;
-			}
-            e.updateAfterEvent();
-
-			fixValue();
-			dispatchEvent(new Event("scroll"));
-		}
-
-		protected function onMouseUp(e:MouseEvent):void {
-			_bt.stopDrag();
-			dispatchEvent(new Event("change"));
-			stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
-			stage.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
-		}
-
-		protected function clickOnBg(e:MouseEvent):void {
-			if (_type == HORIZONTALLY) {
-				value = ((mouseX - (_height >> 1)) / (_width - _height)) * (_max - _min) + _min;
-			} else {
-				value = (_height - (_width >> 1) - mouseY) / (_height - _width) * (_max - _min) + _min;
-			}
-
-            _bt.startDrag(false, _rect);
-            stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
-            stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
-            _bt.stateAnotherMouseDown = ButtonBase.DOWN;
-
-            e.updateAfterEvent();
-
-		}
-
-        protected function onMouseWheel(e:MouseEvent):void {
-            value += (e.delta > 0 ? _wheelSensitivity : - _wheelSensitivity) * step;
-            e.updateAfterEvent();
-		}
-
-		///////////////////////////////////
-		// getter/setters
-		///////////////////////////////////
-
-		public function set mouseWheelTarget(value:DisplayObject):void {
-			if (_mouseWheelTarget != value) {
-				if (_mouseWheelTarget) _mouseWheelTarget.removeEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
-				_mouseWheelTarget = value;
-				if (_mouseWheelTarget) _mouseWheelTarget.addEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
-			}
-		}
-
-		public function get mouseWheelTarget():DisplayObject {
-			return _mouseWheelTarget;
-		}
-
-		public function get button():ButtonBase {
-			return _bt;
-		}
-
-		public function set max(value:Number):void {
-			if (_max != value) {
-				_max = value;
-				fixValue();
-				refresh();
-			}
-		}
-
-		public function get max():Number {
-			return _max;
-		}
-
-		public function set min(value:Number):void {
-			if (_min != value) {
-				_min = value;
-				fixValue();
-				refresh();
-			}
-		}
-
-		public function get min():Number {
-			return _min;
-		}
-
-		public function set value(value:Number):void {
-			if (_value != value) {
-				_value = value;
-				fixValue();
-				refresh();
-
-				dispatchEvent(new Event("change"));
-			}
-		}
-
-		public function get value():Number {
-			return _value;
-		}
-
-		public function set type(value:int):void {
-			if (_type != value) {
-				_type = value;
-				_rect = new Rectangle(0, 0, 0, 0);
-				_changed = true;
-				invalidate();
-			}
-		}
-
-		public function get type():int {
-			return _type;
-		}
-
-		///////////////////////////////////
-		// toString
-		///////////////////////////////////
-
-		override public function toString():String {
-			return "[bloom.Slider]";
+	protected function refresh ():void {
+		if ( _type == HORIZONTALLY ) {
+			_bt.size ( _height , _height );
+			_rect.width = _width - _height;
+			_bt.move ( (_value - _min) / (_max - _min) * _rect.width , 0 );
+		} else {
+			_bt.size ( _width , _width );
+			_rect.height = _height - _width;
+			_bt.move ( 0 , _rect.height - (_value - _min) / (_max - _min) * _rect.height );
 		}
 	}
+
+	protected function fixValue ():void {
+		if ( _max > _min ) {
+			if ( _value > _max )_value = _max;
+			if ( _value < _min )_value = _min;
+		} else {
+			_value = _min = _max;
+		}
+	}
+
+	///////////////////////////////////
+	// Mouse Handle
+	///////////////////////////////////
+
+	protected function onMouseDown ( e:MouseEvent ):void {
+		_bt.startDrag ( false , _rect );
+		stage.addEventListener ( MouseEvent.MOUSE_MOVE , onMouseMove );
+		stage.addEventListener ( MouseEvent.MOUSE_UP , onMouseUp );
+	}
+
+	protected function onMouseMove ( e:MouseEvent ):void {
+		if ( _type == HORIZONTALLY ) {
+			_value = _bt.x / (_width - _height) * (_max - _min) + _min;
+		} else {
+			_value = (_height - _width - _bt.y) / (_height - _width) * (_max - _min) + _min;
+		}
+		e.updateAfterEvent ();
+
+		fixValue ();
+		dispatchEvent ( new Event ( "scroll" ) );
+	}
+
+	protected function onMouseUp ( e:MouseEvent ):void {
+		_bt.stopDrag ();
+		dispatchEvent ( new Event ( "change" ) );
+		stage.removeEventListener ( MouseEvent.MOUSE_UP , onMouseUp );
+		stage.removeEventListener ( MouseEvent.MOUSE_MOVE , onMouseMove );
+	}
+
+	protected function clickOnBg ( e:MouseEvent ):void {
+		if ( _type == HORIZONTALLY ) {
+			value = ((mouseX - (_height >> 1)) / (_width - _height)) * (_max - _min) + _min;
+		} else {
+			value = (_height - (_width >> 1) - mouseY) / (_height - _width) * (_max - _min) + _min;
+		}
+
+		_bt.startDrag ( false , _rect );
+		stage.addEventListener ( MouseEvent.MOUSE_MOVE , onMouseMove );
+		stage.addEventListener ( MouseEvent.MOUSE_UP , onMouseUp );
+		_bt.stateAnotherMouseDown = ButtonBase.DOWN;
+
+		e.updateAfterEvent ();
+
+	}
+
+	protected function onMouseWheel ( e:MouseEvent ):void {
+		value += (e.delta > 0 ? _wheelSensitivity : - _wheelSensitivity) * step;
+		e.updateAfterEvent ();
+	}
+
+	///////////////////////////////////
+	// getter/setters
+	///////////////////////////////////
+
+	public function set mouseWheelTarget ( value:DisplayObject ):void {
+		if ( _mouseWheelTarget != value ) {
+			if ( _mouseWheelTarget ) _mouseWheelTarget.removeEventListener ( MouseEvent.MOUSE_WHEEL , onMouseWheel );
+			_mouseWheelTarget = value;
+			if ( _mouseWheelTarget ) _mouseWheelTarget.addEventListener ( MouseEvent.MOUSE_WHEEL , onMouseWheel );
+		}
+	}
+
+	public function get mouseWheelTarget ():DisplayObject {
+		return _mouseWheelTarget;
+	}
+
+	public function get button ():ButtonBase {
+		return _bt;
+	}
+
+	public function set max ( value:Number ):void {
+		if ( _max != value ) {
+			_max = value;
+			fixValue ();
+			refresh ();
+		}
+	}
+
+	public function get max ():Number {
+		return _max;
+	}
+
+	public function set min ( value:Number ):void {
+		if ( _min != value ) {
+			_min = value;
+			fixValue ();
+			refresh ();
+		}
+	}
+
+	public function get min ():Number {
+		return _min;
+	}
+
+	public function set value ( value:Number ):void {
+		if ( _value != value ) {
+			_value = value;
+			fixValue ();
+			refresh ();
+
+			dispatchEvent ( new Event ( "change" ) );
+		}
+	}
+
+	public function get value ():Number {
+		return _value;
+	}
+
+	public function set type ( value:int ):void {
+		if ( _type != value ) {
+			_type = value;
+			_rect = new Rectangle ( 0 , 0 , 0 , 0 );
+			_changed = true;
+			invalidate ();
+		}
+	}
+
+	public function get type ():int {
+		return _type;
+	}
+
+	///////////////////////////////////
+	// toString
+	///////////////////////////////////
+
+	override public function toString ():String {
+		return "[bloom.Slider]";
+	}
+}
 
 }
