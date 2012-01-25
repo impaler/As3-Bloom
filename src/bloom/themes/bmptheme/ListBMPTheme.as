@@ -2,6 +2,7 @@ package bloom.themes.bmptheme {
 
 import bloom.brushes.BMPBrush;
 import bloom.brushes.ColorBrush;
+import bloom.brushes.TextBrush;
 import bloom.core.ScaleBitmap;
 import bloom.themes.ITheme;
 import bloom.themes.ThemeBase;
@@ -12,18 +13,21 @@ import flash.geom.Rectangle;
 public class ListBMPTheme implements ITheme {
 
 	[Embed(source="../../assets/defaultBMP/list/list_button_normal.png")]
-	private var scroll_button_normal:Class;
+	private var list_button_normal:Class;
 
 	[Embed(source="../../assets/defaultBMP/list/list_button_down.png")]
-	private var scroll_button_down:Class;
+	private var list_button_down:Class;
 
 	[Embed(source="../../assets/defaultBMP/list/list_button_over.png")]
-	private var scroll_button_over:Class;
+	private var list_button_over:Class;
 
 	[Embed(source="../../assets/defaultBMP/list/list_scroll_bar_bg.png")]
-	private var scroll_bar_bg:Class;
+	private var list_bar_bg:Class;
 
 	public function initialize ():void {
+
+		ThemeBase.Text_List = new TextBrush ( "Verdana" , 12 , 0x000000 , false , false , false );
+
 		var data:Vector.<ScaleBitmap>;
 		var scaleBMP0:ScaleBitmap;
 		var scaleBMP1:ScaleBitmap;
@@ -33,13 +37,13 @@ public class ListBMPTheme implements ITheme {
 		var OVER:int = 1;
 		var DOWN:int = 2;
 
-		scaleBMP0 = new ScaleBitmap ( Bitmap ( new scroll_button_normal () ).bitmapData );
+		scaleBMP0 = new ScaleBitmap ( Bitmap ( new list_button_normal () ).bitmapData );
 		scaleBMP0.scale9Grid = new Rectangle ( 7 , 7 , 2 , 2 );
 
-		scaleBMP1 = new ScaleBitmap ( Bitmap ( new scroll_button_over () ).bitmapData );
+		scaleBMP1 = new ScaleBitmap ( Bitmap ( new list_button_over () ).bitmapData );
 		scaleBMP1.scale9Grid = new Rectangle ( 7 , 7 , 2 , 2 );
 
-		scaleBMP2 = new ScaleBitmap ( Bitmap ( new scroll_button_down () ).bitmapData );
+		scaleBMP2 = new ScaleBitmap ( Bitmap ( new list_button_down () ).bitmapData );
 		scaleBMP2.scale9Grid = new Rectangle ( 7 , 7 , 2 , 2 );
 
 		data = new Vector.<ScaleBitmap> ( 3 , true );
@@ -48,7 +52,7 @@ public class ListBMPTheme implements ITheme {
 		data[DOWN] = scaleBMP2;
 		ThemeBase.List_ScrollBarButton = new BMPBrush ( data );
 
-		scaleBMP0 = new ScaleBitmap ( Bitmap ( new scroll_bar_bg () ).bitmapData );
+		scaleBMP0 = new ScaleBitmap ( Bitmap ( new list_bar_bg () ).bitmapData );
 		scaleBMP0.scale9Grid = new Rectangle ( 7 , 7 , 2 , 2 );
 
 		data = new Vector.<ScaleBitmap> ( 2 , true );

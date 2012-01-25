@@ -1,13 +1,7 @@
-/**
- * Created by IntelliJ IDEA.
- * User: omni
- * Date: 24/01/12
- * Time: 7:49 PM
- * To change this template use File | Settings | File Templates.
- */
 package bloom.themes.bmptheme {
 
 import bloom.brushes.BMPBrush;
+import bloom.brushes.TextBrush;
 import bloom.core.ScaleBitmap;
 import bloom.themes.ITheme;
 import bloom.themes.ThemeBase;
@@ -16,6 +10,7 @@ import flash.display.Bitmap;
 import flash.geom.Rectangle;
 
 public class ButtonBMPTheme implements ITheme {
+
 	[Embed(source="../../assets/defaultBMP/buttons/button_normal.png")]
 	private var button_normal:Class;
 
@@ -26,6 +21,9 @@ public class ButtonBMPTheme implements ITheme {
 	private var button_over:Class;
 
 	public function initialize ():void {
+
+		ThemeBase.Text_Button = new TextBrush ( "Verdana" , 12 , 0xffffff , false , false , false );
+
 		var data:Vector.<ScaleBitmap>;
 		var scaleBMP0:ScaleBitmap;
 		var scaleBMP1:ScaleBitmap;
