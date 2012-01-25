@@ -7,8 +7,6 @@ import bloom.themes.ITheme;
 import bloom.themes.ThemeBase;
 
 import flash.display.Bitmap;
-
-import flash.display.Bitmap;
 import flash.geom.Rectangle;
 
 public class ScrollButtonBMPTheme implements ITheme {
@@ -28,7 +26,6 @@ public class ScrollButtonBMPTheme implements ITheme {
 	[Embed(source="../../assets/defaultBMP/scrollbar/scroll_button_over.png")]
 	private var scroll_button_over:Class;
 
-
 	public function initialize ():void {
 
 		ThemeBase.Text_Button = new TextBrush ( "Verdana" , 12 , 0xffffff , false , false , false );
@@ -41,7 +38,6 @@ public class ScrollButtonBMPTheme implements ITheme {
 		var NORMAL:int = 0;
 		var OVER:int = 1;
 		var DOWN:int = 2;
-
 
 		scaleBMP0 = new ScaleBitmap ( Bitmap ( new scroll_bar_bg_h () ).bitmapData );
 		scaleBMP0.scale9Grid = new Rectangle ( 7 , 7 , 2 , 2 );
@@ -68,7 +64,6 @@ public class ScrollButtonBMPTheme implements ITheme {
 		data[OVER] = scaleBMP1;
 		data[DOWN] = scaleBMP2;
 		ThemeBase.SC_ScrollBarButton = new BMPBrush ( data );
-
 
 	}
 }

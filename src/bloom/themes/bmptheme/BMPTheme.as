@@ -23,24 +23,10 @@ package bloom.themes.bmptheme {
 
 import bloom.themes.*;
 
-import bloom.brushes.BMPBrush;
 import bloom.brushes.ColorBrush;
 import bloom.brushes.TextBrush;
-import bloom.core.ScaleBitmap;
-import bloom.themes.bmptheme.LabelBMPTheme;
-
-import flash.display.Bitmap;
-import flash.geom.Rectangle;
 
 public class BMPTheme implements ITheme {
-
-
-
-
-
-	public function BMPTheme () {
-
-	}
 
 	public function initialize ():void {
 
