@@ -27,6 +27,7 @@ import bloom.brushes.TextBrush;
 import bloom.containers.*;
 import bloom.core.Margin;
 import bloom.themes.*;
+import bloom.themes.bmptheme.BMPTheme;
 
 import flash.display.Sprite;
 import flash.display.StageAlign;
@@ -38,267 +39,269 @@ import flash.events.Event;
  *
  * @author sindney, impaler
  */
-[SWF(backgroundColor = 0xffffff , frameRate = 40 , width = 700 , height = 500)]
+[SWF(backgroundColor=0xffffff , frameRate=40 , width=700 , height=500)]
 public class ThemePreviewer extends Sprite {
-	
+
 	[Embed(source="background.jpg")]
-    private var background:Class;
-	
-    [Embed(source="logo_simple.png")]
-    private var logo:Class;
-	
-    public function ThemePreviewer () {
-        stage.align = StageAlign.TOP_LEFT;
-        stage.scaleMode = StageScaleMode.NO_SCALE;
-        stage.showDefaultContextMenu = false;
-		
-		addChild(new background());
-        addChild(new logo());
-		
-        ThemeBase.setTheme(new BMPTheme());
-		//ThemeBase.setTheme(new ColorTheme());
-		
-		var scrollContainer:ScrollContainer = new ScrollContainer();
-		scrollContainer.margin.reset(2, 10, 2, 10);
-		
-		var window:Window = new Window(this, scrollContainer);
-		window.size(600, 300);
-		window.move(20, 150);
+	private var background:Class;
+
+	[Embed(source="logo_simple.png")]
+	private var logo:Class;
+
+	public function ThemePreviewer () {
+		stage.align = StageAlign.TOP_LEFT;
+		stage.scaleMode = StageScaleMode.NO_SCALE;
+		stage.showDefaultContextMenu = false;
+
+		addChild ( new background () );
+		addChild ( new logo () );
+
+		ThemeBase.setTheme ( new BMPTheme () );
+
+		var scrollContainer:ScrollContainer = new ScrollContainer ();
+		scrollContainer.margin.reset ( 2 , 10 , 2 , 10 );
+
+		var window:Window = new Window ( this , scrollContainer );
+		window.size ( 600 , 300 );
+		window.move ( 20 , 150 );
 		window.maxWidth = 720;
 		window.maxHeight = 565;
 		window.minWidth = 200;
 		window.minHeight = 200;
 		window.liveResize = true;
-		
-		var title:Label = new Label(window.header, "ThemePreviewer");
-		title.brush = title.brush.clone() as TextBrush;
+
+		var title:Label = new Label ( window.header , "ThemePreviewer" );
+		title.brush = title.brush.clone () as TextBrush;
 		title.brush.textFormat.bold = true;
 		title.brush.textFormat.color = 0xffff00;
-		title.brush.update();
-		
-        // TabBox
-        var tabBox:TabBox = new TabBox (scrollContainer.content);
-		tabBox.margin.reset(0, 0, 0, 0);
-        tabBox.size(680 ,480);
-		
-		scrollContainer.calculateContentSize();
-		
-        // Tab Content margins
-        var margin:Margin = new Margin (4, 4, 0, 0);
-		
-		var color:Vector.<uint> = new Vector.<uint>(1, true);
+		title.brush.update ();
+
+		// TabBox
+		var tabBox:TabBox = new TabBox ( scrollContainer.content );
+		tabBox.margin.reset ( 0 , 0 , 0 , 0 );
+		tabBox.size ( 680 , 480 );
+
+		scrollContainer.calculateContentSize ();
+
+		// Tab Content margins
+		var margin:Margin = new Margin ( 4 , 4 , 0 , 0 );
+
+		var color:Vector.<uint> = new Vector.<uint> ( 1 , true );
 		color[0] = 0xE9E9E9;
-		var brush:ColorBrush = new ColorBrush(color);
-		
-		scrollContainer = new ScrollContainer();
-		scrollContainer.direction = ScrollContainer.VERTICALLY;
-		scrollContainer.brush = brush;
-		
-        // Buttons Tab
-        var but:Button = new Button ( scrollContainer.content , "Active Button" );
-        but.size ( 120 , 40 );
-		
-        but = new Button ( scrollContainer.content , "Disabled Button" );
-        but.size ( 120 , 40 );
-        but.enabled = false;
-		
-        but = new Button ( scrollContainer.content , ":)" );
-        but.size ( 40 , 120 );
-		
-        but = new Button ( scrollContainer.content , "Button" );
-        but.size ( 120 , 120 );
-		
-        tabBox.addContent ( "Buttons" , scrollContainer , margin );
-		scrollContainer.calculateContentSize();
-		
-        // Labels Tab
-        scrollContainer = new ScrollContainer();
-		scrollContainer.direction = ScrollContainer.VERTICALLY;
-		scrollContainer.brush = brush;
+		var brush:ColorBrush = new ColorBrush ( color );
 
-        var label:Label = new Label ( scrollContainer.content , "I am a Label" );
+		var tabContainer:FlowContainer = new FlowContainer ();
 
-        label = new Label ( scrollContainer.content , "Large Text" );
-        label.brush = new TextBrush ( "Verdana" , 30 , 0x000000 , false , false , false );
+		tabContainer.direction = ScrollContainer.VERTICALLY;
+		tabContainer.brush = brush;
 
-        tabBox.addContent ( "Labels" , scrollContainer , margin );
-		scrollContainer.calculateContentSize();
-		
-        // Sliders Tab
-        scrollContainer = new ScrollContainer();
-		scrollContainer.direction = ScrollContainer.VERTICALLY;
-		scrollContainer.brush = brush;
+		// Buttons Tab
+		var but:Button = new Button ( tabContainer , "Active Button" );
+		but.size ( 120 , 40 );
 
-        var slide:Slider = new Slider ( scrollContainer.content );
-        slide.size ( 30 , 100 );
+		but = new Button ( tabContainer , "Disabled Button" );
+		but.size ( 120 , 40 );
+		but.enabled = false;
 
-        slide = new Slider ( scrollContainer.content );
-        slide.size ( 30 , 100 );
-        slide.enabled = false;
+		but = new Button ( tabContainer , ":)" );
+		but.size ( 40 , 120 );
 
-        slide = new Slider ( scrollContainer.content , 1 , 50 );
-        slide.size ( 100 , 30 );
+		but = new Button ( tabContainer , "Button" );
+		but.size ( 120 , 120 );
 
-        slide = new Slider ( scrollContainer.content , 1 , 50 );
-        slide.size ( 100 , 30 );
-        slide.enabled = false;
+		tabBox.addContent ( "Buttons" , tabContainer , margin );
+//		scrollContainer.calculateContentSize ();
 
-        slide = new Slider ( scrollContainer.content , Slider.VERTICALLY , 30 );
-        slide.size ( 30 , 200 );
-		
-        slide = new Slider ( scrollContainer.content , Slider.HORIZONTALLY , 30 );
-        slide.size ( 200 , 30 );
-		
-        tabBox.addContent ( "Sliders" , scrollContainer , margin );
-		scrollContainer.calculateContentSize();
-		
-        // Numeric Stepper Tab
-        scrollContainer = new ScrollContainer();
-		scrollContainer.direction = ScrollContainer.VERTICALLY;
-		scrollContainer.brush = brush;
-		
-        var stepper:NumericStepper = new NumericStepper ( scrollContainer.content );
-		
-        stepper = new NumericStepper ( scrollContainer.content );
-        stepper.enabled = false;
-		
-        stepper = new NumericStepper ( scrollContainer.content );
-        stepper.textBase.brush = new TextBrush ( "Verdana" , 30 , 0x000000 , false , false , false );
-        stepper.size ( 120 , 40 );
-		
-        tabBox.addContent ( "Steppers" , scrollContainer , margin );
-		scrollContainer.calculateContentSize();
 
-        // CheckBox
-        scrollContainer = new ScrollContainer();
-		scrollContainer.direction = ScrollContainer.VERTICALLY;
-		scrollContainer.brush = brush;
 
-        var checkBox:CheckBox = new CheckBox ( scrollContainer.content , "CheckBox" );
+		// Labels Tab
+		tabContainer = new FlowContainer ();
+		tabContainer.direction = FlowContainer.VERTICALLY;
+		tabContainer.brush = brush;
 
-        checkBox = new CheckBox ( scrollContainer.content , "CheckBox" );
-        checkBox.enabled = false;
+		var label:Label = new Label ( tabContainer , "I am a Label" );
 
-        // with checkboxgroup, you can easily link a group of checkbox object(and he who extends checkbox).
-        // set checkBoxGroup.index = -1 means there's no checkbox object currently.
-        var checkBoxGroup:CheckBoxGroup = new CheckBoxGroup ( - 1 );
-		
-        checkBox = new CheckBox ( scrollContainer.content , "CheckBox Group Item 0" );
-        checkBoxGroup.addChild ( checkBox );
-		
-        checkBox = new CheckBox ( scrollContainer.content , "CheckBox Group Item 1" );
-        checkBoxGroup.addChild ( checkBox );
-		
-        checkBox = new CheckBox ( scrollContainer.content , "CheckBox Group Item 2" );
-        checkBoxGroup.addChild ( checkBox );
-		
-        // set target checkbox
-        checkBoxGroup.index = 0;
-		
-        tabBox.addContent ( "CheckBoxes" , scrollContainer , margin );
-		scrollContainer.calculateContentSize();
-		
-        // Text Tab
-        scrollContainer = new ScrollContainer ();
-		scrollContainer.direction = ScrollContainer.VERTICALLY;
-		scrollContainer.brush = brush;
-		
-        var textbox:TextBox = new TextBox ( scrollContainer.content , "I am a textbox" );
+		label = new Label ( tabContainer , "Large Text" );
+		label.brush = new TextBrush ( "Verdana" , 30 , 0x000000 , false , false , false );
 
-        textbox = new TextBox ( scrollContainer.content , "disabled :(" );
-        textbox.enabled = false;
+		tabBox.addContent ( "Labels" , tabContainer , margin );
 
-        textbox = new TextBox ( scrollContainer.content , "Large Text ^_^" );
-        textbox.textBase.brush = new TextBrush ( "Verdana" , 30 , 0xffffff , false , false , true );
-        textbox.size ( 230 , 160 );
 
-        var text:TextInput = new TextInput ( scrollContainer.content , "Text Input" );
+		// Sliders Tab
+		tabContainer = new FlowContainer ();
+		tabContainer.direction = FlowContainer.VERTICALLY;
+		tabContainer.brush = brush;
 
-        text = new TextInput ( scrollContainer.content , "disabled :(" );
-        text.enabled = false;
+		var slide:Slider = new Slider ( tabContainer );
+		slide.size ( 30 , 100 );
 
-        text = new TextInput ( scrollContainer.content , "Wide o_O" );
-        text.size ( 300 , 20 );
+		slide = new Slider ( tabContainer );
+		slide.size ( 30 , 100 );
+		slide.enabled = false;
 
-        tabBox.addContent ( "Text" , scrollContainer , margin );
-		scrollContainer.calculateContentSize();
+		slide = new Slider ( tabContainer , 1 , 50 );
+		slide.size ( 100 , 30 );
 
-        // List Tab
-        scrollContainer = new ScrollContainer();
-		scrollContainer.direction = ScrollContainer.VERTICALLY;
-		scrollContainer.brush = brush;
+		slide = new Slider ( tabContainer , 1 , 50 );
+		slide.size ( 100 , 30 );
+		slide.enabled = false;
 
-        var i:int;
-        var data:Array = [];
-        for ( i = 0 ; i < 10000 ; i ++ ) {
-            data[i] = ["NO." + i.toString ()];
-        }
-        var list:List = new List ( scrollContainer.content , data );
+		slide = new Slider ( tabContainer , Slider.VERTICALLY , 30 );
+		slide.size ( 30 , 200 );
 
-        list = new List ( scrollContainer.content , data );
-        list.enabled = false;
+		slide = new Slider ( tabContainer , Slider.HORIZONTALLY , 30 );
+		slide.size ( 200 , 30 );
 
-        list = new List ( scrollContainer.content , data );
-        list.size ( 200 , 100 );
+		tabBox.addContent ( "Sliders" , tabContainer , margin );
 
-        tabBox.addContent ( "List" , scrollContainer , margin );
-		scrollContainer.calculateContentSize();
 
-        // Toggle Tab
-        scrollContainer = new ScrollContainer();
-		scrollContainer.direction = ScrollContainer.VERTICALLY;
-		scrollContainer.brush = brush;
+		// Numeric Stepper Tab
+		tabContainer = new FlowContainer ();
+		tabContainer.direction = FlowContainer.VERTICALLY;
+		tabContainer.brush = brush;
 
-        var toggleButton:ToggleButton = new ToggleButton ( scrollContainer.content , "ToggleButton" );
+		var stepper:NumericStepper = new NumericStepper ( tabContainer );
 
-        toggleButton = new ToggleButton ( scrollContainer.content , "ToggleButton" );
-        toggleButton.enabled = false;
+		stepper = new NumericStepper ( tabContainer );
+		stepper.enabled = false;
 
-        var toggleSwitcher:ToggleSwitcher = new ToggleSwitcher ( scrollContainer.content , true );
-        toggleSwitcher.width = 200;
+		stepper = new NumericStepper ( tabContainer );
+		stepper.textBase.brush = new TextBrush ( "Verdana" , 30 , 0x000000 , false , false , false );
+		stepper.size ( 120 , 40 );
 
-        toggleSwitcher = new ToggleSwitcher ( scrollContainer.content , true );
-        toggleSwitcher.enabled = false;
+		tabBox.addContent ( "Steppers" , tabContainer , margin );
 
-        tabBox.addContent ( "Toggle" , scrollContainer , margin );
-		scrollContainer.calculateContentSize();
 
-        // Progress Tab
-        scrollContainer = new ScrollContainer();
-		scrollContainer.direction = ScrollContainer.VERTICALLY;
-		scrollContainer.brush = brush;
+		// CheckBox
+		tabContainer = new FlowContainer ();
+		tabContainer.direction = FlowContainer.VERTICALLY;
+		tabContainer.brush = brush;
 
-        progressBar = new ProgressBar ( scrollContainer.content , 0 );
-        progressBar.addEventListener ( Event.ENTER_FRAME , onLoop );
+		var checkBox:CheckBox = new CheckBox ( tabContainer , "CheckBox" );
 
-        progressBar = new ProgressBar ( scrollContainer.content , 0 );
-        progressBar.enabled = false;
+		checkBox = new CheckBox ( tabContainer , "CheckBox" );
+		checkBox.enabled = false;
 
-        progressBar = new ProgressBar ( scrollContainer.content , 0 );
-        progressBar.size ( 60 , 60 );
-        progressBar.addEventListener ( Event.ENTER_FRAME , onLoop );
+		// with checkboxgroup, you can easily link a group of checkbox object(and he who extends checkbox).
+		// set checkBoxGroup.index = -1 means there's no checkbox object currently.
+		var checkBoxGroup:CheckBoxGroup = new CheckBoxGroup ( - 1 );
 
-        progressBar = new ProgressBar ( scrollContainer.content , 0 );
-        progressBar.size ( 200 , 40 );
-        progressBar.addEventListener ( Event.ENTER_FRAME , onLoop );
+		checkBox = new CheckBox ( tabContainer , "CheckBox Group Item 0" );
+		checkBoxGroup.addChild ( checkBox );
 
-        tabBox.addContent ( "Progress" , scrollContainer , margin );
-		scrollContainer.calculateContentSize();
+		checkBox = new CheckBox ( tabContainer , "CheckBox Group Item 1" );
+		checkBoxGroup.addChild ( checkBox );
 
-        tabBox.toggleTab ( "Buttons" );
+		checkBox = new CheckBox ( tabContainer , "CheckBox Group Item 2" );
+		checkBoxGroup.addChild ( checkBox );
 
-    }
-	
-    private var decrease:Boolean = false;
-    private var progressBar:ProgressBar;
-	
-    private function onLoop ( e:Event ):void {
-        var bar:ProgressBar = e.target as ProgressBar;
-        if ( bar.value == 100 ) decrease = true;
-        if ( bar.value == 0 ) decrease = false;
-        bar.value += decrease ? - 1 : 1;
-    }
-	
+		// set target checkbox
+		checkBoxGroup.index = 0;
+
+		tabBox.addContent ( "CheckBoxes" , tabContainer , margin );
+
+
+		// Text Tab
+		tabContainer = new FlowContainer ();
+		tabContainer.direction = FlowContainer.VERTICALLY;
+		tabContainer.brush = brush;
+
+		var textbox:TextBox = new TextBox ( tabContainer , "I am a textbox" );
+
+		textbox = new TextBox ( tabContainer , "disabled :(" );
+		textbox.enabled = false;
+
+		textbox = new TextBox ( tabContainer , "Large Text ^_^" );
+		textbox.textBase.brush = new TextBrush ( "Verdana" , 30 , 0xffffff , false , false , true );
+		textbox.size ( 230 , 160 );
+
+		var text:TextInput = new TextInput ( tabContainer , "Text Input" );
+
+		text = new TextInput ( tabContainer , "disabled :(" );
+		text.enabled = false;
+
+		text = new TextInput ( tabContainer , "Wide o_O" );
+		text.size ( 300 , 20 );
+
+		tabBox.addContent ( "Text" , tabContainer , margin );
+
+
+		// List Tab
+		tabContainer = new FlowContainer ();
+		tabContainer.direction = FlowContainer.VERTICALLY;
+		tabContainer.brush = brush;
+
+		var i:int;
+		var data:Array = [];
+		for ( i = 0 ; i < 10000 ; i ++ ) {
+			data[i] = ["NO." + i.toString ()];
+		}
+		var list:List = new List ( tabContainer , data );
+
+		list = new List ( tabContainer , data );
+		list.enabled = false;
+
+		list = new List ( tabContainer , data );
+		list.size ( 200 , 100 );
+
+		tabBox.addContent ( "List" , tabContainer , margin );
+
+
+		// Toggle Tab
+		tabContainer = new FlowContainer ();
+		tabContainer.direction = FlowContainer.VERTICALLY;
+		tabContainer.brush = brush;
+
+		var toggleButton:ToggleButton = new ToggleButton ( tabContainer , "ToggleButton" );
+
+		toggleButton = new ToggleButton ( tabContainer , "ToggleButton" );
+		toggleButton.enabled = false;
+
+		var toggleSwitcher:ToggleSwitcher = new ToggleSwitcher ( tabContainer , true );
+		toggleSwitcher.width = 200;
+
+		toggleSwitcher = new ToggleSwitcher ( tabContainer , true );
+		toggleSwitcher.enabled = false;
+
+		tabBox.addContent ( "Toggle" , tabContainer , margin );
+
+
+		// Progress Tab
+		tabContainer = new FlowContainer ();
+		tabContainer.direction = FlowContainer.VERTICALLY;
+		tabContainer.brush = brush;
+
+		progressBar = new ProgressBar ( tabContainer , 0 );
+		progressBar.addEventListener ( Event.ENTER_FRAME , onLoop );
+
+		progressBar = new ProgressBar ( tabContainer , 0 );
+		progressBar.enabled = false;
+
+		progressBar = new ProgressBar ( tabContainer , 0 );
+		progressBar.size ( 60 , 60 );
+		progressBar.addEventListener ( Event.ENTER_FRAME , onLoop );
+
+		progressBar = new ProgressBar ( tabContainer , 0 );
+		progressBar.size ( 200 , 40 );
+		progressBar.addEventListener ( Event.ENTER_FRAME , onLoop );
+
+		tabBox.addContent ( "Progress" , tabContainer , margin );
+
+
+		tabBox.toggleTab ( "Buttons" );
+
+	}
+
+	private var decrease:Boolean = false;
+	private var progressBar:ProgressBar;
+
+	private function onLoop ( e:Event ):void {
+		var bar:ProgressBar = e.target as ProgressBar;
+		if ( bar.value == 100 ) decrease = true;
+		if ( bar.value == 0 ) decrease = false;
+		bar.value += decrease ? - 1 : 1;
+	}
+
 }
 
 }
