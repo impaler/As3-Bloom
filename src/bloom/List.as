@@ -46,8 +46,6 @@ public class List extends Form {
 		_scrollBar.button.brush = ThemeBase.List_ScrollBarButton;
 	}
 
-
-
 	override protected function newItem ():* {
 		return new ListItem ();
 	}

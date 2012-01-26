@@ -28,6 +28,5 @@ public class LabelsTab extends ScrollContainer {
 
 	}
 
-
 }
 }

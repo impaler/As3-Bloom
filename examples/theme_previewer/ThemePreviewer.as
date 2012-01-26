@@ -119,7 +119,6 @@ public class ThemePreviewer extends Sprite {
 		_tabs.addContent ( "Labels" , labelsTab , labelsTab.margin );
 		scrollContainer.calculateContentSize ();
 
-
 		var color:Vector.<uint> = new Vector.<uint> ( 1 , true );
 		color[0] = 0xE9E9E9;
 		var brush:ColorBrush = new ColorBrush ( color );
@@ -270,10 +269,11 @@ public class ThemePreviewer extends Sprite {
 		toggleButton.enabled = false;
 
 		var toggleSwitcher:ToggleSwitcher = new ToggleSwitcher ( scrollContainer_0.content , true );
-		toggleSwitcher.width = 200;
+		toggleSwitcher.width = 120;
 
 		toggleSwitcher = new ToggleSwitcher ( scrollContainer_0.content , true );
 		toggleSwitcher.enabled = false;
+		toggleSwitcher.width = 120;
 
 		_tabs.addContent ( "Toggle" , scrollContainer_0 , margin );
 		scrollContainer_0.calculateContentSize ();

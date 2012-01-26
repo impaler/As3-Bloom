@@ -2,7 +2,6 @@ package theme_previewer.tabs {
 
 import bloom.Button;
 import bloom.Label;
-import bloom.brushes.ColorBrush;
 import bloom.brushes.TextBrush;
 import bloom.containers.FlowContainer;
 import bloom.containers.ScrollContainer;

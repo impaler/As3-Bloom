@@ -23,35 +23,26 @@ package bloom.themes.bmptheme {
 
 import bloom.themes.*;
 
-import bloom.brushes.ColorBrush;
-import bloom.brushes.TextBrush;
-
 public class BMPTheme implements ITheme {
 
 	public function initialize ():void {
 
-		new ButtonBMPTheme().initialize();
-		new ListBMPTheme().initialize();
-		new NumericStepperBMPTheme().initialize();
-		new CheckBoxBMPTheme().initialize();
-		new ProgressBarBMPTheme().initialize();
-		new SliderBMPTheme().initialize();
-		new NumericStepperBMPTheme().initialize();
-		new LabelBMPTheme().initialize();
-		new TabsBMPTheme().initialize();
-		new WindowBMPTheme().initialize();
-		new ScrollButtonBMPTheme().initialize();
-		new FormBMPTheme().initialize();
-		new TextBoxBMPTheme().initialize();
-		new TextInputBMPTheme().initialize();
-
-		ThemeBase.Text_ToggleButton = new TextBrush ( "Verdana" , 12 , 0xffffff , false , false , false );
-
-		var uint_data:Vector.<uint>;
-		// Container
-		uint_data = new Vector.<uint> ( 1 , true );
-		uint_data[0] = 0xE9E9E9;
-		ThemeBase.Container = new ColorBrush ( uint_data );
+		new ButtonBMPTheme ().initialize ();
+		new ListBMPTheme ().initialize ();
+		new NumericStepperBMPTheme ().initialize ();
+		new CheckBoxBMPTheme ().initialize ();
+		new ProgressBarBMPTheme ().initialize ();
+		new SliderBMPTheme ().initialize ();
+		new NumericStepperBMPTheme ().initialize ();
+		new LabelBMPTheme ().initialize ();
+		new TabsBMPTheme ().initialize ();
+		new WindowBMPTheme ().initialize ();
+		new ScrollButtonBMPTheme ().initialize ();
+		new FormBMPTheme ().initialize ();
+		new TextBoxBMPTheme ().initialize ();
+		new TextInputBMPTheme ().initialize ();
+		new ToggleButtonBMPTheme ().initialize ();
+		new ContainerBMPTheme ().initialize ();
 
 	}
 

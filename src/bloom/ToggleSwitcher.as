@@ -55,8 +55,6 @@ import flash.geom.Rectangle;
 	private var _bg:Shape;
 
 	public function ToggleSwitcher ( p:DisplayObjectContainer = null , value:Boolean = false ) {
-		super ( p );
-
 		tabChildren = tabEnabled = false;
 
 		_bg = new Shape ();
@@ -68,14 +66,19 @@ import flash.geom.Rectangle;
 
 		_rect = new Rectangle ();
 		_rect2 = new Rectangle ();
-
 		_value = value;
-
-		brush = ThemeBase.ToggleSwitcher;
 
 		size ( 60 , 20 );
 
+		super ( p );
+
 		_slider.addEventListener ( MouseEvent.MOUSE_DOWN , onMouseDown );
+	}
+
+	override public function setCoreBrush ():void {
+		super.setCoreBrush ();
+
+		brush = ThemeBase.ToggleSwitcher;
 	}
 
 	override protected function draw ( e:Event ):void {

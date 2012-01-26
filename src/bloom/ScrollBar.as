@@ -53,8 +53,6 @@ public class ScrollBar extends Slider {
 		_contentSize = content;
 	}
 
-
-
 	override protected function refresh ():void {
 		_max = Math.max ( _contentSize - _pageSize , 0 );
 		if ( _max > 0 ) {
