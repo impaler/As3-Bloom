@@ -83,7 +83,6 @@ package bloom.containers
 			
 			_scaler = new Sprite();
 			_scaler.buttonMode = true;
-			_scaler.useHandCursor = true;
 			_scaler.tabEnabled = false;
             _scaler.addEventListener(MouseEvent.MOUSE_DOWN, onScaleWindowMouseDown);
 			

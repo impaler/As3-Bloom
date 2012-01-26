@@ -55,6 +55,8 @@ package bloom.containers
 			if (p) p.addChild(this);
 			
 			_title = new FlowContainer(this);
+			_title.buttonMode = true;
+			_title.tabEnabled = false;
 			_title.brush = ThemeBase.AC_Title;
 			_title.size(100, 30);
 			_title.addEventListener(MouseEvent.CLICK, onMouseClick);

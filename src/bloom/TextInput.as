@@ -113,6 +113,13 @@ package bloom
 		// getter/setters
 		///////////////////////////////////
 		
+		override public function set enabled(value:Boolean):void {
+			if (_enabled != value) {
+				_enabled = _textBase.tabEnabled = mouseEnabled = mouseChildren = value;
+				alpha = _enabled ? 1 : ThemeBase.ALPHA;
+			}
+		}
+		
 		public function set text(value:String):void {
 			_textBase.text = value;
 		}

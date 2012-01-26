@@ -30,10 +30,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 ----------------------------------------------------------------
-Version 0.1.1 r31
+Version 0.1.1 r33
 ----------------------------------------------------------------
 
 History
+
+Version 0.1.1 r33
+ - ScrollBar bug fixed.
+ - Consider to separate BMPTheme.
 
 Version 0.1.1 r31
  - Example "HelloWorld" added.

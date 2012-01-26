@@ -53,7 +53,8 @@ package bloom
 			
 			size(100, 20);
 			
-			tabChildren = false;
+			buttonMode = true;
+			tabEnabled = tabChildren = false;
 			addEventListener(MouseEvent.CLICK, onMouseClick);
 		}
 		

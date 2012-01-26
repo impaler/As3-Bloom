@@ -41,32 +41,56 @@ import flash.events.Event;
 [SWF(backgroundColor = 0xffffff , frameRate = 40 , width = 700 , height = 500)]
 public class ThemePreviewer extends Sprite {
 	
-    [Embed(source="background.jpg")]
+	[Embed(source="background.jpg")]
     private var background:Class;
+	
+    [Embed(source="logo_simple.png")]
+    private var logo:Class;
 	
     public function ThemePreviewer () {
         stage.align = StageAlign.TOP_LEFT;
         stage.scaleMode = StageScaleMode.NO_SCALE;
         stage.showDefaultContextMenu = false;
 		
-        addChild ( new background () );
+		addChild(new background());
+        addChild(new logo());
 		
-        ThemeBase.setTheme ( new BMPTheme () );
-		//ThemeBase.setTheme ( new ColorTheme () );
+        ThemeBase.setTheme(new BMPTheme());
+		//ThemeBase.setTheme(new ColorTheme());
+		
+		var scrollContainer:ScrollContainer = new ScrollContainer();
+		scrollContainer.margin.reset(2, 10, 2, 10);
+		
+		var window:Window = new Window(this, scrollContainer);
+		window.size(600, 300);
+		window.move(20, 150);
+		window.maxWidth = 720;
+		window.maxHeight = 565;
+		window.minWidth = 200;
+		window.minHeight = 200;
+		window.liveResize = true;
+		
+		var title:Label = new Label(window.header, "ThemePreviewer");
+		title.brush = title.brush.clone() as TextBrush;
+		title.brush.textFormat.bold = true;
+		title.brush.textFormat.color = 0xffff00;
+		title.brush.update();
 		
         // TabBox
-        var tabBox:TabBox = new TabBox ( this );
-        tabBox.size ( 680 , 480 );
-        tabBox.move ( 10 , 10 );
+        var tabBox:TabBox = new TabBox (scrollContainer.content);
+		tabBox.margin.reset(0, 0, 0, 0);
+        tabBox.size(680 ,480);
+		
+		scrollContainer.calculateContentSize();
 		
         // Tab Content margins
-        var margin:Margin = new Margin ( 4 , 4 , 0 , 0 );
+        var margin:Margin = new Margin (4, 4, 0, 0);
 		
 		var color:Vector.<uint> = new Vector.<uint>(1, true);
 		color[0] = 0xE9E9E9;
 		var brush:ColorBrush = new ColorBrush(color);
 		
-		var scrollContainer:ScrollContainer = new ScrollContainer();
+		scrollContainer = new ScrollContainer();
 		scrollContainer.direction = ScrollContainer.VERTICALLY;
 		scrollContainer.brush = brush;
 		
@@ -185,7 +209,7 @@ public class ThemePreviewer extends Sprite {
         textbox.enabled = false;
 
         textbox = new TextBox ( scrollContainer.content , "Large Text ^_^" );
-        textbox.textBase.brush = new TextBrush ( "Verdana" , 30 , 0x000000 , false , false , false );
+        textbox.textBase.brush = new TextBrush ( "Verdana" , 30 , 0xffffff , false , false , true );
         textbox.size ( 230 , 160 );
 
         var text:TextInput = new TextInput ( scrollContainer.content , "Text Input" );

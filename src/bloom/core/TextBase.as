@@ -22,13 +22,18 @@
 package bloom.core 
 {
 	import flash.display.DisplayObjectContainer;
-	import flash.events.Event;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	
 	import bloom.brushes.TextBrush;
 	import bloom.events.BrushEvent;
 	import bloom.themes.ThemeBase;
+	
+	/** 
+	 * Dispatched when the format of textField has changed.
+	 * @eventType bloom.events.BrushEvent
+	 */
+	[BrushEvent(name = "redraw", type = "bloom.events.BrushEvent")]
 	
 	/**
 	 * TextBase
@@ -64,6 +69,7 @@ package bloom.core
 			if (defaultTextFormat != _brush.textFormat) {
 				defaultTextFormat = _brush.textFormat;
 				setTextFormat(defaultTextFormat);
+				dispatchEvent(new BrushEvent("redraw"));
 			}
 		}
 		

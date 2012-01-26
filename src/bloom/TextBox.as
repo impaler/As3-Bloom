@@ -33,6 +33,7 @@ package bloom
 	import bloom.core.Component;
 	import bloom.core.TextBase;
 	import bloom.core.ScaleBitmap;
+	import bloom.events.BrushEvent;
 	import bloom.themes.ThemeBase;
 	import bloom.ScrollBar;
 	
@@ -67,13 +68,13 @@ package bloom
 			_textBase.addEventListener(Event.SCROLL, onTextScroll);
 			_textBase.addEventListener(FocusEvent.FOCUS_IN, onFocusIn);
 			_textBase.addEventListener(FocusEvent.FOCUS_OUT, onFocusOut);
+			_textBase.addEventListener(BrushEvent.REDRAW, onTextChange);
 			
 			_scrollBar = new ScrollBar(this, 0, 0, 0);
 			_scrollBar.brush = ThemeBase.TB_ScrollBar;
 			_scrollBar.button.brush = ThemeBase.TB_ScrollBarButton;
 			_scrollBar.step = 1;
 			_scrollBar.autoHide = false;
-			_scrollBar.mouseWheelTarget = this;
 			_scrollBar.addEventListener(Event.CHANGE, onScrollBarChange);
 			_scrollBar.addEventListener(Event.SCROLL, onScrollBarMove);
 			
@@ -166,6 +167,13 @@ package bloom
 		///////////////////////////////////
 		// getter/setters
 		///////////////////////////////////
+		
+		override public function set enabled(value:Boolean):void {
+			if (_enabled != value) {
+				_enabled = _textBase.tabEnabled = mouseEnabled = mouseChildren = value;
+				alpha = _enabled ? 1 : ThemeBase.ALPHA;
+			}
+		}
 		
 		public function get scrollBar():ScrollBar {
 			return _scrollBar;

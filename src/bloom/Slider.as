@@ -50,71 +50,68 @@ package bloom
 	/**
 	 * Slider
 	 *
-	 * @date 2012/1/10 20:12
+	 * @date 2012/1/26 10:57
 	 * @author sindney
 	 */
 	public class Slider extends Component {
-
+		
 		public static const VERTICALLY:int = 0;
 		public static const HORIZONTALLY:int = 1;
-
+		
 		public var step:Number = 10;
-
+		
 		protected var _bg:Sprite;
 		protected var _bt:ButtonBase;
-
+		
 		protected var _mouseWheelTarget:DisplayObject;
-
+		
 		protected var _value:Number;
 		protected var _max:Number;
 		protected var _min:Number;
 		protected var _rect:Rectangle;
 		protected var _type:int;
-        protected var _wheelSensitivity:Number;
-
+		
 		public function Slider(p:DisplayObjectContainer = null, type:int = 0, value:Number = 0, max:Number = 100, min:Number = 0) {
 			super(p);
-
+			
 			_bg = new Sprite();
+			_bg.buttonMode = true;
 			_bg.tabEnabled = tabEnabled = false;
-
+			
 			_type = type;
 			_max = max;
 			_min = min;
 			_value = value;
-
+			
 			addChild(_bg);
-
+			
 			_bt = new ButtonBase(this);
 			_bt.brush = ThemeBase.SliderButton;
-
+			
 			brush = ThemeBase.Slider;
-
+			
 			_rect = new Rectangle(0, 0, 0, 0);
-
+			
 			_type == VERTICALLY ? size(20, 100) : size(100, 20);
-
+			
 			_bt.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
 			_bg.addEventListener(MouseEvent.MOUSE_DOWN, clickOnBg);
 			addEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
 		}
-
+		
 		override protected function draw(e:Event):void {
 			if (_changed) {
 				_changed = false;
 			} else {
 				return;
 			}
-
+			
 			var bmpBrush:BMPBrush;
 			var colorBrush:ColorBrush;
 			var scale:ScaleBitmap;
-
+			
 			_bg.graphics.clear();
-			_bg.buttonMode = true;
-
-            _wheelSensitivity = .4;
-
+			
 			if (brush is ColorBrush) {
 				colorBrush = brush as ColorBrush;
 				_bg.graphics.beginFill(colorBrush.colors[0]);
@@ -124,13 +121,13 @@ package bloom
 				scale.setSize(_width, _height);
 				_bg.graphics.beginBitmapFill(scale.bitmapData);
 			}
-
+			
 			_bg.graphics.drawRect(0, 0, _width, _height);
 			_bg.graphics.endFill();
-
+			
 			refresh();
 		}
-
+		
 		protected function refresh():void {
 			if (_type == HORIZONTALLY) {
 				_bt.size(_height, _height);
@@ -142,7 +139,7 @@ package bloom
 				_bt.move(0, _rect.height - (_value - _min) / (_max - _min) * _rect.height);
 			}
 		}
-
+		
 		protected function fixValue():void {
 			if (_max > _min) {
 				if (_value > _max)_value = _max;
@@ -151,17 +148,17 @@ package bloom
 				_value = _min = _max;
 			}
 		}
-
+		
 		///////////////////////////////////
 		// Mouse Handle
 		///////////////////////////////////
-
+		
 		protected function onMouseDown(e:MouseEvent):void {
 			_bt.startDrag(false, _rect);
 			stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 			stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
 		}
-
+		
 		protected function onMouseMove(e:MouseEvent):void {
 			if (_type == HORIZONTALLY) {
 				_value = _bt.x / (_width - _height) * (_max - _min) + _min;
@@ -169,43 +166,41 @@ package bloom
 				_value = (_height - _width - _bt.y) / (_height - _width) * (_max - _min) + _min;
 			}
             e.updateAfterEvent();
-
+			
 			fixValue();
 			dispatchEvent(new Event("scroll"));
 		}
-
+		
 		protected function onMouseUp(e:MouseEvent):void {
 			_bt.stopDrag();
 			dispatchEvent(new Event("change"));
 			stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
 			stage.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 		}
-
+		
 		protected function clickOnBg(e:MouseEvent):void {
 			if (_type == HORIZONTALLY) {
 				value = ((mouseX - (_height >> 1)) / (_width - _height)) * (_max - _min) + _min;
 			} else {
 				value = (_height - (_width >> 1) - mouseY) / (_height - _width) * (_max - _min) + _min;
 			}
-
             _bt.startDrag(false, _rect);
             stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
             stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
-
+			
             e.updateAfterEvent();
-
 		}
-
+		
         protected function onMouseWheel(e:MouseEvent):void {
-            _wheelSensitivity = _wheelSensitivity;
-            value += (e.delta > 0 ? _wheelSensitivity : - _wheelSensitivity) * step;
+			// step does the same thing as wheelSensitivity method.
+            value += (e.delta > 0 ? step : - step);
             e.updateAfterEvent();
 		}
-
+		
 		///////////////////////////////////
 		// getter/setters
-		///////////////////////////////////
-
+		//////////////////////////////////
+		
 		public function set mouseWheelTarget(value:DisplayObject):void {
 			if (_mouseWheelTarget != value) {
 				if (_mouseWheelTarget) _mouseWheelTarget.removeEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
@@ -213,15 +208,15 @@ package bloom
 				if (_mouseWheelTarget) _mouseWheelTarget.addEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
 			}
 		}
-
+		
 		public function get mouseWheelTarget():DisplayObject {
 			return _mouseWheelTarget;
 		}
-
+		
 		public function get button():ButtonBase {
 			return _bt;
 		}
-
+		
 		public function set max(value:Number):void {
 			if (_max != value) {
 				_max = value;
@@ -229,11 +224,11 @@ package bloom
 				refresh();
 			}
 		}
-
+		
 		public function get max():Number {
 			return _max;
 		}
-
+		
 		public function set min(value:Number):void {
 			if (_min != value) {
 				_min = value;
@@ -241,11 +236,11 @@ package bloom
 				refresh();
 			}
 		}
-
+		
 		public function get min():Number {
 			return _min;
 		}
-
+		
 		public function set value(value:Number):void {
 			if (_value != value) {
 				_value = value;
@@ -254,11 +249,11 @@ package bloom
 				dispatchEvent(new Event("change"));
 			}
 		}
-
+		
 		public function get value():Number {
 			return _value;
 		}
-
+		
 		public function set type(value:int):void {
 			if (_type != value) {
 				_type = value;
@@ -267,15 +262,15 @@ package bloom
 				invalidate();
 			}
 		}
-
+		
 		public function get type():int {
 			return _type;
 		}
-
+		
 		///////////////////////////////////
 		// toString
 		///////////////////////////////////
-
+		
 		override public function toString():String {
 			return "[bloom.Slider]";
 		}

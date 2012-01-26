@@ -23,6 +23,10 @@ package bloom.brushes
 {
 	import bloom.events.BrushEvent;
 	
+	/** 
+	 * Dispatched when redraw is needed.
+	 * @eventType bloom.events.BrushEvent
+	 */
 	[BrushEvent(name = "redraw", type = "bloom.events.BrushEvent")]
 	
 	/**

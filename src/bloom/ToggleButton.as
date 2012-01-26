@@ -27,6 +27,7 @@ package bloom
 	import bloom.brushes.BMPBrush;
 	import bloom.brushes.ColorBrush;
 	import bloom.core.ScaleBitmap;
+	import bloom.events.BrushEvent;
 	import bloom.themes.ThemeBase;
 	
 	/**
@@ -42,6 +43,7 @@ package bloom
 			
 			brush = ThemeBase.ToggleButton;
 			_title.brush = ThemeBase.Text_ToggleButton;
+			_title.addEventListener(BrushEvent.REDRAW, onTitleChanged);
 			
 			size(100, 20);
 		}

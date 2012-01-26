@@ -55,14 +55,13 @@ package bloom
 			
 			tabChildren = tabEnabled = false;
             buttonMode = true;
-
+			
 			_bg = new Shape();
 			addChild(_bg);
 			
 			_title = new Label(this, text);
 			_title.brush = ThemeBase.Text_CheckBox;
 			_title.addEventListener(Event.CHANGE, onTitleChanged);
-			_title.addEventListener(BrushEvent.REDRAW, onTitleChanged);
 			
 			_value = value;
 			
