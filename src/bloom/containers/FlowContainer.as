@@ -29,7 +29,6 @@ package bloom.containers
 	/**
 	 * FlowContainer
 	 * 
-	 * @date 2012/1/12 23:29
 	 * @author sindney
 	 */
 	public class FlowContainer extends Container {

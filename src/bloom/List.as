@@ -28,7 +28,6 @@ package bloom
 	/**
 	 * List
 	 *
-	 * @date 2012/1/10 20:11
 	 * @author sindney
 	 */
 	public class List extends Form {
@@ -36,6 +35,7 @@ package bloom
 		public function List(p:DisplayObjectContainer = null, d:Array = null) {
 			super(p, d);
 			brush = ThemeBase.List;
+			_scrollBar.brush = ThemeBase.List_ScrollBar;
 			_scrollBar.button.brush = ThemeBase.List_ScrollBarButton;
 		}
 

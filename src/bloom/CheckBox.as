@@ -41,7 +41,6 @@ package bloom
 	/**
 	 * CheckBox
 	 * 
-	 * @date 2012/1/10 20:11
 	 * @author sindney
 	 */
 	public class CheckBox extends Component {

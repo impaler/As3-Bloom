@@ -46,7 +46,6 @@ package bloom
 	/**
 	 * NumericStepper
 	 * 
-	 * @date 2012/1/13 11:52
 	 * @author impaler
 	 */
 	public class NumericStepper extends Component {

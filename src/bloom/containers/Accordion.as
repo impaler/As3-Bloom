@@ -34,7 +34,6 @@ package bloom.containers
 	/**
 	 * Accordion
 	 * 
-	 * @date 2012/1/17 13:17
 	 * @author sindney
 	 */
 	public class Accordion extends Sprite implements IChild {

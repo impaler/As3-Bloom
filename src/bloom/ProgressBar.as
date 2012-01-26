@@ -37,7 +37,6 @@ package bloom
 	/**
 	 * ProgressBar
 	 * 
-	 * @date 2012/1/17 23:52
 	 * @author sindney
 	 */
 	public class ProgressBar extends Component {

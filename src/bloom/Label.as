@@ -31,7 +31,6 @@ package bloom
 	/**
 	 * Label
 	 * 
-	 * @date 2012/1/10 20:11
 	 * @author sindney
 	 */
 	public class Label extends TextBase {

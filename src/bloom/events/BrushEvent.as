@@ -26,7 +26,6 @@ package bloom.events
 	/**
 	 * BrushEvent
 	 * 
-	 * @date 2012/1/10 20:20
 	 * @author sindney
 	 */
 	public class BrushEvent extends Event {

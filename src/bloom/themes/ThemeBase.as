@@ -26,7 +26,6 @@ package bloom.themes
 	/**
 	 * ThemeBase
 	 * 
-	 * @date 2012/1/20 19:46
 	 * @author sindney, impaler
 	 */
 	public final class ThemeBase {

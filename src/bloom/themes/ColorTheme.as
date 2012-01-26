@@ -27,7 +27,6 @@ package bloom.themes
 	/**
 	 * ColorTheme
 	 * 
-	 * @date 2012/1/20 14:11
 	 * @author sindney, impaler
 	 */
 	public class ColorTheme implements ITheme {

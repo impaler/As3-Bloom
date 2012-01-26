@@ -38,7 +38,6 @@ package bloom.core
 	/**
 	 * TextBase
 	 * 
-	 * @date 2012/1/10 20:05
 	 * @author sindney
 	 */
 	public class TextBase extends TextField implements IComponent {

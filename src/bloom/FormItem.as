@@ -35,7 +35,6 @@ package bloom
 	/**
 	 * FormItem
 	 * 
-	 * @date 2012/1/10 20:11
 	 * @author sindney
 	 */
 	public class FormItem extends Component {
@@ -51,6 +50,7 @@ package bloom
 			_bg = new Shape();
 			addChild(_bg);
 			
+			brush = ThemeBase.FormItem;
 			size(100, 20);
 			
 			buttonMode = true;

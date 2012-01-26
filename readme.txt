@@ -30,10 +30,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 ----------------------------------------------------------------
-Version 0.1.1 r33
+Version 1.0.0 r0
 ----------------------------------------------------------------
 
 History
+
+Version 1.1.0 r0
+ - As3-Bloom's first stable release.
 
 Version 0.1.1 r33
  - ScrollBar bug fixed.

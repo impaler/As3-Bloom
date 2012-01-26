@@ -30,7 +30,6 @@ package bloom
 	/**
 	 * ListItem
 	 * 
-	 * @date 2012/1/10 20:12
 	 * @author sindney
 	 */
 	public class ListItem extends FormItem {
@@ -44,6 +43,8 @@ package bloom
 			_title.brush = ThemeBase.Text_List;
 			_title.addEventListener(Event.CHANGE, onTitleChanged);
 			_title.addEventListener(BrushEvent.REDRAW, onTitleChanged);
+			
+			brush = ThemeBase.ListItem;
 		}
 		
 		protected function onTitleChanged(e:Event):void {

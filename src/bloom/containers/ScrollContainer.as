@@ -37,7 +37,6 @@ package bloom.containers
 	/**
 	 * ScrollContainer
 	 * 
-	 * @date 2012/1/21 10:30
 	 * @author sindney
 	 */
 	public class ScrollContainer extends FlowContainer {

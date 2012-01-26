@@ -36,7 +36,6 @@ package bloom.containers
 	/**
 	 * TabBox
 	 * 
-	 * @date 2012/1/21 11:01
 	 * @author sindney
 	 */
 	public class TabBox extends Container {

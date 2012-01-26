@@ -36,7 +36,6 @@ package bloom.containers
 	/**
 	 * Window
 	 * 
-	 * @date 2012/1/20 14:16
 	 * @author sindney
 	 */
 	public class Window extends Component {

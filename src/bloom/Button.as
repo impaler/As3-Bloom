@@ -32,7 +32,6 @@ package bloom
 	/**
 	 * Button
 	 * 
-	 * @date 2012/1/10 20:11
 	 * @author sindney
 	 */
 	public class Button extends ButtonBase {

@@ -50,7 +50,6 @@ package bloom
 	/**
 	 * Slider
 	 *
-	 * @date 2012/1/26 10:57
 	 * @author sindney
 	 */
 	public class Slider extends Component {
@@ -117,7 +116,7 @@ package bloom
 				_bg.graphics.beginFill(colorBrush.colors[0]);
 			} else if (brush is BMPBrush) {
 				bmpBrush = brush as BMPBrush;
-				scale = bmpBrush.bitmap[_type == VERTICALLY ? 1 : 0];
+				scale = bmpBrush.bitmap[0];
 				scale.setSize(_width, _height);
 				_bg.graphics.beginBitmapFill(scale.bitmapData);
 			}

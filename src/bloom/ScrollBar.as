@@ -27,8 +27,7 @@ package bloom
 
 	/**
 	 * ScrollBar
-	 *
-	 * @date 2012/1/26 10:53
+	 * 
 	 * @author sindney
 	 */
 	public class ScrollBar extends Slider {

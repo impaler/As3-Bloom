@@ -25,7 +25,6 @@ package bloom.core
 	/**
 	 * IChild
 	 * 
-	 * @date 2012/1/17 11:35
 	 * @author sindney
 	 */
 	public interface IChild {

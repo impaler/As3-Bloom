@@ -25,7 +25,6 @@ package bloom.core
 	/**
 	 * Margin
 	 * 
-	 * @date 2012/1/17 12:04
 	 * @author sindney
 	 */
 	public class Margin {

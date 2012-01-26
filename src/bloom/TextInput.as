@@ -36,7 +36,6 @@ package bloom
 	/**
 	 * TextInput
 	 * 
-	 * @date 2012/1/10 20:12
 	 * @author sindney
 	 */
 	public class TextInput extends Component {

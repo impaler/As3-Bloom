@@ -33,7 +33,6 @@ package bloom
 	/**
 	 * ToggleButton
 	 * 
-	 * @date 2012/1/10 20:13
 	 * @author sindney
 	 */
 	public class ToggleButton extends CheckBox {

@@ -36,7 +36,6 @@ package bloom.containers
 	/**
 	 * Conatiner
 	 * 
-	 * @date 2012/1/14 10:48
 	 * @author sindney
 	 */
 	public class Container extends Component {

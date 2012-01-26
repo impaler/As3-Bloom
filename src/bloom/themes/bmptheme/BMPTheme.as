@@ -23,10 +23,15 @@ package bloom.themes.bmptheme {
 
 import bloom.themes.*;
 
+/**
+ * BMPTheme
+ * 
+ * @author impaler
+ */
 public class BMPTheme implements ITheme {
 
 	public function initialize ():void {
-
+		new AccordionTheme ().initialize();
 		new ButtonBMPTheme ().initialize ();
 		new ListBMPTheme ().initialize ();
 		new NumericStepperBMPTheme ().initialize ();
@@ -43,7 +48,6 @@ public class BMPTheme implements ITheme {
 		new TextInputBMPTheme ().initialize ();
 		new ToggleButtonBMPTheme ().initialize ();
 		new ContainerBMPTheme ().initialize ();
-
 	}
 
 }

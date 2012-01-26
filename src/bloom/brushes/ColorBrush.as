@@ -32,7 +32,6 @@ package bloom.brushes
 	/**
 	 * ColorBrush
 	 * 
-	 * @date 2012/1/10 20:18
 	 * @author sindney
 	 */
 	public class ColorBrush extends Brush {

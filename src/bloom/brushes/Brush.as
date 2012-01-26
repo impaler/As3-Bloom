@@ -26,7 +26,6 @@ package bloom.brushes
 	/**
 	 * Brush
 	 * 
-	 * @date 2012/1/10 20:18
 	 * @author sindney
 	 */
 	public class Brush extends EventDispatcher {

@@ -34,7 +34,6 @@ package bloom.brushes
 	 * BMPBrush
 	 * <p>ScaleBitmap Brush.</p>
 	 * 
-	 * @date 2012/1/15 22:11
 	 * @author sindney, impaler
 	 */
 	public class BMPBrush extends Brush {

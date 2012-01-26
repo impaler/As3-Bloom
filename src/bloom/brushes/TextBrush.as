@@ -34,7 +34,6 @@ package bloom.brushes
 	/**
 	 * TextBrush
 	 * 
-	 * @date 2012/1/10 20:19
 	 * @author sindney
 	 */
 	public class TextBrush extends Brush {

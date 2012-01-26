@@ -40,7 +40,6 @@ package bloom.core
 	/**
 	 * Component
 	 * 
-	 * @date 2012/1/10 20:17
 	 * @author sindney
 	 */
 	public class Component extends Sprite implements IComponent {

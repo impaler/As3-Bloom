@@ -35,7 +35,6 @@ package bloom.core
 	/**
 	 * ButtonBase
 	 * 
-	 * @date 2012/1/10 20:17
 	 * @author sindney
 	 */
 	public class ButtonBase extends Component {

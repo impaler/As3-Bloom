@@ -37,7 +37,6 @@ package bloom
 	/**
 	 * CheckBoxGroup
 	 *  
-	 * @date 2012/1/20 20:01
 	 * @author sindney
 	 */
 	public class CheckBoxGroup extends EventDispatcher {

@@ -32,7 +32,6 @@ package bloom
 	 * IconBox
 	 * <p>You can add iconBox to Windows's title. And use it's margin method.</p>
 	 * 
-	 * @date 2012/1/16 10:47
 	 * @author sindney
 	 */
 	public class IconBox extends ScaleBitmap implements IComponent {

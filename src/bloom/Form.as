@@ -45,7 +45,6 @@ package bloom
 	 * Form
 	 * <p>It's just a base class for you to extend, so that you can create your own Form.</p>
 	 * 
-	 * @date 2012/1/21 9:45
 	 * @author sindney
 	 */
 	public class Form extends Component {
@@ -188,8 +187,6 @@ package bloom
 				if (l > 0) {
 					for (i = 0; i < l; i++) {
 						tmp = newItem();
-						if (!tmp.brush) tmp.brush = ThemeBase.FormItem;
-						tmp.drawDirectly();
 						tmp.addEventListener(MouseEvent.CLICK, onItemClick);
 						_pool.push(tmp);
 					}

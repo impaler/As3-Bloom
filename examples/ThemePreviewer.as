@@ -35,11 +35,11 @@ import flash.display.StageScaleMode;
 import flash.events.Event;
 
 /**
- * BMPExample
+ * ThemePreviewer
  *
  * @author sindney, impaler
  */
-[SWF(backgroundColor=0xffffff , frameRate=40 , width=700 , height=500)]
+[SWF(backgroundColor = 0xffffff , frameRate = 40 , width = 700 , height = 500)]
 public class ThemePreviewer extends Sprite {
 
 	[Embed(source="background.jpg")]
@@ -51,7 +51,7 @@ public class ThemePreviewer extends Sprite {
 	public function ThemePreviewer () {
 		stage.align = StageAlign.TOP_LEFT;
 		stage.scaleMode = StageScaleMode.NO_SCALE;
-		stage.showDefaultContextMenu = false;
+		//stage.showDefaultContextMenu = false;
 
 		addChild ( new background () );
 		addChild ( new logo () );
@@ -79,7 +79,7 @@ public class ThemePreviewer extends Sprite {
 		// TabBox
 		var tabBox:TabBox = new TabBox ( scrollContainer.content );
 		tabBox.margin.reset ( 0 , 0 , 0 , 0 );
-		tabBox.size ( 680 , 480 );
+		tabBox.size ( 680 , 600 );
 
 		scrollContainer.calculateContentSize ();
 
@@ -110,9 +110,6 @@ public class ThemePreviewer extends Sprite {
 		but.size ( 120 , 120 );
 
 		tabBox.addContent ( "Buttons" , tabContainer , margin );
-//		scrollContainer.calculateContentSize ();
-
-
 
 		// Labels Tab
 		tabContainer = new FlowContainer ();
@@ -212,7 +209,7 @@ public class ThemePreviewer extends Sprite {
 		textbox.enabled = false;
 
 		textbox = new TextBox ( tabContainer , "Large Text ^_^" );
-		textbox.textBase.brush = new TextBrush ( "Verdana" , 30 , 0xffffff , false , false , true );
+		//textbox.textBase.brush = new TextBrush ( "Verdana" , 30 , 0x000000 , false , false , true );
 		textbox.size ( 230 , 160 );
 
 		var text:TextInput = new TextInput ( tabContainer , "Text Input" );
@@ -258,7 +255,6 @@ public class ThemePreviewer extends Sprite {
 		toggleButton.enabled = false;
 
 		var toggleSwitcher:ToggleSwitcher = new ToggleSwitcher ( tabContainer , true );
-		toggleSwitcher.width = 200;
 
 		toggleSwitcher = new ToggleSwitcher ( tabContainer , true );
 		toggleSwitcher.enabled = false;
@@ -291,7 +287,7 @@ public class ThemePreviewer extends Sprite {
 		tabBox.toggleTab ( "Buttons" );
 
 	}
-
+	
 	private var decrease:Boolean = false;
 	private var progressBar:ProgressBar;
 

@@ -40,7 +40,6 @@ package bloom
 	/**
 	 * TextBox
 	 * 
-	 * @date 2012/1/10 20:12
 	 * @author sindney
 	 */
 	public class TextBox extends Component {
