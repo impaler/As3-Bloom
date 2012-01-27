@@ -35,9 +35,9 @@ package bloom.containers
 		
 		public static const VERTICALLY:int = 0;
 		public static const HORIZONTALLY:int = 1;
-		
+		public static const GRID:int = 2;
+
 		protected var _direction:int;
-		
 		protected var _target:DisplayObjectContainer;
 		
 		public function FlowContainer(p:DisplayObjectContainer = null) {
@@ -48,6 +48,8 @@ package bloom.containers
 		
 		override public function update():void {
 			var last:Number = 0;
+			var rows:Number = 0;
+			var rowLength:Number = 0;
 			
 			var object:DisplayObject;
 			var component:IChild;
@@ -64,9 +66,25 @@ package bloom.containers
 						component.x = component.margin.left;
 						component.y = last + component.margin.top;
 						last = component.y + component.height + component.margin.bottom;
+					} else if ( _direction == GRID ) {
+						component.x = last + component.margin.left;
+						if ( rows == 0 ) {
+							component.y = ( component.margin.top );
+						} else {
+							component.y = (component.margin.top * (rows + 1)) + ( component.height * rows);
+						}
+						last = component.x + component.width + component.margin.right;
+						if ( rows == 1 ) component.y = (component.margin.top * (rows + 1)) + ( component.height * rows);
+						if ( width <= last + component.margin.left + component.width + component.margin.right ) {
+							last = 0;
+							if ( rowLength==0 ) rowLength =i+1;
+							rows += 1;
+						}
 					}
 				}
 			}
+					
+			trace( "row length - " + rowLength );
 		}
 		
 		///////////////////////////////////
