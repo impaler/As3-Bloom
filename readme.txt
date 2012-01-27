@@ -30,12 +30,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 ----------------------------------------------------------------
-Version 1.0.0 r0
+Version 1.0.0 r1
 ----------------------------------------------------------------
 
 History
 
-Version 1.1.0 r0
+Version 1.0.0 r1
+ - ThemeBase.Text_Button_Over/Text_Button_Down/List_Selected added.
+
+Version 1.0.0 r0
  - As3-Bloom's first stable release.
 
 Version 0.1.1 r33
@@ -46,7 +49,7 @@ Version 0.1.1 r31
  - Example "HelloWorld" added.
  - Minor changes.
 
-Version 0.1.1 r28
+Version 0.1.1 r2
  - TabBox added.
  - CheckBoxGroup fix.
  - Now there's only 2 things left todo. Bug fix && Finish the BMPTheme. Guys, get ready to say "hello" to Bloom's first stable release ;)

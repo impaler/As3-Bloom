@@ -56,6 +56,19 @@ package bloom
 		
 		override protected function draw(e:Event):void {
 			super.draw(null);
+			
+			switch(_state) {
+				case 0:
+					_title.brush = ThemeBase.Text_Button;
+					break;
+				case 1:
+					_title.brush = ThemeBase.Text_Button_Over;
+					break;
+				case 2:
+					_title.brush = ThemeBase.Text_Button_Down;
+					break;
+			}
+			
 			_title.move((_width - _title.width) * 0.5, (_height - _title.height) * 0.5);
 		}
 		

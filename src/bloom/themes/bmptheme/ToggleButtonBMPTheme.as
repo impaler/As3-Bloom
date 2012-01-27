@@ -52,7 +52,7 @@ public class ToggleButtonBMPTheme implements ITheme {
 
 	public function initialize ():void {
 
-		ThemeBase.Text_Button = new TextBrush ( "Verdana" , 12 , 0xffffff , false , false , false );
+		ThemeBase.Text_ToggleButton = new TextBrush ( "Verdana" , 12 , 0xffffff , false , false , false );
 
 		var data:Vector.<ScaleBitmap>;
 		var scaleBMP0:ScaleBitmap;

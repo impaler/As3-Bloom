@@ -51,12 +51,15 @@ package bloom.themes
 		///////////////////////////////////
 		
 		public static var Text_Button:TextBrush;
+		public static var Text_Button_Over:TextBrush;
+		public static var Text_Button_Down:TextBrush;
 		
 		public static var Text_CheckBox:TextBrush;
 		
 		public static var Text_Label:TextBrush;
 		
 		public static var Text_List:TextBrush;
+		public static var Text_List_Selected:TextBrush;
 		
 		public static var Text_NumericStepper:TextBrush;
 		

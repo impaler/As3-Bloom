@@ -49,6 +49,8 @@ public class ButtonBMPTheme implements ITheme {
 	public function initialize ():void {
 
 		ThemeBase.Text_Button = new TextBrush ( "Verdana" , 12 , 0xffffff , false , false , false );
+		ThemeBase.Text_Button_Over = new TextBrush ( "Verdana" , 12 , 0xffffff , false , false , false );
+		ThemeBase.Text_Button_Down = new TextBrush ( "Verdana" , 12 , 0x000000 , false , false , false );
 
 		var data:Vector.<ScaleBitmap>;
 		var scaleBMP0:ScaleBitmap;

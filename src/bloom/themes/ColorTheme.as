@@ -38,9 +38,12 @@ package bloom.themes
 		public function initialize():void {
 			// TextBrushes
 			ThemeBase.Text_Button = new TextBrush("Verdana", 12, 0xffffff, false, false, false);
+			ThemeBase.Text_Button_Over = new TextBrush("Verdana", 12, 0xffffff, false, false, false);
+			ThemeBase.Text_Button_Down = new TextBrush("Verdana", 12, 0x000000, false, false, false);
 			ThemeBase.Text_CheckBox = new TextBrush("Verdana", 12, 0x000000, false, false, false);
 			ThemeBase.Text_Label = new TextBrush("Verdana", 12, 0x000000, false, false, false);
-			ThemeBase.Text_List = new TextBrush("Verdana", 12, 0x000000, false, false, false);
+			ThemeBase.Text_List = new TextBrush("Verdana", 12, 0x333333, false, false, false);
+			ThemeBase.Text_List_Selected = new TextBrush("Verdana", 12, 0x000000, false, false, false);
 			ThemeBase.Text_NumericStepper = new TextBrush("Verdana", 12, 0xffffff, false, false, false);
 			ThemeBase.Text_TabBox = new TextBrush("Verdana", 12, 0x000000, false, false, false);
 			ThemeBase.Text_TextBox = new TextBrush("Verdana", 12, 0xffffff, false, false, false);

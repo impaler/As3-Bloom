@@ -52,7 +52,8 @@ public class ListBMPTheme implements ITheme {
 
 	public function initialize ():void {
 
-		ThemeBase.Text_List = new TextBrush ( "Verdana" , 12 , 0x000000 , false , false , false );
+		ThemeBase.Text_List = new TextBrush ( "Verdana" , 12 , 0x333333 , false , false , false );
+		ThemeBase.Text_List_Selected = new TextBrush ( "Verdana" , 12 , 0x000000 , false , false , false );
 
 		var data:Vector.<ScaleBitmap>;
 		var scaleBMP0:ScaleBitmap;

@@ -62,6 +62,7 @@ package bloom
 		
 		override protected function draw(e:Event):void {
 			super.draw(null);
+			_title.brush = _selected ? ThemeBase.Text_List_Selected : ThemeBase.Text_List;
 			_title.move(5, (_height - _title.height) * 0.5);
 		}
 		
