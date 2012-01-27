@@ -59,8 +59,8 @@ package bloom.core {
         	// Check if the given grid is different from the current one
         	if ( (_scale9Grid == null && r != null) || (_scale9Grid != null && ! _scale9Grid.equals ( r )) ) {
             	if ( r == null ) {
-                	// If deleting scalee9Grid, restore the original bitmap
-                	// then resize it (streched) to the previously set dimensions
+                	// If deleting scale9Grid, restore the original bitmap
+                	// then resize it (stretched) to the previously set dimensions
                 	var currentWidth:Number = width;
                 	var currentHeight:Number = height;
                 	_scale9Grid = null;

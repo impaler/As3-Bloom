@@ -348,7 +348,7 @@ package bloom.containers
 		///////////////////////////////////
 		
 		override public function toString():String {
-			return "[bloom.conatiners.Window]";
+			return "[bloom.containers.Window]";
 		}
 		
 	}

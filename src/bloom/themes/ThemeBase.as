@@ -39,7 +39,7 @@ package bloom.themes
 		}
 		
 		///////////////////////////////////
-		// Gloabal
+		// Global
 		///////////////////////////////////
 		
 		public static var ALPHA:Number = 0.8;
@@ -85,7 +85,7 @@ package bloom.themes
 		// CheckBox
 		public static var CheckBox:Brush;
 		
-		// Conatiner
+		// Container
 		public static var Container:Brush;
 		
 		// Form

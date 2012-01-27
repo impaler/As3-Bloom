@@ -139,7 +139,7 @@ package bloom.core
 		public function set brush(b:Brush):void {
 			if (_brush != b) {
 				if (_brush) {
-					if (_brush is BMPBrush)_brush.destory();
+					if (_brush is BMPBrush)_brush.destroy();
 					_brush.removeEventListener(BrushEvent.REDRAW, onBrushChanged);
 				}
 				_brush = b;

@@ -61,7 +61,7 @@ package bloom.brushes
 			return new BMPBrush(data);
 		}
 		
-		override public function destory():void {
+		override public function destroy():void {
 			var data:ScaleBitmap;
 			for each(data in bitmap) {
 				data.bitmapData.dispose();

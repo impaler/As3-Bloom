@@ -59,7 +59,7 @@ package bloom.brushes
 			return new ColorBrush(data);
 		}
 		
-		override public function destory():void {
+		override public function destroy():void {
 			colors = null;
 		}
 		

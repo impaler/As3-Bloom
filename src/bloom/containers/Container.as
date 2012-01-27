@@ -34,7 +34,7 @@ package bloom.containers
 	import bloom.themes.ThemeBase;
 	
 	/**
-	 * Conatiner
+	 * Container
 	 * 
 	 * @author sindney
 	 */
@@ -90,7 +90,7 @@ package bloom.containers
 			if (_enabled != value) {
 				_enabled = tabChildren = mouseEnabled = mouseChildren = value;
 				
-				// make changes in it's childs.
+				// make changes in it's children.
 				var i:int;
 				var child:DisplayObject;
 				for (i = 0; i < numChildren; i++) {
@@ -105,7 +105,7 @@ package bloom.containers
 		///////////////////////////////////
 		
 		override public function toString():String {
-			return "[bloom.conatiners.Container]";
+			return "[bloom.containers.Container]";
 		}
 		
 	}

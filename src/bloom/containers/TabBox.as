@@ -71,14 +71,14 @@ package bloom.containers
 		/**
 		 * Use to change titles' Brush.
 		 */
-		public function changeTitlesBrush(toggltButton:Brush, title:TextBrush):void {
+		public function changeTitlesBrush(toggleButton:Brush, title:TextBrush):void {
 			var object:ToggleButton;
 			for each(object in _header) {
-				object.brush = toggltButton;
+				object.brush = toggleButton;
 				object.title.brush = title;
 			}
 			for each(object in _pool) {
-				object.brush = toggltButton;
+				object.brush = toggleButton;
 				object.title.brush = title;
 			}
 		}

@@ -216,7 +216,6 @@ package bloom
 		}
 		
 		protected function fixValue():void {
-			var old:Number = _value;
 			if (_max > _min) {
 				if (_value > _max)_value = _max;
 				if (_value < _min)_value = _min;
@@ -224,7 +223,7 @@ package bloom
 				_value = _min = _max;
 			}
 			_textBase.text = String(_value);
-			if (old != _value) dispatchEvent(new Event("change"));
+			dispatchEvent(new Event("change"));
 		}
 		
 		protected function onFocusIn(e:FocusEvent):void {
