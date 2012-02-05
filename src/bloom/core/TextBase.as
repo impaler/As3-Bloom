@@ -50,9 +50,9 @@ import flash.text.TextField;
 	public function TextBase ( p:DisplayObjectContainer = null ) {
 		_margin = new Margin ();
 		if ( p != null ) p.addChild ( this );
-		
+
 		super ();
-		
+
 		applyModel ();
 	}
 
@@ -86,8 +86,8 @@ import flash.text.TextField;
 			if ( _brush ) _brush.removeEventListener ( BrushEvent.REDRAW , onBrushChanged );
 			_brush = b;
 //			if ( _brush ) {
-				onBrushChanged ( null );
-				_brush.addEventListener ( BrushEvent.REDRAW , onBrushChanged );
+			onBrushChanged ( null );
+			_brush.addEventListener ( BrushEvent.REDRAW , onBrushChanged );
 //			}
 		}
 	}
@@ -114,12 +114,12 @@ import flash.text.TextField;
 	public function get registerComponent ():Boolean {
 		return _registerComponent;
 	}
-	
-	public function set registerComponent (value:Boolean):void {
+
+	public function set registerComponent ( value:Boolean ):void {
 		_registerComponent = value;
-		
+
 	}
-	
+
 	///////////////////////////////////
 	// toString
 	///////////////////////////////////
@@ -132,7 +132,7 @@ import flash.text.TextField;
 		_brush = null;
 		_margin = null;
 	}
-	
+
 }
 
 }

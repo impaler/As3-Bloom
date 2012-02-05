@@ -1,5 +1,4 @@
-package bloom.components 
-{
+package bloom.components {
 
 import bloom.brushes.TextBrush;
 import bloom.core.ComponentModel;

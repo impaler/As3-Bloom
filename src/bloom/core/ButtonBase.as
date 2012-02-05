@@ -53,16 +53,16 @@ public class ButtonBase extends Component {
 
 		_bg = new Shape ();
 		addChild ( _bg );
-		
+
 		addEventListener ( MouseEvent.MOUSE_OVER , onMouseOver );
 		addEventListener ( MouseEvent.MOUSE_DOWN , onMouseDown );
-		
+
 		super ( p );
 	}
-	
+
 	override public function applyModel ():void {
 		var _prevModel:ButtonModel = _model;
-		if ( !customModel  ) {
+		if ( ! customModel ) {
 			_model = Bloom.core ().theme.Button_Model;
 		}
 		brush = _model.brush;
@@ -74,14 +74,14 @@ public class ButtonBase extends Component {
 			if ( height != _model.defaultHeight )
 				height = _model.defaultHeight;
 		}
-		
+
 	}
 
 	public function set model ( value:ButtonModel ):void {
 		_model = value;
 		super.applyModel ();
 	}
-	
+
 	override protected function draw ( e:Event ):void {
 		if ( _changed ) {
 			_changed = false;
@@ -172,7 +172,7 @@ public class ButtonBase extends Component {
 	public function get state ():int {
 		return _state;
 	}
-	
+
 	///////////////////////////////////
 	// toString
 	///////////////////////////////////
@@ -183,7 +183,7 @@ public class ButtonBase extends Component {
 
 	override public function destroy ():void {
 		super.destroy ();
-		
+
 		removeEventListener ( MouseEvent.MOUSE_OVER , onMouseOver );
 		removeEventListener ( MouseEvent.MOUSE_DOWN , onMouseDown );
 		_bg = null;

@@ -53,13 +53,13 @@ public class Button extends ButtonBase {
 	}
 
 	override public function applyModel ():void {
-		if ( !customModel  )
+		if ( ! customModel )
 			_model = Bloom.core ().theme.Button_Model;
 
 		super.applyModel ();
 		_title.brush = _model.Text_Button;
 	}
-	
+
 	override public function set model ( value:ButtonModel ):void {
 		_model = value;
 		customModel = true;
@@ -103,10 +103,10 @@ public class Button extends ButtonBase {
 	override public function toString ():String {
 		return "[bloom.Button]";
 	}
-	
+
 	override public function destroy ():void {
 		super.destroy ();
-		
+
 		_title = null;
 	}
 

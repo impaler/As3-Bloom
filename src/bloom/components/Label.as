@@ -43,8 +43,8 @@ public class Label extends TextBase {
 		this.text = text;
 
 		super ( p );
-		if ( Bloom.core().registerComponents ) Bloom.core().registerComponent ( this );
-		
+		if ( Bloom.core ().registerComponents ) Bloom.core ().registerComponent ( this );
+
 	}
 
 	override public function applyModel ():void {
@@ -55,13 +55,13 @@ public class Label extends TextBase {
 	override public function get registerComponent ():Boolean {
 		return _registerComponent;
 	}
-	
-	override public function set registerComponent (value:Boolean):void {
-		 Bloom.core().lookupCoreComponent(this, true) ;
+
+	override public function set registerComponent ( value:Boolean ):void {
+		Bloom.core ().lookupCoreComponent ( this , true );
 		_registerComponent = value;
-		
+
 	}
-	
+
 	///////////////////////////////////
 	// toString
 	///////////////////////////////////
@@ -69,7 +69,7 @@ public class Label extends TextBase {
 	override public function toString ():String {
 		return "[bloom.Label]";
 	}
-	
+
 	override public function destroy ():void {
 		_model = null;
 	}

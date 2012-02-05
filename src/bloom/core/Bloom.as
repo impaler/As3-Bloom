@@ -8,22 +8,22 @@ public class Bloom {
 	private static var _instance:Bloom;
 
 	public var stage:Stage;
-	public var theme:ThemeBase = new ThemeBase();
+	public var theme:ThemeBase = new ThemeBase ();
 
 	/**
 	 * This setting will let you register all the components you create so that you can manipulate them all at once
 	 * Such as change theme, enable / disable them
-	 * 
+	 *
 	 */
 	public var registerComponents:Boolean = false;
 
 	private var coreComponentRegistry:Vector.<IComponent> = new Vector.<IComponent> ();
-	
+
 	private var userComponentRegistries:Dictionary = new Dictionary ();
 
 	/**
 	 * Constants
-	 * 
+	 *
 	 */
 	public static const NORM:int = 0;
 	public static const OVER:int = 1;
@@ -48,10 +48,10 @@ public class Bloom {
 
 	public function setTheme ( _theme:ITheme ) {
 		theme.initTheme ( _theme );
-		updateRegistryCompModels (coreComponentRegistry);
+		updateRegistryCompModels ( coreComponentRegistry );
 	}
 
-	private function updateRegistryCompModels (CompRegistry:Vector.<IComponent>):void {
+	private function updateRegistryCompModels ( CompRegistry:Vector.<IComponent> ):void {
 		if ( registerComponents && CompRegistry.length > 0 ) {
 			for each ( var component:IComponent in CompRegistry ) {
 				if ( component.registerComponent ) {
@@ -60,39 +60,38 @@ public class Bloom {
 			}
 		}
 	}
-	
+
 	public function registerComponent ( component:* ):void {
 		if ( component.registerComponent ) {
 			coreComponentRegistry.push ( component as IComponent );
-			}
+		}
 	}
 
-	public function lookupCoreComponent ( comp:*, remove:Boolean = false ):Boolean {
-		return lookupComponent(coreComponentRegistry,comp, remove);
+	public function lookupCoreComponent ( comp:* , remove:Boolean = false ):Boolean {
+		return lookupComponent ( coreComponentRegistry , comp , remove );
 	}
 
-	private function lookupComponent ( CompRegistry:Vector.<IComponent>, comp:*, remove:Boolean = false ):Boolean {
-		for(var i:int=0; i< CompRegistry.length;i++){
-			if(CompRegistry[i] == comp){
+	private function lookupComponent ( CompRegistry:Vector.<IComponent> , comp:* , remove:Boolean = false ):Boolean {
+		for ( var i:int = 0 ; i < CompRegistry.length ; i ++ ) {
+			if ( CompRegistry[i] == comp ) {
 				if ( remove )
-					CompRegistry .splice(i,1);
+					CompRegistry.splice ( i , 1 );
 				return true;
 			}
 		}
 		return false;
 	}
-	
-	public function createNewComponentRegistry(key:String) {
+
+	public function createNewComponentRegistry ( key:String ) {
 		var coreComponentRegistry:Vector.<IComponent> = new Vector.<IComponent> ();
 		userComponentRegistries[key] = coreComponentRegistry;
 		return userComponentRegistries[key];
 	}
-	
-	public function getComponentRegistry(key:String) : Vector.<IComponent> {
+
+	public function getComponentRegistry ( key:String ):Vector.<IComponent> {
 		return userComponentRegistries[key] as Vector.<IComponent>;
-	}	
-	
-	
+	}
+
 }
 }
 
