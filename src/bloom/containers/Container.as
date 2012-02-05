@@ -20,32 +20,46 @@
  * THE SOFTWARE.
  */
 package bloom.containers 
-{	
-	import flash.display.DisplayObject;
-	import flash.display.DisplayObjectContainer;
-	import flash.events.Event;
-	
-	import bloom.brushes.BMPBrush;
-	import bloom.brushes.Brush;
-	import bloom.brushes.ColorBrush;
-	import bloom.core.Component;
-	import bloom.core.IComponent;
-	import bloom.core.ScaleBitmap;
-	import bloom.themes.ThemeBase;
-	
-	/**
+{
+
+import bloom.brushes.BMPBrush;
+import bloom.brushes.ColorBrush;
+import bloom.core.Bloom;
+import bloom.core.Component;
+import bloom.core.IComponent;
+import bloom.core.ScaleBitmap;
+
+import flash.display.DisplayObject;
+import flash.display.DisplayObjectContainer;
+import flash.events.Event;
+
+/**
 	 * Container
 	 * 
 	 * @author sindney
 	 */
 	public class Container extends Component {
+		private var _model:ContainerModel;
+		public static const BG:int = 0;
 		
 		public function Container(p:DisplayObjectContainer = null) {
 			super(p);
-			brush = ThemeBase.Container;
-			size(100, 100);
 		}
-		
+
+		override public function applyModel ():void {
+			var _prevModel:ContainerModel = _model;
+			_model = Bloom.core().theme.Container_Model;
+			
+			if ( width == 0 && height == 0 || width == _prevModel.defaultWidth && height == _prevModel.defaultHeight ) {
+				if ( width != _model.defaultWidth )
+					width = _model.defaultWidth;
+	
+				if ( height != _model.defaultHeight )
+					height = _model.defaultHeight;
+			}
+			brush = _model.brush;
+		}
+
 		/**
 		 * Update child's layout.
 		 */

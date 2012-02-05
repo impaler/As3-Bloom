@@ -21,17 +21,16 @@
  */
 package bloom.core 
 {
-	import flash.display.DisplayObjectContainer;
-	import flash.display.Sprite;
-	import flash.events.Event;
-	import flash.events.MouseEvent;
-	
-	import bloom.brushes.BMPBrush;
-	import bloom.brushes.Brush;
-	import bloom.events.BrushEvent;
-	import bloom.themes.ThemeBase;
-	
-	/** 
+
+import bloom.brushes.BMPBrush;
+import bloom.brushes.Brush;
+import bloom.events.BrushEvent;
+
+import flash.display.DisplayObjectContainer;
+import flash.display.Sprite;
+import flash.events.Event;
+
+/** 
 	 * Dispatched when this Component has resized.
 	 * @eventType flash.events.Event
 	 */
@@ -53,14 +52,24 @@ package bloom.core
 		protected var _brush:Brush;
 		
 		protected var _margin:Margin;
+	
+		protected var _registerComponent:Boolean = true;
+		protected var customModel:Boolean = false;
 		
 		public function Component(p:DisplayObjectContainer = null) {
 			super();
+			applyModel ();
 			_margin = new Margin();
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+			if ( Bloom.core().registerComponents ) Bloom.core().registerComponent ( this );
 			if (p != null) p.addChild(this);
 		}
-		
+	
+		public function applyModel ():void {
+			_changed = true;
+			invalidate();
+		}
+	
 		/**
 		 * Move this component.
 		 */
@@ -90,7 +99,7 @@ package bloom.core
 		protected function draw(e:Event):void {
 			
 		}
-		
+	
 		protected function invalidate():void {
 			if (stage) stage.invalidate();
 		}
@@ -159,7 +168,7 @@ package bloom.core
 		public function set enabled(value:Boolean):void {
 			if (_enabled != value) {
 				_enabled = mouseEnabled = mouseChildren = value;
-				alpha = _enabled ? 1 : ThemeBase.ALPHA;
+				alpha = _enabled ? 1 : Bloom.core().theme.ALPHA;
 			}
 		}
 		
@@ -171,6 +180,10 @@ package bloom.core
 			return _margin;
 		}
 		
+		public function get registerComponent ( ):Boolean {
+			return _registerComponent;
+		}
+	
 		///////////////////////////////////
 		// toString
 		///////////////////////////////////
@@ -178,7 +191,12 @@ package bloom.core
 		override public function toString():String {
 			return "[bloom.core.Component]";
 		}
-		
-	}
+	
+		public function destroy () : void {
+			_brush = null;
+			_margin = null;
+		}
+	
+}
 
 }

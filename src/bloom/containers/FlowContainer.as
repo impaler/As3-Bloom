@@ -41,9 +41,9 @@ package bloom.containers
 		protected var _target:DisplayObjectContainer;
 		
 		public function FlowContainer(p:DisplayObjectContainer = null) {
-			super(p);
 			_direction = HORIZONTALLY;
 			_target = this;
+			super(p);
 		}
 		
 		override public function update():void {
@@ -83,8 +83,6 @@ package bloom.containers
 					}
 				}
 			}
-					
-			trace( "row length - " + rowLength );
 		}
 		
 		///////////////////////////////////

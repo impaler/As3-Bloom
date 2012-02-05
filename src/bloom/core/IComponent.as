@@ -29,6 +29,8 @@ package bloom.core
 	 */
 	public interface IComponent extends IChild {
 		
+		function applyModel ():void
+		
 		function move(x:Number, y:Number):void;
 		
 		function size(w:Number, h:Number):void;
@@ -37,6 +39,10 @@ package bloom.core
 		function get enabled():Boolean;
 		
 		function toString():String;
+		
+		function get registerComponent():Boolean;
+		
+		function destroy () : void;
 		
 	}
 	
