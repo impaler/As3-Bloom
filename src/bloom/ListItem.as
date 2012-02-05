@@ -26,8 +26,10 @@ package bloom
 	
 	import bloom.events.BrushEvent;
 	import bloom.themes.ThemeBase;
-	
-	/**
+
+	import flash.events.MouseEvent;
+
+/**
 	 * ListItem
 	 * 
 	 * @author sindney
@@ -44,7 +46,23 @@ package bloom
 			_title.addEventListener(Event.CHANGE, onTitleChanged);
 			_title.addEventListener(BrushEvent.REDRAW, onTitleChanged);
 			
+			this.addEventListener(MouseEvent.MOUSE_OVER , onOver);
+			
 			brush = ThemeBase.ListItem;
+		}
+
+		private function onOver ( event:MouseEvent ):void {
+			this.removeEventListener(MouseEvent.MOUSE_OVER , onOver);
+			this.addEventListener(MouseEvent.MOUSE_OUT , onOut);
+			
+			_title.brush = ThemeBase.Text_List_Selected;
+		}
+	
+		private function onOut ( event:MouseEvent ):void {
+			this.addEventListener(MouseEvent.MOUSE_OVER , onOver);
+			this.removeEventListener(MouseEvent.MOUSE_OUT , onOut);
+			
+			_title.brush = ThemeBase.Text_List;
 		}
 		
 		protected function onTitleChanged(e:Event):void {

@@ -43,12 +43,13 @@ package bloom.themes
 			ThemeBase.Text_CheckBox = new TextBrush("Verdana", 12, 0x000000, false, false, false);
 			ThemeBase.Text_Label = new TextBrush("Verdana", 12, 0x000000, false, false, false);
 			ThemeBase.Text_List = new TextBrush("Verdana", 12, 0x333333, false, false, false);
-			ThemeBase.Text_List_Selected = new TextBrush("Verdana", 12, 0x000000, false, false, false);
+			ThemeBase.Text_List_Selected = new TextBrush("Verdana", 14, 0x000000, false, false, false);
 			ThemeBase.Text_NumericStepper = new TextBrush("Verdana", 12, 0xffffff, false, false, false);
 			ThemeBase.Text_TabBox = new TextBrush("Verdana", 12, 0x000000, false, false, false);
 			ThemeBase.Text_TextBox = new TextBrush("Verdana", 12, 0xffffff, false, false, false);
 			ThemeBase.Text_TextInput = new TextBrush("Verdana", 12, 0xffffff, false, false, false);
 			ThemeBase.Text_ToggleButton = new TextBrush("Verdana", 12, 0xffffff, false, false, false);
+			ThemeBase.Text_SelectList = new TextBrush("Verdana", 12, 0x000000, false, false, false);
 			
 			var data:Vector.<uint>;
 			
@@ -67,6 +68,19 @@ package bloom.themes
 			data[1] = 0x5E5EAC;
 			data[2] = 0xF1BA44;
 			ThemeBase.Button = new ColorBrush(data);
+			
+			// SelectList
+			data = new Vector.<uint>(3, true);
+			data[0] = 0xffffff;
+			data[1] = 0x5E5EAC;
+			data[2] = 0xF1BA44;
+			ThemeBase.SelectList = new ColorBrush(data);	
+			
+			data = new Vector.<uint>(3, true);
+			data[0] = 0x3E3E72;
+			data[1] = 0x5E5EAC;
+			data[2] = 0xF1BA44;
+			ThemeBase.SelectListButton = new ColorBrush(data);	
 			
 			// CheckBox
 			data = new Vector.<uint>(2, true);

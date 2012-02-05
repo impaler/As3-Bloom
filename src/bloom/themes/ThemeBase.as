@@ -22,8 +22,10 @@
 package bloom.themes 
 {	
 	import bloom.brushes.*;
-	
-	/**
+
+	import flash.display.Stage;
+
+/**
 	 * ThemeBase
 	 * 
 	 * @author sindney, impaler
@@ -42,6 +44,8 @@ package bloom.themes
 		// Global
 		///////////////////////////////////
 		
+		public static var stage:Stage;
+		
 		public static var ALPHA:Number = 0.8;
 		
 		public static var FOCUS:uint = 0xEEDD88;
@@ -53,6 +57,8 @@ package bloom.themes
 		public static var Text_Button:TextBrush;
 		public static var Text_Button_Over:TextBrush;
 		public static var Text_Button_Down:TextBrush;
+		
+		public static var Text_SelectList:TextBrush;
 		
 		public static var Text_CheckBox:TextBrush;
 		
@@ -81,6 +87,10 @@ package bloom.themes
 		
 		// Button
 		public static var Button:Brush;
+		
+		// Select List
+		public static var SelectList:Brush;
+		public static var SelectListButton:Brush;
 		
 		// CheckBox
 		public static var CheckBox:Brush;
