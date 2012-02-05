@@ -73,7 +73,7 @@ package bloom.containers
 						} else {
 							component.y = (component.margin.top * (rows + 1)) + ( component.height * rows);
 						}
-						last = component.x + component.width + component.margin.right;
+						last = component.x + component.width;
 						if ( rows == 1 ) component.y = (component.margin.top * (rows + 1)) + ( component.height * rows);
 						if ( width <= last + component.margin.left + component.width + component.margin.right ) {
 							last = 0;
