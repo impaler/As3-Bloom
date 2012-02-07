@@ -24,26 +24,47 @@ public class bloomtest extends Sprite {
 
 		Bloom.core ().init ( stage , new DefaultTheme () , true );
 		Bloom.core().registerComponents = true;
+		
+		var cont:FlowContainer = new FlowContainer ( this );
+		cont.size ( 0,0 );
+		cont.registerComponent = false;
+		cont.direction = FlowContainer.VERTICALLY;
+		
+		var btn:Button = new Button(cont, "Test", howMany );
+		var btn:Button = new Button(cont, "Test", howMany );
+		var btn:Button = new Button(cont, "Test", howMany );
+		var btn:Button = new Button(cont, "Test", howMany );
+		
+		buttonsTest ();
+	}
 
+	private function howMany (e:MouseEvent):void {
+		trace(Bloom.core().componentRegistry.Registry.length);
+	}
+
+	private function buttonsTest ():void {
 		var cont:FlowContainer = new FlowContainer ( this );
 		cont.size ( 300 , 350 );
 		cont.registerComponent = false;
 		cont.direction = FlowContainer.GRID;
 
+		var jj:Label = new Label ( cont , "Set Default" );
+		var jj:Label = new Label ( cont , "Set Default" );
+		var jj:Label = new Label ( cont , "Set Default" );
+		var jj:Label = new Label ( cont , "Set Default" );
+		var jj:Label = new Label ( cont , "Set Default" );
+		var jj:Label = new Label ( cont , "Set Default" );
+		
 		var defaulttheme:Button = new Button ( cont , "Set Default" );
-		defaulttheme.addEventListener ( MouseEvent.MOUSE_DOWN , _changeToDefaultTheme );
+		defaulttheme.onDown.add ( _changeToDefaultTheme );
 
 		var darktheme:Button = new Button ( cont , "Set Dark" );
-		darktheme.addEventListener ( MouseEvent.MOUSE_DOWN , _changeToDarkTheme );
-		
+		darktheme.onDown.add ( _changeToDarkTheme );
 
-		
 		var disablebtn:Button = new Button ( cont , "Disable" );
 		disablebtn.registerComponent = false;
-		disablebtn.addEventListener ( MouseEvent.MOUSE_DOWN , _disableComps );
-		
-		
-		
+		disablebtn.onDown.add ( _disableComps );
+
 		var darktheme:Button = new Button ( cont , "Dark and wide Always" );
 		darktheme.width = 180;
 		darktheme.model = new DarkButtonModel ();
@@ -52,24 +73,22 @@ public class bloomtest extends Sprite {
 			var btn:Button = new Button ( cont , "Button " + i + " :)" );
 		}
 
-		
-		var _altReg = Bloom.core().newCompRegistry("alt");
-		
+		var _altReg = Bloom.core ().newCompRegistry ( "alt" );
+
 		for ( var i:int = 0 ; i < 6 ; i ++ ) {
 			_altReg.registerComponent ( new Button ( cont , "alt reg " + i + " :)" ) );
 		}
 
 		var defaulttheme:Button = new Button ( cont , "Alt Default" );
-		defaulttheme.addEventListener ( MouseEvent.MOUSE_DOWN , _changealtToDefaultTheme );
+		defaulttheme.onDown.add ( _changealtToDefaultTheme );
 
 		var darktheme:Button = new Button ( cont , "Alt Dark" );
-		darktheme.addEventListener ( MouseEvent.MOUSE_DOWN , _changealtToDarkTheme );
-		
+		darktheme.onDown.add ( _changealtToDarkTheme );
 	}
 
 	private function _disableComps ( event:MouseEvent ):void {
-		Bloom.core().componentRegistry.disableComponents();
-	}
+			Bloom.core().componentRegistry.disableComponents();
+		}
 
 	private function _changealtToDarkTheme ( event:MouseEvent ):void {
 		var _altReg = Bloom.core().getCompRegistry("alt");

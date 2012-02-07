@@ -40,7 +40,7 @@ public class Button extends ButtonBase {
 
 	public function Button ( p:DisplayObjectContainer = null , text:String = "" , down:Function = null ) {
 		_title = new Label ( this , text );
-//		_title.registerComponent = false;
+		_title.registerComponent = false;
 
 		super ( p );
 		addChild ( _title );
@@ -48,7 +48,7 @@ public class Button extends ButtonBase {
 		_title.addEventListener ( Event.CHANGE , onTitleChanged );
 		_title.addEventListener ( BrushEvent.REDRAW , onTitleChanged );
 
-		if ( down != null ) addEventListener ( MouseEvent.MOUSE_DOWN , down );
+		if ( down != null ) onDown.add( down );
 	}
 
 	override public function applyModel ():void {
