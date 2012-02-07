@@ -23,7 +23,6 @@ package bloom.containers {
 
 import bloom.brushes.BMPBrush;
 import bloom.brushes.ColorBrush;
-import bloom.core.Bloom;
 import bloom.core.Component;
 import bloom.core.ScaleBitmap;
 
@@ -32,8 +31,6 @@ import flash.display.Sprite;
 import flash.events.Event;
 import flash.events.MouseEvent;
 import flash.geom.Rectangle;
-
-//	import bloom.themes.ThemeBase;
 
 /**
  * Window
@@ -64,6 +61,8 @@ public class Window extends Component {
 
 	private var xOffset:Number;
 	private var yOffset:Number;
+	
+	private var _model:WindowModel;
 
 	public function Window ( p:DisplayObjectContainer = null , content:FlowContainer = null , moveable:Boolean = true ,
 	                         resizeable:Boolean = true ) {
@@ -93,22 +92,33 @@ public class Window extends Component {
 
 	override public function applyModel ():void {
 		super.applyModel ();
+		
+		var _prevModel:WindowModel = _model;
+		if ( ! _customModel ) {
+			_model = Registry.theme.Window_Model;
+		}
+		brush = _model.brush;
 
-		brush = Bloom.core ().theme.Window_Model.brush;
-
-		_maxWidth = Bloom.core ().theme.Window_Model.maxWidth;
-		_minWidth = Bloom.core ().theme.Window_Model.minWidth;
-		_maxHeight = Bloom.core ().theme.Window_Model.maxHeight;
-		_minHeight = Bloom.core ().theme.Window_Model.minHeight;
-		_header.brush = Bloom.core ().theme.Window_Model.Window_Header;
-		_footer.brush = Bloom.core ().theme.Window_Model.Window_Footer;
-		_liveResize = Bloom.core ().theme.Window_Model.liveResize;
-		_headerHeight = Bloom.core ().theme.Window_Model.headerHeight;
-		_footerHeight = Bloom.core ().theme.Window_Model.footerHeight;
+		_maxWidth = _model.maxWidth;
+		_minWidth = _model.minWidth;
+		_maxHeight = _model.maxHeight;
+		_minHeight = _model.minHeight;
+		_header.brush = _model.Window_Header;
+		_footer.brush = _model.Window_Footer;
+		_liveResize = _model.liveResize;
+		_headerHeight = _model.headerHeight;
+		_footerHeight = _model.footerHeight;
 		_resizeable = true;
 		_resizeable ? addChild ( _scaler ) : removeChild ( _scaler );
 		_moveable = true;
-		size ( Bloom.core ().theme.Window_Model.defaultWidth , Bloom.core ().theme.Window_Model.defaultHeight );
+		
+		if ( width == 0 && height == 0 || width == _prevModel.defaultWidth && height == _prevModel.defaultHeight ) {
+			if ( width != _model.defaultWidth && height != _model.defaultHeight) {
+				size ( _model.defaultWidth , _model.defaultHeight );
+			}
+		}
+
+		
 	}
 
 	private function onStartWindowDrag ( e:MouseEvent ):void {

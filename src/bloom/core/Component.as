@@ -52,14 +52,17 @@ import flash.events.Event;
 	protected var _margin:Margin;
 
 	protected var _registerComponent:Boolean = true;
-	protected var customModel:Boolean = false;
+	
+	protected var _customModel:Boolean = false;
+	
+	protected var _Reg:ComponentReg;
 
 	public function Component ( p:DisplayObjectContainer = null ) {
 		super ();
+		Bloom.core ().registerComponent ( this );
 		applyModel ();
 		_margin = new Margin ();
 		addEventListener ( Event.ADDED_TO_STAGE , onAddedToStage );
-		if ( Bloom.core ().registerComponents ) Bloom.core ().registerComponent ( this );
 		if ( p != null ) p.addChild ( this );
 	}
 
@@ -166,7 +169,7 @@ import flash.events.Event;
 	public function set enabled ( value:Boolean ):void {
 		if ( _enabled != value ) {
 			_enabled = mouseEnabled = mouseChildren = value;
-			alpha = _enabled ? 1 : Bloom.core ().theme.ALPHA;
+			alpha = _enabled ? 1 : Registry.theme.ALPHA;
 		}
 	}
 
@@ -181,7 +184,16 @@ import flash.events.Event;
 	public function get registerComponent ():Boolean {
 		return _registerComponent;
 	}
-
+	
+	public function set registerComponent (value:Boolean):void {
+		_registerComponent = value;
+		
+//		if ( !value ) {
+//			Registry.removeComponent( this, true );
+//		}
+		
+	}
+	
 	///////////////////////////////////
 	// toString
 	///////////////////////////////////
@@ -195,6 +207,14 @@ import flash.events.Event;
 		_margin = null;
 	}
 
+	public function set Registry ( value:ComponentReg ):void {
+		_Reg = value;
+	}
+	
+	public function get Registry ( ):ComponentReg {
+		return _Reg;
+	}
+	
 }
 
 }

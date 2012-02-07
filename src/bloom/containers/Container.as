@@ -47,7 +47,8 @@ public class Container extends Component {
 
 	override public function applyModel ():void {
 		var _prevModel:ContainerModel = _model;
-		_model = Bloom.core ().theme.Container_Model;
+		if ( ! _customModel )
+			_model = Registry.theme.Container_Model;
 
 		if ( width == 0 && height == 0 || width == _prevModel.defaultWidth && height == _prevModel.defaultHeight ) {
 			if ( width != _model.defaultWidth )

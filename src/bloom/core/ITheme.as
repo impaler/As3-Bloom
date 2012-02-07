@@ -28,7 +28,7 @@ package bloom.core {
  */
 public interface ITheme {
 
-	function initialize ():void;
+	function initialize (themBase:ThemeBase):void;
 
 }
 

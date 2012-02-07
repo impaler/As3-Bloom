@@ -1,15 +1,16 @@
 package bloom.themes.darkTheme {
 
-import bloom.core.Bloom;
+import bloom.core.ComponentReg;
 import bloom.core.ITheme;
+import bloom.core.ThemeBase;
 
 public class DarkTheme implements ITheme {
 
-	public function initialize ():void {
-		Bloom.core ().theme.Button_Model = new DarkButtonModel ();
-		Bloom.core ().theme.Container_Model = new DarkContainerModel ();
-		Bloom.core ().theme.Label_Model = new DarkLabelModel ();
-		Bloom.core ().theme.Window_Model = new DarkWindowModel ();
+	public function initialize (themBase:ThemeBase):void {
+		themBase.Button_Model = new DarkButtonModel ();
+		themBase.Container_Model = new DarkContainerModel ();
+		themBase.Label_Model = new DarkLabelModel ();
+		themBase.Window_Model = new DarkWindowModel ();
 	}
 
 }

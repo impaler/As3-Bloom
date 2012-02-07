@@ -35,6 +35,10 @@ public interface IComponent extends IChild {
 	function size ( w:Number , h:Number ):void;
 
 	function set enabled ( value:Boolean ):void;
+	
+	function set Registry ( value:ComponentReg ):void;
+	
+	function get Registry ( ):ComponentReg;
 
 	function get enabled ():Boolean;
 

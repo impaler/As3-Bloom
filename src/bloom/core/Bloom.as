@@ -8,29 +8,26 @@ public class Bloom {
 	private static var _instance:Bloom;
 
 	public var stage:Stage;
-	public var theme:ThemeBase = new ThemeBase ();
 
-	/**
-	 * This setting will let you register all the components you create so that you can manipulate them all at once
-	 * Such as change theme, enable / disable them
-	 *
-	 */
 	public var registerComponents:Boolean = false;
-
-	private var coreComponentRegistry:Vector.<IComponent> = new Vector.<IComponent> ();
-
+	public var componentRegistry:ComponentReg = new ComponentReg ();
+	
 	private var userComponentRegistries:Dictionary = new Dictionary ();
 
 	/**
-	 * Constants
+	 * Component Constants
 	 *
 	 */
 	public static const NORM:int = 0;
 	public static const OVER:int = 1;
 	public static const DOWN:int = 2;
 
+	/**
+	 * Bloom core singleton pattern
+	 *
+	 * @param singletonEnforcer
+	 */
 	public function Bloom ( singletonEnforcer:SingletonEnforcer ) {
-//		trace ( "Single instantiate" );
 	}
 
 	public static function core ():Bloom {
@@ -43,56 +40,36 @@ public class Bloom {
 	public function init ( _stage:Stage , _theme:ITheme , _registerComponents:Boolean = false ):void {
 		stage = _stage;
 		registerComponents = _registerComponents;
-		theme.initTheme ( _theme );
+		componentRegistry.theme.initTheme ( _theme );
 	}
 
-	public function setTheme ( _theme:ITheme ) {
-		theme.initTheme ( _theme );
-		updateRegistryCompModels ( coreComponentRegistry );
+	public function setTheme ( _theme:ITheme ):void {
+		componentRegistry.theme.initTheme ( _theme );
+		if ( registerComponents && componentRegistry.Registry.length > 0 ) {
+			componentRegistry.updateRegistryCompModels ();
+		}
 	}
+	
+	public function registerComponent ( component:IComponent ):void {
+		component.Registry = componentRegistry;
 
-	private function updateRegistryCompModels ( CompRegistry:Vector.<IComponent> ):void {
-		if ( registerComponents && CompRegistry.length > 0 ) {
-			for each ( var component:IComponent in CompRegistry ) {
-				if ( component.registerComponent ) {
-					component.applyModel ();
-				}
-			}
+		if ( registerComponents && component.registerComponent ) {
+			componentRegistry.registerComponent ( component );
 		}
 	}
 
-	public function registerComponent ( component:* ):void {
-		if ( component.registerComponent ) {
-			coreComponentRegistry.push ( component as IComponent );
-		}
-	}
-
-	public function lookupCoreComponent ( comp:* , remove:Boolean = false ):Boolean {
-		return lookupComponent ( coreComponentRegistry , comp , remove );
-	}
-
-	private function lookupComponent ( CompRegistry:Vector.<IComponent> , comp:* , remove:Boolean = false ):Boolean {
-		for ( var i:int = 0 ; i < CompRegistry.length ; i ++ ) {
-			if ( CompRegistry[i] == comp ) {
-				if ( remove )
-					CompRegistry.splice ( i , 1 );
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public function createNewComponentRegistry ( key:String ) {
-		var coreComponentRegistry:Vector.<IComponent> = new Vector.<IComponent> ();
-		userComponentRegistries[key] = coreComponentRegistry;
+	public function newCompRegistry ( key:String ):ComponentReg {
+		var ComponentRegistry:ComponentReg = new ComponentReg ();
+			userComponentRegistries[key] = ComponentRegistry;
 		return userComponentRegistries[key];
 	}
 
-	public function getComponentRegistry ( key:String ):Vector.<IComponent> {
-		return userComponentRegistries[key] as Vector.<IComponent>;
+	public function getCompRegistry ( key:String ):ComponentReg {
+		return userComponentRegistries[key] as ComponentReg;
 	}
 
 }
+
 }
 
 internal class SingletonEnforcer {

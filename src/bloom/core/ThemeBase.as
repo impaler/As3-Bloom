@@ -38,7 +38,7 @@ public final class ThemeBase {
 	 * @param	theme
 	 */
 	public function initTheme ( theme:ITheme ):void {
-		theme.initialize ();
+		theme.initialize(this);
 	}
 
 	///////////////////////////////////

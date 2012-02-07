@@ -1,15 +1,17 @@
 package bloom.themes.defaultTheme {
 
 import bloom.core.Bloom;
+import bloom.core.ComponentReg;
 import bloom.core.ITheme;
+import bloom.core.ThemeBase;
 
 public class DefaultTheme implements ITheme {
 
-	public function initialize ():void {
-		Bloom.core ().theme.Button_Model = new DefaultButtonModel ();
-		Bloom.core ().theme.Container_Model = new DefaultContainerModel ();
-		Bloom.core ().theme.Label_Model = new DefaultLabelModel ();
-		Bloom.core ().theme.Window_Model = new DefaultWindowModel ();
+	public function initialize (themBase:ThemeBase):void {
+		themBase.Button_Model = new DefaultButtonModel ();
+		themBase.Container_Model = new DefaultContainerModel ();
+		themBase.Label_Model = new DefaultLabelModel ();
+		themBase.Window_Model = new DefaultWindowModel ();
 	}
 
 }

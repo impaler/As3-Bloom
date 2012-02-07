@@ -62,23 +62,24 @@ public class ButtonBase extends Component {
 
 	override public function applyModel ():void {
 		var _prevModel:ButtonModel = _model;
-		if ( ! customModel ) {
-			_model = Bloom.core ().theme.Button_Model;
+		if ( ! _customModel ) {
+			_model = Registry.theme.Button_Model;
 		}
 		brush = _model.brush;
 
-		if ( width == 0 && height == 0 || width == _prevModel.defaultWidth && height == _prevModel.defaultHeight ) {
-			if ( width != _model.defaultWidth )
-				width = _model.defaultWidth;
 
-			if ( height != _model.defaultHeight )
-				height = _model.defaultHeight;
-		}
-
+			if ( width == 0 && height == 0 || width == _prevModel.defaultWidth && height == _prevModel.defaultHeight ) {
+				if ( width != _model.defaultWidth )
+					width = _model.defaultWidth;
+	
+				if ( height != _model.defaultHeight )
+					height = _model.defaultHeight;
+			}
 	}
 
 	public function set model ( value:ButtonModel ):void {
 		_model = value;
+		_customModel = true;
 		super.applyModel ();
 	}
 

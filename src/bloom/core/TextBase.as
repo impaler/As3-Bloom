@@ -22,6 +22,7 @@
 package bloom.core {
 
 import bloom.brushes.TextBrush;
+import bloom.components.LabelModel;
 import bloom.events.BrushEvent;
 
 import flash.display.DisplayObjectContainer;
@@ -46,17 +47,30 @@ import flash.text.TextField;
 	protected var _enabled:Boolean = true;
 
 	protected var _registerComponent:Boolean = true;
+	
+	protected var _Reg:ComponentReg;
+	
+	protected var _model:LabelModel;
+	
+	protected var _customModel:Boolean = false;
 
 	public function TextBase ( p:DisplayObjectContainer = null ) {
 		_margin = new Margin ();
 		if ( p != null ) p.addChild ( this );
 
 		super ();
-
+		Registry = Bloom.core().componentRegistry;
+		
 		applyModel ();
 	}
 
 	public function applyModel ():void {
+	}
+	
+	public function set model ( value:LabelModel ):void {
+		_model = value;
+		_customModel = true;
+		applyModel ();
 	}
 
 	public function move ( x:Number , y:Number ):void {
@@ -99,7 +113,7 @@ import flash.text.TextField;
 	public function set enabled ( value:Boolean ):void {
 		if ( _enabled != value ) {
 			_enabled = tabEnabled = mouseEnabled = value;
-			alpha = _enabled ? 1 : Bloom.core ().theme.ALPHA;
+			alpha = _enabled ? 1 : Registry.theme.ALPHA;
 		}
 	}
 
@@ -133,6 +147,13 @@ import flash.text.TextField;
 		_margin = null;
 	}
 
+	public function set Registry ( value:ComponentReg ):void {
+		_Reg = value;
+	}
+
+	public function get Registry ():ComponentReg {
+		return _Reg;
+	}
 }
 
 }

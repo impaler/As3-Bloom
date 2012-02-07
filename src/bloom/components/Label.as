@@ -33,8 +33,6 @@ import flash.display.DisplayObjectContainer;
  */
 public class Label extends TextBase {
 
-	private var _model:LabelModel;
-
 	public function Label ( p:DisplayObjectContainer = null , text:String = "" ) {
 		selectable = mouseEnabled = tabEnabled = false;
 		type = "dynamic";
@@ -43,24 +41,26 @@ public class Label extends TextBase {
 		this.text = text;
 
 		super ( p );
-		if ( Bloom.core ().registerComponents ) Bloom.core ().registerComponent ( this );
 
 	}
 
 	override public function applyModel ():void {
-		_model = Bloom.core ().theme.Label_Model;
+		if ( ! _customModel )
+		_model = Registry.theme.Label_Model;
 		brush = _model.Text_Label;
 	}
 
-	override public function get registerComponent ():Boolean {
-		return _registerComponent;
-	}
-
-	override public function set registerComponent ( value:Boolean ):void {
-		Bloom.core ().lookupCoreComponent ( this , true );
-		_registerComponent = value;
-
-	}
+	
+//	override public function get registerComponent ():Boolean {
+//		return _registerComponent;
+//	}
+//
+//	override public function set registerComponent ( value:Boolean ):void {
+//		//todo
+////		Bloom.core ().lookupCoreComponent ( this , true );
+//		_registerComponent = value;
+//
+//	}
 
 	///////////////////////////////////
 	// toString

@@ -40,8 +40,7 @@ public class Button extends ButtonBase {
 
 	public function Button ( p:DisplayObjectContainer = null , text:String = "" , down:Function = null ) {
 		_title = new Label ( this , text );
-		//when switching themes do not override to core LabelModel
-		_title.registerComponent = false;
+//		_title.registerComponent = false;
 
 		super ( p );
 		addChild ( _title );
@@ -53,17 +52,11 @@ public class Button extends ButtonBase {
 	}
 
 	override public function applyModel ():void {
-		if ( ! customModel )
-			_model = Bloom.core ().theme.Button_Model;
+		if ( ! _customModel )
+			_model = Registry.theme.Button_Model;
 
 		super.applyModel ();
 		_title.brush = _model.Text_Button;
-	}
-
-	override public function set model ( value:ButtonModel ):void {
-		_model = value;
-		customModel = true;
-		super.applyModel ();
 	}
 
 	protected function onTitleChanged ( e:Event ):void {
