@@ -59,12 +59,24 @@ import flash.text.TextField;
 		if ( p != null ) p.addChild ( this );
 
 		super ();
-		Registry = Bloom.core().componentRegistry;
+		Bloom.core ().registerComponent ( this );
 		
 		applyModel ();
 	}
 
 	public function applyModel ():void {
+	}
+	
+	public function get registerComponent ():Boolean {
+		return _registerComponent;
+	}
+	
+	public function set registerComponent (value:Boolean):void {
+		_registerComponent = value;
+		
+		if ( !value ) {
+			Registry.removeComponent( this, true );
+		}
 	}
 	
 	public function set model ( value:LabelModel ):void {
@@ -123,15 +135,6 @@ import flash.text.TextField;
 
 	public function get margin ():Margin {
 		return _margin;
-	}
-
-	public function get registerComponent ():Boolean {
-		return _registerComponent;
-	}
-
-	public function set registerComponent ( value:Boolean ):void {
-		_registerComponent = value;
-
 	}
 
 	///////////////////////////////////

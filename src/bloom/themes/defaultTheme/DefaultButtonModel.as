@@ -10,7 +10,7 @@ public class DefaultButtonModel extends ButtonModel {
 		defaultWidth = 120;
 		defaultHeight = 26;
 
-		Text_Button = new TextBrush ( "Verdana" , 12 , 0xffffff , false , false , false );
+		Text_Button = new TextBrush ( "Verdana" , 12 , 0x66ffff , false , false , false );
 		Text_Button_Over = new TextBrush ( "Verdana" , 13 , 0xffffff , false , false , false );
 		Text_Button_Down = new TextBrush ( "Verdana" , 11 , 0x000000 , false , false , false );
 

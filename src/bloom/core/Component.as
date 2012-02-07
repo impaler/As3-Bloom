@@ -188,10 +188,9 @@ import flash.events.Event;
 	public function set registerComponent (value:Boolean):void {
 		_registerComponent = value;
 		
-//		if ( !value ) {
-//			Registry.removeComponent( this, true );
-//		}
-		
+		if ( !value ) {
+			Registry.removeComponent( this, true );
+		}
 	}
 	
 	///////////////////////////////////
