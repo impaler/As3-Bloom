@@ -45,7 +45,14 @@ public class bloomtest extends Sprite {
 		var btn:Button = new Button(cont, "Test", howMany );
 		var btn:Button = new Button(cont, "Test", howMany );
 		
-		_alertTest = new AlertWindow (cont);
+		_alertTest = new AlertWindow ();
+		_alertTest.content.addChild(new Button(cont, "Test", howMany ));
+		_alertTest.content.addChild(new Button(cont, "Test", howMany ));
+		_alertTest.content.addChild(new Button(cont, "Test", howMany ));
+		_alertTest.content.addChild(new Button(cont, "Test", howMany ));
+		_alertTest.content.addChild(new Button(cont, "Test", howMany ));
+		_alertTest.content.addChild(new Button(cont, "Test", howMany ));
+		_alertTest.content.addChild(new Button(cont, "Test", howMany ));
 		
 		
 //		buttonsTest ();

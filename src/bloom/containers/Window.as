@@ -77,7 +77,13 @@ public class Window extends Component {
 		_closeBtn.size(20,20);
 
 		_content = content;
-		if ( _content ) addChild ( _content );
+		if ( _content == null ) {
+			_content = new FlowContainer ();
+			_content.direction = FlowContainer.VERTICALLY;
+			_content.tabEnabled = false;
+			_content.registerComponent = false;
+		}
+		addChild ( _content );
 
 		_scaler = new Sprite ();
 		_scaler.buttonMode = true;
