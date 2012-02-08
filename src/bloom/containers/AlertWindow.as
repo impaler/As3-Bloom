@@ -23,6 +23,9 @@ package bloom.containers {
 
 import bloom.brushes.Brush;
 import bloom.core.Bloom;
+
+import com.greensock.TweenLite;
+
 import flash.display.Shape;
 import flash.display.Sprite;
 import flash.events.Event;
@@ -54,12 +57,15 @@ public class AlertWindow extends Window {
 	}
 
 	override public function closeWindow ( e:Event = null ):void {
-		Bloom.core().stage.removeChild(_modalBG);
+		TweenLite.to(_modalBG,.4,{alpha:0,onComplete:function(){Bloom.core().stage.removeChild(_modalBG);}});
 		super.closeWindow ( e );
 	}
 
 	override public function openWindow ( e:Event = null ):void {
-		Bloom.core().stage.addChild(_modalBG);	
+		_modalBG.alpha=0;
+		Bloom.core().stage.addChild(_modalBG);
+		TweenLite.to(_modalBG,.4,{alpha:1});
+		
 		super.openWindow ( e );
 	}
 
