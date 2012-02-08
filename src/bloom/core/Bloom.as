@@ -54,7 +54,7 @@ public class Bloom {
 		component.Registry = componentRegistry;
 
 		if ( registerComponents && component.registerComponent ) {
-			componentRegistry.registerComponent ( component );
+			componentRegistry.registerComponent ( component, true );
 		}
 	}
 

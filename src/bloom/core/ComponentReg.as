@@ -46,7 +46,10 @@ public class ComponentReg {
 		return false;
 	}
 
-	public function registerComponent ( component:IComponent ):IComponent {
+	public function registerComponent ( component:IComponent, core:Boolean = false ):IComponent {
+		if ( !core )
+			Bloom.core().componentRegistry.removeComponent( component, true );
+		
 		component.Registry = this;
 		if ( component.registerComponent ) {
 			Registry.push ( component );
