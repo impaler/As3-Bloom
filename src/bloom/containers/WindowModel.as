@@ -15,6 +15,8 @@ public class WindowModel extends ComponentModel {
 	public var liveResize:Boolean;
 	public var headerHeight:Number;
 	public var footerHeight:Number;
+	public var moveable:Boolean;
+	public var resizeable:Boolean;
 
 }
 }

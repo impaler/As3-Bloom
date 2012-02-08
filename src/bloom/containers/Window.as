@@ -23,14 +23,13 @@ package bloom.containers {
 
 import bloom.brushes.BMPBrush;
 import bloom.brushes.ColorBrush;
+import bloom.components.Button;
+import bloom.core.Bloom;
 import bloom.core.Component;
 import bloom.core.ScaleBitmap;
-
-import flash.display.DisplayObjectContainer;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.events.MouseEvent;
-import flash.geom.Rectangle;
 
 /**
  * Window
@@ -41,35 +40,41 @@ public class Window extends Component {
 
 	public var _liveResize:Boolean;
 
-	private var _moveable:Boolean;
-	private var _resizeable:Boolean;
+	protected var _moveable:Boolean;
+	protected var _resizeable:Boolean;
 
-	private var _maxWidth:Number;
-	private var _minWidth:Number;
-	private var _maxHeight:Number;
-	private var _minHeight:Number;
+	protected var _maxWidth:Number;
+	protected var _minWidth:Number;
+	protected var _maxHeight:Number;
+	protected var _minHeight:Number;
 
-	private var _headerHeight:Number;
-	private var _footerHeight:Number;
-
-	private var _rect:Rectangle;
-
-	private var _header:FlowContainer;
-	private var _content:FlowContainer;
-	private var _footer:FlowContainer;
-	private var _scaler:Sprite;
-
-	private var xOffset:Number;
-	private var yOffset:Number;
+	protected var _headerHeight:Number;
+	protected var _footerHeight:Number;
 	
-	private var _model:WindowModel;
+	protected var _header:FlowContainer;
+	protected var _content:FlowContainer;
+	protected var _footer:FlowContainer;
+	protected var _scaler:Sprite;
 
-	public function Window ( p:DisplayObjectContainer = null , content:FlowContainer = null , moveable:Boolean = true ,
-	                         resizeable:Boolean = true ) {
+	protected var _closeBtn:Button;
+	
+	
+	protected var xOffset:Number;
+
+	protected var yOffset:Number;
+	
+	protected var _window_model:WindowModel;
+
+	public function Window ( content:FlowContainer = null ) {
 		_header = new FlowContainer ();
-		_header.buttonMode = true;
+		_header.direction = FlowContainer.HORIZONTALLY;
 		_header.tabEnabled = false;
+		_header.registerComponent = false;
 		addChild ( _header );
+		
+		_closeBtn = new Button(_header, "x", closeWindow );
+		_closeBtn.registerComponent = false;
+		_closeBtn.size(20,20);
 
 		_content = content;
 		if ( _content ) addChild ( _content );
@@ -79,47 +84,54 @@ public class Window extends Component {
 		_scaler.tabEnabled = false;
 
 		_footer = new FlowContainer ();
+		_footer.registerComponent = false;
 		addChild ( _footer );
-
-		_rect = new Rectangle ();
-
-		super ( p );
-
-		_header.addEventListener ( MouseEvent.MOUSE_DOWN , onStartWindowDrag );
-		_scaler.addEventListener ( MouseEvent.MOUSE_DOWN , onScaleWindowMouseDown );
+		
+		super ( null );
 
 	}
+
+	public function openWindow (e:Event=null):void {
+		Bloom.core().stage.addChild(this);
+	}
+	
+	public function closeWindow (e:Event=null):void {
+		Bloom.core().stage.removeChild(this);
+	}	
 
 	override public function applyModel ():void {
 		super.applyModel ();
 		
-		var _prevModel:WindowModel = _model;
+		var _prevModel:WindowModel = _window_model;
 		if ( ! _customModel ) {
-			_model = Registry.theme.Window_Model;
+			_window_model = Registry.theme.Window_Model;
 		}
-		brush = _model.brush;
+		brush = _window_model.brush;
 
-		_maxWidth = _model.maxWidth;
-		_minWidth = _model.minWidth;
-		_maxHeight = _model.maxHeight;
-		_minHeight = _model.minHeight;
-		_header.brush = _model.Window_Header;
-		_footer.brush = _model.Window_Footer;
-		_liveResize = _model.liveResize;
-		_headerHeight = _model.headerHeight;
-		_footerHeight = _model.footerHeight;
-		_resizeable = true;
-		_resizeable ? addChild ( _scaler ) : removeChild ( _scaler );
-		_moveable = true;
+		_maxWidth = _window_model.maxWidth;
+		_minWidth = _window_model.minWidth;
+		_maxHeight = _window_model.maxHeight;
+		_minHeight = _window_model.minHeight;
+		
+		_header.brush = _window_model.Window_Header;
+		_footer.brush = _window_model.Window_Footer;
+		_headerHeight = _window_model.headerHeight;
+		_footerHeight = _window_model.footerHeight;
+		
+		liveResize = _window_model.liveResize;
+		resizeable = _window_model.resizeable;
+		moveable = _window_model.moveable;
 		
 		if ( width == 0 && height == 0 || width == _prevModel.defaultWidth && height == _prevModel.defaultHeight ) {
-			if ( width != _model.defaultWidth && height != _model.defaultHeight) {
-				size ( _model.defaultWidth , _model.defaultHeight );
+			if ( width != _window_model.defaultWidth && height != _window_model.defaultHeight) {
+				size ( _window_model.defaultWidth , _window_model.defaultHeight );
 			}
 		}
 
 		
 	}
+
+	private function set liveResize ( liveResize:Boolean ):void {_liveResize = liveResize;}
 
 	private function onStartWindowDrag ( e:MouseEvent ):void {
 		if ( moveable ) {
@@ -271,6 +283,10 @@ public class Window extends Component {
 			_resizeable ? addChild ( _scaler ) : removeChild ( _scaler );
 			update ();
 		}
+		
+		value ? _scaler.addEventListener ( MouseEvent.MOUSE_DOWN , onScaleWindowMouseDown ) : 		
+		              _scaler.removeEventListener ( MouseEvent.MOUSE_DOWN , onScaleWindowMouseDown );
+		
 	}
 
 	public function get resizeable ():Boolean {
@@ -354,9 +370,15 @@ public class Window extends Component {
 	}
 
 	public function set moveable ( value:Boolean ):void {
-		if ( _moveable != value ) {
-			_moveable = _header.buttonMode = _header.useHandCursor = value;
+		if ( moveable ) {
+			_header.addEventListener ( MouseEvent.MOUSE_DOWN , onStartWindowDrag );
+		} else {
+			_header.removeEventListener ( MouseEvent.MOUSE_DOWN , onStartWindowDrag );
 		}
+		
+		_header.buttonMode = value;
+		_header.useHandCursor = value;
+		
 	}
 
 	public function get moveable ():Boolean {

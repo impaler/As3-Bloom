@@ -23,8 +23,10 @@ package bloom.core {
 
 import bloom.components.ButtonModel;
 import bloom.components.LabelModel;
+import bloom.containers.AlertWindowModel;
 import bloom.containers.ContainerModel;
 import bloom.containers.WindowModel;
+import bloom.themes.darkTheme.DarkAlertWindowModel;
 
 /**
  * ThemeBase
@@ -60,6 +62,8 @@ public final class ThemeBase {
 	public var Label_Model:LabelModel;
 
 	public var Window_Model:WindowModel;
+	
+	public var AlertWindow_Model:AlertWindowModel;
 
 }
 

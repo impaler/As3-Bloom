@@ -54,7 +54,7 @@ public class Button extends ButtonBase {
 	override public function applyModel ():void {
 		if ( ! _customModel )
 			_model = Registry.theme.Button_Model;
-		
+
 		super.applyModel ();
 		_title.brush = _model.Text_Button;
 	}

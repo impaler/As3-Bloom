@@ -45,13 +45,13 @@ public class ButtonBase extends Component {
 
 	protected var _state:int = 0;
 	protected var _bg:Shape;
-
-	protected var _model:ButtonModel;
-
+	
 	public var onDown:NativeSignal;
 	public var onOver:NativeSignal;
 	public var onStageUp:NativeSignal;
 	public var onOut:NativeSignal;
+	
+	protected var _model:ButtonModel;
 
 	public function ButtonBase ( p:DisplayObjectContainer = null ) {
 		buttonMode = true;
@@ -73,11 +73,10 @@ public class ButtonBase extends Component {
 
 	override public function applyModel ():void {
 		var _prevModel:ButtonModel = _model;
-		if ( ! _customModel ) 
+		if ( ! _customModel ) {
 			_model = Registry.theme.Button_Model;
-		
-		if(brush != _model.brush)
-			brush = _model.brush;
+		}
+		brush = _model.brush;
 
 		if ( width == 0 && height == 0 || width == _prevModel.defaultWidth && height == _prevModel.defaultHeight ) {
 			if ( width != _model.defaultWidth )
@@ -86,13 +85,12 @@ public class ButtonBase extends Component {
 			if ( height != _model.defaultHeight )
 				height = _model.defaultHeight;
 		}
-		super.applyModel();
 	}
 
 	public function set model ( value:ButtonModel ):void {
 		_model = value;
 		_customModel = true;
-		applyModel ();
+		super.applyModel ();
 	}
 
 	override protected function draw ( e:Event ):void {

@@ -213,7 +213,7 @@ import flash.events.Event;
 	public function get Registry ( ):ComponentReg {
 		return _Reg;
 	}
-	
+
 }
 
 }

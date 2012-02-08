@@ -11,6 +11,7 @@ public class DarkTheme implements ITheme {
 		themBase.Container_Model = new DarkContainerModel ();
 		themBase.Label_Model = new DarkLabelModel ();
 		themBase.Window_Model = new DarkWindowModel ();
+		themBase.AlertWindow_Model = new DarkAlertWindowModel ();
 	}
 
 }

@@ -1,7 +1,5 @@
 package bloom.themes.defaultTheme {
 
-import bloom.core.Bloom;
-import bloom.core.ComponentReg;
 import bloom.core.ITheme;
 import bloom.core.ThemeBase;
 
@@ -12,6 +10,7 @@ public class DefaultTheme implements ITheme {
 		themBase.Container_Model = new DefaultContainerModel ();
 		themBase.Label_Model = new DefaultLabelModel ();
 		themBase.Window_Model = new DefaultWindowModel ();
+		themBase.AlertWindow_Model = new DefaultAlertWindowModel();
 	}
 
 }

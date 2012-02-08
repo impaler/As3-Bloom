@@ -7,8 +7,10 @@ public class DefaultWindowModel extends WindowModel {
 
 	public function DefaultWindowModel () {
 
+		resizeable = true;
 		liveResize = true;
-
+		moveable = true;
+		
 		headerHeight = 30;
 		footerHeight = 30;
 

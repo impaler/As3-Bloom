@@ -1,14 +1,18 @@
 package bloom.core {
 
 import flash.display.Stage;
+import flash.events.Event;
 import flash.utils.Dictionary;
+
+import org.osflash.signals.natives.NativeSignal;
 
 public class Bloom {
 
 	private static var _instance:Bloom;
 
 	public var stage:Stage;
-
+	public var onStageResize:NativeSignal;
+	
 	public var registerComponents:Boolean = false;
 	public var componentRegistry:ComponentReg = new ComponentReg ();
 	
@@ -41,6 +45,8 @@ public class Bloom {
 		stage = _stage;
 		registerComponents = _registerComponents;
 		componentRegistry.theme.initTheme ( _theme );
+		
+		onStageResize = new NativeSignal( stage , Event.RESIZE, Event );
 	}
 
 	public function setTheme ( _theme:ITheme ):void {

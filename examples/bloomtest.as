@@ -2,6 +2,7 @@ package {
 
 import bloom.components.Button;
 import bloom.components.Label;
+import bloom.containers.AlertWindow;
 import bloom.containers.FlowContainer;
 import bloom.containers.Window;
 import bloom.core.Bloom;
@@ -17,6 +18,8 @@ import flash.events.MouseEvent;
 
 public class bloomtest extends Sprite {
 
+	private var _alertTest:AlertWindow;
+
 	public function bloomtest () {
 		stage.align = StageAlign.TOP_LEFT;
 		stage.scaleMode = StageScaleMode.NO_SCALE;
@@ -25,17 +28,31 @@ public class bloomtest extends Sprite {
 		Bloom.core ().init ( stage , new DefaultTheme () , true );
 		Bloom.core().registerComponents = true;
 		
-		var cont:FlowContainer = new FlowContainer ( this );
+//		var jj:Window = new Window ( this );
+
+
+		var btn:Button = new Button(this, "Open Alert", openAlert );
+		
+		
+		var cont:FlowContainer = new FlowContainer ( );
 		cont.size ( 0,0 );
 		cont.registerComponent = false;
 		cont.direction = FlowContainer.VERTICALLY;
 		
+
 		var btn:Button = new Button(cont, "Test", howMany );
 		var btn:Button = new Button(cont, "Test", howMany );
 		var btn:Button = new Button(cont, "Test", howMany );
 		var btn:Button = new Button(cont, "Test", howMany );
 		
-		buttonsTest ();
+		_alertTest = new AlertWindow (cont);
+		
+		
+//		buttonsTest ();
+	}
+
+	private function openAlert (e:MouseEvent):void {
+		_alertTest.openWindow();
 	}
 
 	private function howMany (e:MouseEvent):void {
@@ -48,6 +65,11 @@ public class bloomtest extends Sprite {
 		cont.registerComponent = false;
 		cont.direction = FlowContainer.GRID;
 
+
+		
+		
+		/*
+		
 		var jj:Label = new Label ( cont , "Set Default" );
 		var jj:Label = new Label ( cont , "Set Default" );
 		var jj:Label = new Label ( cont , "Set Default" );
@@ -84,6 +106,10 @@ public class bloomtest extends Sprite {
 
 		var darktheme:Button = new Button ( cont , "Alt Dark" );
 		darktheme.onDown.add ( _changealtToDarkTheme );
+		
+		*/
+		
+		
 	}
 
 	private function _disableComps ( event:MouseEvent ):void {

@@ -1,14 +1,11 @@
-package bloom.themes.darkTheme {
+package bloom.themes.defaultTheme {
 
 import bloom.brushes.ColorBrush;
-import bloom.containers.WindowModel;
+import bloom.containers.AlertWindowModel;
 
-public class DarkWindowModel extends WindowModel {
+public class DefaultAlertWindowModel extends AlertWindowModel {
 
-	public function DarkWindowModel () {
-
-		liveResize = true;
-		moveable = true;
+	public function DefaultAlertWindowModel () {
 		
 		headerHeight = 30;
 		footerHeight = 30;
@@ -25,15 +22,15 @@ public class DarkWindowModel extends WindowModel {
 		var data = new Vector.<uint> ( 3 , true );
 		data = new Vector.<uint> ( 2 , true );
 		data[0] = 0x000000;
-		data[1] = 0x373737;
+		data[1] = 0x3E3E50;
 		brush = new ColorBrush ( data );
 
 		data = new Vector.<uint> ( 1 , true );
-		data[0] = 0x212121;
+		data[0] = 0x3E3E50;
 		Window_Header = new ColorBrush ( data );
 
 		data = new Vector.<uint> ( 1 , true );
-		data[0] = 0x212121;
+		data[0] = 0xB4B4B4;
 		Window_Footer = new ColorBrush ( data );
 
 	}
