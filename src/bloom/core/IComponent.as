@@ -29,6 +29,8 @@ package bloom.core {
 public interface IComponent extends IChild {
 
 	function applyModel ():void
+	
+	function drawDirectly ():void
 
 	function move ( x:Number , y:Number ):void;
 

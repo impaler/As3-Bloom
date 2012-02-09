@@ -21,10 +21,14 @@
  */
 package bloom.containers {
 
+import bloom.core.Bloom;
+import bloom.core.Component;
 import bloom.core.IChild;
+import bloom.core.IComponent;
 
 import flash.display.DisplayObject;
 import flash.display.DisplayObjectContainer;
+import flash.display.Sprite;
 
 /**
  * FlowContainer
@@ -33,18 +37,29 @@ import flash.display.DisplayObjectContainer;
  */
 public class FlowContainer extends Container {
 
-	public static const VERTICALLY:int = 0;
-	public static const HORIZONTALLY:int = 1;
-	public static const GRID:int = 2;
-
+	protected var _target:Sprite;
 	protected var _direction:int;
-	protected var _target:DisplayObjectContainer;
+	protected var _hAlignment:int;
 
 	public function FlowContainer ( p:DisplayObjectContainer = null ) {
-		_direction = HORIZONTALLY;
-		_target = this;
+		_direction = Bloom.HORIZONTALLY;
+		_hAlignment = Bloom.LEFT;
+		
+		_target = new Sprite ();
+		addChild ( _target );
+		
 		super ( p );
 	}
+
+	override public function addContent ( cont:IComponent ):void {
+		cont.drawDirectly();
+		_target.addChild ( DisplayObject ( cont ) );
+		invalidate();
+	}
+	
+	public function get content ( ):DisplayObjectContainer {
+		return _target;
+	}	
 
 	override public function update ():void {
 		var last:Number = 0;
@@ -58,15 +73,15 @@ public class FlowContainer extends Container {
 			object = _target.getChildAt ( i );
 			if ( object is IChild ) {
 				component = object as IChild;
-				if ( _direction == HORIZONTALLY ) {
+				if ( _direction == Bloom.HORIZONTALLY ) {
 					component.x = last + component.margin.left;
 					component.y = component.margin.top;
 					last = component.x + component.width + component.margin.right;
-				} else if ( _direction == VERTICALLY ) {
+				} else if ( _direction == Bloom.VERTICALLY ) {
 					component.x = component.margin.left;
 					component.y = last + component.margin.top;
 					last = component.y + component.height + component.margin.bottom;
-				} else if ( _direction == GRID ) {
+				} else if ( _direction == Bloom.GRID ) {
 					component.x = last + component.margin.left;
 					if ( rows == 0 ) {
 						component.y = ( component.margin.top );
@@ -83,6 +98,19 @@ public class FlowContainer extends Container {
 				}
 			}
 		}
+
+		switch ( _hAlignment ) {
+			case Bloom.CENTRE:
+				_target.x = Math.round ( (width * .5) - (_target.width * .5) );
+				break;
+			case Bloom.LEFT:
+				_target.x = margin.left;
+				break;
+			case Bloom.RIGHT:
+				_target.x = Math.round ( (width) - (_target.width) - margin.right );
+				break;
+		}
+
 	}
 
 	///////////////////////////////////
@@ -103,15 +131,23 @@ public class FlowContainer extends Container {
 	/**
 	 * Default Target is FlowContainer itself.
 	 */
-	public function set target ( value:DisplayObjectContainer ):void {
+	public function set target ( value:Sprite ):void {
 		if ( _target != value ) {
 			_target = value;
 			update ();
 		}
 	}
 
-	public function get target ():DisplayObjectContainer {
+	public function get target ():Sprite {
 		return _target;
+	}
+
+	public function set hAlignment ( hAlignment:int ):void {
+		_hAlignment = hAlignment;
+	}
+	
+	public function get hAlignment ( ):int {
+		return _hAlignment;
 	}
 
 	///////////////////////////////////

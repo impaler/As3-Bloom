@@ -62,6 +62,7 @@ import flash.events.Event;
 		Bloom.core ().registerComponent ( this );
 		applyModel ();
 		_margin = new Margin ();
+		alpha = 0;
 		addEventListener ( Event.ADDED_TO_STAGE , onAddedToStage );
 		if ( p != null ) p.addChild ( this );
 	}
@@ -102,7 +103,7 @@ import flash.events.Event;
 	}
 
 	protected function invalidate ():void {
-		if ( stage ) stage.invalidate ();
+		if ( Bloom.core().stage ) Bloom.core().stage.invalidate ();
 	}
 
 	protected function onBrushChanged ( e:BrushEvent ):void {
@@ -112,8 +113,9 @@ import flash.events.Event;
 
 	private function onAddedToStage ( e:Event ):void {
 		removeEventListener ( Event.ADDED_TO_STAGE , onAddedToStage );
-		stage.addEventListener ( Event.RENDER , draw );
+		Bloom.core().stage.addEventListener ( Event.RENDER , draw );
 		invalidate ();
+		alpha = 1;
 	}
 
 	///////////////////////////////////

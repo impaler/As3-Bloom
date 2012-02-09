@@ -23,7 +23,6 @@ package bloom.containers {
 
 import bloom.brushes.BMPBrush;
 import bloom.brushes.ColorBrush;
-import bloom.core.Bloom;
 import bloom.core.Component;
 import bloom.core.IComponent;
 import bloom.core.ScaleBitmap;
@@ -45,6 +44,10 @@ public class Container extends Component {
 		super ( p );
 	}
 
+	public function addContent ( cont:IComponent ):void {
+			addChild( DisplayObject ( cont ) );
+		}
+	
 	override public function applyModel ():void {
 		var _prevModel:ContainerModel = _model;
 		if ( ! _customModel )

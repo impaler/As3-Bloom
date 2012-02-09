@@ -66,20 +66,11 @@ public class Window extends Component {
 	protected var _window_model:WindowModel;
 
 	public function Window ( content:FlowContainer = null ) {
-		_header = new FlowContainer ();
-		_header.direction = FlowContainer.HORIZONTALLY;
-		_header.tabEnabled = false;
-		_header.registerComponent = false;
-		addChild ( _header );
-		
-		_closeBtn = new Button(_header, "x", closeWindow );
-		_closeBtn.registerComponent = false;
-		_closeBtn.size(20,20);
-
 		_content = content;
 		if ( _content == null ) {
 			_content = new FlowContainer ();
-			_content.direction = FlowContainer.VERTICALLY;
+			_content.direction = Bloom.VERTICALLY;
+			_content.hAlignment = Bloom.CENTRE;
 			_content.tabEnabled = false;
 			_content.registerComponent = false;
 		}
@@ -93,6 +84,18 @@ public class Window extends Component {
 		_footer.registerComponent = false;
 		addChild ( _footer );
 		
+		_header = new FlowContainer ();
+		_header.direction = Bloom.HORIZONTALLY;
+		_header.hAlignment = Bloom.RIGHT;
+		_header.tabEnabled = false;
+		_header.registerComponent = false;
+		addChild ( _header );
+		
+		_closeBtn = new Button(null, "x", closeWindow );
+		_closeBtn.registerComponent = false;
+		_closeBtn.size(20,20);
+		_header.addContent ( _closeBtn );
+
 		super ( null );
 
 	}
@@ -143,8 +146,8 @@ public class Window extends Component {
 		if ( moveable ) {
 			xOffset = e.stageX - this.x;
 			yOffset = e.stageY - this.y;
-			stage.addEventListener ( MouseEvent.MOUSE_MOVE , onWindowDragMouseMove );
-			stage.addEventListener ( MouseEvent.MOUSE_UP , onWindowDragMouseUp );
+			Bloom.core().stage.addEventListener ( MouseEvent.MOUSE_MOVE , onWindowDragMouseMove );
+			Bloom.core().stage.addEventListener ( MouseEvent.MOUSE_UP , onWindowDragMouseUp );
 		}
 	}
 
@@ -155,16 +158,16 @@ public class Window extends Component {
 	}
 
 	private function onWindowDragMouseUp ( event:MouseEvent ):void {
-		stage.removeEventListener ( MouseEvent.MOUSE_MOVE , onWindowDragMouseMove );
-		stage.removeEventListener ( MouseEvent.MOUSE_UP , onWindowDragMouseUp );
+		Bloom.core().stage.removeEventListener ( MouseEvent.MOUSE_MOVE , onWindowDragMouseMove );
+		Bloom.core().stage.removeEventListener ( MouseEvent.MOUSE_UP , onWindowDragMouseUp );
 	}
 
 	private function onScaleWindowMouseDown ( e:MouseEvent ):void {
 		if ( _liveResize ) {
 			xOffset = e.stageX - _scaler.x;
 			yOffset = e.stageY - _scaler.y;
-			stage.addEventListener ( MouseEvent.MOUSE_MOVE , onScaleWindowMouseMove );
-			stage.addEventListener ( MouseEvent.MOUSE_UP , onScaleWindowMouseUp );
+			Bloom.core().stage.addEventListener ( MouseEvent.MOUSE_MOVE , onScaleWindowMouseMove );
+			Bloom.core().stage.addEventListener ( MouseEvent.MOUSE_UP , onScaleWindowMouseUp );
 		}
 	}
 
@@ -176,8 +179,8 @@ public class Window extends Component {
 	}
 
 	private function onScaleWindowMouseUp ( e:MouseEvent ):void {
-		stage.removeEventListener ( MouseEvent.MOUSE_UP , onScaleWindowMouseUp );
-		stage.removeEventListener ( MouseEvent.MOUSE_MOVE , onScaleWindowMouseMove );
+		Bloom.core().stage.removeEventListener ( MouseEvent.MOUSE_UP , onScaleWindowMouseUp );
+		Bloom.core().stage.removeEventListener ( MouseEvent.MOUSE_MOVE , onScaleWindowMouseMove );
 		size ( _scaler.x + _footerHeight , _scaler.y + _footerHeight );
 		_scaler.stopDrag ();
 	}
@@ -187,6 +190,7 @@ public class Window extends Component {
 	 */
 	public function update ():void {
 		_header.size ( _width , _headerHeight );
+		
 		if ( _content ) {
 			_content.move ( _content.margin.left , _headerHeight + _content.margin.top );
 			_content.size ( _width - _content.margin.left - content.margin.right ,
@@ -376,7 +380,7 @@ public class Window extends Component {
 	}
 
 	public function set moveable ( value:Boolean ):void {
-		if ( moveable ) {
+		if ( value ) {
 			_header.addEventListener ( MouseEvent.MOUSE_DOWN , onStartWindowDrag );
 		} else {
 			_header.removeEventListener ( MouseEvent.MOUSE_DOWN , onStartWindowDrag );
@@ -384,6 +388,8 @@ public class Window extends Component {
 		
 		_header.buttonMode = value;
 		_header.useHandCursor = value;
+		
+		_moveable = value;
 		
 	}
 

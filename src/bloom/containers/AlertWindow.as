@@ -54,6 +54,8 @@ public class AlertWindow extends Window {
 		_modalBG = new Sprite();
 		_modalBG.mouseEnabled = true;
 		_modalBG.mouseChildren = true;
+		
+		update();
 	}
 
 	override public function closeWindow ( e:Event = null ):void {

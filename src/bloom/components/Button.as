@@ -43,6 +43,7 @@ public class Button extends ButtonBase {
 		_title.registerComponent = false;
 
 		super ( p );
+		
 		addChild ( _title );
 
 		_title.addEventListener ( Event.CHANGE , onTitleChanged );

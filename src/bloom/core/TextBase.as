@@ -157,6 +157,10 @@ import flash.text.TextField;
 	public function get Registry ():ComponentReg {
 		return _Reg;
 	}
+
+	public function drawDirectly ():void {
+		
+	}
 }
 
 }
