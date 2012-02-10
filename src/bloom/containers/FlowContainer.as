@@ -40,10 +40,12 @@ public class FlowContainer extends Container {
 	protected var _target:Sprite;
 	protected var _direction:int;
 	protected var _hAlignment:int;
+	private var _vAlignment:int;
 
 	public function FlowContainer ( p:DisplayObjectContainer = null ) {
 		_direction = Bloom.HORIZONTALLY;
 		_hAlignment = Bloom.LEFT;
+		_vAlignment = Bloom.TOP;
 		
 		_target = new Sprite ();
 		addChild ( _target );
@@ -99,6 +101,7 @@ public class FlowContainer extends Container {
 			}
 		}
 
+		//todo component margins not implimented in alignment, this may require another container components potentially all different
 		switch ( _hAlignment ) {
 			case Bloom.CENTRE:
 				_target.x = Math.round ( (width * .5) - (_target.width * .5) );
@@ -107,9 +110,21 @@ public class FlowContainer extends Container {
 				_target.x = margin.left;
 				break;
 			case Bloom.RIGHT:
-				_target.x = Math.round ( (width) - (_target.width) - margin.right );
+				_target.x = Math.round ( (width) - (_target.width) - margin.right - margin.left );
 				break;
 		}
+		
+		switch ( _vAlignment ) {
+			case Bloom.TOP:
+				_target.y = margin.top;
+				break;
+			case Bloom.CENTRE:
+				_target.y = Math.round ( (height * .5) - (_target.height * .5) );
+				break;
+			case Bloom.BOTTOM:
+				_target.y = (height) - (_target.height) - margin.top - margin.bottom;
+				break;
+		}			
 
 	}
 
@@ -144,8 +159,14 @@ public class FlowContainer extends Container {
 
 	public function set hAlignment ( hAlignment:int ):void {
 		_hAlignment = hAlignment;
+		drawDirectly();
 	}
-	
+
+	public function set vAlignment ( value:int ):void {
+		_vAlignment = value;
+		drawDirectly();
+	}
+
 	public function get hAlignment ( ):int {
 		return _hAlignment;
 	}

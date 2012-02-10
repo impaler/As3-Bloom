@@ -90,7 +90,7 @@ public class ButtonBase extends Component {
 	public function set model ( value:ButtonModel ):void {
 		_model = value;
 		_customModel = true;
-		super.applyModel ();
+		applyModel ();
 	}
 
 	override protected function draw ( e:Event ):void {
