@@ -56,6 +56,7 @@ public class FlowContainer extends Container {
 	override public function addContent ( cont:IComponent ):void {
 		cont.drawDirectly();
 		_target.addChild ( DisplayObject ( cont ) );
+		drawDirectly();
 		invalidate();
 	}
 	
@@ -116,13 +117,13 @@ public class FlowContainer extends Container {
 		
 		switch ( _vAlignment ) {
 			case Bloom.TOP:
-				_target.y = margin.top;
+				_target.y = 0;
 				break;
 			case Bloom.CENTRE:
 				_target.y = Math.round ( (height * .5) - (_target.height * .5) );
 				break;
 			case Bloom.BOTTOM:
-				_target.y = (height) - (_target.height) - margin.top - margin.bottom;
+				_target.y = (height) - (_target.height) ;
 				break;
 		}			
 

@@ -1,6 +1,7 @@
 package bloom.containers {
 
 import bloom.brushes.Brush;
+import bloom.brushes.TextBrush;
 import bloom.core.ComponentModel;
 
 public class WindowModel extends ComponentModel {
@@ -17,6 +18,8 @@ public class WindowModel extends ComponentModel {
 	public var footerHeight:Number;
 	public var moveable:Boolean;
 	public var resizeable:Boolean;
+	
+	public var title:TextBrush;
 
 }
 }

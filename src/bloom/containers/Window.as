@@ -24,6 +24,7 @@ package bloom.containers {
 import bloom.brushes.BMPBrush;
 import bloom.brushes.ColorBrush;
 import bloom.components.Button;
+import bloom.components.Label;
 import bloom.core.Bloom;
 import bloom.core.Component;
 import bloom.core.ScaleBitmap;
@@ -64,6 +65,11 @@ public class Window extends Component {
 	protected var yOffset:Number;
 	
 	protected var _window_model:WindowModel;
+	
+	protected var _titleText:String;
+	
+	protected var _titleLabel:Label;
+	
 
 	public function Window ( content:FlowContainer = null ) {
 		_content = content;
@@ -87,9 +93,15 @@ public class Window extends Component {
 		_header = new FlowContainer ();
 		_header.direction = Bloom.HORIZONTALLY;
 		_header.hAlignment = Bloom.RIGHT;
+		_header.vAlignment = Bloom.TOP;
 		_header.tabEnabled = false;
 		_header.registerComponent = false;
 		addChild ( _header );
+		
+		_titleText = "Window";
+		_titleLabel = new Label(null, _titleText );
+		_titleLabel.registerComponent = false;
+		_header.addChild(_titleLabel);
 		
 		_closeBtn = new Button(null, "x", closeWindow );
 		_closeBtn.registerComponent = false;
@@ -130,6 +142,8 @@ public class Window extends Component {
 		liveResize = _window_model.liveResize;
 		resizeable = _window_model.resizeable;
 		moveable = _window_model.moveable;
+		
+		_titleLabel.brush = _window_model.title;
 		
 		if ( width == 0 && height == 0 || width == _prevModel.defaultWidth && height == _prevModel.defaultHeight ) {
 			if ( width != _window_model.defaultWidth && height != _window_model.defaultHeight) {
@@ -190,6 +204,8 @@ public class Window extends Component {
 	 */
 	public function update ():void {
 		_header.size ( _width , _headerHeight );
+		_titleLabel.y = _header.height *.5- _titleLabel.height*.5;
+		_titleLabel.x = _header.margin.left;
 		
 		if ( _content ) {
 			_content.move ( _content.margin.left , _headerHeight + _content.margin.top );

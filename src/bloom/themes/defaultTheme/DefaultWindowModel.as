@@ -1,6 +1,7 @@
 package bloom.themes.defaultTheme {
 
 import bloom.brushes.ColorBrush;
+import bloom.brushes.TextBrush;
 import bloom.containers.WindowModel;
 
 public class DefaultWindowModel extends WindowModel {
@@ -36,6 +37,9 @@ public class DefaultWindowModel extends WindowModel {
 		data = new Vector.<uint> ( 1 , true );
 		data[0] = 0xB4B4B4;
 		Window_Footer = new ColorBrush ( data );
+		
+		
+		title = new TextBrush ( "Verdana" , 12 , 0xffffff , false , false , false );
 
 	}
 }

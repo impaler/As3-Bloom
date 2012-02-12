@@ -22,13 +22,15 @@
 package bloom.containers {
 
 import bloom.brushes.Brush;
+import bloom.components.Button;
+import bloom.components.Label;
 import bloom.core.Bloom;
 
 import com.greensock.TweenLite;
 
-import flash.display.Shape;
 import flash.display.Sprite;
 import flash.events.Event;
+import flash.events.MouseEvent;
 
 /**
  * Window
@@ -47,15 +49,38 @@ public class AlertWindow extends Window {
 	
 	private var _modalBrush:Brush;
 	
+	private var _okHandler:Function;
+	private var _alertDescriptionText:String;
+	private var _okButton:Button;
+	private var _AlertText:Label;
+	
 
-	public function AlertWindow ( content:FlowContainer = null ) {
-		super ( content );
-		
+	public function AlertWindow ( alertTitle:String , alertText:String = null , okHandler:Function = null ) {
+		_okHandler =  okHandler;
+		_titleText = alertTitle;
+		_alertDescriptionText = alertText;
+
 		_modalBG = new Sprite();
 		_modalBG.mouseEnabled = true;
 		_modalBG.mouseChildren = true;
+
+		super ( content );
+		_okButton = new Button(null, "OK", onOK );
+		_okButton.registerComponent = false;
+		
+		_AlertText = new Label(null, alertText );
+		_AlertText.registerComponent = false;
+
+		content.hAlignment = Bloom.CENTRE;
+		content.addContent(_AlertText);
+		content.addContent(_okButton);
 		
 		update();
+	}
+
+	private function onOK (e:MouseEvent):void {
+		if ( _okHandler != null ) _okHandler();
+		closeWindow();	
 	}
 
 	override public function closeWindow ( e:Event = null ):void {

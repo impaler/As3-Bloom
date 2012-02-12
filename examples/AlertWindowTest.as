@@ -20,7 +20,9 @@ public class AlertWindowTest extends Sprite {
 		Bloom.core ().init ( stage , new DefaultTheme () , true );
 		Bloom.core ().registerComponents = true;
 
-		var alert:AlertWindow = new AlertWindow ( );
+		var alert:AlertWindow = new AlertWindow ( "Alert Test", "You are being alerted!",
+		                                          function(){trace( "Alert Ok Handler" )} );
+		
 		var alertBtn:Button = new Button ( this, "Alert", function(e:MouseEvent) {alert.openWindow();} );
 
 	}

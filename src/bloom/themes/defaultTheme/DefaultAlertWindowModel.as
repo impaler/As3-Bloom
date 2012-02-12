@@ -1,6 +1,7 @@
 package bloom.themes.defaultTheme {
 
 import bloom.brushes.ColorBrush;
+import bloom.brushes.TextBrush;
 import bloom.containers.AlertWindowModel;
 
 public class DefaultAlertWindowModel extends AlertWindowModel {
@@ -11,7 +12,7 @@ public class DefaultAlertWindowModel extends AlertWindowModel {
 		footerHeight = 30;
 
 		defaultWidth = 400;
-		defaultHeight = 400;
+		defaultHeight = 220;
 
 		minHeight = 100;
 		maxHeight = 1000;
@@ -32,7 +33,9 @@ public class DefaultAlertWindowModel extends AlertWindowModel {
 		data = new Vector.<uint> ( 1 , true );
 		data[0] = 0xB4B4B4;
 		Window_Footer = new ColorBrush ( data );
-
+		
+		title = new TextBrush ( "Verdana" , 12 , 0xffffff , false , false , false );
+		
 	}
 }
 }

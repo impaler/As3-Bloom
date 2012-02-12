@@ -112,8 +112,8 @@ import flash.text.TextField;
 			if ( _brush ) _brush.removeEventListener ( BrushEvent.REDRAW , onBrushChanged );
 			_brush = b;
 //			if ( _brush ) {
-			onBrushChanged ( null );
-			_brush.addEventListener ( BrushEvent.REDRAW , onBrushChanged );
+				onBrushChanged ( null );
+				_brush.addEventListener ( BrushEvent.REDRAW , onBrushChanged );
 //			}
 		}
 	}
