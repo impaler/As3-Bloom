@@ -22,6 +22,7 @@
 package bloom.control {
 
 import bloom.core.Bloom;
+import bloom.core.ComponentStyle;
 
 /**
  * ThemeBase
@@ -30,18 +31,33 @@ import bloom.core.Bloom;
  */
 public class ThemeBase {
 
-	public function ThemeBase () {
-		Bloom.core ().styleRegistry.getObject ( BUTTONBASE_STYLE );
-		Bloom.core ().styleRegistry.getObject ( LABEL_STYLE );
-	}
-
 	///////////////////////////////////
 	// Components
 	///////////////////////////////////
 
-	public var BUTTONBASE_STYLE:Class;
-	public var LABEL_STYLE:Class;
+	public var BUTTONBASE_STYLE_C:Class;
 
+	public function get BUTTONBASE_STYLE ():Class {
+		return BUTTONBASE_STYLE_C;
+	}
+	
+	public function set BUTTONBASE_STYLE (value:Class):void {
+		BUTTONBASE_STYLE_C = value;
+		Bloom.core ().styleRegistry.getObject ( value );
+	}
+		
+	public var LABEL_STYLE_STYLE_C:Class;
+	
+	public function get LABEL_STYLE ():Class {
+		return LABEL_STYLE_STYLE_C;
+	}
+	
+	public function set LABEL_STYLE (value:Class):void {
+		LABEL_STYLE_STYLE_C = value;
+		Bloom.core ().styleRegistry.getObject ( LABEL_STYLE_STYLE_C );
+	}	
+	
+	
 }
 
 }

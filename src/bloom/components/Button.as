@@ -7,6 +7,7 @@ package bloom.components {
 import bloom.core.Bloom;
 import bloom.core.BloomConstants;
 import bloom.core.ButtonBase;
+import bloom.core.ComponentStyle;
 import bloom.core.Position;
 
 import flash.display.DisplayObjectContainer;
@@ -20,8 +21,8 @@ public class Button extends ButtonBase {
 		if ( down != null ) onDown.addOnce ( down );
 
 		super ( p );
-		style = Bloom.core ().styleRegistry.getObject ( Bloom.core ().currentTheme.BUTTONBASE_STYLE );
-
+		
+		style = Bloom.core ().styleRegistry.getObject ( Bloom.core ().currentTheme.BUTTONBASE_STYLE ) as ComponentStyle;
 		_title = new Label ( this , text );
 
 	}
