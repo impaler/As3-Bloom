@@ -8,7 +8,6 @@ public class ComponentStyle {
 
 	public var defaultWidth:int;
 	public var defaultHeight:int;
-	
 
 	public function initialize ( comp:IComponent ):void {
 		var _comp:Component = comp as Component;

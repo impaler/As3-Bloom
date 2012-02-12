@@ -38,7 +38,7 @@ import org.osflash.signals.natives.NativeSignal;
  */
 public class ButtonBase extends Component {
 
-	protected var _state:int = 0;
+	protected var _state:int = BloomConstants.NORM;
 	protected var _bg:Shape;
 
 	public var onDown:NativeSignal;
@@ -47,8 +47,6 @@ public class ButtonBase extends Component {
 	public var onOut:NativeSignal;
 
 	public function ButtonBase ( p:DisplayObjectContainer = null ) {
-		super ( p );
-
 		buttonMode = true;
 		tabEnabled = false;
 
@@ -60,12 +58,15 @@ public class ButtonBase extends Component {
 		onDown = new NativeSignal ( this , MouseEvent.MOUSE_DOWN , MouseEvent );
 		onOut = new NativeSignal ( this , MouseEvent.MOUSE_OUT , MouseEvent );
 
+		super ( p );
+		style = Bloom.core ().styleRegistry.getObject ( Bloom.core ().currentTheme.BUTTONBASE_STYLE );
+
 		onOver.add ( onMouseOver );
 		onDown.add ( onMouseDown );
 
 	}
 
-	public function get getStyle ():ButtonBaseStyle {
+	protected function get getButtonBaseStyle ():ButtonBaseStyle {
 		return _style as ButtonBaseStyle;
 	}
 
@@ -82,8 +83,8 @@ public class ButtonBase extends Component {
 
 		_bg.graphics.clear ();
 
-		if ( getStyle.backgroundBrush is ColorBrush ) {
-			colorBrush = getStyle.backgroundBrush as ColorBrush;
+		if ( getButtonBaseStyle.backgroundBrush is ColorBrush ) {
+			colorBrush = getButtonBaseStyle.backgroundBrush as ColorBrush;
 			switch ( _state ) {
 				case BloomConstants.NORM:
 					_bg.graphics.beginFill ( colorBrush.colors[BloomConstants.NORM] );
@@ -95,8 +96,8 @@ public class ButtonBase extends Component {
 					_bg.graphics.beginFill ( colorBrush.colors[BloomConstants.DOWN] );
 					break;
 			}
-		} else if ( getStyle.backgroundBrush is BMPBrush ) {
-			bmpBrush = getStyle.backgroundBrush as BMPBrush;
+		} else if ( getButtonBaseStyle.backgroundBrush is BMPBrush ) {
+			bmpBrush = getButtonBaseStyle.backgroundBrush as BMPBrush;
 			switch ( _state ) {
 				case BloomConstants.NORM:
 					scale = bmpBrush.bitmap[BloomConstants.NORM];

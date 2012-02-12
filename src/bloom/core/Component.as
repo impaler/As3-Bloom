@@ -50,12 +50,10 @@ public class Component extends Sprite implements IComponent {
 
 	public function Component ( p:DisplayObjectContainer = null ) {
 		super ();
-		
+
 		_onAddedToStage = new NativeSignal ( this , Event.ADDED_TO_STAGE , Event );
-		_onStageDraw = Bloom.core ().onStageDraw;
 		_onResize = new NativeSignal ( this , Event.RESIZE , Event );
-		
-		style = Bloom.core ().styleRegistry.getObject ( Bloom.core ().currentTheme.BUTTONBASE_STYLE );
+		_onStageDraw = Bloom.core ().onStageDraw;
 
 		_onAddedToStage.addOnce ( onAddedToStage );
 
@@ -107,7 +105,7 @@ public class Component extends Sprite implements IComponent {
 	}
 
 	protected function invalidate ():void {
-		if ( stage ) stage.invalidate ();
+		if ( Bloom.core ().stage ) Bloom.core ().stage.invalidate ();
 	}
 
 	private function onAddedToStage ( e:Event ):void {

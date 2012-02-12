@@ -11,11 +11,11 @@ import org.osflash.signals.natives.NativeSignal;
 public class Bloom {
 
 	private static var _instance:Bloom;
-	
+
 	public var stage:Stage;
 	public var onStageResize:NativeSignal;
 	public var onStageDraw:NativeSignal;
-	
+
 	public var styleRegistry:ObjectPool;
 	public var currentTheme:ThemeBase;
 
@@ -38,10 +38,9 @@ public class Bloom {
 		stage = _stage;
 		onStageResize = new NativeSignal ( stage , Event.RESIZE , Event );
 		onStageDraw = new NativeSignal ( stage , Event.RENDER , Event );
-		styleRegistry = new ObjectPool();
-		
-		currentTheme = new _theme() as ThemeBase;
-		
+		styleRegistry = new ObjectPool ();
+
+		currentTheme = new _theme () as ThemeBase;
 	}
 
 }

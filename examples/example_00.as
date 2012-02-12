@@ -4,6 +4,8 @@
  */
 package {
 
+import bloom.components.Button;
+import bloom.components.Label;
 import bloom.core.Bloom;
 import bloom.core.ButtonBase;
 import bloom.theme.defaultTheme.DefaultTheme;
@@ -11,6 +13,7 @@ import bloom.theme.defaultTheme.DefaultTheme;
 import flash.display.Sprite;
 import flash.display.StageAlign;
 import flash.display.StageScaleMode;
+import flash.text.TextField;
 
 public class example_00 extends Sprite {
 	public function example_00 () {
@@ -20,7 +23,14 @@ public class example_00 extends Sprite {
 
 		Bloom.core ().init ( stage , DefaultTheme );
 		
-		var thing:ButtonBase = new ButtonBase(this);
+		var thing:Button = new Button(this, "Wow");
+		
+//		var thing:ButtonBase = new ButtonBase(this);
+		
+//		var lbl:Label = new Label(this, "Wow");
+		
+//		var txt:TextField = new TextField();addChild(txt);
+//		txt.text = "fdsafasf";
 		
 		
 	}

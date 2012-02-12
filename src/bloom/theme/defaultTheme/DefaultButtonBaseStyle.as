@@ -10,16 +10,15 @@ import bloom.core.ButtonBaseStyle;
 
 public class DefaultButtonBaseStyle extends ButtonBaseStyle {
 	public function DefaultButtonBaseStyle () {
-		
+
 		defaultWidth = 130;
 		defaultHeight = 36;
-		
-		var data = new Vector.<uint> ( 3 , true );
-			data[BloomConstants.NORM] = DefaultTheme.NORMCOLOR;
-			data[BloomConstants.OVER] = DefaultTheme.OVERCOLOR;
-			data[BloomConstants.DOWN] = DefaultTheme.DOWNCOLOR;
+
+		var data:Vector.<uint> = new Vector.<uint> ( 3 , true );
+		data[BloomConstants.NORM] = DefaultTheme.NORMCOLOR;
+		data[BloomConstants.OVER] = DefaultTheme.OVERCOLOR;
+		data[BloomConstants.DOWN] = DefaultTheme.DOWNCOLOR;
 		backgroundBrush = new ColorBrush ( data );
-		
 
 	}
 }

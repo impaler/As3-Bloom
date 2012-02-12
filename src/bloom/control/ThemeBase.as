@@ -30,8 +30,9 @@ import bloom.core.Bloom;
  */
 public class ThemeBase {
 
-	public function ThemeBase ( ) {
-		Bloom.core().styleRegistry.getObject(BUTTONBASE_STYLE);
+	public function ThemeBase () {
+		Bloom.core ().styleRegistry.getObject ( BUTTONBASE_STYLE );
+		Bloom.core ().styleRegistry.getObject ( LABEL_STYLE );
 	}
 
 	///////////////////////////////////
@@ -39,6 +40,7 @@ public class ThemeBase {
 	///////////////////////////////////
 
 	public var BUTTONBASE_STYLE:Class;
+	public var LABEL_STYLE:Class;
 
 }
 

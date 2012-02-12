@@ -27,13 +27,13 @@ package bloom.core {
  * @author sindney
  */
 public interface IComponent extends IChild {
-	
+
 	function set style ( style:ComponentStyle ):void;
-	
+
 	function move ( x:Number , y:Number ):void;
 
 	function size ( w:Number , h:Number ):void;
-	
+
 	function destroy ():void ;
 
 	function set enabled ( value:Boolean ):void;

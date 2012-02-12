@@ -19,23 +19,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package bloom.core {
+package bloom.components {
 
-import bloom.brushes.Brush;
+import bloom.brushes.TextBrush;
+import bloom.core.*;
 
 /**
  * ButtonBase
  *
  * @author sindney
  */
-public class ButtonBaseStyle extends ComponentStyle {
+public class LabelStyle extends ComponentStyle {
 
-	public var backgroundBrush:Brush;
+	public var textFormatBrush:TextBrush;
 
 	override public function initialize ( comp:IComponent ):void {
-		super.initialize ( comp );
-		var btn:ButtonBase = comp as ButtonBase;
-
+//		super.initialize(comp);
+		var lbl:Label = comp as Label;
+		lbl.setTextBrush ( textFormatBrush );
 	}
 
 }
