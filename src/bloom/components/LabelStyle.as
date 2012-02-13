@@ -38,7 +38,10 @@ public class LabelStyle extends ComponentStyle {
 		var lbl:Label = comp as Label;
 		lbl.setTextBrush ( textFormatBrush );
 	}
-
+	
+	override public function toString ():String {
+		return "[bloom.components.LabelStyle]";
+	}
 }
 
 }

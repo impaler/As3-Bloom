@@ -13,6 +13,10 @@ public class DefaultLabelStyle extends LabelStyle {
 		textFormatBrush = new TextBrush ( "Verdana" , 14 , 0xffffff , false , false , false );
 
 	}
-
+	
+	override public function toString ():String {
+		return "[bloom.theme.defaultTheme.DefaultLabelStyle]";
+	}
+	
 }
 }

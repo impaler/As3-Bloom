@@ -21,11 +21,7 @@
  */
 package bloom.core {
 
-import bloom.brushes.BMPBrush;
-import bloom.brushes.ColorBrush;
-
 import flash.display.DisplayObjectContainer;
-import flash.display.Shape;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.events.MouseEvent;
@@ -60,7 +56,6 @@ public class ButtonBase extends Component {
 		onOut = new NativeSignal ( this , MouseEvent.MOUSE_OUT , MouseEvent );
 
 		super ( p );
-		style = Bloom.core ().styleRegistry.getObject ( Bloom.core ().currentTheme.BUTTONBASE_STYLE );
 
 		onOver.add ( onMouseOver );
 		onDown.add ( onMouseDown );
@@ -68,7 +63,7 @@ public class ButtonBase extends Component {
 	}
 
 	protected function get getButtonBaseStyle ():ButtonBaseStyle {
-		return _style as ButtonBaseStyle;
+		return Bloom.core ().styleRegistry.getObject ( Bloom.core ().currentTheme.BUTTONBASE_STYLE ) as ButtonBaseStyle;
 	}
 
 	override protected function draw ( e:Event ):void {
@@ -78,11 +73,7 @@ public class ButtonBase extends Component {
 			return;
 		}
 
-		var obj:Object = new Object();
-		obj.width = _width;
-		obj.height = _height;
-		
-		getButtonBaseStyle.backgroundBrush.draw(_state,_bg,obj);
+		getButtonBaseStyle.backgroundBrush.draw ( _state , _bg , dimensionObject );
 
 	}
 

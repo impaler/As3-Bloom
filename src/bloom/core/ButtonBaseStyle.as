@@ -37,7 +37,10 @@ public class ButtonBaseStyle extends ComponentStyle {
 		var btn:ButtonBase = comp as ButtonBase;
 
 	}
-
+	
+	override public function toString ():String {
+		return "[bloom.core.ButtonBaseStyle]";
+	}
 }
 
 }

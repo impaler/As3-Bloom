@@ -46,7 +46,7 @@ public class Component extends Sprite implements IComponent {
 	protected var _onStageDraw:NativeSignal;
 	protected var _onResize:NativeSignal;
 
-	protected var _style:ComponentStyle;
+	protected var _currentStyleID:String;
 
 	public function Component ( p:DisplayObjectContainer = null ) {
 		super ();
@@ -61,13 +61,11 @@ public class Component extends Sprite implements IComponent {
 	}
 
 	public function set style ( style:ComponentStyle ):void {
-		if ( style != null ) {
-			var newStyle:Class = getDefinitionByName ( getQualifiedClassName ( style ) ) as Class;
-			if ( _style != null ) {
-				var current:Class = getDefinitionByName ( getQualifiedClassName ( _style ) ) as Class;
-				if ( newStyle == current ) return;
-			}
-			_style = Bloom.core ().styleRegistry.getObject ( newStyle ) as ComponentStyle;
+		var newStyle:Class = getDefinitionByName ( getQualifiedClassName ( style ) ) as Class;
+		var style:ComponentStyle = Bloom.core ().styleRegistry.getObject ( newStyle ) as ComponentStyle;
+		
+		if ( newStyle.toString() != _currentStyleID ) {
+			_currentStyleID = style.toString ();
 			style.initialize ( this );
 			_changed = true;
 			invalidate ();
@@ -152,6 +150,13 @@ public class Component extends Sprite implements IComponent {
 
 	public function get enabled ():Boolean {
 		return _enabled;
+	}
+
+	public function get dimensionObject ():Object {
+		var obj:Object = new Object ();
+		obj.width = _width;
+		obj.height = _height;
+		return obj;
 	}
 
 	public function destroy ():void {

@@ -28,7 +28,7 @@ public class Button extends ButtonBase {
 	}
 
 	public function get getButtonStyle ():ButtonStyle {
-		return _style as ButtonStyle;
+		return Bloom.core ().styleRegistry.getObject ( Bloom.core ().currentTheme.BUTTONBASE_STYLE ) as ButtonStyle;
 	}
 
 	override protected function draw ( e:Event ):void {

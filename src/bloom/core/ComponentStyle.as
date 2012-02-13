@@ -15,6 +15,10 @@ public class ComponentStyle {
 		_comp.width = defaultWidth;
 		_comp.height = defaultHeight;
 	}
-
+	
+	public function toString ():String {
+		return "[bloom.core.ComponentStyle]";
+	}
+	
 }
 }

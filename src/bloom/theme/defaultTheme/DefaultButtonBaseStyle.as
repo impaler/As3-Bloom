@@ -21,5 +21,10 @@ public class DefaultButtonBaseStyle extends ButtonBaseStyle {
 		backgroundBrush = new ColorBrush ( data );
 
 	}
+	
+	override public function toString ():String {
+		return "[bloom.theme.defaultTheme.DefaultButtonBaseStyle]";
+	}
+	
 }
 }
