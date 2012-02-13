@@ -24,6 +24,8 @@ package bloom.brushes {
 import bloom.core.ScaleBitmap;
 import bloom.events.BrushEvent;
 
+import flash.display.Sprite;
+
 /**
  * Dispatched when redraw is needed.
  * @eventType bloom.events.BrushEvent
@@ -44,6 +46,17 @@ import bloom.events.BrushEvent;
 		this.bitmap = bitmap;
 	}
 
+	override public function draw ( state:int , value:Sprite , args:Object ):void {
+		var scale:ScaleBitmap = bitmap[state];
+		scale.setSize ( args.width , args.height );
+		
+		value.graphics.clear ();
+		value.graphics.beginBitmapFill ( scale.bitmapData );
+		value.graphics.drawRect ( 0 , 0 , args.width , args.height );
+		value.graphics.endFill ();
+	}
+	
+	
 	/**
 	 * Use this to make your changes up to date.
 	 */

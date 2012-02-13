@@ -23,6 +23,8 @@ package bloom.brushes {
 
 import bloom.events.BrushEvent;
 
+import flash.display.Sprite;
+
 /**
  * Dispatched when redraw is needed.
  * @eventType bloom.events.BrushEvent
@@ -40,6 +42,13 @@ import bloom.events.BrushEvent;
 	public function ColorBrush ( colors:Vector.<uint> = null ) {
 		super ();
 		this.colors = colors;
+	}
+
+	override public function draw ( state:int , value:Sprite , args:Object ):void {
+		value.graphics.clear ();
+		value.graphics.beginFill ( colors[state] );
+		value.graphics.drawRect ( 0 , 0 , args.width , args.height );
+		value.graphics.endFill ();
 	}
 
 	/**

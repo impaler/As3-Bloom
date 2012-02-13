@@ -26,6 +26,7 @@ import bloom.brushes.ColorBrush;
 
 import flash.display.DisplayObjectContainer;
 import flash.display.Shape;
+import flash.display.Sprite;
 import flash.events.Event;
 import flash.events.MouseEvent;
 
@@ -39,7 +40,7 @@ import org.osflash.signals.natives.NativeSignal;
 public class ButtonBase extends Component {
 
 	protected var _state:int = BloomConstants.NORM;
-	protected var _bg:Shape;
+	protected var _bg:Sprite;
 
 	public var onDown:NativeSignal;
 	public var onOver:NativeSignal;
@@ -50,7 +51,7 @@ public class ButtonBase extends Component {
 		buttonMode = true;
 		tabEnabled = false;
 
-		_bg = new Shape ();
+		_bg = new Sprite ();
 		addChild ( _bg );
 
 		onStageUp = new NativeSignal ( Bloom.core ().stage , MouseEvent.MOUSE_UP , MouseEvent );
@@ -77,48 +78,12 @@ public class ButtonBase extends Component {
 			return;
 		}
 
-		var bmpBrush:BMPBrush;
-		var colorBrush:ColorBrush;
-		var scale:ScaleBitmap;
+		var obj:Object = new Object();
+		obj.width = _width;
+		obj.height = _height;
+		
+		getButtonBaseStyle.backgroundBrush.draw(_state,_bg,obj);
 
-		_bg.graphics.clear ();
-
-		if ( getButtonBaseStyle.backgroundBrush is ColorBrush ) {
-			colorBrush = getButtonBaseStyle.backgroundBrush as ColorBrush;
-			switch ( _state ) {
-				case BloomConstants.NORM:
-					_bg.graphics.beginFill ( colorBrush.colors[BloomConstants.NORM] );
-					break;
-				case BloomConstants.OVER:
-					_bg.graphics.beginFill ( colorBrush.colors[BloomConstants.OVER] );
-					break;
-				case BloomConstants.DOWN:
-					_bg.graphics.beginFill ( colorBrush.colors[BloomConstants.DOWN] );
-					break;
-			}
-		} else if ( getButtonBaseStyle.backgroundBrush is BMPBrush ) {
-			bmpBrush = getButtonBaseStyle.backgroundBrush as BMPBrush;
-			switch ( _state ) {
-				case BloomConstants.NORM:
-					scale = bmpBrush.bitmap[BloomConstants.NORM];
-					scale.setSize ( _width , _height );
-					_bg.graphics.beginBitmapFill ( scale.bitmapData );
-					break;
-				case BloomConstants.OVER:
-					scale = bmpBrush.bitmap[BloomConstants.OVER];
-					scale.setSize ( _width , _height );
-					_bg.graphics.beginBitmapFill ( scale.bitmapData );
-					break;
-				case BloomConstants.DOWN:
-					scale = bmpBrush.bitmap[BloomConstants.DOWN];
-					scale.setSize ( _width , _height );
-					_bg.graphics.beginBitmapFill ( scale.bitmapData );
-					break;
-			}
-		}
-
-		_bg.graphics.drawRect ( 0 , 0 , _width , _height );
-		_bg.graphics.endFill ();
 	}
 
 	protected function onMouseOver ( e:MouseEvent ):void {

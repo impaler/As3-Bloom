@@ -21,6 +21,7 @@
  */
 package bloom.brushes {
 
+import flash.display.Sprite;
 import flash.events.EventDispatcher;
 
 /**
@@ -33,7 +34,11 @@ public class Brush extends EventDispatcher {
 	public function Brush () {
 		super ();
 	}
+	
+	public function draw ( state:int , value:Sprite , args:Object ):void {
 
+	}
+	
 	public function update ():void {
 
 	}

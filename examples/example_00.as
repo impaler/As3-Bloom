@@ -23,6 +23,7 @@ public class example_00 extends Sprite {
 
 		Bloom.core ().init ( stage , DefaultTheme );
 		
+		
 		var thing:Button = new Button(this, "Wow");
 		
 //		var thing:ButtonBase = new ButtonBase(this);
