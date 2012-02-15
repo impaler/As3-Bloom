@@ -10,27 +10,21 @@ package bloom.control
 	 */
 	public class ObjectPool {
 		
-		private var _pools:Dictionary;
+		public static var pools:Dictionary = new Dictionary();
 		
-		public function ObjectPool() {
-			reset();
-		}
-		
-		public function getObject(c:Class):* {
-			var tmp:Array = c in _pools ? _pools[c] : _pools[c] = new Array();
+		public static function getObject(c:Class):* {
+			var tmp:Array = c in pools ? pools[c] : pools[c] = new Array();
 			return tmp.length > 0 ? tmp.pop() : new c();
 		}
 		
-		public function returnObject(o:*, c:Class = null):void {
-			if (c == null) {
-				c = getDefinitionByName(getQualifiedClassName(o)) as Class;
-			}
-			var tmp:Array = c in _pools ? _pools[c] : _pools[c] = new Array();
-			tmp.push(o);
+		public static function returnObject(object:*, c:Class = null):void {
+			if (!c) c = getClassName(object);
+			var tmp:Array = c in pools ? pools[c] : pools[c] = new Array();
+			tmp.push(object);
 		}
 		
-		public function reset():void {
-			_pools = new Dictionary();
+		public static function getClassName(object:*):Class {
+			return getDefinitionByName(getQualifiedClassName(object)) as Class;
 		}
 		
 	}
