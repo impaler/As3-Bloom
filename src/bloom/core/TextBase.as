@@ -4,6 +4,8 @@ package bloom.core
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	
+	import bloom.control.ThemeBase;
+	
 	/**
 	 * TextBase
 	 */
@@ -60,7 +62,7 @@ package bloom.core
 		public function set enabled(value:Boolean):void {
 			if (_enabled != value) {
 				_enabled = tabEnabled = mouseEnabled = value;
-				alpha = _enabled ? 1 : DefaultTheme.alpha;
+				alpha = _enabled ? 1 : ThemeBase.theme.alpha;
 			}
 		}
 		

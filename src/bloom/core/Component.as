@@ -105,7 +105,7 @@ package bloom.core
 		public function set enabled(value:Boolean):void {
 			if (_enabled != value) {
 				_enabled = mouseEnabled = mouseChildren = value;
-				alpha = _enabled ? 1 : ThemeBase.alpha;
+				alpha = _enabled ? 1 : ThemeBase.theme.alpha;
 			}
 		}
 		

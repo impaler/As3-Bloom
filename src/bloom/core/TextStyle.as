@@ -9,7 +9,7 @@ package bloom.core
 		
 		public var textFormat:TextFormat;
 		
-		public function TextStyle(format:TextFormat) {
+		public function TextStyle(format:TextFormat = null) {
 			textFormat = format ? format : new TextFormat();
 		}
 		

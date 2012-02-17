@@ -22,8 +22,6 @@ package bloom.components
 			_title.addEventListener(Event.CHANGE, onTitleChanged);
 			
 			style = ThemeBase.theme.button;
-			
-			size(120, 30);
 		}
 		
 		protected function onTitleChanged(e:Event):void {
@@ -41,23 +39,25 @@ package bloom.components
 				return;
 			}
 			
+			if (!_title) return;
+			
 			var style:ButtonStyle = _style as ButtonStyle;
 			
 			_bg.graphics.clear();
 			
 			switch(_state) {
 				case NORMAL:
-					_title.style = style.normal;
+					_title.style = style.title_normal;
 					style.normal.setSize(_width, _height);
 					_bg.graphics.beginBitmapFill(style.normal.bitmapData);
 					break;
 				case OVER:
-					_title.style = style.over;
+					_title.style = style.title_over;
 					style.over.setSize(_width, _height);
 					_bg.graphics.beginBitmapFill(style.over.bitmapData);
 					break;
 				case DOWN:
-					_title.style = style.down;
+					_title.style = style.title_down;
 					style.down.setSize(_width, _height);
 					_bg.graphics.beginBitmapFill(style.down.bitmapData);
 					break;

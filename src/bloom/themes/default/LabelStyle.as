@@ -11,7 +11,7 @@ package bloom.themes.default
 			super();
 			textFormat.font = "Verdana";
 			textFormat.size = 12;
-			textFormat.color = 0xffffff;
+			textFormat.color = 0x000000;
 		}
 		
 	}

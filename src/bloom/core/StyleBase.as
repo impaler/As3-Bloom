@@ -21,7 +21,7 @@ package bloom.core
 		// toString
 		///////////////////////////////////
 		
-		public function toString():String {
+		override public function toString():String {
 			return "[bloom.core.StyleBase]";
 		}
 	}
