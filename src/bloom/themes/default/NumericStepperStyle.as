@@ -7,9 +7,9 @@ package bloom.themes.default
 	import bloom.core.TextStyle;
 	
 	/**
-	 * TextInputStyle
+	 * NumericStepperStyle
 	 */
-	public class TextInputStyle implements IStyleBase {
+	public class NumericStepperStyle implements IStyleBase {
 		
 		[Embed(source = "assets/text_normal.png")]
 		private static var bg_normal:Class;
@@ -17,13 +17,19 @@ package bloom.themes.default
 		[Embed(source = "assets/text_active.png")]
 		private static var bg_active:Class;
 		
+		public var bt_increase:NSIncreaseStyle;
+		public var bt_decrease:NSDecreaseStyle;
+		
 		public var normal:ScaleBitmap;
 		public var active:ScaleBitmap;
 		
 		public var text_normal:TextStyle;
 		public var text_active:TextStyle;
 		
-		public function TextInputStyle() {
+		public function NumericStepperStyle() {
+			bt_increase = new NSIncreaseStyle();
+			bt_decrease = new NSDecreaseStyle();
+			
 			normal = new ScaleBitmap(new bg_normal().bitmapData);
 			normal.scale9Grid = new Rectangle(13, 15, 51, 12);
 			
@@ -46,9 +52,8 @@ package bloom.themes.default
 		///////////////////////////////////
 		
 		public function toString():String {
-			return "[bloom.themes.default.TextInputStyle]";
+			return "[bloom.themes.default.NumericStepperStyle]";
 		}
 		
 	}
-
 }

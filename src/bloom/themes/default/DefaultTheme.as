@@ -14,6 +14,8 @@ package bloom.themes.default
 			buttonBase = ObjectPool.getObject(ButtonBaseStyle) as ButtonBaseStyle;
 			checkBox = ObjectPool.getObject(CheckBoxStyle) as CheckBoxStyle;
 			textInput = ObjectPool.getObject(TextInputStyle) as TextInputStyle;
+			numericStepper = ObjectPool.getObject(NumericStepperStyle) as NumericStepperStyle;
+			progressBar = ObjectPool.getObject(ProgressBarStyle) as ProgressBarStyle;
 		}
 		
 		///////////////////////////////////
@@ -35,6 +37,10 @@ package bloom.themes.default
 		public var checkBox:CheckBoxStyle;
 		
 		public var textInput:TextInputStyle;
+		
+		public var numericStepper:NumericStepperStyle;
+		
+		public var progressBar:ProgressBarStyle;
 		
 		///////////////////////////////////
 		// toString

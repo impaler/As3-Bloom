@@ -54,6 +54,12 @@ package
 			
 			var textInput:TextInput = new TextInput(this, "TextInput");
 			textInput.y = 160;
+			
+			var numericStepper:NumericStepper = new NumericStepper(this);
+			numericStepper.y = 180;
+			
+			var progressBar:ProgressBar = new ProgressBar(this, 50);
+			progressBar.y = 200;
 		}
 		
 	}

@@ -9,10 +9,10 @@ package bloom.themes.default
 	public class CheckBoxStyle implements IStyleBase {
 		
 		[Embed(source = "assets/checkbox_off.png")]
-		private var cb_normal:Class;
+		private static var cb_normal:Class;
 		
 		[Embed(source = "assets/checkbox_on.png")]
-		private var cb_selected:Class;
+		private static var cb_selected:Class;
 		
 		public var normal:ScaleBitmap;
 		public var selected:ScaleBitmap;

@@ -113,13 +113,20 @@ package bloom.core
 		}
 		
 		public function set style(value:IStyleBase):void {
-			if (_style != value) {
-				if (_style) ObjectPool.returnObject(_style);
-				_style = value;
-				if (_style) {
+			if (!_style) {
+				if (value) {
 					_style = ObjectPool.getObject(ObjectPool.getClassName(value)) as IStyleBase;
 					drawDirectly();
 				}
+			} else if (!value) {
+				if (_style) {
+					ObjectPool.returnObject(_style);
+					_style = null;
+				}
+			} else if (_style.toString() != value.toString()) {
+				ObjectPool.returnObject(_style);
+				_style = ObjectPool.getObject(ObjectPool.getClassName(value)) as IStyleBase;
+				drawDirectly();
 			}
 		}
 		

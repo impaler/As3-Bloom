@@ -59,11 +59,11 @@ package bloom.components
 			if (_focused) {
 				style.active.setSize(_width, _height);
 				_bg.graphics.beginBitmapFill(style.active.bitmapData);
-				_textBase.style = style.title_active;
+				_textBase.style = style.text_active;
 			} else {
 				style.normal.setSize(_width, _height);
 				_bg.graphics.beginBitmapFill(style.normal.bitmapData);
-				_textBase.style = style.title_normal;
+				_textBase.style = style.text_normal;
 			}
 			
 			_bg.graphics.drawRect(0, 0, _width, _height);
