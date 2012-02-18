@@ -2,9 +2,9 @@ package bloom.core
 {
 	
 	/**
-	 * IChild
+	 * IObjectBase
 	 */
-	public interface IChild {
+	public interface IObjectBase {
 		
 		function set x(value:Number):void;
 		function get x():Number;

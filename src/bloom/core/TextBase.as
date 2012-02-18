@@ -33,24 +33,16 @@ package bloom.core
 			height = h;
 		}
 		
-		protected function onStyleChanged(e:StyleEvent):void {
-			if (defaultTextFormat != _style.textFormat) {
-				defaultTextFormat = _style.textFormat;
-				setTextFormat(defaultTextFormat);
-			}
-		}
-		
 		///////////////////////////////////
 		// getter/setters
 		///////////////////////////////////
 		
 		public function set style(value:TextStyle):void {
 			if (_style != value) {
-				if (_style) _style.removeEventListener(StyleEvent.REDRAW, onStyleChanged);
 				_style = value;
 				if (_style) {
-					onStyleChanged(null);
-					_style.addEventListener(StyleEvent.REDRAW, onStyleChanged);
+					defaultTextFormat = _style.textFormat;
+					setTextFormat(defaultTextFormat);
 				}
 			}
 		}

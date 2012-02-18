@@ -1,16 +1,15 @@
 package bloom.components 
 {
 	import flash.display.DisplayObjectContainer;
-	import flash.events.EventDispatcher;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
-	[Event(name = "change", type = "flash.events.Event")]
+	import org.osflash.signals.Signal;
 	
 	/**
 	 * CheckBoxGroup
 	 */
-	public class CheckBoxGroup extends EventDispatcher {
+	public class CheckBoxGroup extends Signal {
 		
 		private var _content:Array;
 		
@@ -18,6 +17,8 @@ package bloom.components
 		private var _target:CheckBox;
 		
 		public function CheckBoxGroup(index:int, ...rest) {
+			super();
+			
 			_index = index;
 		    
 			if (_index == -1) {
@@ -85,7 +86,7 @@ package bloom.components
 		private function onChange(e:Event):void {
 			_index = _content.indexOf(e.target as CheckBox);
 			update();
-			dispatchEvent(new Event("change"));
+			dispatch();
 		}
 		
 		///////////////////////////////////
@@ -113,7 +114,7 @@ package bloom.components
 		// toString
 		///////////////////////////////////
 		
-		override public function toString():String {
+		public function toString():String {
 			return "[bloom.components.CheckBoxGroup]";
 		}
 		

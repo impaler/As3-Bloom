@@ -5,7 +5,7 @@ package bloom.core
 	/**
 	 * TextStyle
 	 */
-	public class TextStyle extends StyleBase {
+	public class TextStyle implements IStyleBase {
 		
 		public var textFormat:TextFormat;
 		
@@ -17,7 +17,7 @@ package bloom.core
 		// toString
 		///////////////////////////////////
 		
-		override public function toString():String {
+		public function toString():String {
 			return "[bloom.core.TextStyle]";
 		}
 	}

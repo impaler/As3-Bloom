@@ -13,6 +13,7 @@ package bloom.themes.default
 			button = ObjectPool.getObject(ButtonStyle) as ButtonStyle;
 			buttonBase = ObjectPool.getObject(ButtonBaseStyle) as ButtonBaseStyle;
 			checkBox = ObjectPool.getObject(CheckBoxStyle) as CheckBoxStyle;
+			textInput = ObjectPool.getObject(TextInputStyle) as TextInputStyle;
 		}
 		
 		///////////////////////////////////
@@ -20,7 +21,6 @@ package bloom.themes.default
 		///////////////////////////////////
 		
 		public var alpha:Number = 0.5;
-		public var focus:uint = 0xEEDD88;
 		
 		///////////////////////////////////
 		// Components
@@ -33,6 +33,8 @@ package bloom.themes.default
 		public var buttonBase:ButtonBaseStyle;
 		
 		public var checkBox:CheckBoxStyle;
+		
+		public var textInput:TextInputStyle;
 		
 		///////////////////////////////////
 		// toString

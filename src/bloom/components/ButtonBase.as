@@ -7,7 +7,6 @@ package bloom.components
 	
 	import bloom.control.ThemeBase;
 	import bloom.core.Component;
-	import bloom.core.StyleEvent;
 	import bloom.themes.default.ButtonBaseStyle;
 	
 	/**
@@ -36,10 +35,10 @@ package bloom.components
 			
 			addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
 			addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
-			ThemeBase.dispatcher.addEventListener(StyleEvent.REDRAW, onThemeChanged);
+			ThemeBase.signal.add(onThemeChanged);
 		}
 		
-		protected function onThemeChanged(e:StyleEvent):void {
+		protected function onThemeChanged():void {
 			style = ThemeBase.theme.buttonBase;
 		}
 		

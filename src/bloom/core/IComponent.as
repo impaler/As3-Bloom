@@ -4,7 +4,7 @@ package bloom.core
 	/**
 	 * IComponent
 	 */
-	public interface IComponent extends IChild {
+	public interface IComponent extends IObjectBase {
 		
 		function move(x:Number, y:Number):void;
 		

@@ -1,21 +1,18 @@
 package bloom.control 
 {
-	import flash.events.EventDispatcher;
+	import org.osflash.signals.Signal;
 	
-	import bloom.core.StyleEvent;
 	import bloom.themes.default.*;
-	
-	[StyleEvent(name = "redraw", type = "bloom.core.StyleEvent")]
 	
 	/**
 	 * ThemeBase
 	 */
 	public class ThemeBase {
 		
-		private static var _dispatcher:EventDispatcher = new EventDispatcher();
+		private static const _signal:Signal = new Signal();
 		
-		public static function get dispatcher():EventDispatcher {
-			return _dispatcher;
+		public static function get signal():Signal {
+			return _signal;
 		}
 		
 		private static var _theme:DefaultTheme;
@@ -27,7 +24,7 @@ package bloom.control
 		public static function set theme(value:DefaultTheme):void {
 			if (_theme != value) {
 				_theme = value;
-				dispatcher.dispatchEvent(new StyleEvent(StyleEvent.REDRAW));
+				_signal.dispatch();
 			}
 		}
 		

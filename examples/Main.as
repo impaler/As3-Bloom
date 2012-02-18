@@ -26,6 +26,7 @@ package
 			ThemeBase.theme = new DefaultTheme();
 			
 			var label:Label = new Label(this, "Label");
+			
 			var buttonBase:ButtonBase = new ButtonBase(this);
 			buttonBase.y = 20;
 			
@@ -50,6 +51,9 @@ package
 			cbg.addChild(checkBox);
 			
 			cbg.index = 0;
+			
+			var textInput:TextInput = new TextInput(this, "TextInput");
+			textInput.y = 160;
 		}
 		
 	}

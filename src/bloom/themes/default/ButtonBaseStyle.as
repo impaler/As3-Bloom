@@ -2,13 +2,13 @@ package bloom.themes.default
 {
 	import flash.geom.Rectangle;
 	
+	import bloom.core.IStyleBase;
 	import bloom.core.ScaleBitmap;
-	import bloom.core.StyleBase;
 	
 	/**
 	 * ButtonBaseStyle
 	 */
-	public class ButtonBaseStyle extends StyleBase {
+	public class ButtonBaseStyle implements IStyleBase {
 		
 		[Embed(source = "assets/button_normal.png")]
 		private var bt_normal:Class;
@@ -38,7 +38,7 @@ package bloom.themes.default
 		// toString
 		///////////////////////////////////
 		
-		override public function toString():String {
+		public function toString():String {
 			return "[bloom.themes.default.ButtonBaseStyle]";
 		}
 		

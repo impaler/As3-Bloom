@@ -5,7 +5,6 @@ package bloom.components
 	import flash.events.MouseEvent;
 	
 	import bloom.control.ThemeBase;
-	import bloom.core.StyleEvent;
 	import bloom.themes.default.ButtonStyle;
 	
 	/**
@@ -28,7 +27,7 @@ package bloom.components
 			_title.move((_width - _title.width) * 0.5, (_height - _title.height) * 0.5);
 		}
 		
-		override protected function onThemeChanged(e:StyleEvent):void {
+		override protected function onThemeChanged():void {
 			style = ThemeBase.theme.button;
 		}
 		

@@ -21,7 +21,7 @@ package bloom.core
 		protected var _width:Number = 0;
 		protected var _height:Number = 0;
 		
-		protected var _style:StyleBase;
+		protected var _style:IStyleBase;
 		
 		protected var _margin:Margin;
 		
@@ -59,11 +59,6 @@ package bloom.core
 		
 		protected function invalidate():void {
 			if (stage) stage.invalidate();
-		}
-		
-		protected function onStyleChanged(e:StyleEvent):void {
-			_changed = true;
-			invalidate();
 		}
 		
 		private function onAddedToStage(e:Event):void {
@@ -113,20 +108,16 @@ package bloom.core
 			return _enabled;
 		}
 		
-		public function get style():StyleBase {
+		public function get style():IStyleBase {
 			return _style;
 		}
 		
-		public function set style(value:StyleBase):void {
+		public function set style(value:IStyleBase):void {
 			if (_style != value) {
-				if (_style) {
-					ObjectPool.returnObject(_style);
-					_style.removeEventListener(StyleEvent.REDRAW, onStyleChanged);
-				}
+				if (_style) ObjectPool.returnObject(_style);
 				_style = value;
 				if (_style) {
-					_style = ObjectPool.getObject(ObjectPool.getClassName(value)) as StyleBase;
-					_style.addEventListener(StyleEvent.REDRAW, onStyleChanged);
+					_style = ObjectPool.getObject(ObjectPool.getClassName(value)) as IStyleBase;
 					drawDirectly();
 				}
 			}

@@ -5,7 +5,6 @@ package bloom.components
 	import flash.text.TextFormat;
 	
 	import bloom.control.ThemeBase;
-	import bloom.core.StyleEvent;
 	import bloom.core.TextBase;
 	
 	/**
@@ -23,10 +22,10 @@ package bloom.components
 			style = ThemeBase.theme.label;
 			this.text = text;
 			
-			ThemeBase.dispatcher.addEventListener(StyleEvent.REDRAW, onThemeChanged);
+			ThemeBase.signal.add(onThemeChanged);
 		}
 		
-		protected function onThemeChanged(e:StyleEvent):void {
+		protected function onThemeChanged():void {
 			style = ThemeBase.theme.label;
 		}
 		
