@@ -4,7 +4,7 @@ package bloom.core
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	
-	import bloom.control.ThemeBase;
+	import bloom.control.Bloom;
 	
 	/**
 	 * TextBase
@@ -54,7 +54,7 @@ package bloom.core
 		public function set enabled(value:Boolean):void {
 			if (_enabled != value) {
 				_enabled = tabEnabled = mouseEnabled = value;
-				alpha = _enabled ? 1 : ThemeBase.theme.alpha;
+				alpha = _enabled ? 1 : Bloom.theme.alpha;
 			}
 		}
 		
@@ -73,7 +73,10 @@ package bloom.core
 		override public function toString():String {
 			return "[bloom.core.TextBase]";
 		}
-		
+
+		public function destroy ():void {
+			_style = null;
+		}
 	}
 
 }
