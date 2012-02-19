@@ -3,7 +3,7 @@ package
 	import flash.display.Sprite;
 	import flash.events.Event;
 	
-	import bloom.control.ThemeBase;
+	import bloom.control.Bloom;
 	import bloom.components.*;
 	import bloom.themes.default.DefaultTheme;
 	
@@ -23,16 +23,23 @@ package
 			stage.scaleMode = "noScale";
 			stage.align = "TL";
 			
-			ThemeBase.theme = new DefaultTheme();
+			Bloom.init(stage , new DefaultTheme());
 			
 			var label:Label = new Label(this, "Label");
 			
 			var buttonBase:ButtonBase = new ButtonBase(this);
 			buttonBase.y = 20;
 			
+			var buttonBase:ButtonBase = new ButtonBase(this);
+			buttonBase.y = 80;
+			
 			var button:Button = new Button(this, "Button");
 			button.y = 50;
+			var button:Button = new Button(this, "Button");
+			button.y = 60;
 			
+			
+/*			
 			var checkBox:CheckBox = new CheckBox(this, "CheckBox");
 			checkBox.y = 80;
 			
@@ -59,7 +66,7 @@ package
 			numericStepper.y = 180;
 			
 			var progressBar:ProgressBar = new ProgressBar(this, 50);
-			progressBar.y = 200;
+			progressBar.y = 200;*/
 		}
 		
 	}
