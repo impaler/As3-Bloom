@@ -15,6 +15,7 @@ package bloom.core
 		
 		function toString():String;
 		
+		function destroy () :void;
 	}
 	
 }

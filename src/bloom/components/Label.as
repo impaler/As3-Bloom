@@ -4,7 +4,7 @@ package bloom.components
 	import flash.events.Event;
 	import flash.text.TextFormat;
 	
-	import bloom.control.ThemeBase;
+	import bloom.control.Bloom;
 	import bloom.core.TextBase;
 	
 	/**
@@ -19,14 +19,14 @@ package bloom.components
 			type = "dynamic";
 			autoSize = "left";
 			
-			style = ThemeBase.theme.label;
+			style = Bloom.theme.label;
 			this.text = text;
 			
-			ThemeBase.signal.add(onThemeChanged);
+			Bloom.onThemeChanged.add(onThemeChanged);
 		}
 		
 		protected function onThemeChanged():void {
-			style = ThemeBase.theme.label;
+			style = Bloom.theme.label;
 		}
 		
 		///////////////////////////////////

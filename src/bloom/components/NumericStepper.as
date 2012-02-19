@@ -10,7 +10,7 @@ package bloom.components
 	
 	import org.osflash.signals.Signal;
 	
-	import bloom.control.ThemeBase;
+	import bloom.control.Bloom;
 	import bloom.core.Component;
 	import bloom.core.TextBase;
 	import bloom.themes.default.NumericStepperStyle;
@@ -72,7 +72,7 @@ package bloom.components
 			_decrease_shape = new Shape();
 			_decrease.addChild(_decrease_shape);
 			
-			style = ThemeBase.theme.numericStepper;
+			style = Bloom.theme.numericStepper;
 			
 			_max = max;
 			_min = min;
@@ -135,7 +135,7 @@ package bloom.components
 		}
 		
 		protected function onThemeChanged():void {
-			style = ThemeBase.theme.numericStepper;
+			style = Bloom.theme.numericStepper;
 		}
 		
 		override protected function draw(e:Event):void {
@@ -222,7 +222,7 @@ package bloom.components
 		override public function set enabled(value:Boolean):void {
 			if (_enabled != value) {
 				_enabled = _textBase.tabEnabled = mouseEnabled = mouseChildren = value;
-				alpha = _enabled ? 1 : ThemeBase.theme.alpha;
+				alpha = _enabled ? 1 : Bloom.theme.alpha;
 			}
 		}
 		

@@ -4,7 +4,7 @@ package bloom.components
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
-	import bloom.control.ThemeBase;
+	import bloom.control.Bloom;
 	import bloom.themes.default.ButtonStyle;
 	
 	/**
@@ -20,7 +20,7 @@ package bloom.components
 			_title = new Label(this, text);
 			_title.addEventListener(Event.CHANGE, onTitleChanged);
 			
-			style = ThemeBase.theme.button;
+			style = Bloom.theme.button;
 		}
 		
 		protected function onTitleChanged(e:Event):void {
@@ -28,7 +28,7 @@ package bloom.components
 		}
 		
 		override protected function onThemeChanged():void {
-			style = ThemeBase.theme.button;
+			style = Bloom.theme.button;
 		}
 		
 		override protected function draw(e:Event):void {
