@@ -7,7 +7,7 @@ package bloom.components
 	
 	import org.osflash.signals.Signal;
 	
-	import bloom.control.ThemeBase;
+	import bloom.control.Bloom;
 	import bloom.core.Component;
 	import bloom.core.ScaleBitmap;
 	import bloom.themes.default.ProgressBarStyle;
@@ -36,7 +36,7 @@ package bloom.components
 			
 			_value = value;
 			
-			style = ThemeBase.theme.progressBar;
+			style = Bloom.theme.progressBar;
 			
 			size(100, 20);
 		}

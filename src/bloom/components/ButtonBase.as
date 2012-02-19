@@ -5,7 +5,7 @@ package bloom.components
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
-	import bloom.control.ThemeBase;
+	import bloom.control.Bloom;
 	import bloom.core.Component;
 	import bloom.themes.default.ButtonBaseStyle;
 	
@@ -29,17 +29,17 @@ package bloom.components
 			_bg = new Shape();
 			addChild(_bg);
 			
-			style = ThemeBase.theme.buttonBase;
+			style = Bloom.theme.buttonBase;
 			
 			size(120, 30);
 			
 			addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
 			addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
-			ThemeBase.signal.add(onThemeChanged);
+			Bloom.onThemeChanged.add(onThemeChanged);
 		}
 		
 		protected function onThemeChanged():void {
-			style = ThemeBase.theme.buttonBase;
+			style = Bloom.theme.buttonBase;
 		}
 		
 		override protected function draw(e:Event):void {
