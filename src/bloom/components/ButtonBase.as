@@ -49,7 +49,7 @@ import org.osflash.signals.natives.NativeSignal;
 			onDown = new NativeSignal ( this , MouseEvent.MOUSE_DOWN , MouseEvent );
 			onOut = new NativeSignal ( this , MouseEvent.MOUSE_OUT , MouseEvent );
 			
-			onOver.add(onMouseOver);
+			onOver.addOnce(onMouseOver);
 			onDown.add(onMouseDown);
 			
 			Bloom.onThemeChanged.add(onThemeChanged);
@@ -75,7 +75,7 @@ import org.osflash.signals.natives.NativeSignal;
 				_state = OVER;
 				_changed = true;
 				invalidate();
-				onOut.add(onMouseOut);
+				onOut.addOnce(onMouseOut);
 			}
 		}
 		
@@ -84,22 +84,20 @@ import org.osflash.signals.natives.NativeSignal;
 				_state = DOWN;
 				_changed = true;
 				invalidate();
-				onUp.add(onMouseUp);
-				onOver.remove(onMouseOver);
+				onUp.addOnce(onMouseUp);
 			}
 		}
 		
 		protected function onMouseUp(e:MouseEvent):void {
 			_state = NORMAL;
+			onOut.numListeners > 0 ? _state = OVER : _state = NORMAL;
 			_changed = true;
 			invalidate();
-			onOver.add(onMouseOver);
-			onOut.remove(onMouseOut);
-			onUp.remove(onMouseUp);
+			onOver.addOnce(onMouseOver);
 		}
 		
 		protected function onMouseOut(e:MouseEvent):void {
-			if (_state != DOWN) onMouseUp(e);
+			if (_state != DOWN || _state != OVER) onMouseUp(e);
 		}
 		
 		///////////////////////////////////
