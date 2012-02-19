@@ -8,8 +8,10 @@ package bloom.components
 	import bloom.control.Bloom;
 	import bloom.core.Component;
 	import bloom.themes.default.ButtonBaseStyle;
-	
-	/**
+
+import org.osflash.signals.natives.NativeSignal;
+
+/**
 	 * ButtonBase
 	 */
 	public class ButtonBase extends Component {
@@ -20,6 +22,11 @@ package bloom.components
 		
 		protected var _state:int = 0;
 		protected var _bg:Shape;
+		
+		public var onDown:NativeSignal;
+		public var onOver:NativeSignal;
+		public var onStageUp:NativeSignal;
+		public var onOut:NativeSignal;
 		
 		public function ButtonBase(p:DisplayObjectContainer = null) {
 			super(p);
@@ -33,8 +40,14 @@ package bloom.components
 			
 			size(120, 30);
 			
-			addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
-			addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+			onStageUp = Bloom.onStageMouseUp;
+			onOver = new NativeSignal ( this , MouseEvent.MOUSE_OVER , MouseEvent );
+			onDown = new NativeSignal ( this , MouseEvent.MOUSE_DOWN , MouseEvent );
+			onOut = new NativeSignal ( this , MouseEvent.MOUSE_OUT , MouseEvent );
+			
+			onOver.add(onMouseOver);
+			onDown.add(onMouseDown);
+			
 			Bloom.onThemeChanged.add(onThemeChanged);
 		}
 		
@@ -77,7 +90,7 @@ package bloom.components
 				_state = OVER;
 				_changed = true;
 				invalidate();
-				addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+				onOut.add(onMouseOut);
 			}
 		}
 		
@@ -86,8 +99,8 @@ package bloom.components
 				_state = DOWN;
 				_changed = true;
 				invalidate();
-				stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
-				removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
+				onStageUp.add(onMouseUp);
+				onOver.remove(onMouseOver);
 			}
 		}
 		
@@ -95,9 +108,9 @@ package bloom.components
 			_state = NORMAL;
 			_changed = true;
 			invalidate();
-			addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
-			removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
-			stage.removeEventListener (MouseEvent.MOUSE_UP, onMouseUp);
+			onOver.add(onMouseOver);
+			onOut.remove(onMouseOut);
+			onStageUp.remove(onMouseUp);
 		}
 		
 		protected function onMouseOut(e:MouseEvent):void {
@@ -118,6 +131,19 @@ package bloom.components
 		
 		public override function toString():String {
 			return "[bloom.components.ButtonBase]";
+		}
+	
+		override public function destroy () :void {
+			onStageUp.remove(onMouseUp);
+			
+			onOver.removeAll ();
+			onOver = null;
+			onDown.removeAll ();
+			onDown = null;
+			onOut.removeAll ();
+			onOut = null;
+	
+			_bg = null;
 		}
 	}
 
