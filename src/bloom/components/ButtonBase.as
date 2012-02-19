@@ -1,8 +1,12 @@
 package bloom.components 
 {
-	import flash.display.DisplayObjectContainer;
+
+import bloom.brush.Brush;
+
+import flash.display.DisplayObjectContainer;
 	import flash.display.Shape;
-	import flash.events.Event;
+import flash.display.Sprite;
+import flash.events.Event;
 	import flash.events.MouseEvent;
 	
 	import bloom.control.Bloom;
@@ -21,7 +25,7 @@ import org.osflash.signals.natives.NativeSignal;
 		public static const DOWN:int = 2;
 		
 		protected var _state:int = 0;
-		protected var _bg:Shape;
+		protected var _bg:Sprite;
 		
 		public var onDown:NativeSignal;
 		public var onOver:NativeSignal;
@@ -33,7 +37,7 @@ import org.osflash.signals.natives.NativeSignal;
 			buttonMode = true;
 			tabEnabled = false;
 			
-			_bg = new Shape();
+			_bg = new Sprite();
 			addChild(_bg);
 			
 			style = Bloom.theme.buttonBase;
@@ -62,27 +66,8 @@ import org.osflash.signals.natives.NativeSignal;
 				return;
 			}
 			
-			var style:ButtonBaseStyle = _style as ButtonBaseStyle;
-			
-			_bg.graphics.clear();
-			
-			switch(_state) {
-				case NORMAL:
-					style.normal.setSize(_width, _height);
-					_bg.graphics.beginBitmapFill(style.normal.bitmapData);
-					break;
-				case OVER:
-					style.over.setSize(_width, _height);
-					_bg.graphics.beginBitmapFill(style.over.bitmapData);
-					break;
-				case DOWN:
-					style.down.setSize(_width, _height);
-					_bg.graphics.beginBitmapFill(style.down.bitmapData);
-					break;
-			}
-			
-			_bg.graphics.drawRect(0, 0, _width, _height);
-			_bg.graphics.endFill();
+			buttonBaseStyle.backgroundBrush.update ( _state , _bg , dimensionObject );
+
 		}
 		
 		protected function onMouseOver(e:MouseEvent):void {
@@ -123,6 +108,10 @@ import org.osflash.signals.natives.NativeSignal;
 		
 		public function get state():int {
 			return _state;
+		}
+	
+		public function get buttonBaseStyle():ButtonBaseStyle {
+			return _style as ButtonBaseStyle;
 		}
 		
 		///////////////////////////////////

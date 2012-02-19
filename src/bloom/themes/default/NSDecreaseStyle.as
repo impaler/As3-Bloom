@@ -18,12 +18,12 @@ package bloom.themes.default
 		private static var bt_decrease_down:Class;
 		
 		public function NSDecreaseStyle() {
-			normal = new ScaleBitmap(new bt_decrease_normal().bitmapData);
-			normal.scale9Grid = new Rectangle(2, 2, 13, 4);
-			over = new ScaleBitmap(new bt_decrease_over().bitmapData);
-			over.scale9Grid = new Rectangle(2, 2, 13, 4);
-			down = new ScaleBitmap(new bt_decrease_down().bitmapData);
-			down.scale9Grid = new Rectangle(2, 2, 13, 4);
+//			normal = new ScaleBitmap(new bt_decrease_normal().bitmapData);
+//			normal.scale9Grid = new Rectangle(2, 2, 13, 4);
+//			over = new ScaleBitmap(new bt_decrease_over().bitmapData);
+//			over.scale9Grid = new Rectangle(2, 2, 13, 4);
+//			down = new ScaleBitmap(new bt_decrease_down().bitmapData);
+//			down.scale9Grid = new Rectangle(2, 2, 13, 4);
 		}
 		
 		///////////////////////////////////

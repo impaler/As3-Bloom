@@ -38,32 +38,12 @@ package bloom.components
 				return;
 			}
 			
+			super.draw(e);
+			
 			if (!_title) return;
 			
-			var style:ButtonStyle = _style as ButtonStyle;
-			
-			_bg.graphics.clear();
-			
-			switch(_state) {
-				case NORMAL:
-					_title.style = style.title_normal;
-					style.normal.setSize(_width, _height);
-					_bg.graphics.beginBitmapFill(style.normal.bitmapData);
-					break;
-				case OVER:
-					_title.style = style.title_over;
-					style.over.setSize(_width, _height);
-					_bg.graphics.beginBitmapFill(style.over.bitmapData);
-					break;
-				case DOWN:
-					_title.style = style.title_down;
-					style.down.setSize(_width, _height);
-					_bg.graphics.beginBitmapFill(style.down.bitmapData);
-					break;
-			}
-			
-			_bg.graphics.drawRect(0, 0, _width, _height);
-			_bg.graphics.endFill();
+			buttonStyle.backgroundBrush.update ( _state , _bg , dimensionObject );
+			buttonStyle.textStyle.update( _state, _title );
 			
 			_title.move((_width - _title.width) * 0.5, (_height - _title.height) * 0.5);
 		}
@@ -74,6 +54,10 @@ package bloom.components
 		
 		public function get title():Label {
 			return _title;
+		}
+		
+		public function get buttonStyle():ButtonStyle {
+			return _style as ButtonStyle;
 		}
 		
 		///////////////////////////////////

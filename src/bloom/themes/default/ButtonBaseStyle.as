@@ -1,6 +1,11 @@
 package bloom.themes.default 
 {
-	import flash.geom.Rectangle;
+
+import bloom.brush.BMPBrush;
+import bloom.brush.Brush;
+import bloom.components.ButtonBase;
+
+import flash.geom.Rectangle;
 	
 	import bloom.core.IStyleBase;
 	import bloom.core.ScaleBitmap;
@@ -19,17 +24,23 @@ package bloom.themes.default
 		[Embed(source = "assets/button_over.png")]
 		private static var bt_over:Class;
 		
-		public var normal:ScaleBitmap;
-		public var over:ScaleBitmap;
-		public var down:ScaleBitmap;
+		public var backgroundBrush:Brush;
 		
 		public function ButtonBaseStyle() {
-			normal = new ScaleBitmap(new bt_normal().bitmapData);
+			
+			var normal:ScaleBitmap = new ScaleBitmap(new bt_normal().bitmapData);
 			normal.scale9Grid = new Rectangle(15, 15, 70, 14);
-			over = new ScaleBitmap(new bt_over().bitmapData);
+			var over:ScaleBitmap = new ScaleBitmap(new bt_over().bitmapData);
 			over.scale9Grid = new Rectangle(15, 15, 70, 14);
-			down = new ScaleBitmap(new bt_down().bitmapData);
+			var down:ScaleBitmap = new ScaleBitmap(new bt_down().bitmapData);
 			down.scale9Grid = new Rectangle(15, 15, 70, 14);
+			
+			var data:Vector.<ScaleBitmap> = new Vector.<ScaleBitmap> ( 3 , true );
+			data[ButtonBase.NORMAL] = normal;
+			data[ButtonBase.OVER] = over;
+			data[ButtonBase.DOWN] = down;
+			backgroundBrush = new BMPBrush( data );
+
 		}
 		
 		///////////////////////////////////

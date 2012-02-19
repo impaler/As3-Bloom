@@ -136,6 +136,13 @@ import org.osflash.signals.natives.NativeSignal;
 			return _margin;
 		}
 		
+		public function get dimensionObject ():Object {
+			var obj:Object = new Object ();
+			obj.width = _width;
+			obj.height = _height;
+			return obj;
+		}
+	
 		///////////////////////////////////
 		// toString
 		///////////////////////////////////
