@@ -29,7 +29,7 @@ import org.osflash.signals.natives.NativeSignal;
 		
 		public var onDown:NativeSignal;
 		public var onOver:NativeSignal;
-		public var onStageUp:NativeSignal;
+		public var onUp:NativeSignal;
 		public var onOut:NativeSignal;
 		
 		public function ButtonBase(p:DisplayObjectContainer = null) {
@@ -44,7 +44,7 @@ import org.osflash.signals.natives.NativeSignal;
 			
 			size(120, 30);
 			
-			onStageUp = Bloom.onStageMouseUp;
+			onUp = Bloom.onStageMouseUp;
 			onOver = new NativeSignal ( this , MouseEvent.MOUSE_OVER , MouseEvent );
 			onDown = new NativeSignal ( this , MouseEvent.MOUSE_DOWN , MouseEvent );
 			onOut = new NativeSignal ( this , MouseEvent.MOUSE_OUT , MouseEvent );
@@ -84,7 +84,7 @@ import org.osflash.signals.natives.NativeSignal;
 				_state = DOWN;
 				_changed = true;
 				invalidate();
-				onStageUp.add(onMouseUp);
+				onUp.add(onMouseUp);
 				onOver.remove(onMouseOver);
 			}
 		}
@@ -95,7 +95,7 @@ import org.osflash.signals.natives.NativeSignal;
 			invalidate();
 			onOver.add(onMouseOver);
 			onOut.remove(onMouseOut);
-			onStageUp.remove(onMouseUp);
+			onUp.remove(onMouseUp);
 		}
 		
 		protected function onMouseOut(e:MouseEvent):void {
@@ -123,7 +123,7 @@ import org.osflash.signals.natives.NativeSignal;
 		}
 	
 		override public function destroy () :void {
-			onStageUp.remove(onMouseUp);
+			onUp.remove(onMouseUp);
 			
 			onOver.removeAll ();
 			onOver = null;

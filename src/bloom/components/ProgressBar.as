@@ -22,12 +22,12 @@ package bloom.components
 		
 		private var _value:int;
 		
-		private var _changedSignal:Signal;
+		private var _onChanged:Signal;
 		
 		public function ProgressBar(p:DisplayObjectContainer = null, value:int = 0) {
 			super(p);
 			
-			_changedSignal = new Signal();
+			_onChanged = new Signal(int);
 			
 			_bg = new Sprite();
 			_progress = new Shape();
@@ -75,7 +75,7 @@ package bloom.components
 				_value = value;
 				_changed = true;
 				invalidate();
-				if (_value >= 100) _changedSignal.dispatch();
+				if (_value >= 100) _onChanged.dispatch(_value);
 			}
 		}
 		
@@ -83,8 +83,8 @@ package bloom.components
 			return _value;
 		}
 		
-		public function get changedSignal():Signal {
-			return _changedSignal;
+		public function get onChanged():Signal {
+			return _onChanged;
 		}
 		
 		///////////////////////////////////

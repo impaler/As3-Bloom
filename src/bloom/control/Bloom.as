@@ -71,6 +71,10 @@ public class Bloom {
 		_onStageResize = null;
 		_onStageDraw.removeAll();
 		_onStageDraw = null;
+		_onStageMouseUp.removeAll();
+		_onStageMouseUp = null;
+		
+		_theme = null;
 	}
 
 }

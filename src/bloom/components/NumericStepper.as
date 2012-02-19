@@ -38,7 +38,7 @@ package bloom.components
 		private var _increase:ButtonBase;
 		private var _decrease:ButtonBase;
 		
-		private var _signalChanged:Signal;
+		private var _onChanged:Signal;
 		
 		private var _focused:Boolean = false;
 		
@@ -47,7 +47,7 @@ package bloom.components
 			
 			this.step = step;
 			
-			_signalChanged = new Signal();
+			_onChanged = new Signal(Number);
 			
 			_bg = new Shape();
 			addChild(_bg);
@@ -200,7 +200,7 @@ package bloom.components
 				_value = _min = _max;
 			}
 			_textBase.text = String(_value);
-			_signalChanged.dispatch();
+			_onChanged.dispatch(_value);
 		}
 		
 		protected function onFocusIn(e:FocusEvent):void {
@@ -263,8 +263,8 @@ package bloom.components
 			return _min;
 		}
 		
-		public function get signalChanged():Signal {
-			return _signalChanged;
+		public function get onChanged():Signal {
+			return _onChanged;
 		}
 		
 		///////////////////////////////////
