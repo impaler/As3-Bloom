@@ -7,7 +7,7 @@ package bloom.components
 	
 	import org.osflash.signals.Signal;
 	
-	import bloom.control.ThemeBase;
+	import bloom.control.Bloom;
 	import bloom.core.Component;
 	import bloom.themes.default.CheckBoxStyle;
 	
@@ -22,7 +22,7 @@ package bloom.components
 		protected var _title:Label;
 		protected var _bg:Shape;
 		
-		protected var _signalChanged:Signal;
+		protected var _onChanged:Signal;
 		
 		public function CheckBox(p:DisplayObjectContainer = null, text:String = "", value:Boolean = false) {
 			super(p);
@@ -36,16 +36,16 @@ package bloom.components
 			_title = new Label(this, text);
 			_title.addEventListener(Event.CHANGE, onTitleChanged);
 			
-			_signalChanged = new Signal();
+			_onChanged = new Signal(Boolean);
 			
 			_value = value;
 			
-			style = ThemeBase.theme.checkBox;
+			style = Bloom.theme.checkBox;
 			
 			size(100, 20);
 			
 			addEventListener(MouseEvent.CLICK, onMouseClick);
-			ThemeBase.signal.add(onThemeChanged);
+			Bloom.onThemeChanged.add(onThemeChanged);
 		}
 		
 		protected function onTitleChanged(e:Event):void {
@@ -53,7 +53,7 @@ package bloom.components
 		}
 		
 		protected function onThemeChanged():void {
-			style = ThemeBase.theme.buttonBase;
+			style = Bloom.theme.buttonBase;
 		}
 		
 		override protected function draw(e:Event):void {
@@ -91,7 +91,7 @@ package bloom.components
 				_value = b;
 				_changed = true;
 				invalidate();
-				_signalChanged.dispatch();
+				_onChanged.dispatch(_value);
 			}
 		}
 		
@@ -99,8 +99,8 @@ package bloom.components
 			return _value;
 		}
 		
-		public function get signalChanged():Signal {
-			return _signalChanged;
+		public function get onChanged():Signal {
+			return _onChanged;
 		}
 		
 		///////////////////////////////////

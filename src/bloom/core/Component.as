@@ -6,9 +6,11 @@ package bloom.core
 	import flash.events.MouseEvent;
 	
 	import bloom.control.ObjectPool;
-	import bloom.control.ThemeBase;
-	
-	[Event(name = "resize", type = "flash.events.Event")]
+	import bloom.control.Bloom;
+
+import org.osflash.signals.natives.NativeSignal;
+
+[Event(name = "resize", type = "flash.events.Event")]
 	
 	/**
 	 * Component
@@ -28,7 +30,8 @@ package bloom.core
 		public function Component(p:DisplayObjectContainer = null) {
 			super();
 			_margin = new Margin();
-			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+			var onAddedToStageSignal:NativeSignal = new NativeSignal( this, Event.ADDED_TO_STAGE, Event );
+			onAddedToStageSignal.addOnce(onAddedToStage);
 			if (p) p.addChild(this);
 		}
 		
@@ -62,8 +65,7 @@ package bloom.core
 		}
 		
 		private function onAddedToStage(e:Event):void {
-			removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
-			stage.addEventListener(Event.RENDER, draw);
+			Bloom.onStageDraw.add(draw);
 			invalidate();
 		}
 		
@@ -100,7 +102,7 @@ package bloom.core
 		public function set enabled(value:Boolean):void {
 			if (_enabled != value) {
 				_enabled = mouseEnabled = mouseChildren = value;
-				alpha = _enabled ? 1 : ThemeBase.theme.alpha;
+				alpha = _enabled ? 1 : Bloom.theme.alpha;
 			}
 		}
 		
@@ -134,12 +136,24 @@ package bloom.core
 			return _margin;
 		}
 		
+		public function get dimensionObject ():Object {
+			var obj:Object = new Object ();
+			obj.width = _width;
+			obj.height = _height;
+			return obj;
+		}
+	
 		///////////////////////////////////
 		// toString
 		///////////////////////////////////
 		
 		override public function toString():String {
 			return "[bloom.core.Component]";
+		}
+		
+		public function destroy () :void {
+			Bloom.onStageDraw.remove(draw);
+			_style = null;
 		}
 		
 	}

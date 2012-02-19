@@ -1,7 +1,7 @@
 package bloom.themes.default 
 {	
 	import bloom.control.ObjectPool;
-	import bloom.control.ThemeBase;
+	import bloom.control.Bloom;
 	
 	/**
 	 * DefaultTheme

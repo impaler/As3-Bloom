@@ -10,7 +10,7 @@ package bloom.components
 	
 	import org.osflash.signals.Signal;
 	
-	import bloom.control.ThemeBase;
+	import bloom.control.Bloom;
 	import bloom.core.Component;
 	import bloom.core.TextBase;
 	import bloom.themes.default.NumericStepperStyle;
@@ -38,7 +38,7 @@ package bloom.components
 		private var _increase:ButtonBase;
 		private var _decrease:ButtonBase;
 		
-		private var _signalChanged:Signal;
+		private var _onChanged:Signal;
 		
 		private var _focused:Boolean = false;
 		
@@ -47,7 +47,7 @@ package bloom.components
 			
 			this.step = step;
 			
-			_signalChanged = new Signal();
+			_onChanged = new Signal(Number);
 			
 			_bg = new Shape();
 			addChild(_bg);
@@ -72,7 +72,7 @@ package bloom.components
 			_decrease_shape = new Shape();
 			_decrease.addChild(_decrease_shape);
 			
-			style = ThemeBase.theme.numericStepper;
+			style = Bloom.theme.numericStepper;
 			
 			_max = max;
 			_min = min;
@@ -135,7 +135,7 @@ package bloom.components
 		}
 		
 		protected function onThemeChanged():void {
-			style = ThemeBase.theme.numericStepper;
+			style = Bloom.theme.numericStepper;
 		}
 		
 		override protected function draw(e:Event):void {
@@ -200,7 +200,7 @@ package bloom.components
 				_value = _min = _max;
 			}
 			_textBase.text = String(_value);
-			_signalChanged.dispatch();
+			_onChanged.dispatch(_value);
 		}
 		
 		protected function onFocusIn(e:FocusEvent):void {
@@ -222,7 +222,7 @@ package bloom.components
 		override public function set enabled(value:Boolean):void {
 			if (_enabled != value) {
 				_enabled = _textBase.tabEnabled = mouseEnabled = mouseChildren = value;
-				alpha = _enabled ? 1 : ThemeBase.theme.alpha;
+				alpha = _enabled ? 1 : Bloom.theme.alpha;
 			}
 		}
 		
@@ -263,8 +263,8 @@ package bloom.components
 			return _min;
 		}
 		
-		public function get signalChanged():Signal {
-			return _signalChanged;
+		public function get onChanged():Signal {
+			return _onChanged;
 		}
 		
 		///////////////////////////////////
