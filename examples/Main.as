@@ -1,5 +1,7 @@
 package 
 {
+
+
 	import flash.display.Sprite;
 	import flash.events.Event;
 	
@@ -7,7 +9,6 @@ package
 	import bloom.components.*;
 	import bloom.themes.default.DefaultTheme;
 
-import flash.events.MouseEvent;
 
 /**
 	 * Example
@@ -27,21 +28,40 @@ import flash.events.MouseEvent;
 			
 			BloomCore.init(stage , new DefaultTheme());
 			
-			var fCont:FlowContainer = new FlowContainer(this);
-
-			fCont.size( 200, 200 );
-			fCont.move( 30, 30 );
 			
+			var fCont:ScrollContainer = new ScrollContainer ();
+			fCont.margin.reset ( 2 , 10 , 2 , 10 );
+			fCont.setScrollBar(true, true);
+			
+			var window:Window = new Window ( this , fCont );
+			window.size ( 600 , 300 );
+			window.move ( 20 , 150 );
+			window.maxWidth = 720;
+			window.maxHeight = 565;
+			window.minWidth = 200;
+			window.minHeight = 200;
+			window.liveResize = true;
+			
+			var slide:Slider = new Slider();
+			slide.size(stage.stageWidth, 30);
+			fCont.addContent( slide );
+			fCont.addContent( new ButtonBase() );
 			fCont.addContent( new Slider() );
 			fCont.addContent( new ButtonBase() );
 			fCont.addContent( new ButtonBase() );
+			fCont.addContent( new Slider() );
+			fCont.addContent( new ButtonBase() );
+			fCont.addContent( new Slider() );
 			fCont.addContent( new ButtonBase() );
 
 			
-			fCont.direction = FlowContainer.GRID;
-			fCont.vAlignment = FlowContainer.TOP;
-			fCont.hAlignment = FlowContainer.LEFT;
-			fCont.maskContent = true;
+//			fCont.direction = FlowContainer.VERTICALLY;
+//			fCont.vAlignment = FlowContainer.TOP;
+//			fCont.hAlignment = FlowContainer.LEFT;
+//			fCont.maskContent = false;
+
+
+			
 			
 			/*
 			var label:Label = new Label(this, "Label");

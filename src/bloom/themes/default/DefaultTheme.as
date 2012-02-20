@@ -17,8 +17,9 @@ package bloom.themes.default
 			progressBar = ObjectPool.getObject(ProgressBarStyle) as ProgressBarStyle;
 			container = ObjectPool.getObject(ContainerStyle) as ContainerStyle;
 			flowContainer = ObjectPool.getObject(FlowContainerStyle) as FlowContainerStyle;
-			sliderButton = ObjectPool.getObject(SliderButtonStyle) as SliderButtonStyle;
 			slider = ObjectPool.getObject(SliderStyle) as SliderStyle;
+			scrollContainer = ObjectPool.getObject(ScrollContainerStlye) as ScrollContainerStlye;
+			window = ObjectPool.getObject(WindowStyle) as WindowStyle;
 		}
 		
 		///////////////////////////////////
@@ -48,10 +49,12 @@ package bloom.themes.default
 		public var container:ContainerStyle;
 	
 		public var flowContainer:FlowContainerStyle;
-
-		public var sliderButton:SliderButtonStyle;
 		
 		public var slider:SliderStyle;
+		
+		public var scrollContainer:ScrollContainerStlye;
+		
+		public var window:WindowStyle;
 		
 		///////////////////////////////////
 		// toString

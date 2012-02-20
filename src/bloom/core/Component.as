@@ -139,6 +139,8 @@ import org.osflash.signals.natives.NativeSignal;
 			var obj:Object = new Object ();
 			obj.width = _width;
 			obj.height = _height;
+			obj.x = 0;
+			obj.y = 0;
 			return obj;
 		}
 	

@@ -17,7 +17,7 @@ public class ColorBrush extends Brush {
 		
 		_value.graphics.clear ();
 		_value.graphics.beginFill ( colors[state] );
-		_value.graphics.drawRect ( 0 , 0 , args.width , args.height );
+		_value.graphics.drawRect ( args.x , args.y , args.width , args.height );
 		_value.graphics.endFill ();
 	}
 

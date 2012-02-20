@@ -2,22 +2,20 @@ package bloom.themes.default {
 
 import bloom.brush.Brush;
 import bloom.brush.ColorBrush;
-import bloom.components.Slider;
+import bloom.components.ScrollContainer;
 import bloom.core.IStyleBase;
 
-public class SliderStyle implements IStyleBase {
+public class ScrollContainerStlye implements IStyleBase {
 	
 	public var backgroundBrush:Brush;
-	public var sliderButton:IStyleBase;
+	public var SC_ScrollBarButton:IStyleBase;
 	
-	public function SliderStyle () {
-		
+	public function ScrollContainerStlye () {
 		var data:Vector.<uint> = new Vector.<uint> ( 1 , true );
-		data[Slider.NORMAL] = 0xccccff;
+		data[ScrollContainer.NORMAL] = 0x6666ff;
 		backgroundBrush = new ColorBrush( data );
 		
-		sliderButton = new SliderButtonStyle();
-		
+		SC_ScrollBarButton = new SliderButtonStyle();
 	}
 	
 	///////////////////////////////////
@@ -25,7 +23,7 @@ public class SliderStyle implements IStyleBase {
 	///////////////////////////////////
 	
 	public function toString():String {
-		return "[bloom.themes.default.SliderStyle]";
+		return "[bloom.themes.default.ScrollContainerStlye]";
 	}
 	
 }

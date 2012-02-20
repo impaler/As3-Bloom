@@ -4,6 +4,7 @@ import bloom.brush.ColorBrush;
 import bloom.components.ButtonBase;
 
 public class SliderButtonStyle extends ButtonStyle {
+	
 	public function SliderButtonStyle () {
 		
 		var data:Vector.<uint> = new Vector.<uint> ( 3 , true );

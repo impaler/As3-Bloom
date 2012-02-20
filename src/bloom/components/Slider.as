@@ -24,6 +24,7 @@ package bloom.components
 
 import bloom.control.BloomCore;
 import bloom.core.Component;
+import bloom.core.IStyleBase;
 import bloom.themes.default.SliderStyle;
 
 import flash.display.DisplayObject;
@@ -88,7 +89,6 @@ import org.osflash.signals.natives.NativeSignal;
 
 			_rect = new Rectangle(0, 0, 0, 0);
 			
-			_bt.style = BloomCore.theme.sliderButton;
 			style = BloomCore.theme.slider;
 			
 			_type == VERTICALLY ? size(20, 100) : size(100, 20);
@@ -104,6 +104,7 @@ import org.osflash.signals.natives.NativeSignal;
 			onDown.add(clickOnBg);
 			onWheel.add(onMouseWheel);
 			_bt.onDown.add(onMouseDown);
+			
 		}
 		
 		override protected function draw(e:Event):void {
@@ -138,8 +139,15 @@ import org.osflash.signals.natives.NativeSignal;
 				_value = _min = _max;
 			}
 		}
-		
-		///////////////////////////////////
+
+		override public function set style ( value:IStyleBase ):void {
+			super.style = value;
+			
+			_bt.style = sliderStyle.sliderButton;
+			
+		}
+
+///////////////////////////////////
 		// Mouse Handle
 		///////////////////////////////////
 		
@@ -215,8 +223,8 @@ import org.osflash.signals.natives.NativeSignal;
 			if (_mouseWheelTarget != value) {
 				onWheel.removeAll();
 				onWheel = null;
-				onWheel = new NativeSignal ( _mouseWheelTarget , MouseEvent.MOUSE_WHEEL , MouseEvent );
 				_mouseWheelTarget = value;
+				onWheel = new NativeSignal ( _mouseWheelTarget , MouseEvent.MOUSE_WHEEL , MouseEvent );
 				if (_mouseWheelTarget) onWheel.add(onMouseWheel);
 			}
 		}
