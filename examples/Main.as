@@ -27,6 +27,23 @@ import flash.events.MouseEvent;
 			
 			BloomCore.init(stage , new DefaultTheme());
 			
+			var fCont:FlowContainer = new FlowContainer(this);
+
+			fCont.size( 200, 200 );
+			fCont.move( 30, 30 );
+			
+			fCont.addContent( new Slider() );
+			fCont.addContent( new ButtonBase() );
+			fCont.addContent( new ButtonBase() );
+			fCont.addContent( new ButtonBase() );
+
+			
+			fCont.direction = FlowContainer.GRID;
+			fCont.vAlignment = FlowContainer.TOP;
+			fCont.hAlignment = FlowContainer.LEFT;
+			fCont.maskContent = true;
+			
+			/*
 			var label:Label = new Label(this, "Label");
 			
 			var buttonBase:ButtonBase = new ButtonBase(this);
@@ -69,7 +86,7 @@ import flash.events.MouseEvent;
 			
 			var progressBar:ProgressBar = new ProgressBar(this, 50);
 			progressBar.y = 200;
-			progressBar.onChanged.add(function(e:int){trace("onChanged value - " + e + " - " + progressBar.toString())});
+			progressBar.onChanged.add(function(e:int){trace("onChanged value - " + e + " - " + progressBar.toString())});*/
 			
 		}
 		

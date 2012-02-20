@@ -37,18 +37,6 @@ import org.osflash.signals.Signal;
 
 import org.osflash.signals.natives.NativeSignal;
 
-/**
-	 * Dispatched when the value has changed.
-	 * @eventType flash.events.Event
-	 */
-	[Event(name = "change", type = "flash.events.Event")]
-
-	/**
-	 * Dispatched when scrolling.
-	 * @eventType flash.events.Event
-	 */
-	[Event(name = "scroll", type = "flash.events.Event")]
-
 	/**
 	 * Slider
 	 *
