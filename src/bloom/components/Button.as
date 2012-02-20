@@ -13,17 +13,20 @@ package bloom.components
 	public class Button extends ButtonBase {
 		
 		private var _title:Label;
+		private var _icon:DisplayObjectContainer;
 		
-		public function Button(p:DisplayObjectContainer = null, text:String = "") {
+		public function Button(p:DisplayObjectContainer = null, text:String = "", icon_:DisplayObjectContainer = null) {
 			super(p);
 			
 			_title = new Label(this, text);
-			_title.addEventListener(Event.CHANGE, onTitleChanged);
+			_title.onTextChange.add( onTitleChanged );
+			
+			icon = icon_;
 			
 			style = Bloom.theme.button;
 		}
 		
-		protected function onTitleChanged(e:Event):void {
+		protected function onTitleChanged(title:String):void {
 			_title.move((_width - _title.width) * 0.5, (_height - _title.height) * 0.5);
 		}
 		
@@ -52,6 +55,16 @@ package bloom.components
 		// getter/setters
 		///////////////////////////////////
 		
+		public function set icon(value:DisplayObjectContainer):void {
+			if ( value != null ) {
+				_icon = value;
+				this.addChild(_icon);
+				
+				_changed = true;
+				invalidate();
+			}
+		}
+		
 		public function get title():Label {
 			return _title;
 		}
@@ -60,12 +73,21 @@ package bloom.components
 			return _style as ButtonStyle;
 		}
 		
+		
+		
 		///////////////////////////////////
 		// toString
 		///////////////////////////////////
 		
 		override public function toString():String {
 			return "[bloom.components.Button]";
+		}
+		
+		override public function destroy () : void {
+			super.destroy();
+			
+			_title.destroy();
+			_title = null;
 		}
 		
 	}
