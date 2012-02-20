@@ -1,17 +1,15 @@
 package bloom.components 
 {
 
-import bloom.brush.Brush;
 
 import flash.display.DisplayObjectContainer;
-	import flash.display.Shape;
 import flash.display.Sprite;
 import flash.events.Event;
-	import flash.events.MouseEvent;
-	
-	import bloom.control.Bloom;
-	import bloom.core.Component;
-	import bloom.themes.default.ButtonBaseStyle;
+import flash.events.MouseEvent;
+
+import bloom.control.Bloom;
+import bloom.core.Component;
+import bloom.themes.default.ButtonBaseStyle;
 
 import org.osflash.signals.natives.NativeSignal;
 
@@ -31,6 +29,9 @@ import org.osflash.signals.natives.NativeSignal;
 		public var onOver:NativeSignal;
 		public var onUp:NativeSignal;
 		public var onOut:NativeSignal;
+		public var onClick:NativeSignal;
+		
+		private var _isDown:Boolean;
 		
 		public function ButtonBase(p:DisplayObjectContainer = null) {
 			super(p);
@@ -48,9 +49,12 @@ import org.osflash.signals.natives.NativeSignal;
 			onOver = new NativeSignal ( this , MouseEvent.MOUSE_OVER , MouseEvent );
 			onDown = new NativeSignal ( this , MouseEvent.MOUSE_DOWN , MouseEvent );
 			onOut = new NativeSignal ( this , MouseEvent.MOUSE_OUT , MouseEvent );
+			onClick = new NativeSignal ( this , MouseEvent.CLICK , MouseEvent );
 			
 			onOver.addOnce(onMouseOver);
 			onDown.add(onMouseDown);
+			
+			_isDown = false;
 			
 			Bloom.onThemeChanged.add(onThemeChanged);
 		}
@@ -67,7 +71,6 @@ import org.osflash.signals.natives.NativeSignal;
 			}
 			
 			buttonBaseStyle.backgroundBrush.update ( _state , _bg , dimensionObject );
-
 		}
 		
 		protected function onMouseOver(e:MouseEvent):void {
@@ -82,6 +85,7 @@ import org.osflash.signals.natives.NativeSignal;
 		protected function onMouseDown(e:MouseEvent):void {
 			if (_state != DOWN) {
 				_state = DOWN;
+				_isDown = true;
 				_changed = true;
 				invalidate();
 				onUp.addOnce(onMouseUp);
@@ -92,12 +96,15 @@ import org.osflash.signals.natives.NativeSignal;
 			_state = NORMAL;
 			onOut.numListeners > 0 ? _state = OVER : _state = NORMAL;
 			_changed = true;
+			_isDown = false;
 			invalidate();
 			onOver.addOnce(onMouseOver);
 		}
 		
 		protected function onMouseOut(e:MouseEvent):void {
-			if (_state != DOWN || _state != OVER) onMouseUp(e);
+			if (_state != DOWN || _state != OVER) {
+				if ( !_isDown ) onMouseUp(e);
+			}
 		}
 		
 		///////////////////////////////////
@@ -121,6 +128,8 @@ import org.osflash.signals.natives.NativeSignal;
 		}
 	
 		override public function destroy () :void {
+			super.destroy();
+
 			onUp.remove(onMouseUp);
 			
 			onOver.removeAll ();
@@ -129,7 +138,7 @@ import org.osflash.signals.natives.NativeSignal;
 			onDown = null;
 			onOut.removeAll ();
 			onOut = null;
-	
+			
 			_bg = null;
 		}
 	}
