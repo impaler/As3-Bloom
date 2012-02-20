@@ -7,7 +7,7 @@ import flash.display.Sprite;
 import flash.events.Event;
 import flash.events.MouseEvent;
 
-import bloom.control.Bloom;
+import bloom.control.BloomCore;
 import bloom.core.Component;
 import bloom.themes.default.ButtonBaseStyle;
 
@@ -41,11 +41,11 @@ import org.osflash.signals.natives.NativeSignal;
 			_bg = new Sprite();
 			addChild(_bg);
 			
-			style = Bloom.theme.buttonBase;
+			style = BloomCore.theme.buttonBase;
 			
 			size(120, 30);
 			
-			onUp = Bloom.onStageMouseUp;
+			onUp = BloomCore.onStageMouseUp;
 			onOver = new NativeSignal ( this , MouseEvent.MOUSE_OVER , MouseEvent );
 			onDown = new NativeSignal ( this , MouseEvent.MOUSE_DOWN , MouseEvent );
 			onOut = new NativeSignal ( this , MouseEvent.MOUSE_OUT , MouseEvent );
@@ -56,11 +56,11 @@ import org.osflash.signals.natives.NativeSignal;
 			
 			_isDown = false;
 			
-			Bloom.onThemeChanged.add(onThemeChanged);
+			BloomCore.onThemeChanged.add(onThemeChanged);
 		}
 		
 		protected function onThemeChanged():void {
-			style = Bloom.theme.buttonBase;
+			style = BloomCore.theme.buttonBase;
 		}
 		
 		override protected function draw(e:Event):void {

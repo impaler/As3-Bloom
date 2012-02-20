@@ -5,9 +5,8 @@ package bloom.components
 	import flash.events.Event;
 	import flash.events.FocusEvent;
 	
-	import bloom.control.Bloom;
+	import bloom.control.BloomCore;
 	import bloom.core.Component;
-	import bloom.core.ScaleBitmap;
 	import bloom.core.TextBase;
 	import bloom.themes.default.TextInputStyle;
 	
@@ -33,7 +32,7 @@ package bloom.components
 			_textBase.type = "input";
 			_textBase.text = text;
 			
-			style = Bloom.theme.textInput;
+			style = BloomCore.theme.textInput;
 			
 			size(100, 20);
 			
@@ -42,7 +41,7 @@ package bloom.components
 		}
 		
 		protected function onThemeChanged():void {
-			style = Bloom.theme.textInput;
+			style = BloomCore.theme.textInput;
 		}
 		
 		override protected function draw(e:Event):void {
@@ -95,7 +94,7 @@ package bloom.components
 		override public function set enabled(value:Boolean):void {
 			if (_enabled != value) {
 				_enabled = _textBase.tabEnabled = mouseEnabled = mouseChildren = value;
-				alpha = _enabled ? 1 : Bloom.theme.alpha;
+				alpha = _enabled ? 1 : BloomCore.theme.alpha;
 			}
 		}
 		

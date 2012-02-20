@@ -3,10 +3,9 @@ package bloom.core
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.events.MouseEvent;
 	
 	import bloom.control.ObjectPool;
-	import bloom.control.Bloom;
+	import bloom.control.BloomCore;
 
 import org.osflash.signals.natives.NativeSignal;
 
@@ -65,7 +64,7 @@ import org.osflash.signals.natives.NativeSignal;
 		}
 		
 		private function onAddedToStage(e:Event):void {
-			Bloom.onStageDraw.add(draw);
+			BloomCore.onStageDraw.add(draw);
 			invalidate();
 		}
 		
@@ -102,7 +101,7 @@ import org.osflash.signals.natives.NativeSignal;
 		public function set enabled(value:Boolean):void {
 			if (_enabled != value) {
 				_enabled = mouseEnabled = mouseChildren = value;
-				alpha = _enabled ? 1 : Bloom.theme.alpha;
+				alpha = _enabled ? 1 : BloomCore.theme.alpha;
 			}
 		}
 		
@@ -152,8 +151,9 @@ import org.osflash.signals.natives.NativeSignal;
 		}
 		
 		public function destroy () :void {
-			Bloom.onStageDraw.remove(draw);
+			BloomCore.onStageDraw.remove(draw);
 			_style = null;
+			if ( parent!=null ) parent.removeChild(this);
 		}
 		
 	}

@@ -12,7 +12,7 @@ import org.osflash.signals.natives.NativeSignal;
 /**
  * ThemeBase
  */
-public class Bloom {
+public class BloomCore {
 
 	private static var _stage:Stage;
 

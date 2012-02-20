@@ -1,10 +1,8 @@
 package bloom.components 
 {
 	import flash.display.DisplayObjectContainer;
-	import flash.events.Event;
-	import flash.text.TextFormat;
 	
-	import bloom.control.Bloom;
+	import bloom.control.BloomCore;
 	import bloom.core.TextBase;
 	
 	/**
@@ -19,14 +17,14 @@ package bloom.components
 			type = "dynamic";
 			autoSize = "left";
 			
-			style = Bloom.theme.label;
+			style = BloomCore.theme.label;
 			this.text = text;
 			
-			Bloom.onThemeChanged.add(onThemeChanged);
+			BloomCore.onThemeChanged.add(onThemeChanged);
 		}
 		
 		protected function onThemeChanged():void {
-			style = Bloom.theme.label;
+			style = BloomCore.theme.label;
 		}
 		
 		///////////////////////////////////
@@ -40,7 +38,7 @@ package bloom.components
 		override public function destroy () : void {
 			super.destroy();
 			
-			Bloom.onThemeChanged.remove(onThemeChanged);
+			BloomCore.onThemeChanged.remove(onThemeChanged);
 		}
 		
 	}

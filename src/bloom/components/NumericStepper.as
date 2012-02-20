@@ -11,7 +11,7 @@ package bloom.components
 	import org.osflash.signals.Signal;
 	import org.osflash.signals.natives.NativeSignal;
 	
-	import bloom.control.Bloom;
+	import bloom.control.BloomCore;
 	import bloom.core.Component;
 	import bloom.core.TextBase;
 	import bloom.themes.default.NumericStepperStyle;
@@ -75,7 +75,7 @@ package bloom.components
 			_decrease_shape = new Shape();
 			_decrease.addChild(_decrease_shape);
 			
-			style = Bloom.theme.numericStepper;
+			style = BloomCore.theme.numericStepper;
 			
 			_max = max;
 			_min = min;
@@ -125,14 +125,14 @@ package bloom.components
 			_increasing = true;
 			_timer.reset();
 			_timer.start();
-			Bloom.onStageMouseUp.addOnce( onMouseUp );
+			BloomCore.onStageMouseUp.addOnce( onMouseUp );
 		}
 		
 		private function onDecreasePress(e:MouseEvent):void {
 			_increasing = false;
 			_timer.reset();
 			_timer.start();
-			Bloom.onStageMouseUp.addOnce( onMouseUp );
+			BloomCore.onStageMouseUp.addOnce( onMouseUp );
 		}
 		
 		private function onMouseUp(e:MouseEvent):void {
@@ -141,7 +141,7 @@ package bloom.components
 		}
 		
 		protected function onThemeChanged():void {
-			style = Bloom.theme.numericStepper;
+			style = BloomCore.theme.numericStepper;
 		}
 		
 		override protected function draw(e:Event):void {
@@ -228,7 +228,7 @@ package bloom.components
 		override public function set enabled(value:Boolean):void {
 			if (_enabled != value) {
 				_enabled = _textBase.tabEnabled = mouseEnabled = mouseChildren = value;
-				alpha = _enabled ? 1 : Bloom.theme.alpha;
+				alpha = _enabled ? 1 : BloomCore.theme.alpha;
 			}
 		}
 		

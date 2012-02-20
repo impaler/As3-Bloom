@@ -3,7 +3,7 @@ package
 	import flash.display.Sprite;
 	import flash.events.Event;
 	
-	import bloom.control.Bloom;
+	import bloom.control.BloomCore;
 	import bloom.components.*;
 	import bloom.themes.default.DefaultTheme;
 
@@ -25,7 +25,7 @@ import flash.events.MouseEvent;
 			stage.scaleMode = "noScale";
 			stage.align = "TL";
 			
-			Bloom.init(stage , new DefaultTheme());
+			BloomCore.init(stage , new DefaultTheme());
 			
 			var label:Label = new Label(this, "Label");
 			

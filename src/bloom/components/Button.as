@@ -2,9 +2,8 @@ package bloom.components
 {
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
-	import flash.events.MouseEvent;
 	
-	import bloom.control.Bloom;
+	import bloom.control.BloomCore;
 	import bloom.themes.default.ButtonStyle;
 	
 	/**
@@ -23,7 +22,7 @@ package bloom.components
 			
 			icon = icon_;
 			
-			style = Bloom.theme.button;
+			style = BloomCore.theme.button;
 		}
 		
 		protected function onTitleChanged(title:String):void {
@@ -31,7 +30,7 @@ package bloom.components
 		}
 		
 		override protected function onThemeChanged():void {
-			style = Bloom.theme.button;
+			style = BloomCore.theme.button;
 		}
 		
 		override protected function draw(e:Event):void {
@@ -40,8 +39,6 @@ package bloom.components
 			} else {
 				return;
 			}
-			
-			super.draw(e);
 			
 			if (!_title) return;
 			

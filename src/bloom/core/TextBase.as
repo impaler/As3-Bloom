@@ -2,10 +2,10 @@ package bloom.core
 {
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
-import flash.events.FocusEvent;
-import flash.text.TextField;
+	import flash.events.FocusEvent;
+	import flash.text.TextField;
 	
-	import bloom.control.Bloom;
+	import bloom.control.BloomCore;
 	
 	import org.osflash.signals.Signal;
 	
@@ -72,7 +72,7 @@ import flash.text.TextField;
 		public function set enabled(value:Boolean):void {
 			if (_enabled != value) {
 				_enabled = tabEnabled = mouseEnabled = value;
-				alpha = _enabled ? 1 : Bloom.theme.alpha;
+				alpha = _enabled ? 1 : BloomCore.theme.alpha;
 			}
 		}
 		

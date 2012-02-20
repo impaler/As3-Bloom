@@ -7,7 +7,7 @@ package bloom.components
 	
 	import org.osflash.signals.Signal;
 	
-	import bloom.control.Bloom;
+	import bloom.control.BloomCore;
 	import bloom.core.Component;
 	import bloom.themes.default.CheckBoxStyle;
 	
@@ -40,12 +40,12 @@ package bloom.components
 			
 			_value = value;
 			
-			style = Bloom.theme.checkBox;
+			style = BloomCore.theme.checkBox;
 			
 			size(100, 20);
 			
 			addEventListener(MouseEvent.CLICK, onMouseClick);
-			Bloom.onThemeChanged.add(onThemeChanged);
+			BloomCore.onThemeChanged.add(onThemeChanged);
 		}
 		
 		protected function onTitleChanged(e:Event):void {
@@ -53,7 +53,7 @@ package bloom.components
 		}
 		
 		protected function onThemeChanged():void {
-			style = Bloom.theme.buttonBase;
+			style = BloomCore.theme.buttonBase;
 		}
 		
 		override protected function draw(e:Event):void {
