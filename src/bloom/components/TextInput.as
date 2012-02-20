@@ -9,8 +9,12 @@ package bloom.components
 	import bloom.core.Component;
 	import bloom.core.TextBase;
 	import bloom.themes.default.TextInputStyle;
-	
-	/**
+
+import org.osflash.signals.Signal;
+
+import org.osflash.signals.natives.NativeSignal;
+
+/**
 	 * TextInput
 	 */
 	public class TextInput extends Component {
@@ -19,6 +23,8 @@ package bloom.components
 		protected var _textBase:TextBase;
 		
 		protected var _focused:Boolean = false;
+	
+		public var onTextChange:Signal;
 		
 		public function TextInput(p:DisplayObjectContainer = null, text:String = "") {
 			super(p);
@@ -36,8 +42,10 @@ package bloom.components
 			
 			size(100, 20);
 			
-			_textBase.addEventListener(FocusEvent.FOCUS_IN, onFocusIn);
-			_textBase.addEventListener(FocusEvent.FOCUS_OUT, onFocusOut);
+			onTextChange = _textBase.onTextChange;
+			
+			_textBase.onFocusIn.add(onFocusIn);
+			_textBase.onFocusOut.add(onFocusOut);
 		}
 		
 		protected function onThemeChanged():void {
@@ -116,6 +124,14 @@ package bloom.components
 		
 		override public function toString():String {
 			return "[bloom.components.TextInput]";
+		}
+		
+		override public function destroy () : void {
+			super.destroy();
+
+			_textBase.destroy();
+			_textBase = null;
+			_bg = null;
 		}
 	}
 

@@ -110,6 +110,18 @@ package bloom.components
 		override public function toString():String {
 			return "[bloom.components.CheckBox]";
 		}
+		
+		override public function destroy () : void {
+			super.destroy();
+			
+			_onChanged.removeAll();
+			_onChanged = null;
+			
+			_title.destroy();
+			_title = null;
+			_bg = null;
+		}
+
 	}
 
 }

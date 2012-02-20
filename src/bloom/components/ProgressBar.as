@@ -93,6 +93,16 @@ package bloom.components
 		override public function toString():String {
 			return "[bloom.components.ProgressBar]";
 		}
+		
+		override public function destroy () : void {
+			super.destroy();
+
+			_onChanged.removeAll();
+			_onChanged = null;
+			_bg = null;
+			_progress = null;
+		}
+		
 	}
 
 }

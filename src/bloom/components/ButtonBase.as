@@ -138,6 +138,8 @@ import org.osflash.signals.natives.NativeSignal;
 			onDown = null;
 			onOut.removeAll ();
 			onOut = null;
+			onClick.removeAll();
+			onClick = null;
 			
 			_bg = null;
 		}
