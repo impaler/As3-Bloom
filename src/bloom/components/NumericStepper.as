@@ -9,13 +9,14 @@ package bloom.components
 	import flash.utils.Timer;
 	
 	import org.osflash.signals.Signal;
+	import org.osflash.signals.natives.NativeSignal;
 	
 	import bloom.control.Bloom;
 	import bloom.core.Component;
 	import bloom.core.TextBase;
 	import bloom.themes.default.NumericStepperStyle;
-	
-	/**
+
+/**
 	 * NumericStepper
 	 */
 	public class NumericStepper extends Component {
@@ -39,7 +40,9 @@ package bloom.components
 		private var _decrease:ButtonBase;
 		
 		private var _onChanged:Signal;
-		
+		private var _timerChange:NativeSignal;
+		private var _onWheel:NativeSignal;
+	
 		private var _focused:Boolean = false;
 		
 		public function NumericStepper(p:DisplayObjectContainer = null, value:Number = 0, max:Number = 1000, min:Number = -1000, step:Number = 1) {
@@ -55,17 +58,17 @@ package bloom.components
 			_textBase = new TextBase(this);
 			_textBase.selectable = true;
 			_textBase.multiline = false;
-			_textBase.type = "input";
+			_textBase.type = TextBase.INPUT;
 			_textBase.restrict = "0-9.\\-";
-			_textBase.addEventListener(Event.CHANGE, onTextChange);
+			_textBase.onTextChange.add(onTextChange);
 			
 			_increase = new ButtonBase(this);
-			_increase.addEventListener(MouseEvent.CLICK, onIncreaseClick);
-			_increase.addEventListener(MouseEvent.MOUSE_DOWN, onIncreasePress);
+			_increase.onClick.add(onIncreaseClick);
+			_increase.onDown.add(onIncreasePress);
 			
 			_decrease = new ButtonBase(this);
-			_decrease.addEventListener(MouseEvent.CLICK, onDecreaseClick);
-			_decrease.addEventListener(MouseEvent.MOUSE_DOWN, onDecreasePress);
+			_decrease.onClick.add(onDecreaseClick);
+			_decrease.onDown.add(onDecreasePress);
 			
 			_increase_shape = new Shape();
 			_increase.addChild(_increase_shape);
@@ -80,20 +83,24 @@ package bloom.components
 			fixValue();
 			
 			_timer = new Timer(1000);
-			_timer.addEventListener(TimerEvent.TIMER, onTimerTick);
+			_timerChange = new NativeSignal( _timer, TimerEvent.TIMER, TimerEvent );
+			_timerChange.add(onTimerTick);
 			
 			size(100, 20);
 			
-			_textBase.addEventListener(FocusEvent.FOCUS_IN, onFocusIn);
-			_textBase.addEventListener(FocusEvent.FOCUS_OUT, onFocusOut);
-			addEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
+			_textBase.onFocusIn.add( onFocusIn );
+			_textBase.onFocusOut.add( onFocusOut );
+			
+			_onWheel = new NativeSignal( this, MouseEvent.MOUSE_WHEEL, MouseEvent );
+			_onWheel.add( onMouseWheel );
+			
 		}
 		
 		private function onMouseWheel(e:MouseEvent):void {
 			value += (e.delta > 0 ? 1 : -1) * step;
 		}
 		
-		private function onTextChange(e:Event):void {
+		private function onTextChange(text:String):void {
 			if (Number(_textBase.text) is Number && !isNaN(Number(_textBase.text))) {
 				value = Number(_textBase.text);
 			} else {
@@ -118,18 +125,17 @@ package bloom.components
 			_increasing = true;
 			_timer.reset();
 			_timer.start();
-			stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+			Bloom.onStageMouseUp.addOnce( onMouseUp );
 		}
 		
 		private function onDecreasePress(e:MouseEvent):void {
 			_increasing = false;
 			_timer.reset();
 			_timer.start();
-			stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+			Bloom.onStageMouseUp.addOnce( onMouseUp );
 		}
 		
 		private function onMouseUp(e:MouseEvent):void {
-			stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
 			_timer.stop();
 			_timer.delay = 1000;
 		}
@@ -273,6 +279,26 @@ package bloom.components
 		
 		override public function toString():String {
 			return "[bloom.components.NumericStepper]";
+		}
+		
+		override public function destroy () : void {
+			super.destroy();
+			
+			_increase.destroy();
+			_increase = null;
+			_decrease.destroy();
+			_decrease = null;	
+			_textBase.destroy();
+			_textBase = null;
+			
+			_timer = null;
+			
+			_onChanged.removeAll();
+			_onChanged = null;
+			_timerChange.removeAll();
+			_timerChange = null;	
+			_onWheel.removeAll();
+			_onWheel = null;
 		}
 		
 	}
