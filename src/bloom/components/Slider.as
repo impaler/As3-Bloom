@@ -97,13 +97,13 @@ import org.osflash.signals.natives.NativeSignal;
 			addChild(_bg);
 			
 			_bt = new ButtonBase(this);
-			_bt.style = BloomCore.theme.sliderButton;
 
 			_rect = new Rectangle(0, 0, 0, 0);
-
-			_type == VERTICALLY ? size(20, 100) : size(100, 20);
 			
+			_bt.style = BloomCore.theme.sliderButton;
 			style = BloomCore.theme.slider;
+			
+			_type == VERTICALLY ? size(20, 100) : size(100, 20);
 			
 			onChange = new Signal( Number );
 			onScroll = new Signal();
@@ -225,9 +225,11 @@ import org.osflash.signals.natives.NativeSignal;
 	
 		public function set mouseWheelTarget(value:DisplayObject):void {
 			if (_mouseWheelTarget != value) {
-				if (_mouseWheelTarget) _mouseWheelTarget.removeEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
+				onWheel.removeAll();
+				onWheel = null;
+				onWheel = new NativeSignal ( _mouseWheelTarget , MouseEvent.MOUSE_WHEEL , MouseEvent );
 				_mouseWheelTarget = value;
-				if (_mouseWheelTarget) _mouseWheelTarget.addEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
+				if (_mouseWheelTarget) onWheel.add(onMouseWheel);
 			}
 		}
 		
