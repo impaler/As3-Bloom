@@ -6,6 +6,8 @@ package bloom.core
 	 */
 	public interface IComponent extends IObjectBase {
 		
+		function drawDirectly ():void
+		
 		function move(x:Number, y:Number):void;
 		
 		function size(w:Number, h:Number):void;

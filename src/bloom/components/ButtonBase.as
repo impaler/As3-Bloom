@@ -43,7 +43,7 @@ import org.osflash.signals.natives.NativeSignal;
 			
 			style = BloomCore.theme.buttonBase;
 			
-			size(120, 30);
+			size(30, 30);
 			
 			onUp = BloomCore.onStageMouseUp;
 			onOver = new NativeSignal ( this , MouseEvent.MOUSE_OVER , MouseEvent );

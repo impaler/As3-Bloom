@@ -50,6 +50,9 @@ package bloom.core
 			width = w;
 			height = h;
 		}
+	
+		public function drawDirectly ():void {
+		}
 		
 		///////////////////////////////////
 		// getter/setters
@@ -122,7 +125,7 @@ package bloom.core
 			if ( _onFocusOut != null) _onFocusOut.removeAll();
 			_onFocusOut = null;
 		}
-	
+
 }
 
 }

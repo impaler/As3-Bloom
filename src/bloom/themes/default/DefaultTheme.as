@@ -1,12 +1,12 @@
 package bloom.themes.default 
 {	
 	import bloom.control.ObjectPool;
-	
-	/**
+
+/**
 	 * DefaultTheme
 	 */
 	public class DefaultTheme {
-		
+
 		public function DefaultTheme() {
 			label = ObjectPool.getObject(LabelStyle) as LabelStyle;
 			button = ObjectPool.getObject(ButtonStyle) as ButtonStyle;
@@ -15,6 +15,8 @@ package bloom.themes.default
 			textInput = ObjectPool.getObject(TextInputStyle) as TextInputStyle;
 			numericStepper = ObjectPool.getObject(NumericStepperStyle) as NumericStepperStyle;
 			progressBar = ObjectPool.getObject(ProgressBarStyle) as ProgressBarStyle;
+			container = ObjectPool.getObject(ContainerStyle) as ContainerStyle;
+			flowContainer = ObjectPool.getObject(FlowContainerStyle) as FlowContainerStyle;
 		}
 		
 		///////////////////////////////////
@@ -40,6 +42,11 @@ package bloom.themes.default
 		public var numericStepper:NumericStepperStyle;
 		
 		public var progressBar:ProgressBarStyle;
+		
+		public var container:ContainerStyle;
+	
+		public var flowContainer:FlowContainerStyle;
+
 		
 		///////////////////////////////////
 		// toString
