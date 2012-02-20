@@ -73,7 +73,7 @@ import org.osflash.signals.natives.NativeSignal;
 			buttonBaseStyle.backgroundBrush.update ( _state , _bg , dimensionObject );
 		}
 		
-		protected function onMouseOver(e:MouseEvent):void {
+		public function onMouseOver(e:MouseEvent):void {
 			if (_state != OVER) {
 				_state = OVER;
 				_changed = true;
@@ -101,7 +101,7 @@ import org.osflash.signals.natives.NativeSignal;
 			onOver.addOnce(onMouseOver);
 		}
 		
-		protected function onMouseOut(e:MouseEvent):void {
+		public function onMouseOut(e:MouseEvent):void {
 			if (_state != DOWN || _state != OVER) {
 				if ( !_isDown ) onMouseUp(e);
 			}
@@ -113,6 +113,12 @@ import org.osflash.signals.natives.NativeSignal;
 		
 		public function get state():int {
 			return _state;
+		}
+	
+			
+		public function set state(value:int):void {
+			_state = value;
+			drawDirectly();
 		}
 	
 		public function get buttonBaseStyle():ButtonBaseStyle {

@@ -2,7 +2,7 @@ package bloom.themes.default
 {	
 	import bloom.control.ObjectPool;
 
-/**
+	/**
 	 * DefaultTheme
 	 */
 	public class DefaultTheme {
@@ -17,6 +17,8 @@ package bloom.themes.default
 			progressBar = ObjectPool.getObject(ProgressBarStyle) as ProgressBarStyle;
 			container = ObjectPool.getObject(ContainerStyle) as ContainerStyle;
 			flowContainer = ObjectPool.getObject(FlowContainerStyle) as FlowContainerStyle;
+			sliderButton = ObjectPool.getObject(SliderButtonStyle) as SliderButtonStyle;
+			slider = ObjectPool.getObject(SliderStyle) as SliderStyle;
 		}
 		
 		///////////////////////////////////
@@ -47,6 +49,9 @@ package bloom.themes.default
 	
 		public var flowContainer:FlowContainerStyle;
 
+		public var sliderButton:SliderButtonStyle;
+		
+		public var slider:SliderStyle;
 		
 		///////////////////////////////////
 		// toString
