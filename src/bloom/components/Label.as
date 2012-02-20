@@ -37,6 +37,12 @@ package bloom.components
 			return "[bloom.components.Label]";
 		}
 		
+		override public function destroy () : void {
+			super.destroy();
+			
+			Bloom.onThemeChanged.remove(onThemeChanged);
+		}
+		
 	}
 
 }
