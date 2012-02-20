@@ -97,15 +97,19 @@ package bloom.core {
     	}
 		
     	public function setSize ( w:Number , h:Number ):void {
-        	if ( _scale9Grid == null ) {
-            	super.width = w;
-            	super.height = h;
-        	} else {
-            	w = Math.max ( w , _originalBitmap.width - _scale9Grid.width );
-            	h = Math.max ( h , _originalBitmap.height - _scale9Grid.height );
-            	resizeBitmap ( w , h );
-        	}
-    	}
+		    if ( w!=super.width || h!=super.height) {
+			    if ( _scale9Grid == null ) {
+		            super.width = w;
+		            super.height = h;
+		        } else {
+		            w = Math.max ( w , _originalBitmap.width - _scale9Grid.width );
+		            h = Math.max ( h , _originalBitmap.height - _scale9Grid.height );
+		            super.width = w;
+		            super.height = h;
+		            resizeBitmap ( w , h );
+		        }
+		    }
+		}
 		
     	public function getOriginalBitmapData ():BitmapData {
         	return _originalBitmap;
