@@ -1,7 +1,7 @@
 package bloom.themes.defaultTheme
 {
 
-import bloom.style.*;
+import bloom.core.ThemeBase;
 
 	/**
 	 * DefaultTheme

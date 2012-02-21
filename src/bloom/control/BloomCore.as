@@ -1,6 +1,6 @@
 package bloom.control {
 
-import bloom.style.ThemeBase;
+import bloom.core.ThemeBase;
 
 import flash.display.Stage;
 import flash.events.Event;

@@ -1,5 +1,7 @@
-package bloom.style 
+package bloom.core 
 {
+
+import bloom.style.*;
 
 import bloom.control.ObjectPool;
 
