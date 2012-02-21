@@ -25,7 +25,6 @@ package bloom.components
 import bloom.control.BloomCore;
 import bloom.core.Component;
 import bloom.core.IStyleBase;
-import bloom.core.ScaleBitmap;
 import bloom.themes.default.WindowStyle;
 
 import flash.display.DisplayObjectContainer;
@@ -34,7 +33,11 @@ import flash.events.Event;
 import flash.events.MouseEvent;
 import flash.geom.Rectangle;
 
-/**
+import org.osflash.signals.Signal;
+
+import org.osflash.signals.natives.NativeSignal;
+
+	/**
 	 * Window
 	 * 
 	 * @author sindney
@@ -65,6 +68,12 @@ import flash.geom.Rectangle;
         private var yOffset:Number;
 	
 		public static var NORMAL:int = 0;
+	
+		public var onHeaderDown:NativeSignal;
+		public var onScalerDown:NativeSignal;
+		public var onStageMouseMove:NativeSignal;
+		public var onStageMouseUp:NativeSignal;
+		public var onResize:Signal;
 		
 		public function Window(p:DisplayObjectContainer = null, content:FlowContainer = null, moveable:Boolean = true, resizeable:Boolean = true) {
 			super(p);
@@ -76,7 +85,6 @@ import flash.geom.Rectangle;
 			
 			_header = new FlowContainer();
 			_header.tabEnabled = false;
-			_header.addEventListener(MouseEvent.MOUSE_DOWN, onStartWindowDrag);
 			addChild(_header);
 			
 			_content = content;
@@ -85,7 +93,6 @@ import flash.geom.Rectangle;
 			_scaler = new Sprite();
 			_scaler.buttonMode = true;
 			_scaler.tabEnabled = false;
-            _scaler.addEventListener(MouseEvent.MOUSE_DOWN, onScaleWindowMouseDown);
 			
 			_footer = new FlowContainer();
 
@@ -101,20 +108,27 @@ import flash.geom.Rectangle;
 			_rect = new Rectangle();
 			
 			style = BloomCore.theme.window;
-			//todo
-//			_header.style = ThemeBase.Window_Header;			
-//			_footer.style = ThemeBase.Window_Footer;
 			
+			onHeaderDown = new NativeSignal(_header, MouseEvent.MOUSE_DOWN, MouseEvent);
+			onScalerDown = new NativeSignal(_scaler, MouseEvent.MOUSE_DOWN, MouseEvent);
+			onStageMouseMove = new NativeSignal(BloomCore.stage, MouseEvent.MOUSE_MOVE, MouseEvent);
+			onResize = new Signal();
+			onStageMouseUp = BloomCore.onStageMouseUp;
+			
+			onHeaderDown.add(onStartWindowDrag);
+			onScalerDown.add(onScaleWindowMouseDown);
 			
 			size(100, 100);
+			
 		}
 		
         private function onStartWindowDrag(e:MouseEvent):void {
             if (moveable) {
                 xOffset = e.stageX - this.x;
                 yOffset = e.stageY - this.y;
-                stage.addEventListener(MouseEvent.MOUSE_MOVE, onWindowDragMouseMove);
-                stage.addEventListener(MouseEvent.MOUSE_UP, onWindowDragMouseUp);
+	            
+	            onStageMouseMove.add(onWindowDragMouseMove);
+	            onStageMouseUp.addOnce(onWindowDragMouseUp);
             }
         }
 		
@@ -125,16 +139,16 @@ import flash.geom.Rectangle;
         }
 		
         private function onWindowDragMouseUp(event:MouseEvent):void {
-            stage.removeEventListener(MouseEvent.MOUSE_MOVE, onWindowDragMouseMove);
-            stage.removeEventListener(MouseEvent.MOUSE_UP, onWindowDragMouseUp);
+	        onStageMouseMove.remove(onWindowDragMouseMove);
         }
 		
         private function onScaleWindowMouseDown(e:MouseEvent):void {
             if (liveResize) {
                 xOffset = e.stageX - _scaler.x;
                 yOffset = e.stageY - _scaler.y;
-                stage.addEventListener(MouseEvent.MOUSE_MOVE, onScaleWindowMouseMove);
-                stage.addEventListener(MouseEvent.MOUSE_UP, onScaleWindowMouseUp);
+	            
+	            onStageMouseMove.add(onScaleWindowMouseMove);
+	            onStageMouseUp.add(onScaleWindowMouseUp);
             }
         }
 		
@@ -146,8 +160,9 @@ import flash.geom.Rectangle;
 		}
 		
 		private function onScaleWindowMouseUp(e:MouseEvent):void {
-			stage.removeEventListener(MouseEvent.MOUSE_UP, onScaleWindowMouseUp);
-			stage.removeEventListener(MouseEvent.MOUSE_MOVE, onScaleWindowMouseMove);
+			onStageMouseMove.remove(onScaleWindowMouseMove);
+			onStageMouseUp.remove(onScaleWindowMouseUp);
+			
 			size(_scaler.x + _footerSize, _scaler.y + _footerSize);
 			_scaler.stopDrag();
 		}
@@ -177,7 +192,7 @@ import flash.geom.Rectangle;
 				if (_height < _minHeight)_height = _minHeight;
 				_changed = true;
 				invalidate();
-				dispatchEvent(new Event("resize"));
+				onResize.dispatch();
 			}
 		}
 		
@@ -189,7 +204,7 @@ import flash.geom.Rectangle;
 			}
 			
 			winStyle.backgroundBrush.update(NORMAL, this, dimensionObject );
-			winStyle.scaleBrush.update( NORMAL, _scaler, _footerSize );
+			winStyle.scalerBrush.update(NORMAL, _scaler, _footerSize);
 			
 			update();
 		}
@@ -198,6 +213,14 @@ import flash.geom.Rectangle;
 		// getter/setters
 		///////////////////////////////////
 
+		override public function set style ( value:IStyleBase ):void {
+			super.style = value;
+
+			_footer.style = BloomCore.theme.window.footer;
+			_header.style = BloomCore.theme.window.header;
+			
+		}
+	
 		override public function get dimensionObject ():Object {
 			var obj:Object = new Object ();
 			obj.width = _width;
@@ -308,7 +331,7 @@ import flash.geom.Rectangle;
 				if (_width < _minWidth)_width = _minWidth;
 				_changed = true;
 				invalidate();
-				dispatchEvent(new Event("resize"));
+				onResize.dispatch();
 			}
 		}
 		
@@ -318,7 +341,7 @@ import flash.geom.Rectangle;
 				if (_height < _minHeight)_height = _minHeight;
 				_changed = true;
 				invalidate();
-				dispatchEvent(new Event("resize"));
+				onResize.dispatch();
 			}
 		}
 		
@@ -339,7 +362,22 @@ import flash.geom.Rectangle;
 		override public function toString():String {
 			return "[bloom.containers.Window]";
 		}
-		
-	}
+
+		override public function destroy ():void {
+			super.destroy ();
+			
+			onStageMouseUp.remove(onWindowDragMouseUp);
+			
+			onHeaderDown.removeAll();
+			onHeaderDown = null;
+			onScalerDown.removeAll();
+			onScalerDown = null;
+			onStageMouseMove.removeAll();
+			onStageMouseMove = null;
+			onResize.removeAll();
+			onResize = null;
+		}
+	
+}
 
 }

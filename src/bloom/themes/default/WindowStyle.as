@@ -11,8 +11,10 @@ import flash.display.Sprite;
 public class WindowStyle implements IStyleBase {
 	
 	public var backgroundBrush:Brush;
-	public var scaleBrush:Brush;
+	public var scalerBrush:Brush;
 	
+	public var header:FlowContainerStyle;
+	public var footer:FlowContainerStyle;
 	
 	public function WindowStyle () {
 		var data:Vector.<uint> = new Vector.<uint> ( 1 , true );
@@ -21,7 +23,10 @@ public class WindowStyle implements IStyleBase {
 
 		var scaleBrushdata:Vector.<Function> = new Vector.<Function> ( 1 , true );
 		scaleBrushdata[Window.NORMAL] = drawScaler;
-		scaleBrush = new MethodBrush( scaleBrushdata );
+		scalerBrush = new MethodBrush( scaleBrushdata );
+		
+		header = new WindowHeaderContainerStyle();
+		footer = new WindowFooterContainerStyle();
 	}
 
 	private static function drawScaler ( scaler:* , args:Object ):void {
