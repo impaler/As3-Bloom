@@ -1,17 +1,18 @@
 package bloom.themes.defaultTheme {
 
 import bloom.brush.ColorBrush;
-import bloom.components.ScrollContainer;
-import bloom.style.ScrollContainerStyle;
+import bloom.components.Form;
+import bloom.style.FormStyle;
 
-public class DefaultScrollContainerStyle extends ScrollContainerStyle {
+public class DefaultFormStyle extends FormStyle {
 	
-	public function DefaultScrollContainerStyle () {
+	public function DefaultFormStyle () {
 		
 		var data:Vector.<uint> = new Vector.<uint> ( 1 , true );
-		data[ScrollContainer.NORMAL] = 0x6666ff;
+		data[Form.NORMAL] = 0x666983;
 		backgroundBrush = new ColorBrush( data );
 		
+		formItemStyle = new DefaultFormItemStyle();
 		scrollBar = new DefaultSliderStyle();
 		
 	}
@@ -21,7 +22,7 @@ public class DefaultScrollContainerStyle extends ScrollContainerStyle {
 	///////////////////////////////////
 	
 	override public function toString():String {
-		return "[bloom.style.default.DefaultScrollContainerStyle]";
+		return "[bloom.style.default.DefaultFormStyle]";
 	}
 	
 }

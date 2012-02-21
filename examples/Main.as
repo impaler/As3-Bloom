@@ -11,7 +11,7 @@ import flash.display.Sprite;
 
 import flash.events.MouseEvent;
 
-/**
+	/**
 	 * Example
 	 */
 	public class Main extends Sprite {
@@ -41,6 +41,16 @@ import flash.events.MouseEvent;
 			window.minWidth = 200;
 			window.minHeight = 200;
 			window.liveResize = true;
+			
+			var i:int;
+			var data:Array = [];
+			for (i = 0; i < 10; i++) {
+				data[i] = ["NO." + i.toString()];
+			}
+			
+			var list:Form = new Form(null, data);
+			list.size(200, 100);
+			fCont.addContent(list);
 			
 			var label:Label = new Label(null, "Label");
 			fCont.addContent(label);

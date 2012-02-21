@@ -23,6 +23,7 @@ import bloom.core.ThemeBase;
 			slider = DefaultSliderStyle;
 			scrollContainer = DefaultScrollContainerStyle;
 			window = DefaultWindowStyle;
+			form = DefaultFormStyle;
 			
 			disabledAlpha = .05;
 		}

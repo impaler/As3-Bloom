@@ -5,7 +5,7 @@ import bloom.style.*;
 
 import bloom.control.ObjectPool;
 
-/**
+	/**
 	 * ThemeBase
 	 */
 	public class ThemeBase {
@@ -161,6 +161,22 @@ import bloom.control.ObjectPool;
 		public function get windowStyle ():WindowStyle {
 			return _window as WindowStyle;
 		}	
+	
+		///////////////////////////////////
+	
+		private var _formStyle:FormStyle;
+	
+		public function set form ( value:Class ):void {
+			_formStyle = ObjectPool.getObject(value);
+		}	
+	
+		public function get formStyle ():FormStyle {
+			return _formStyle as FormStyle;
+		}		
+	
+	
+	
+	
 		
 		///////////////////////////////////
 		// toString

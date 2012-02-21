@@ -96,26 +96,26 @@ import flash.geom.Rectangle;
 			drawDirectly();
 		}
 
-	override public function addContent ( cont:IComponent ):void {
-		super.addContent(cont);
-		calculateContentSize();
-	}
-	
-	override public function set style ( value:IStyleBase ):void {
-		super.style = value;
-		if ( _objects_created ) {
-			h_scrollBar.button.style = scrollStyle.SC_ScrollBarButton;
-			v_scrollBar.button.style = scrollStyle.SC_ScrollBarButton;
+		override public function addContent ( cont:IComponent ):void {
+			super.addContent(cont);
+			calculateContentSize();
 		}
 		
-	}
-
-	public function getScrollBar(direction:int):ScrollBar {
-			var result:ScrollBar;
-			if (direction == VERTICALLY) result = v_scrollBar;
-			if (direction == HORIZONTALLY) result = h_scrollBar;
-			return result;
+		override public function set style ( value:IStyleBase ):void {
+			super.style = value;
+			if ( _objects_created ) {
+				h_scrollBar.style = scrollStyle.scrollBar;
+				v_scrollBar.style = scrollStyle.scrollBar;
+			}
+			
 		}
+	
+		public function getScrollBar(direction:int):ScrollBar {
+				var result:ScrollBar;
+				if (direction == VERTICALLY) result = v_scrollBar;
+				if (direction == HORIZONTALLY) result = h_scrollBar;
+				return result;
+			}
 		
 		public function setScrollBar(horizontal:Boolean, vertical:Boolean):void {
 			h_scrollBar_enabled = horizontal;
