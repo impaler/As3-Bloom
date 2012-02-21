@@ -13,7 +13,7 @@ import bloom.core.Component;
 
 import org.osflash.signals.natives.NativeSignal;
 
-/**
+	/**
 	 * ButtonBase
 	 */
 	public class ButtonBase extends Component {
@@ -41,7 +41,7 @@ import org.osflash.signals.natives.NativeSignal;
 			_bg = new Sprite();
 			addChild(_bg);
 			
-			style = BloomCore.theme.buttonBaseStyle;
+			style = BloomCore.theme.buttonBaseStyle as ButtonBaseStyle;
 			
 			size(120, 30);
 			
@@ -60,7 +60,7 @@ import org.osflash.signals.natives.NativeSignal;
 		}
 		
 		protected function onThemeChanged():void {
-			style = BloomCore.theme.buttonBaseStyle;
+			style = BloomCore.theme.buttonBaseStyle as ButtonBaseStyle;
 		}
 		
 		override protected function draw(e:Event):void {

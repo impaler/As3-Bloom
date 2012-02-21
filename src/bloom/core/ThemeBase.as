@@ -1,8 +1,5 @@
 package bloom.core 
 {
-
-import bloom.style.*;
-
 import bloom.control.ObjectPool;
 
 	/**
@@ -20,162 +17,159 @@ import bloom.control.ObjectPool;
 		// Components
 		///////////////////////////////////
 		
-		private var _label:TextStyle;
+		private var _label:*;
 
 		public function set label ( value:Class ):void {
 			_label = ObjectPool.getObject(value);
 		}
 	
-		public function get labelStyle ():TextStyle {
-			return _label as TextStyle;
+		public function get labelStyle ():* {
+			return _label;
 		}
 	
 		///////////////////////////////////
 
-		private var _button:ButtonStyle;
+		private var _button:*;
 	
 		public function set button ( value:Class ):void {
 			_button = ObjectPool.getObject(value);
 		}	
 	
-		public function get buttonStyle ():ButtonStyle {
-			return _button as ButtonStyle;
+		public function get buttonStyle ():* {
+			return _button;
 		}
 	
 		///////////////////////////////////
 	
-		private var _buttonBase:ButtonBaseStyle;
+		private var _buttonBase:*;
 	
 		public function set buttonBase ( value:Class ):void {
 			_buttonBase = ObjectPool.getObject(value);
 		}	
 	
-		public function get buttonBaseStyle ():ButtonBaseStyle {
-			return _buttonBase as ButtonBaseStyle;
+		public function get buttonBaseStyle ():* {
+			return _buttonBase;
 		}	
 	
 		///////////////////////////////////
 	
-		private var _checkBox:CheckBoxStyle;
+		private var _checkBox:*;
 	
 		public function set checkBox ( value:Class ):void {
 			_checkBox = ObjectPool.getObject(value);
 		}	
 	
-		public function get checkBoxStyle ():CheckBoxStyle {
-			return _checkBox as CheckBoxStyle;
+		public function get checkBoxStyle ():* {
+			return _checkBox;
 		}	
 	
 		///////////////////////////////////
 	
-		private var _textInput:TextInputStyle;
+		private var _textInput:*;
 	
 		public function set textInput ( value:Class ):void {
 			_textInput = ObjectPool.getObject(value);
 		}	
 	
-		public function get textInputStyle ():TextInputStyle {
-			return _textInput as TextInputStyle;
+		public function get textInputStyle ():* {
+			return _textInput;
 		}		
 		
 		///////////////////////////////////
 	
-		private var _flowContainerStyle:ContainerStyle;
+		private var _flowContainerStyle:*;
 	
 		public function set flowContainer ( value:Class ):void {
 			_flowContainerStyle = ObjectPool.getObject(value);
 		}	
 	
-		public function get flowContainerStyle ():ContainerStyle {
-			return _flowContainerStyle as ContainerStyle;
+		public function get flowContainerStyle ():* {
+			return _flowContainerStyle;
 		}	
 	
 		///////////////////////////////////
 	
-		private var _numericStepper:NumericStepperStyle;
+		private var _numericStepper:*;
 	
 		public function set numericStepper ( value:Class ):void {
 			_numericStepper = ObjectPool.getObject(value);
 		}	
 	
-		public function get numericStepperStyle ():NumericStepperStyle {
-			return _numericStepper as NumericStepperStyle;
+		public function get numericStepperStyle ():* {
+			return _numericStepper;
 		}		
 	
 		///////////////////////////////////
 	
-		private var _progressBar:ProgressBarStyle;
+		private var _progressBar:*;
 	
 		public function set progressBar ( value:Class ):void {
 			_progressBar = ObjectPool.getObject(value);
 		}	
 	
-		public function get progressBarStyle ():ProgressBarStyle {
-			return _progressBar as ProgressBarStyle;
+		public function get progressBarStyle ():* {
+			return _progressBar;
 		}	
 	
 		///////////////////////////////////
 	
-		private var _container:ContainerStyle;
+		private var _container:*;
 	
 		public function set container ( value:Class ):void {
 			_container = ObjectPool.getObject(value);
 		}	
 	
-		public function get containerStyle ():ContainerStyle {
-			return _container as ContainerStyle;
+		public function get containerStyle ():* {
+			return _container;
 		}		
 			
 		///////////////////////////////////
 	
-		private var _slider:SliderStyle;
+		private var _slider:*;
 	
 		public function set slider ( value:Class ):void {
 			_slider = ObjectPool.getObject(value);
 		}	
 	
-		public function get sliderStyle ():SliderStyle {
-			return _slider as SliderStyle;
+		public function get sliderStyle ():* {
+			return _slider;
 		}		
 		
 		///////////////////////////////////
 	
-		private var _scrollContainer:ScrollContainerStyle;
+		private var _scrollContainer:*;
 	
 		public function set scrollContainer ( value:Class ):void {
 			_scrollContainer = ObjectPool.getObject(value);
 		}	
 	
-		public function get scrollContainerStyle ():ScrollContainerStyle {
-			return _scrollContainer as ScrollContainerStyle;
+		public function get scrollContainerStyle ():* {
+			return _scrollContainer;
 		}		
 
 		///////////////////////////////////
 	
-		private var _window:WindowStyle;
+		private var _window:*;
 	
 		public function set window ( value:Class ):void {
 			_window = ObjectPool.getObject(value);
 		}	
 	
-		public function get windowStyle ():WindowStyle {
-			return _window as WindowStyle;
+		public function get windowStyle ():* {
+			return _window;
 		}	
 	
 		///////////////////////////////////
 	
-		private var _formStyle:FormStyle;
+		private var _formStyle:*;
 	
 		public function set form ( value:Class ):void {
 			_formStyle = ObjectPool.getObject(value);
 		}	
 	
-		public function get formStyle ():FormStyle {
-			return _formStyle as FormStyle;
+		public function get formStyle ():* {
+			return _formStyle;
 		}		
-	
-	
-	
 	
 		
 		///////////////////////////////////

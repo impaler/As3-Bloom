@@ -4,10 +4,10 @@ package
 import bloom.themes.defaultTheme.DefaultTheme;
 
 import flash.display.Sprite;
-	import flash.events.Event;
-	
-	import bloom.control.BloomCore;
-	import bloom.components.*;
+import flash.events.Event;
+
+import bloom.control.BloomCore;
+import bloom.components.*;
 
 import flash.events.MouseEvent;
 
