@@ -1,11 +1,12 @@
-package bloom.themes.default {
+package bloom.themes.defaultTheme {
 
 import bloom.brush.ColorBrush;
 import bloom.components.ButtonBase;
+import bloom.style.*;
 
-public class SliderButtonStyle extends ButtonStyle {
+public class DefaultSliderButtonStyle extends ButtonBaseStyle {
 	
-	public function SliderButtonStyle () {
+	public function DefaultSliderButtonStyle () {
 		
 		var data:Vector.<uint> = new Vector.<uint> ( 3 , true );
 		data[ButtonBase.NORMAL] = 0x6666ff;
@@ -20,7 +21,7 @@ public class SliderButtonStyle extends ButtonStyle {
 	///////////////////////////////////
 	
 	override public function toString():String {
-		return "[bloom.themes.default.ButtonStyle]";
+		return "[bloom.style.default.DefaultSliderButtonStyle]";
 	}
 	
 }

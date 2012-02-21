@@ -1,6 +1,9 @@
 package bloom.components 
 {
-	import flash.display.DisplayObjectContainer;
+
+import bloom.style.CheckBoxStyle;
+
+import flash.display.DisplayObjectContainer;
 	import flash.display.Shape;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -9,7 +12,6 @@ package bloom.components
 	
 	import bloom.control.BloomCore;
 	import bloom.core.Component;
-	import bloom.themes.default.CheckBoxStyle;
 	
 	[Event(name = "change", type = "flash.events.Event")]
 	
@@ -40,7 +42,7 @@ package bloom.components
 			
 			_value = value;
 			
-			style = BloomCore.theme.checkBox;
+			style = BloomCore.theme.checkBoxStyle;
 			
 			size(100, 20);
 			
@@ -53,7 +55,7 @@ package bloom.components
 		}
 		
 		protected function onThemeChanged():void {
-			style = BloomCore.theme.buttonBase;
+			style = BloomCore.theme.buttonBaseStyle;
 		}
 		
 		override protected function draw(e:Event):void {

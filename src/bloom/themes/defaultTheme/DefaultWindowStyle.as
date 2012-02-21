@@ -1,32 +1,25 @@
-package bloom.themes.default {
+package bloom.themes.defaultTheme {
 
-import bloom.brush.Brush;
 import bloom.brush.ColorBrush;
 import bloom.brush.MethodBrush;
 import bloom.components.Window;
-import bloom.core.IStyleBase;
+import bloom.style.*;
 
 import flash.display.Sprite;
 
-public class WindowStyle implements IStyleBase {
+public class DefaultWindowStyle extends WindowStyle {
 	
-	public var backgroundBrush:Brush;
-	public var scalerBrush:Brush;
-	
-	public var header:FlowContainerStyle;
-	public var footer:FlowContainerStyle;
-	
-	public function WindowStyle () {
+	public function DefaultWindowStyle () {
 		var data:Vector.<uint> = new Vector.<uint> ( 1 , true );
 		data[Window.NORMAL] = 0x665511;
 		backgroundBrush = new ColorBrush( data );
 
-		var scaleBrushdata:Vector.<Function> = new Vector.<Function> ( 1 , true );
-		scaleBrushdata[Window.NORMAL] = drawScaler;
-		scalerBrush = new MethodBrush( scaleBrushdata );
+		var scalerBrushData:Vector.<Function> = new Vector.<Function> ( 1 , true );
+		scalerBrushData[Window.NORMAL] = drawScaler;
+		scalerBrush = new MethodBrush( scalerBrushData );
 		
-		header = new WindowHeaderContainerStyle();
-		footer = new WindowFooterContainerStyle();
+		header = new DefaultWindowHeaderContainerStyle();
+		footer = new DefaultWindowFooterContainerStyle();
 	}
 
 	private static function drawScaler ( scaler:* , args:Object ):void {
@@ -41,13 +34,12 @@ public class WindowStyle implements IStyleBase {
 		_scaler.graphics.endFill();
 	}
 	
-	
 	///////////////////////////////////
 	// toString
 	///////////////////////////////////
 	
-	public function toString():String {
-		return "[bloom.themes.default.WindowStyle]";
+	override public function toString():String {
+		return "[bloom.style.default.DefaultWindowStyle]";
 	}
 	
 }

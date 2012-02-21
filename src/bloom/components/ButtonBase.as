@@ -1,6 +1,7 @@
 package bloom.components 
 {
 
+import bloom.style.ButtonBaseStyle;
 
 import flash.display.DisplayObjectContainer;
 import flash.display.Sprite;
@@ -9,7 +10,6 @@ import flash.events.MouseEvent;
 
 import bloom.control.BloomCore;
 import bloom.core.Component;
-import bloom.themes.default.ButtonBaseStyle;
 
 import org.osflash.signals.natives.NativeSignal;
 
@@ -41,7 +41,7 @@ import org.osflash.signals.natives.NativeSignal;
 			_bg = new Sprite();
 			addChild(_bg);
 			
-			style = BloomCore.theme.buttonBase;
+			style = BloomCore.theme.buttonBaseStyle;
 			
 			size(120, 30);
 			
@@ -60,7 +60,7 @@ import org.osflash.signals.natives.NativeSignal;
 		}
 		
 		protected function onThemeChanged():void {
-			style = BloomCore.theme.buttonBase;
+			style = BloomCore.theme.buttonBaseStyle;
 		}
 		
 		override protected function draw(e:Event):void {

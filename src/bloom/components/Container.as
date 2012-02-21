@@ -24,7 +24,7 @@ package bloom.components
 {
 
 import bloom.control.BloomCore;
-import bloom.themes.default.ContainerStyle;
+import bloom.style.ContainerStyle;
 
 import flash.display.DisplayObject;
 import flash.display.DisplayObjectContainer;
@@ -46,7 +46,7 @@ import bloom.core.IComponent;
 		public function Container(p:DisplayObjectContainer = null) {
 			super(p);
 			
-			style = BloomCore.theme.container;
+			style = BloomCore.theme.containerStyle;
 			
 			size(100, 100);
 		}

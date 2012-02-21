@@ -25,7 +25,7 @@ package bloom.components
 import bloom.control.BloomCore;
 import bloom.core.Component;
 import bloom.core.IStyleBase;
-import bloom.themes.default.SliderStyle;
+import bloom.style.SliderStyle;
 
 import flash.display.DisplayObject;
 import flash.display.DisplayObjectContainer;
@@ -89,7 +89,7 @@ import org.osflash.signals.natives.NativeSignal;
 
 			_rect = new Rectangle(0, 0, 0, 0);
 			
-			style = BloomCore.theme.slider;
+			style = BloomCore.theme.sliderStyle;
 			
 			_type == VERTICALLY ? size(20, 100) : size(100, 20);
 			

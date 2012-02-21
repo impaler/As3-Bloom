@@ -1,20 +1,22 @@
 package bloom.components 
 {
-	import flash.display.DisplayObjectContainer;
-	import flash.display.Shape;
-	import flash.events.Event;
-	import flash.events.FocusEvent;
-	import flash.events.MouseEvent;
-	import flash.events.TimerEvent;
-	import flash.utils.Timer;
-	
-	import org.osflash.signals.Signal;
-	import org.osflash.signals.natives.NativeSignal;
-	
-	import bloom.control.BloomCore;
-	import bloom.core.Component;
-	import bloom.core.TextBase;
-	import bloom.themes.default.NumericStepperStyle;
+
+import bloom.style.NumericStepperStyle;
+
+import flash.display.DisplayObjectContainer;
+import flash.display.Shape;
+import flash.events.Event;
+import flash.events.FocusEvent;
+import flash.events.MouseEvent;
+import flash.events.TimerEvent;
+import flash.utils.Timer;
+
+import org.osflash.signals.Signal;
+import org.osflash.signals.natives.NativeSignal;
+
+import bloom.control.BloomCore;
+import bloom.core.Component;
+import bloom.core.TextBase;
 
 /**
 	 * NumericStepper
@@ -75,7 +77,7 @@ package bloom.components
 			_decrease_shape = new Shape();
 			_decrease.addChild(_decrease_shape);
 			
-			style = BloomCore.theme.numericStepper;
+			style = BloomCore.theme.numericStepperStyle;
 			
 			_max = max;
 			_min = min;
@@ -141,7 +143,7 @@ package bloom.components
 		}
 		
 		protected function onThemeChanged():void {
-			style = BloomCore.theme.numericStepper;
+			style = BloomCore.theme.numericStepperStyle;
 		}
 		
 		override protected function draw(e:Event):void {
@@ -228,7 +230,7 @@ package bloom.components
 		override public function set enabled(value:Boolean):void {
 			if (_enabled != value) {
 				_enabled = _textBase.tabEnabled = mouseEnabled = mouseChildren = value;
-				alpha = _enabled ? 1 : BloomCore.theme.alpha;
+				alpha = _enabled ? 1 : BloomCore.theme.disabledAlpha;
 			}
 		}
 		

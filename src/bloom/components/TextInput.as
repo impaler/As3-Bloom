@@ -1,18 +1,19 @@
 package bloom.components 
 {
-	import flash.display.DisplayObjectContainer;
-	import flash.display.Shape;
-	import flash.events.Event;
-	import flash.events.FocusEvent;
-	
-	import bloom.control.BloomCore;
-	import bloom.core.Component;
-	import bloom.core.TextBase;
-	import bloom.themes.default.TextInputStyle;
+
+import bloom.style.TextInputStyle;
+
+import flash.display.DisplayObjectContainer;
+import flash.display.Shape;
+import flash.events.Event;
+import flash.events.FocusEvent;
+
+import bloom.control.BloomCore;
+import bloom.core.Component;
+import bloom.core.TextBase;
 
 import org.osflash.signals.Signal;
 
-import org.osflash.signals.natives.NativeSignal;
 
 /**
 	 * TextInput
@@ -38,7 +39,7 @@ import org.osflash.signals.natives.NativeSignal;
 			_textBase.type = "input";
 			_textBase.text = text;
 			
-			style = BloomCore.theme.textInput;
+			style = BloomCore.theme.textInputStyle;
 			
 			size(100, 20);
 			
@@ -49,7 +50,7 @@ import org.osflash.signals.natives.NativeSignal;
 		}
 		
 		protected function onThemeChanged():void {
-			style = BloomCore.theme.textInput;
+			style = BloomCore.theme.textInputStyle;
 		}
 		
 		override protected function draw(e:Event):void {
@@ -102,7 +103,7 @@ import org.osflash.signals.natives.NativeSignal;
 		override public function set enabled(value:Boolean):void {
 			if (_enabled != value) {
 				_enabled = _textBase.tabEnabled = mouseEnabled = mouseChildren = value;
-				alpha = _enabled ? 1 : BloomCore.theme.alpha;
+				alpha = _enabled ? 1 : BloomCore.theme.disabledAlpha;
 			}
 		}
 		

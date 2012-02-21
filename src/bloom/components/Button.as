@@ -1,10 +1,12 @@
 package bloom.components 
 {
-	import flash.display.DisplayObjectContainer;
-	import flash.events.Event;
-	
-	import bloom.control.BloomCore;
-	import bloom.themes.default.ButtonStyle;
+
+import bloom.style.ButtonStyle;
+
+import flash.display.DisplayObjectContainer;
+import flash.events.Event;
+
+import bloom.control.BloomCore;
 	
 	/**
 	 * Button
@@ -22,7 +24,7 @@ package bloom.components
 			
 			icon = icon_;
 			
-			style = BloomCore.theme.button;
+			style = BloomCore.theme.buttonStyle;
 		}
 		
 		protected function onTitleChanged(title:String):void {
@@ -30,7 +32,7 @@ package bloom.components
 		}
 		
 		override protected function onThemeChanged():void {
-			style = BloomCore.theme.button;
+			style = BloomCore.theme.buttonStyle;
 		}
 		
 		override protected function draw(e:Event):void {

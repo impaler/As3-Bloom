@@ -36,7 +36,7 @@ package bloom.core
 		// toString
 		///////////////////////////////////
 		
-		public function toString():String {
+		public static function toString():String {
 			return "[bloom.core.Margin]";
 		}
 		

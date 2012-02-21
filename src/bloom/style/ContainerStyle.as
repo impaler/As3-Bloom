@@ -1,4 +1,4 @@
-package bloom.themes.default {
+package bloom.style {
 
 import bloom.brush.Brush;
 import bloom.brush.ColorBrush;
@@ -9,20 +9,12 @@ public class ContainerStyle implements IStyleBase {
 	
 	public var backgroundBrush:Brush;
 	
-	public function ContainerStyle () {
-		
-		var data:Vector.<uint> = new Vector.<uint> ( 1 , true );
-		data[Container.NORMAL] = 0x666983;
-		backgroundBrush = new ColorBrush( data );
-		
-	}
-	
 	///////////////////////////////////
 	// toString
 	///////////////////////////////////
 	
 	public function toString():String {
-		return "[bloom.themes.default.ContainerStyle]";
+		return "[bloom.style.default.ContainerStyle]";
 	}
 	
 }

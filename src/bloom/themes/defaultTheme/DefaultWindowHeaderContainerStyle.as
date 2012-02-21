@@ -1,11 +1,11 @@
-package bloom.themes.default {
+package bloom.themes.defaultTheme {
 
 import bloom.brush.ColorBrush;
 import bloom.components.Container;
-import bloom.core.IStyleBase;
+import bloom.style.ContainerStyle;
 
-public class WindowFooterContainerStyle extends FlowContainerStyle implements IStyleBase {
-	public function WindowFooterContainerStyle () {
+public class DefaultWindowHeaderContainerStyle extends ContainerStyle {
+	public function DefaultWindowHeaderContainerStyle () {
 		
 		var data:Vector.<uint> = new Vector.<uint> ( 1 , true );
 		data[Container.NORMAL] = 0x000000;
@@ -18,7 +18,7 @@ public class WindowFooterContainerStyle extends FlowContainerStyle implements IS
 	///////////////////////////////////
 	
 	override public function toString():String {
-		return "[bloom.themes.default.WindowFooterContainerStyle]";
+		return "[bloom.style.default.DefaultWindowHeaderContainerStyle]";
 	}
 }
 }

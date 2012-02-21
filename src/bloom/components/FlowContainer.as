@@ -65,7 +65,7 @@ import flash.geom.Rectangle;
 			_vAlignment = TOP;
 			_mask = false;
 			
-			style = BloomCore.theme.flowContainer;
+			style = BloomCore.theme.flowContainerStyle;
 		}
 	
 		public function addContent ( cont:IComponent ):void {

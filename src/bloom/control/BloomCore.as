@@ -1,6 +1,6 @@
 package bloom.control {
 
-import bloom.themes.default.DefaultTheme;
+import bloom.style.ThemeBase;
 
 import flash.display.Stage;
 import flash.events.Event;
@@ -21,9 +21,9 @@ public class BloomCore {
 	private static var _onStageResize:NativeSignal;
 	private static var _onStageMouseUp:NativeSignal;
 	
-	private static var _theme:DefaultTheme;
+	private static var _theme:ThemeBase;
 
-	public static function init ( stage:Stage , value:DefaultTheme ):void {
+	public static function init ( stage:Stage , value:ThemeBase ):void {
 		_stage = stage;
 		_onStageDraw = new NativeSignal ( _stage , Event.RENDER , Event );
 		_onStageResize = new NativeSignal ( _stage , Event.RESIZE , Event );
@@ -51,22 +51,22 @@ public class BloomCore {
 		return _onStageMouseUp;
 	}
 
-	public static function get theme ():DefaultTheme {
-		return _theme;
+	public static function get theme ():ThemeBase {
+		return _theme as ThemeBase;
 	}
 
 	public static function get stage ():Stage {
 		return _stage;
 	}
 
-	public static function set theme ( value:DefaultTheme ):void {
+	public static function set theme ( value:ThemeBase ):void {
 		if ( _theme != value ) {
 			_theme = value;
 			_onThemeChanged.dispatch ();
 		}
 	}
 	
-	public function destroy () :void {
+	public static function destroy () :void {
 		_onStageResize.removeAll();
 		_onStageResize = null;
 		_onStageDraw.removeAll();

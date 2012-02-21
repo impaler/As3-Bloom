@@ -1,6 +1,9 @@
 package bloom.core 
 {
-	import flash.display.DisplayObjectContainer;
+
+import bloom.style.TextStyle;
+
+import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
 	import flash.events.FocusEvent;
 	import flash.text.TextField;
@@ -75,7 +78,7 @@ package bloom.core
 		public function set enabled(value:Boolean):void {
 			if (_enabled != value) {
 				_enabled = tabEnabled = mouseEnabled = value;
-				alpha = _enabled ? 1 : BloomCore.theme.alpha;
+				alpha = _enabled ? 1 : BloomCore.theme.disabledAlpha;
 			}
 		}
 		

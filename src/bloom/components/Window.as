@@ -25,7 +25,7 @@ package bloom.components
 import bloom.control.BloomCore;
 import bloom.core.Component;
 import bloom.core.IStyleBase;
-import bloom.themes.default.WindowStyle;
+import bloom.style.WindowStyle;
 
 import flash.display.DisplayObjectContainer;
 import flash.display.Sprite;
@@ -56,8 +56,6 @@ import org.osflash.signals.natives.NativeSignal;
 		
 		private var _headerSize:Number;
 		private var _footerSize:Number;
-		
-		private var _rect:Rectangle;
 		
 		private var _header:FlowContainer;
 		private var _content:FlowContainer;
@@ -105,9 +103,7 @@ import org.osflash.signals.natives.NativeSignal;
 			this.resizeable = resizeable;
 			liveResize = false;
 			
-			_rect = new Rectangle();
-			
-			style = BloomCore.theme.window;
+			style = BloomCore.theme.windowStyle;
 			
 			onHeaderDown = new NativeSignal(_header, MouseEvent.MOUSE_DOWN, MouseEvent);
 			onScalerDown = new NativeSignal(_scaler, MouseEvent.MOUSE_DOWN, MouseEvent);
@@ -216,8 +212,8 @@ import org.osflash.signals.natives.NativeSignal;
 		override public function set style ( value:IStyleBase ):void {
 			super.style = value;
 
-			_footer.style = BloomCore.theme.window.footer;
-			_header.style = BloomCore.theme.window.header;
+			_footer.style = BloomCore.theme.windowStyle.footer;
+			_header.style = BloomCore.theme.windowStyle.header;
 			
 		}
 	

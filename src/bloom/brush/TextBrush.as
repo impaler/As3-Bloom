@@ -1,7 +1,7 @@
 package bloom.brush {
 
 import bloom.core.TextBase;
-import bloom.core.TextStyle;
+import bloom.style.TextStyle;
 
 public class TextBrush extends Brush {
 

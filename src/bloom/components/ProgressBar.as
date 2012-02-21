@@ -1,15 +1,17 @@
 package bloom.components 
 {
-	import flash.display.DisplayObjectContainer;
-	import flash.display.Shape;
-	import flash.display.Sprite;
-	import flash.events.Event;
-	
-	import org.osflash.signals.Signal;
-	
-	import bloom.control.BloomCore;
-	import bloom.core.Component;
-	import bloom.themes.default.ProgressBarStyle;
+
+import bloom.style.ProgressBarStyle;
+
+import flash.display.DisplayObjectContainer;
+import flash.display.Shape;
+import flash.display.Sprite;
+import flash.events.Event;
+
+import org.osflash.signals.Signal;
+
+import bloom.control.BloomCore;
+import bloom.core.Component;
 	
 	/**
 	 * ProgressBar
@@ -35,7 +37,7 @@ package bloom.components
 			
 			_value = value;
 			
-			style = BloomCore.theme.progressBar;
+			style = BloomCore.theme.progressBarStyle;
 			
 			size(100, 20);
 		}

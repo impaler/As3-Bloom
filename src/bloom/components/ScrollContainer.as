@@ -26,7 +26,7 @@ import bloom.control.BloomCore;
 import bloom.core.IComponent;
 import bloom.core.IObjectBase;
 import bloom.core.IStyleBase;
-import bloom.themes.default.ScrollContainerStlye;
+import bloom.style.ScrollContainerStyle;
 
 import flash.display.DisplayObject;
 import flash.display.DisplayObjectContainer;
@@ -86,7 +86,7 @@ import flash.geom.Rectangle;
 			
 			_objects_created = true;
 			
-			style = BloomCore.theme.scrollContainer;
+			style = BloomCore.theme.scrollContainerStyle;
 			
 			
 			h_scrollBar_enabled = v_scrollBar_enabled = true;
@@ -245,8 +245,8 @@ import flash.geom.Rectangle;
 			return _content;
 		}
 	
-		public function get scrollStyle () : ScrollContainerStlye {
-			return _style as ScrollContainerStlye;
+		public function get scrollStyle () : ScrollContainerStyle {
+			return _style as ScrollContainerStyle;
 		}
 		
 		///////////////////////////////////

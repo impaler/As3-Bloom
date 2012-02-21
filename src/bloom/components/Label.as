@@ -17,14 +17,14 @@ package bloom.components
 			type = "dynamic";
 			autoSize = "left";
 			
-			style = BloomCore.theme.label;
+			style = BloomCore.theme.labelStyle;
 			this.text = text;
 			
 			BloomCore.onThemeChanged.add(onThemeChanged);
 		}
 		
 		protected function onThemeChanged():void {
-			style = BloomCore.theme.label;
+			style = BloomCore.theme.labelStyle;
 		}
 		
 		///////////////////////////////////

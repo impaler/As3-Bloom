@@ -101,7 +101,7 @@ import org.osflash.signals.natives.NativeSignal;
 		public function set enabled(value:Boolean):void {
 			if (_enabled != value) {
 				_enabled = mouseEnabled = mouseChildren = value;
-				alpha = _enabled ? 1 : BloomCore.theme.alpha;
+				alpha = _enabled ? 1 : BloomCore.theme.disabledAlpha;
 			}
 		}
 		

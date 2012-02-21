@@ -114,7 +114,7 @@ package bloom.components
 		// toString
 		///////////////////////////////////
 		
-		public function toString():String {
+		public static function toString():String {
 			return "[bloom.components.CheckBoxGroup]";
 		}
 		
