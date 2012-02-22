@@ -11,20 +11,20 @@ package bloom.themes.blue
 	public class BlueButtonBase extends ButtonBaseStyle {
 		
 		[Embed(source="assets/button_normal.png")]
-		private static var bt_normal:Class;
-		
-		[Embed(source="assets/button_down.png")]
-		private static var bt_down:Class;
+		private static var bm0:Class;
 		
 		[Embed(source="assets/button_over.png")]
-		private static var bt_over:Class;
+		private static var bm1:Class;
+		
+		[Embed(source="assets/button_down.png")]
+		private static var bm2:Class;
 		
 		public function BlueButtonBase() {
-			normal = new ScaleBitmap(new bt_normal().bitmapData);
+			normal = new ScaleBitmap(new bm0().bitmapData);
 			normal.scale9Grid = new Rectangle(15, 15, 70, 14);
-			over = new ScaleBitmap(new bt_over().bitmapData);
+			over = new ScaleBitmap(new bm1().bitmapData);
 			over.scale9Grid = new Rectangle(15, 15, 70, 14);
-			down = new ScaleBitmap(new bt_down().bitmapData);
+			down = new ScaleBitmap(new bm2().bitmapData);
 			down.scale9Grid = new Rectangle(15, 15, 70, 14);
 		}
 		

@@ -18,7 +18,7 @@ package bloom.styles
 		///////////////////////////////////
 		
 		override public function toString():String {
-			return "[bloom.style.ButtonStyle]";
+			return "[bloom.styles.ButtonStyle]";
 		}
 	}
 

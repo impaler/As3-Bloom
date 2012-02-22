@@ -13,6 +13,8 @@ package bloom.themes
 			_label = new BlueLabel();
 			_button = new BlueButton();
 			_buttonBase = new BlueButtonBase();
+			_checkBox = new BlueCheckBox();
+			_textInput = new BlueTextInput();
 		}
 		
 		///////////////////////////////////

@@ -46,6 +46,36 @@ package
 			button.mouseUp.add(function(e:MouseEvent):void {
 				button.title.text = "One does not simply";
 			});
+			
+			var checkBox:CheckBox = new CheckBox(this, "I don't always change.");
+			checkBox.move(0, 140);
+			checkBox.valueChanged.add(function(target:CheckBox):void {
+				target.title.text = target.value ? "But when i do i change my title." : "I don't always change.";
+			});
+			
+			var textInput:TextInput = new TextInput(this, "Nothing");
+			textInput.move(0, 160);
+			
+			label = new Label(this, "CheckBoxGroup index: -1");
+			label.move(0, 180);
+			
+			var checkBoxGroup:CheckBoxGroup = new CheckBoxGroup( -1);
+			
+			checkBox = new CheckBox(this, "CheckBox");
+			checkBox.move(0, 200);
+			checkBoxGroup.addChild(checkBox);
+			
+			checkBox = new CheckBox(this, "CheckBox");
+			checkBox.move(0, 220);
+			checkBoxGroup.addChild(checkBox);
+			
+			checkBox = new CheckBox(this, "CheckBox");
+			checkBox.move(0, 240);
+			checkBoxGroup.addChild(checkBox);
+			
+			checkBoxGroup.add(function(target:CheckBoxGroup):void {
+				label.text = "CheckBoxGroup index: " + target.index.toString();
+			});
 		}
 		
 	}

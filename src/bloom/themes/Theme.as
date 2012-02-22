@@ -12,6 +12,8 @@ package bloom.themes
 		protected var _label:TextStyle;
 		protected var _button:ButtonStyle;
 		protected var _buttonBase:ButtonBaseStyle;
+		protected var _checkBox:CheckBoxStyle;
+		protected var _textInput:TextInputStyle;
 		
 		public function Theme() {
 			
@@ -35,6 +37,14 @@ package bloom.themes
 		
 		public function get button():ButtonStyle {
 			return _button;
+		}
+		
+		public function get checkBox():CheckBoxStyle {
+			return _checkBox;
+		}
+		
+		public function get textInput():TextInputStyle {
+			return _textInput;
 		}
 		
 		///////////////////////////////////

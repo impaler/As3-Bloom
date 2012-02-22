@@ -15,6 +15,10 @@ package bloom.themes
 		
 		function get label():TextStyle;
 		
+		function get checkBox():CheckBoxStyle;
+		
+		function get textInput():TextInputStyle;
+		
 	}
 	
 }

@@ -1,8 +1,5 @@
 package bloom.styles 
-{
-	import flash.display.BitmapData;
-	import flash.display.Sprite;
-	
+{	
 	import bloom.core.ScaleBitmap;
 	
 	/**
@@ -23,7 +20,7 @@ package bloom.styles
 		///////////////////////////////////
 		
 		public function toString():String {
-			return "[bloom.style.ButtonBaseStyle]";
+			return "[bloom.styles.ButtonBaseStyle]";
 		}
 
 	}

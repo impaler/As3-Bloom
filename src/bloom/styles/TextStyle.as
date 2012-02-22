@@ -18,7 +18,7 @@ package bloom.styles
 		///////////////////////////////////
 		
 		public function toString():String {
-			return "[bloom.core.TextStyle]";
+			return "[bloom.styles.TextStyle]";
 		}
 	}
 
