@@ -4,8 +4,8 @@ package bloom.components
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFieldType;
 	
-	import bloom.control.ThemeBase;
 	import bloom.core.TextBase;
+	import bloom.core.ThemeBase;
 	
 	/**
 	 * Label
@@ -23,7 +23,6 @@ package bloom.components
 			this.text = text;
 			
 			style = ThemeBase.theme.label;
-			ThemeBase.onThemeChanged.add(onThemeChanged);
 		}
 		
 		override public function destroy():void {
@@ -31,7 +30,7 @@ package bloom.components
 			ThemeBase.onThemeChanged.remove(onThemeChanged);
 		}
 		
-		protected function onThemeChanged():void {
+		override protected function onThemeChanged():void {
 			style = ThemeBase.theme.label;
 		}
 		

@@ -1,4 +1,4 @@
-package bloom.control 
+package bloom.core 
 {
 	import flash.display.Stage;
 	import flash.events.Event;
@@ -41,7 +41,7 @@ package bloom.control
 		public static function set theme(value:ITheme):void {
 			if (_theme != value) {
 				_theme = value;
-				_onThemeChanged.dispatch();
+				if(_theme)_onThemeChanged.dispatch();
 			}
 		}
 		

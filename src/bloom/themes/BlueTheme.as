@@ -11,6 +11,7 @@ package bloom.themes
 			_alpha = 0.5;
 			
 			_label = new BlueLabel();
+			_button = new BlueButton();
 			_buttonBase = new BlueButtonBase();
 		}
 		

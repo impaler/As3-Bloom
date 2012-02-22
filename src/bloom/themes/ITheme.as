@@ -11,6 +11,8 @@ package bloom.themes
 		
 		function get buttonBase():ButtonBaseStyle;
 		
+		function get button():ButtonStyle;
+		
 		function get label():TextStyle;
 		
 	}

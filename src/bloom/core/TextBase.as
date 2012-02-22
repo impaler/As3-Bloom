@@ -1,19 +1,13 @@
 package bloom.core 
 {
-	// i wonder what IDE you are using.
-	// it seems very diffrernt with flash develop's default style.
-	
-	// first, flash native classes.
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
 	import flash.events.FocusEvent;
 	import flash.text.TextField;
 	
-	// then, 3rd part libs.
 	import org.osflash.signals.natives.NativeSignal;
 	
-	// then, bloom native classes.
-	import bloom.control.ThemeBase;
+	import bloom.core.ThemeBase;
 	import bloom.styles.TextStyle;
 	
 	/**
@@ -21,26 +15,24 @@ package bloom.core
 	 */
 	public class TextBase extends TextField implements IComponent {
 		
-		// we don't need a static const "input", since adobe's native class has it.
-		// try to make things simple and clear. delete all unnecessary objects.
-		
 		protected var _style:TextStyle;
 		
 		protected var _margin:Margin;
 		protected var _enabled:Boolean = true;
 		
-		// passive word is recommanded when using signals.
-		// use _xxx when this var will have it's getter/setter.
-		// if not just directly use xxx.
 		protected var _onTextChanged:NativeSignal;
 		protected var _onFocusedIn:NativeSignal;
 		protected var _onFocusedOut:NativeSignal;
 		
 		public function TextBase(p:DisplayObjectContainer = null) {
 			super();
+			
 			_margin = new Margin();
 			if (p) p.addChild(this);
+			
 			_onTextChanged = new NativeSignal(this, Event.CHANGE, Event);
+			
+			ThemeBase.onThemeChanged.add(onThemeChanged);
 		}
 		
 		public function move(x:Number, y:Number):void {
@@ -57,8 +49,8 @@ package bloom.core
 			
 		}
 		
-		// put public functions first, then protected, then private, then getter setters, toString() comes last.
 		public function destroy():void {
+			ThemeBase.onThemeChanged.remove(onThemeChanged);
 			_style = null;
 			_onTextChanged.removeAll();
 			_onTextChanged = null;
@@ -68,11 +60,14 @@ package bloom.core
 			_onFocusedOut = null;
 		}
 		
+		protected function onThemeChanged():void {
+			
+		}
+		
 		///////////////////////////////////
 		// getter/setters
 		///////////////////////////////////
 		
-		// getter/setter s' getter comes first.
 		public function get style():TextStyle {
 			return _style;
 		}
@@ -94,9 +89,6 @@ package bloom.core
 		public function set enabled(value:Boolean):void {
 			if (_enabled != value) {
 				_enabled = tabEnabled = mouseEnabled = value;
-				//alpha = _enabled ? 1 : BloomCore.theme.disabledAlpha;
-				// try to make classses name or objects' name simple and short and cool.
-				// since it's in bloom.control, i think it should be sth like ThemeBase.
 				alpha = _enabled ? 1 : ThemeBase.theme.alpha;
 			}
 		}

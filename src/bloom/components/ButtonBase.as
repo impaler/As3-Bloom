@@ -8,8 +8,8 @@ package bloom.components
 	
 	import org.osflash.signals.natives.NativeSignal;
 	
-	import bloom.control.ThemeBase;
 	import bloom.core.Component;
+	import bloom.core.ThemeBase;
 	import bloom.styles.ButtonBaseStyle;
 	
 	/**
@@ -49,8 +49,6 @@ package bloom.components
 			
 			style = ThemeBase.theme.buttonBase;
 			size(120, 30);
-			
-			ThemeBase.onThemeChanged.add(onThemeChanged);
 		}
 		
 		override public function destroy():void {
@@ -72,11 +70,6 @@ package bloom.components
 			style = ThemeBase.theme.buttonBase;
 		}
 		
-		// i decided not to make a static draw like function.
-		// it's complex. And there's not that much code in draw isn't it?
-		// check this out, we don't need to create new instance of styles.
-		// just put some necessary bitmapData, and clone() those calculated bitmapData in style and use that to draw :D
-		// how stupid i was ... 
 		override protected function draw(e:Event):void {
 			if (!_changed) return;
 			_changed = false;
@@ -87,20 +80,20 @@ package bloom.components
 			graphics.clear();
 			switch(state){
 				case NORMAL:
-					style.normal.setSize(width, height);
+					style.normal.setSize(_width, _height);
 					background = style.normal.bitmapData.clone();
 					break;
 				case OVER:
-					style.over.setSize(width, height);
+					style.over.setSize(_width, _height);
 					background = style.over.bitmapData.clone();
 					break;
 				case DOWN:
-					style.down.setSize(width, height);
+					style.down.setSize(_width, _height);
 					background = style.down.bitmapData.clone();
 					break;
 			}
 			graphics.beginBitmapFill(background);
-			graphics.drawRect(0, 0, width, height);
+			graphics.drawRect(0, 0, _width, _height);
 			graphics.endFill();
 		}
 		

@@ -10,6 +10,7 @@ package bloom.themes
 		protected var _alpha:Number = 0.5;
 		
 		protected var _label:TextStyle;
+		protected var _button:ButtonStyle;
 		protected var _buttonBase:ButtonBaseStyle;
 		
 		public function Theme() {
@@ -32,12 +33,16 @@ package bloom.themes
 			return _label;
 		}
 		
+		public function get button():ButtonStyle {
+			return _button;
+		}
+		
 		///////////////////////////////////
 		// toString
 		///////////////////////////////////
 		
 		public function toString():String {
-			return "[bloom.themes.blue]";
+			return "[bloom.themes.Theme]";
 		}
 	}
 

@@ -7,7 +7,7 @@ package bloom.core
 	import org.osflash.signals.natives.NativeSignal;
 	import org.osflash.signals.Signal;
 	
-	import bloom.control.ThemeBase;
+	import bloom.core.ThemeBase;
 	import bloom.styles.IStyle;
 	
 	/**
@@ -29,11 +29,16 @@ package bloom.core
 		
 		public function Component(p:DisplayObjectContainer = null) {
 			super();
+			
 			var temp:NativeSignal = new NativeSignal(this, Event.ADDED_TO_STAGE, Event);
 			temp.addOnce(onAddedToStage);
+			
 			_onResized = new Signal();
+			
 			_margin = new Margin();
 			if (p) p.addChild(this);
+			
+			ThemeBase.onThemeChanged.add(onThemeChanged);
 		}
 		
 		public function move(x:Number, y:Number):void {
@@ -128,7 +133,10 @@ package bloom.core
 		public function set style(value:IStyle):void {
 			if (_style != value) {
 				_style = value;
-				if (_style) drawDirectly();
+				if (_style) {
+					_changed = true;
+					invalidate();
+				}
 			}
 		}
 		
