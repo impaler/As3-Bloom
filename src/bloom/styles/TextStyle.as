@@ -1,13 +1,11 @@
-package bloom.style 
+package bloom.styles 
 {
-
-import bloom.core.*;
 	import flash.text.TextFormat;
 	
 	/**
 	 * TextStyle
 	 */
-	public class TextStyle implements IStyleBase {
+	public class TextStyle implements IStyle {
 		
 		public var textFormat:TextFormat;
 		

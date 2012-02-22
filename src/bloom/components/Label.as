@@ -1,8 +1,10 @@
 package bloom.components 
 {
 	import flash.display.DisplayObjectContainer;
+	import flash.text.TextFieldAutoSize;
+	import flash.text.TextFieldType;
 	
-	import bloom.control.BloomCore;
+	import bloom.control.ThemeBase;
 	import bloom.core.TextBase;
 	
 	/**
@@ -13,18 +15,24 @@ package bloom.components
 		public function Label(p:DisplayObjectContainer = null, text:String = "") {
 			super(p);
 			
-			selectable = mouseEnabled = tabEnabled = false;
-			type = "dynamic";
-			autoSize = "left";
+			type = TextFieldType.DYNAMIC;
+			autoSize = TextFieldAutoSize.LEFT;
 			
-			style = BloomCore.theme.labelStyle;
+			selectable = mouseEnabled = tabEnabled = false;
+			
 			this.text = text;
 			
-			BloomCore.onThemeChanged.add(onThemeChanged);
+			style = ThemeBase.theme.label;
+			ThemeBase.onThemeChanged.add(onThemeChanged);
+		}
+		
+		override public function destroy():void {
+			super.destroy();
+			ThemeBase.onThemeChanged.remove(onThemeChanged);
 		}
 		
 		protected function onThemeChanged():void {
-			style = BloomCore.theme.labelStyle;
+			style = ThemeBase.theme.label;
 		}
 		
 		///////////////////////////////////
@@ -33,12 +41,6 @@ package bloom.components
 		
 		override public function toString():String {
 			return "[bloom.components.Label]";
-		}
-		
-		override public function destroy () : void {
-			super.destroy();
-			
-			BloomCore.onThemeChanged.remove(onThemeChanged);
 		}
 		
 	}

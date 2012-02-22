@@ -4,12 +4,11 @@ package bloom.core
 	import flash.display.Sprite;
 	import flash.events.Event;
 	
-	import bloom.control.ObjectPool;
-	import bloom.control.BloomCore;
-
-import org.osflash.signals.natives.NativeSignal;
-
-[Event(name = "resize", type = "flash.events.Event")]
+	import org.osflash.signals.natives.NativeSignal;
+	import org.osflash.signals.Signal;
+	
+	import bloom.control.ThemeBase;
+	import bloom.styles.IStyle;
 	
 	/**
 	 * Component
@@ -19,32 +18,29 @@ import org.osflash.signals.natives.NativeSignal;
 		protected var _enabled:Boolean = true;
 		protected var _changed:Boolean = false;
 		
+		protected var _onResized:Signal;
+		
 		protected var _width:Number = 0;
 		protected var _height:Number = 0;
 		
-		protected var _style:IStyleBase;
+		protected var _style:IStyle;
 		
 		protected var _margin:Margin;
 		
 		public function Component(p:DisplayObjectContainer = null) {
 			super();
+			var temp:NativeSignal = new NativeSignal(this, Event.ADDED_TO_STAGE, Event);
+			temp.addOnce(onAddedToStage);
+			_onResized = new Signal();
 			_margin = new Margin();
-			var onAddedToStageSignal:NativeSignal = new NativeSignal( this, Event.ADDED_TO_STAGE, Event );
-			onAddedToStageSignal.addOnce(onAddedToStage);
 			if (p) p.addChild(this);
 		}
 		
-		/**
-		 * Move this component.
-		 */
 		public function move(x:Number, y:Number):void {
 			this.x = x;
 			this.y = y;
 		}
 		
-		/**
-		 * Resize this component.
-		 */
 		public function size(width:Number, height:Number):void {
 			this.width = width;
 			this.height = height;
@@ -53,6 +49,18 @@ import org.osflash.signals.natives.NativeSignal;
 		public function drawDirectly():void {
 			_changed = true;
 			draw(null);
+		}
+		
+		public function destroy():void {
+			ThemeBase.onThemeChanged.remove(onThemeChanged);
+			ThemeBase.onStageDraw.remove(draw);
+			if (parent) parent.removeChild(this);
+			_style = null;
+			_margin = null;
+		}
+		
+		protected function onThemeChanged():void {
+			
 		}
 		
 		protected function draw(e:Event):void {
@@ -64,7 +72,7 @@ import org.osflash.signals.natives.NativeSignal;
 		}
 		
 		private function onAddedToStage(e:Event):void {
-			BloomCore.onStageDraw.add(draw);
+			ThemeBase.onStageDraw.add(draw);
 			invalidate();
 		}
 		
@@ -77,7 +85,7 @@ import org.osflash.signals.natives.NativeSignal;
 				_width = value;
 				_changed = true;
 				invalidate();
-				dispatchEvent(new Event(Event.RESIZE));
+				_onResized.dispatch();
 			}
 		}
 		
@@ -90,7 +98,7 @@ import org.osflash.signals.natives.NativeSignal;
 				_height = value;
 				_changed = true;
 				invalidate();
-				dispatchEvent(new Event(Event.RESIZE));
+				_onResized.dispatch();
 			}
 		}
 		
@@ -98,10 +106,14 @@ import org.osflash.signals.natives.NativeSignal;
 			return _height;
 		}
 		
+		public function get onResized():Signal {
+			return _onResized;
+		}
+		
 		public function set enabled(value:Boolean):void {
 			if (_enabled != value) {
 				_enabled = mouseEnabled = mouseChildren = value;
-				alpha = _enabled ? 1 : BloomCore.theme.disabledAlpha;
+				alpha = _enabled ? 1 : ThemeBase.theme.alpha;
 			}
 		}
 		
@@ -109,25 +121,14 @@ import org.osflash.signals.natives.NativeSignal;
 			return _enabled;
 		}
 		
-		public function get style():IStyleBase {
+		public function get style():IStyle {
 			return _style;
 		}
 		
-		public function set style(value:IStyleBase):void {
-			if (!_style) {
-				if (value) {
-					_style = ObjectPool.getObject(ObjectPool.getClassName(value)) as IStyleBase;
-					drawDirectly();
-				}
-			} else if (!value) {
-				if (_style) {
-					ObjectPool.returnObject(_style);
-					_style = null;
-				}
-			} else if (_style.toString() != value.toString()) {
-				ObjectPool.returnObject(_style);
-				_style = ObjectPool.getObject(ObjectPool.getClassName(value)) as IStyleBase;
-				drawDirectly();
+		public function set style(value:IStyle):void {
+			if (_style != value) {
+				_style = value;
+				if (_style) drawDirectly();
 			}
 		}
 		
@@ -135,27 +136,12 @@ import org.osflash.signals.natives.NativeSignal;
 			return _margin;
 		}
 		
-		public function get dimensionObject ():Object {
-			var obj:Object = new Object ();
-			obj.width = _width;
-			obj.height = _height;
-			obj.x = 0;
-			obj.y = 0;
-			return obj;
-		}
-	
 		///////////////////////////////////
 		// toString
 		///////////////////////////////////
 		
 		override public function toString():String {
 			return "[bloom.core.Component]";
-		}
-		
-		public function destroy () :void {
-			BloomCore.onStageDraw.remove(draw);
-			_style = null;
-			if ( parent!=null ) parent.removeChild(this);
 		}
 		
 	}

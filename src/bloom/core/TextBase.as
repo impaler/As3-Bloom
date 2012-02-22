@@ -1,47 +1,46 @@
 package bloom.core 
 {
-
-import bloom.style.TextStyle;
-
-import flash.display.DisplayObjectContainer;
+	// i wonder what IDE you are using.
+	// it seems very diffrernt with flash develop's default style.
+	
+	// first, flash native classes.
+	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
 	import flash.events.FocusEvent;
 	import flash.text.TextField;
 	
-	import bloom.control.BloomCore;
-	
-	import org.osflash.signals.Signal;
-	
+	// then, 3rd part libs.
 	import org.osflash.signals.natives.NativeSignal;
-
-/**
+	
+	// then, bloom native classes.
+	import bloom.control.ThemeBase;
+	import bloom.styles.TextStyle;
+	
+	/**
 	 * TextBase
 	 */
 	public class TextBase extends TextField implements IComponent {
 		
-		public static const INPUT:String = "input";
-	
+		// we don't need a static const "input", since adobe's native class has it.
+		// try to make things simple and clear. delete all unnecessary objects.
+		
 		protected var _style:TextStyle;
 		
 		protected var _margin:Margin;
 		protected var _enabled:Boolean = true;
 		
-		protected var _onTextChange:Signal;
-		protected var _onChange:NativeSignal;
-		protected var _onFocusIn:NativeSignal;
-		protected var _onFocusOut:NativeSignal;
+		// passive word is recommanded when using signals.
+		// use _xxx when this var will have it's getter/setter.
+		// if not just directly use xxx.
+		protected var _onTextChanged:NativeSignal;
+		protected var _onFocusedIn:NativeSignal;
+		protected var _onFocusedOut:NativeSignal;
 		
 		public function TextBase(p:DisplayObjectContainer = null) {
 			super();
 			_margin = new Margin();
-			_onChange = new NativeSignal( this, Event.CHANGE, Event);
-			_onChange.add(onTitleChanged);
-			_onTextChange = new Signal(String);
 			if (p) p.addChild(this);
-		}
-
-		private function onTitleChanged (e:Event):void {
-			_onTextChange.dispatch(text);
+			_onTextChanged = new NativeSignal(this, Event.CHANGE, Event);
 		}
 		
 		public function move(x:Number, y:Number):void {
@@ -49,17 +48,34 @@ import flash.display.DisplayObjectContainer;
 			this.y = y;
 		}
 		
-		public function size(w:Number, h:Number):void {
-			width = w;
-			height = h;
+		public function size(width:Number, height:Number):void {
+			this.width = width;
+			this.height = height;
 		}
-	
-		public function drawDirectly ():void {
+		
+		public function drawDirectly():void {
+			
+		}
+		
+		// put public functions first, then protected, then private, then getter setters, toString() comes last.
+		public function destroy():void {
+			_style = null;
+			_onTextChanged.removeAll();
+			_onTextChanged = null;
+			if (_onFocusedIn) _onFocusedIn.removeAll();
+			_onFocusedIn = null;
+			if (_onFocusedOut) _onFocusedOut.removeAll();
+			_onFocusedOut = null;
 		}
 		
 		///////////////////////////////////
 		// getter/setters
 		///////////////////////////////////
+		
+		// getter/setter s' getter comes first.
+		public function get style():TextStyle {
+			return _style;
+		}
 		
 		public function set style(value:TextStyle):void {
 			if (_style != value) {
@@ -71,42 +87,37 @@ import flash.display.DisplayObjectContainer;
 			}
 		}
 		
-		public function get style():TextStyle {
-			return _style;
+		public function get enabled():Boolean {
+			return _enabled;
 		}
 		
 		public function set enabled(value:Boolean):void {
 			if (_enabled != value) {
 				_enabled = tabEnabled = mouseEnabled = value;
-				alpha = _enabled ? 1 : BloomCore.theme.disabledAlpha;
+				//alpha = _enabled ? 1 : BloomCore.theme.disabledAlpha;
+				// try to make classses name or objects' name simple and short and cool.
+				// since it's in bloom.control, i think it should be sth like ThemeBase.
+				alpha = _enabled ? 1 : ThemeBase.theme.alpha;
 			}
-		}
-		
-		public function get enabled():Boolean {
-			return _enabled;
 		}
 		
 		public function get margin():Margin {
 			return _margin;
 		}
-	
-		public function get onTextChange():Signal {
-			return _onTextChange;
+		
+		public function get onTextChanged():NativeSignal {
+			return _onTextChanged;
 		}
-	
-		public function get onFocusIn ():NativeSignal {
-			if ( _onFocusIn == null ) 
-				_onFocusIn = new NativeSignal(this, FocusEvent.FOCUS_IN, FocusEvent);
-			
-			return _onFocusIn;
+		
+		public function get onFocusedIn():NativeSignal {
+			if (!_onFocusedIn) _onFocusedIn = new NativeSignal(this, FocusEvent.FOCUS_IN, FocusEvent);
+			return _onFocusedIn;
 		}
-	
-		public function get onFocusOut ():NativeSignal {
-			if ( _onFocusOut == null ) 
-				_onFocusOut = new NativeSignal(this, FocusEvent.FOCUS_OUT, FocusEvent);
-			
-			return _onFocusOut;
-		}	
+		
+		public function get onFocusedOut():NativeSignal {
+			if (!_onFocusedOut) _onFocusedOut = new NativeSignal(this, FocusEvent.FOCUS_OUT, FocusEvent);
+			return _onFocusedOut;
+		}
 		
 		///////////////////////////////////
 		// toString
@@ -115,20 +126,6 @@ import flash.display.DisplayObjectContainer;
 		override public function toString():String {
 			return "[bloom.core.TextBase]";
 		}
-
-		public function destroy ():void {
-			_style = null;
-			
-			_onChange.removeAll();
-			_onChange = null;
-			_onTextChange.removeAll();
-			_onTextChange = null;
-			if ( _onFocusIn != null) _onFocusIn.removeAll();
-			_onFocusIn = null;
-			if ( _onFocusOut != null) _onFocusOut.removeAll();
-			_onFocusOut = null;
-		}
-
-}
-
+		
+	}
 }

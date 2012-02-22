@@ -1,14 +1,13 @@
-package bloom.themes.defaultTheme 
+package bloom.themes.blue 
 {
-
-import bloom.style.TextStyle;
-
+	import bloom.styles.TextStyle;
+	
 	/**
-	 * LabelStyle
+	 * BlueLabel
 	 */
-	public class DefaultTextStyle extends TextStyle {
+	public class BlueLabel extends TextStyle {
 		
-		public function DefaultTextStyle() {
+		public function BlueLabel() {
 			textFormat.font = "Verdana";
 			textFormat.size = 12;
 			textFormat.color = 0x000000;
@@ -19,7 +18,7 @@ import bloom.style.TextStyle;
 		///////////////////////////////////
 		
 		override public function toString():String {
-			return "[bloom.style.default.DefaultTextStyle]";
+			return "[bloom.style.blue.BlueLabel]";
 		}
 		
 	}
