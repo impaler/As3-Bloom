@@ -19,6 +19,8 @@ package bloom.themes
 		
 		function get textInput():TextInputStyle;
 		
+		function get numericStepper():NumericStepperStyle;
+		
 	}
 	
 }

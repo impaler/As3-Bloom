@@ -17,12 +17,10 @@ package bloom.components
 	 */
 	public class ButtonBase extends Component {
 		
-		// static comes first then public, then protected then private.
 		public static const NORMAL:int = 0;
 		public static const OVER:int = 1;
 		public static const DOWN:int = 2;
 		
-		// try to make public methods looks cool (-.-)
 		protected var _mouseDown:NativeSignal;
 		protected var _mouseOver:NativeSignal;
 		protected var _mouseUp:NativeSignal;

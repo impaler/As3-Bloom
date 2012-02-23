@@ -38,6 +38,7 @@ package
 			buttonBase.move(0, 80);
 			
 			var button:Button = new Button(this, "One does not simply");
+			button.icon = new Bitmap(new BitmapData(10, 10, false, 0xffff00));
 			button.size(200, 30);
 			button.move(0, 110);
 			button.mouseDown.add(function(e:MouseEvent):void {
@@ -76,6 +77,10 @@ package
 			checkBoxGroup.add(function(target:CheckBoxGroup):void {
 				label.text = "CheckBoxGroup index: " + target.index.toString();
 			});
+			
+			var numericStepper:NumericStepper = new NumericStepper(this);
+			numericStepper.move(0, 270);
+			numericStepper.increase.iconNormal = new Bitmap(new BitmapData(10, 5, false, 0xffff00));
 		}
 		
 	}

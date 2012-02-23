@@ -26,7 +26,7 @@ package bloom.components
 		
 		private function onTitleChanged(e:Event):void {
 			if (_icon) {
-				_icon.x = (_icon.width + _title.margin.left + _title.width) * 0.5;
+				_icon.x = (_width - _icon.width - _title.margin.left - _title.width) * 0.5;
 				_icon.y = (_height - _icon.height) * 0.5;
 				_title.x = _icon.x + _icon.width + _title.margin.left;
 			} else {
@@ -90,8 +90,12 @@ package bloom.components
 		
 		public function set icon(value:DisplayObject):void {
 			if (_icon != value) {
+				if (_icon) removeChild(_icon);
 				_icon = value;
-				if (_icon) onTitleChanged(null);
+				if (_icon) {
+					addChild(_icon);
+					onTitleChanged(null);
+				}
 			}
 		}
 		

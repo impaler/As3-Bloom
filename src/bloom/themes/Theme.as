@@ -14,6 +14,7 @@ package bloom.themes
 		protected var _buttonBase:ButtonBaseStyle;
 		protected var _checkBox:CheckBoxStyle;
 		protected var _textInput:TextInputStyle;
+		protected var _numericStepper:NumericStepperStyle;
 		
 		public function Theme() {
 			
@@ -45,6 +46,10 @@ package bloom.themes
 		
 		public function get textInput():TextInputStyle {
 			return _textInput;
+		}
+		
+		public function get numericStepper():NumericStepperStyle {
+			return _numericStepper;
 		}
 		
 		///////////////////////////////////

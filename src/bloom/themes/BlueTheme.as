@@ -15,6 +15,7 @@ package bloom.themes
 			_buttonBase = new BlueButtonBase();
 			_checkBox = new BlueCheckBox();
 			_textInput = new BlueTextInput();
+			_numericStepper = new BlueNumericStepper();
 		}
 		
 		///////////////////////////////////

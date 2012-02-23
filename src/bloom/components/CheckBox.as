@@ -56,7 +56,7 @@ package bloom.components
 			removeChild(_title);
 			_title.destroy();
 			_title = null;
-			_mouseClick.remove(onMouseClick);
+			_mouseClick.removeAll();
 			_mouseClick = null;
 			_valueChanged.removeAll();
 			_valueChanged = null;
