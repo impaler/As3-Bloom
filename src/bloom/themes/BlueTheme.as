@@ -16,6 +16,9 @@ package bloom.themes
 			_checkBox = new BlueCheckBox();
 			_textInput = new BlueTextInput();
 			_numericStepper = new BlueNumericStepper();
+			_progressBar = new BlueProgressBar();
+			_slider = new BlueSlider();
+			_textBox = new BlueTextBox();
 		}
 		
 		///////////////////////////////////

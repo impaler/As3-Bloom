@@ -80,7 +80,19 @@ package
 			
 			var numericStepper:NumericStepper = new NumericStepper(this);
 			numericStepper.move(0, 270);
-			numericStepper.increase.iconNormal = new Bitmap(new BitmapData(10, 5, false, 0xffff00));
+			//numericStepper.increase.iconNormal = new Bitmap(new BitmapData(10, 5, false, 0xffff00));
+			
+			var progressBar:ProgressBar = new ProgressBar(this, 30);
+			//progressBar.value = 100;
+			progressBar.move(0, 300);
+			
+			var slider:Slider = new Slider(this, Slider.HORIZONTALLY);
+			slider.move(0, 330);
+			
+			var textBox:TextBox = new TextBox(this);
+			//textBox.scrollBar.width = 30;
+			textBox.size(200, 100);
+			textBox.move(0, 360);
 		}
 		
 	}

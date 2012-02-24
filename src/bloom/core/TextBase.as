@@ -23,6 +23,7 @@ package bloom.core
 		protected var _onTextChanged:NativeSignal;
 		protected var _onFocusedIn:NativeSignal;
 		protected var _onFocusedOut:NativeSignal;
+		protected var _onTextScroll:NativeSignal;
 		
 		public function TextBase(p:DisplayObjectContainer = null) {
 			super();
@@ -102,13 +103,18 @@ package bloom.core
 		}
 		
 		public function get onFocusedIn():NativeSignal {
-			if (!_onFocusedIn) _onFocusedIn = new NativeSignal(this, FocusEvent.FOCUS_IN, FocusEvent);
+			if (!_onFocusedIn)_onFocusedIn = new NativeSignal(this, FocusEvent.FOCUS_IN, FocusEvent);
 			return _onFocusedIn;
 		}
 		
 		public function get onFocusedOut():NativeSignal {
-			if (!_onFocusedOut) _onFocusedOut = new NativeSignal(this, FocusEvent.FOCUS_OUT, FocusEvent);
+			if (!_onFocusedOut)_onFocusedOut = new NativeSignal(this, FocusEvent.FOCUS_OUT, FocusEvent);
 			return _onFocusedOut;
+		}
+		
+		public function get onTextScroll():NativeSignal {
+			if (!_onTextScroll)_onTextScroll = new NativeSignal(this, Event.SCROLL, Event);
+			return _onTextScroll;
 		}
 		
 		///////////////////////////////////

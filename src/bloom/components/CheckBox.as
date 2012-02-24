@@ -41,7 +41,7 @@ package bloom.components
 			
 			_valueChanged = new Signal(CheckBox);
 			
-			style = ThemeBase.theme.checkBox;
+			_style = ThemeBase.theme.checkBox;
 			size(100, 20);
 		}
 		

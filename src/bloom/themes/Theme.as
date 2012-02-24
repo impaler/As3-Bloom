@@ -15,6 +15,9 @@ package bloom.themes
 		protected var _checkBox:CheckBoxStyle;
 		protected var _textInput:TextInputStyle;
 		protected var _numericStepper:NumericStepperStyle;
+		protected var _progressBar:ProgressBarStyle;
+		protected var _slider:SliderStyle;
+		protected var _textBox:TextBoxStyle;
 		
 		public function Theme() {
 			
@@ -50,6 +53,18 @@ package bloom.themes
 		
 		public function get numericStepper():NumericStepperStyle {
 			return _numericStepper;
+		}
+		
+		public function get progressBar():ProgressBarStyle {
+			return _progressBar;
+		}
+		
+		public function get slider():SliderStyle {
+			return _slider;
+		}
+		
+		public function get textBox():TextBoxStyle {
+			return _textBox;
 		}
 		
 		///////////////////////////////////

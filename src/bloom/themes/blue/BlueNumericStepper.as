@@ -18,22 +18,22 @@ package bloom.themes.blue
 		[Embed(source="assets/text_active.png")]
 		private static var bm1:Class;
 		
-		[Embed(source="assets/ns_increase_normal.png")]
+		[Embed(source="assets/increase_normal.png")]
 		private static var bm2:Class;
 		
-		[Embed(source="assets/ns_increase_over.png")]
+		[Embed(source="assets/increase_over.png")]
 		private static var bm3:Class;
 		
-		[Embed(source="assets/ns_increase_down.png")]
+		[Embed(source="assets/increase_down.png")]
 		private static var bm4:Class;
 		
-		[Embed(source="assets/ns_decrease_normal.png")]
+		[Embed(source="assets/decrease_normal.png")]
 		private static var bm5:Class;
 		
-		[Embed(source="assets/ns_decrease_over.png")]
+		[Embed(source="assets/decrease_over.png")]
 		private static var bm6:Class;
 		
-		[Embed(source="assets/ns_decrease_down.png")]
+		[Embed(source="assets/decrease_down.png")]
 		private static var bm7:Class;
 		
 		public function BlueNumericStepper() {

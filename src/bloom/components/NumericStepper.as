@@ -76,7 +76,7 @@ package bloom.components
 			
 			this.value = value;
 			
-			style = ThemeBase.theme.numericStepper;
+			_style = ThemeBase.theme.numericStepper;
 			size(100, 20);
 		}
 		

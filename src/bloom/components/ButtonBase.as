@@ -45,7 +45,7 @@ package bloom.components
 			_mouseOver.add(onMouseOver);
 			_mouseDown.add(onMouseDown);
 			
-			style = ThemeBase.theme.buttonBase;
+			_style = ThemeBase.theme.buttonBase;
 			size(120, 30);
 		}
 		

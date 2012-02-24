@@ -21,6 +21,12 @@ package bloom.themes
 		
 		function get numericStepper():NumericStepperStyle;
 		
+		function get progressBar():ProgressBarStyle;
+		
+		function get slider():SliderStyle;
+		
+		function get textBox():TextBoxStyle;
+		
 	}
 	
 }

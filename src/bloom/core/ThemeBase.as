@@ -20,6 +20,7 @@ package bloom.core
 		private static var _onStageDraw:NativeSignal;
 		private static var _onStageResize:NativeSignal;
 		private static var _onStageMouseUp:NativeSignal;
+		private static var _onStageMouseMove:NativeSignal;
 		
 		private static var _theme:ITheme;
 		
@@ -28,6 +29,7 @@ package bloom.core
 			_onStageDraw = new NativeSignal(_stage, Event.RENDER, Event);
 			_onStageResize = new NativeSignal(_stage, Event.RESIZE, Event);
 			_onStageMouseUp = new NativeSignal(_stage, MouseEvent.MOUSE_UP, MouseEvent);
+			_onStageMouseMove = new NativeSignal(_stage, MouseEvent.MOUSE_MOVE, MouseEvent);
 		}
 		
 		///////////////////////////////////
@@ -59,6 +61,10 @@ package bloom.core
 		
 		public static function get onStageMouseUp():NativeSignal {
 			return _onStageMouseUp;
+		}
+		
+		public static function get onStageMouseMove():NativeSignal {
+			return _onStageMouseMove;
 		}
 		
 		public static function get stage():Stage {
