@@ -93,6 +93,10 @@ package
 			//textBox.scrollBar.width = 30;
 			textBox.size(200, 100);
 			textBox.move(0, 360);
+			
+			var toggleButton:ToggleButton = new ToggleButton(this, "Toggle");
+			toggleButton.icon = new Bitmap(new BitmapData(10, 10, false, 0xffff00));
+			toggleButton.move(0, 460);
 		}
 		
 	}

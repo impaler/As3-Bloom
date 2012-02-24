@@ -27,6 +27,8 @@ package bloom.themes
 		
 		function get textBox():TextBoxStyle;
 		
+		function get toggleButton():ToggleButtonStyle;
+		
 	}
 	
 }

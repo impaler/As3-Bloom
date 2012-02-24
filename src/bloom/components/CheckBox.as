@@ -17,13 +17,13 @@ package bloom.components
 	 */
 	public class CheckBox extends Component {
 		
-		private var _mouseClick:NativeSignal;
-		private var _valueChanged:Signal;
+		protected var _mouseClick:NativeSignal;
+		protected var _valueChanged:Signal;
 		
-		private var _value:Boolean;
-		private var _title:Label;
+		protected var _value:Boolean;
+		protected var _title:Label;
 		
-		private var background:BitmapData;
+		protected var background:BitmapData;
 		
 		public function CheckBox(p:DisplayObjectContainer = null, title:String = "", value:Boolean = false) {
 			super(p);

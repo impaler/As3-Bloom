@@ -18,6 +18,7 @@ package bloom.themes
 		protected var _progressBar:ProgressBarStyle;
 		protected var _slider:SliderStyle;
 		protected var _textBox:TextBoxStyle;
+		protected var _toggleButton:ToggleButtonStyle;
 		
 		public function Theme() {
 			
@@ -65,6 +66,10 @@ package bloom.themes
 		
 		public function get textBox():TextBoxStyle {
 			return _textBox;
+		}
+		
+		public function get toggleButton():ToggleButtonStyle {
+			return _toggleButton;
 		}
 		
 		///////////////////////////////////

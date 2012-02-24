@@ -19,6 +19,7 @@ package bloom.themes
 			_progressBar = new BlueProgressBar();
 			_slider = new BlueSlider();
 			_textBox = new BlueTextBox();
+			_toggleButton = new BlueToggleButton();
 		}
 		
 		///////////////////////////////////
