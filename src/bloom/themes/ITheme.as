@@ -29,6 +29,8 @@ package bloom.themes
 		
 		function get toggleButton():ToggleButtonStyle;
 		
+		function get container():ContainerStyle;
+		
 	}
 	
 }

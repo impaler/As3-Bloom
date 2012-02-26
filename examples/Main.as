@@ -26,21 +26,20 @@ package
 			ThemeBase.initialize(stage);
 			ThemeBase.theme = new BlueTheme();
 			
-			var label:Label = new Label(this, "Label");
+			var flowContainer:FlowContainer = new FlowContainer(this, FlowContainer.VERTICALLY);
+			flowContainer.size(220, 620);
 			
-			var buttonBase:ButtonBase = new ButtonBase(this);
-			buttonBase.move(0, 20);
-			buttonBase = new ButtonBase(this);
+			var label:Label = new Label(flowContainer, "Label");
+			
+			var buttonBase:ButtonBase = new ButtonBase(flowContainer);
+			buttonBase = new ButtonBase(flowContainer);
 			buttonBase.state = ButtonBase.OVER;
-			buttonBase.move(0, 50);
-			buttonBase = new ButtonBase(this);
+			buttonBase = new ButtonBase(flowContainer);
 			buttonBase.state = ButtonBase.DOWN;
-			buttonBase.move(0, 80);
 			
-			var button:Button = new Button(this, "One does not simply");
+			var button:Button = new Button(flowContainer, "One does not simply");
 			button.icon = new Bitmap(new BitmapData(10, 10, false, 0xffff00));
 			button.size(200, 30);
-			button.move(0, 110);
 			button.mouseDown.add(function(e:MouseEvent):void {
 				button.title.text = "Click this Button :D";
 			});
@@ -48,55 +47,46 @@ package
 				button.title.text = "One does not simply";
 			});
 			
-			var checkBox:CheckBox = new CheckBox(this, "I don't always change.");
-			checkBox.move(0, 140);
+			var checkBox:CheckBox = new CheckBox(flowContainer, "Normal");
 			checkBox.valueChanged.add(function(target:CheckBox):void {
-				target.title.text = target.value ? "But when i do i change my title." : "I don't always change.";
+				target.title.text = target.value ? "Active" : "Normal";
 			});
 			
-			var textInput:TextInput = new TextInput(this, "Nothing");
-			textInput.move(0, 160);
+			var textInput:TextInput = new TextInput(flowContainer, "Nothing");
 			
-			label = new Label(this, "CheckBoxGroup index: -1");
-			label.move(0, 180);
+			label = new Label(flowContainer, "CheckBoxGroup index: -1");
 			
 			var checkBoxGroup:CheckBoxGroup = new CheckBoxGroup( -1);
 			
-			checkBox = new CheckBox(this, "CheckBox");
-			checkBox.move(0, 200);
+			checkBox = new CheckBox(flowContainer, "CheckBox");
 			checkBoxGroup.addChild(checkBox);
 			
-			checkBox = new CheckBox(this, "CheckBox");
-			checkBox.move(0, 220);
+			checkBox = new CheckBox(flowContainer, "CheckBox");
 			checkBoxGroup.addChild(checkBox);
 			
-			checkBox = new CheckBox(this, "CheckBox");
-			checkBox.move(0, 240);
+			checkBox = new CheckBox(flowContainer, "CheckBox");
 			checkBoxGroup.addChild(checkBox);
 			
 			checkBoxGroup.add(function(target:CheckBoxGroup):void {
 				label.text = "CheckBoxGroup index: " + target.index.toString();
 			});
 			
-			var numericStepper:NumericStepper = new NumericStepper(this);
-			numericStepper.move(0, 270);
+			var numericStepper:NumericStepper = new NumericStepper(flowContainer);
 			//numericStepper.increase.iconNormal = new Bitmap(new BitmapData(10, 5, false, 0xffff00));
 			
-			var progressBar:ProgressBar = new ProgressBar(this, 30);
+			var progressBar:ProgressBar = new ProgressBar(flowContainer, 30);
 			//progressBar.value = 100;
-			progressBar.move(0, 300);
 			
-			var slider:Slider = new Slider(this, Slider.HORIZONTALLY);
-			slider.move(0, 330);
+			var slider:Slider = new Slider(flowContainer, Slider.HORIZONTALLY);
 			
-			var textBox:TextBox = new TextBox(this);
+			var textBox:TextBox = new TextBox(flowContainer);
 			//textBox.scrollBar.width = 30;
 			textBox.size(200, 100);
-			textBox.move(0, 360);
 			
-			var toggleButton:ToggleButton = new ToggleButton(this, "Toggle");
+			var toggleButton:ToggleButton = new ToggleButton(flowContainer, "Toggle");
 			toggleButton.icon = new Bitmap(new BitmapData(10, 10, false, 0xffff00));
-			toggleButton.move(0, 460);
+			
+			flowContainer.update();
 		}
 		
 	}

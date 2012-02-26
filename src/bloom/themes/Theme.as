@@ -19,6 +19,7 @@ package bloom.themes
 		protected var _slider:SliderStyle;
 		protected var _textBox:TextBoxStyle;
 		protected var _toggleButton:ToggleButtonStyle;
+		protected var _container:ContainerStyle;
 		
 		public function Theme() {
 			
@@ -70,6 +71,10 @@ package bloom.themes
 		
 		public function get toggleButton():ToggleButtonStyle {
 			return _toggleButton;
+		}
+		
+		public function get container():ContainerStyle {
+			return _container;
 		}
 		
 		///////////////////////////////////

@@ -20,6 +20,7 @@ package bloom.themes
 			_slider = new BlueSlider();
 			_textBox = new BlueTextBox();
 			_toggleButton = new BlueToggleButton();
+			_container = new BlueContainer();
 		}
 		
 		///////////////////////////////////
