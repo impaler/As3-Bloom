@@ -83,7 +83,7 @@ package bloom.components
             e.updateAfterEvent();
 		}
 		
-		override protected function onMouseWheel(e:MouseEvent):void {
+		override public function onMouseWheel(e:MouseEvent):void {
 			if (_type == HORIZONTALLY) {
 				value += e.delta > 0 ? step : - step;
 			} else {

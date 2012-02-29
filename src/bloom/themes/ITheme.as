@@ -31,6 +31,8 @@ package bloom.themes
 		
 		function get container():ContainerStyle;
 		
+		function get scrollContainer():ScrollContainerStyle;
+		
 	}
 	
 }

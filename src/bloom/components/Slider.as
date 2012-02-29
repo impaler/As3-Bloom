@@ -116,9 +116,10 @@ package bloom.components
 			
 			_button.style = style.button;
 			
-			_bg.graphics.clear();
 			style.background.setSize(_width, _height);
 			background = style.background.bitmapData.clone();
+			
+			_bg.graphics.clear();
 			_bg.graphics.beginBitmapFill(background);
 			_bg.graphics.drawRect(0, 0, _width, _height);
 			_bg.graphics.endFill();
@@ -186,7 +187,7 @@ package bloom.components
             e.updateAfterEvent();
 		}
 		
-        protected function onMouseWheel(e:MouseEvent):void {
+        public function onMouseWheel(e:MouseEvent):void {
             value += (e.delta > 0 ? step : - step);
             e.updateAfterEvent();
 		}

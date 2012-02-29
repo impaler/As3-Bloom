@@ -2,6 +2,7 @@ package bloom.components
 {
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
+	import flash.display.Sprite;
 	
 	import bloom.core.IObjectBase;
 	
@@ -13,12 +14,14 @@ package bloom.components
 		public static const VERTICALLY:int = 0;
 		public static const HORIZONTALLY:int = 1;
 		
+		protected var _content:Sprite;
 		protected var _direction:int;
 		
 		public function FlowContainer(p:DisplayObjectContainer = null, direction:int = 0) {
 			super(p);
 			_direction = direction;
-			update();
+			_content = new Sprite();
+			addChild(_content);
 		}
 		
 		public function update():void {
@@ -26,9 +29,9 @@ package bloom.components
 			
 			var object:DisplayObject;
 			var component:IObjectBase;
-			var i:int, j:int = numChildren;
+			var i:int, j:int = _content.numChildren;
 			for (i = 0; i < j; i++) {
-				object = getChildAt(i);
+				object = _content.getChildAt(i);
 				if (object is IObjectBase) {
 					component = object as IObjectBase;
 					if (_direction == HORIZONTALLY) {
@@ -47,6 +50,10 @@ package bloom.components
 		///////////////////////////////////
 		// getter/setters
 		///////////////////////////////////
+		
+		public function get content():Sprite {
+			return _content;
+		}
 		
 		public function set direction(value:int):void {
 			if (_direction != value) {

@@ -13,7 +13,7 @@ package bloom.components
 	 */
 	public class Container extends Component {
 		
-		private var background:BitmapData;
+		protected var background:BitmapData;
 		
 		public function Container(p:DisplayObjectContainer = null) {
 			super(p);
