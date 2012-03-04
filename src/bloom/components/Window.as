@@ -158,6 +158,33 @@ package bloom.components
 			}
 		}
 		
+		override public function destroy():void {
+			super.destroy();
+			if (background) background.dispose();
+			background = null;
+			if (scaler) scaler.dispose();
+			scaler = null;
+			graphics.clear();
+			_scaler.graphics.clear();
+			removeChild(_scaler);
+			removeChild(_header);
+			_header.destroy();
+			removeChild(_footer);
+			_footer.destroy();
+			if (_content) {
+				removeChild(_content);
+				_content.destroy();
+			}
+			onHeaderClicked.removeAll();
+			onHeaderClicked = null;
+			onScalerClicked.removeAll();
+			onScalerClicked = null;
+		}
+		
+		override protected function onThemeChanged():void {
+			style = ThemeBase.theme.window;
+		}
+		
 		override protected function draw(e:Event):void {
 			if (!_changed) return;
 			_changed = false;
