@@ -80,7 +80,7 @@ package
 			var slider:Slider = new Slider(flowContainer.content, Slider.HORIZONTALLY);
 			
 			var textBox:TextBox = new TextBox(flowContainer.content);
-			//textBox.scrollBar.width = 30;
+			textBox.scrollBar.width = 30;
 			textBox.size(200, 100);
 			
 			var toggleButton:ToggleButton = new ToggleButton(flowContainer.content, "Toggle");
@@ -92,6 +92,17 @@ package
 			scrollContainer.move(230, 10);
 			scrollContainer.setScrollBar(true, true);
 			scrollContainer.setContentSize(200, 200);
+			scrollContainer.getScrollBar(FlowContainer.HORIZONTALLY).height = 30;
+			scrollContainer.getScrollBar(FlowContainer.VERTICALLY).width = 30;
+			
+			flowContainer = new FlowContainer();
+			flowContainer.margin.reset(0, 8, 0, 8);
+			
+			var window:Window = new Window(this, flowContainer);
+			window.header.content.addChild(new Label(null, "Window"));
+			window.header.update();
+			window.liveResize = true;
+			window.move(230, 120);
 		}
 		
 	}

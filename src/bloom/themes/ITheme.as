@@ -33,6 +33,8 @@ package bloom.themes
 		
 		function get scrollContainer():ScrollContainerStyle;
 		
+		function get window():WindowStyle;
+		
 	}
 	
 }

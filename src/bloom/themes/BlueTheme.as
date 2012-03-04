@@ -22,6 +22,7 @@ package bloom.themes
 			_toggleButton = new BlueToggleButton();
 			_container = new BlueContainer();
 			_scrollContainer = new BlueScrollContainer();
+			_window = new BlueWindow();
 		}
 		
 		///////////////////////////////////
