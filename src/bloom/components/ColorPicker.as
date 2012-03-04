@@ -1,6 +1,6 @@
 package bloom.components {
 
-import bloom.ColorUtils;
+import bloom.utils.ColorUtils;
 import bloom.core.ThemeBase;
 
 import flash.display.DisplayObjectContainer;
@@ -10,6 +10,7 @@ import flash.display.Sprite;
 import flash.events.Event;
 import flash.events.MouseEvent;
 import flash.geom.Matrix;
+import flash.geom.Point;
 import flash.geom.Rectangle;
 
 import org.osflash.signals.Signal;
@@ -27,10 +28,12 @@ public class ColorPicker extends Button {
 	protected var colorContainer:Sprite;
 	protected var saturationContainer:Sprite;
 	protected var lightnessContainer:Sprite;
-	protected var previewSwatch:Sprite;
+	protected var previewIcon:Sprite;
 	protected var pickerHandle:Sprite;
 	protected var lightnessHandle:Sprite;
-
+	protected var previousSwatch:Sprite;
+	protected var previewSwatch:Sprite;
+	
 	protected var _valueChanged:Signal;
 	protected var _valueChangeLive:Signal;
 
@@ -48,7 +51,7 @@ public class ColorPicker extends Button {
 	private var _saturation:Number;
 	private var _saturatedHue:uint;
 	private var _color:uint = 0xff0000;
-	private var _previousColor:uint;
+	private var _previousColor:uint = _color;
 	private var _r:uint = 0xff;
 	private var _g:uint = 0;
 	private var _b:uint = 0;
@@ -58,6 +61,7 @@ public class ColorPicker extends Button {
 	private var _pickerHandleS:Number;
 	private var _buttonHeight:Number;
 	private var _lightnessHandleH:Number;
+	private var _swatchH:Number;
 
 	public function ColorPicker (p:DisplayObjectContainer = null,title:String = "") {
 		super (p,title);
@@ -70,7 +74,13 @@ public class ColorPicker extends Button {
 		cancelButton = new Button (pickerUIContainer,"Cancel");
 
 		previewSwatch = new Sprite ();
-		icon = previewSwatch;
+		pickerUIContainer.addChild (previewSwatch);
+		
+		previousSwatch = new Sprite ();
+		pickerUIContainer.addChild (previousSwatch);
+		
+		previewIcon = new Sprite ();
+		icon = previewIcon;
 
 		colorContainer = new Sprite ();
 		pickerUIContainer.addChild (colorContainer);
@@ -95,7 +105,7 @@ public class ColorPicker extends Button {
 		onsaturationContainerDown = new NativeSignal (saturationContainer,MouseEvent.MOUSE_DOWN);
 		onlightnessContainerDown = new NativeSignal (lightnessContainer,MouseEvent.MOUSE_DOWN);
 
-		onpickerHandleDown.add (onMainHandlePress);
+		onpickerHandleDown.add (onpickerHandlePress);
 		ThemeBase.onStageMouseUp.add (onMainHandleRelease);
 
 		onlightnessContainerDown.add (onlightnessContainerPress);
@@ -107,6 +117,7 @@ public class ColorPicker extends Button {
 
 		mouseDown.add (openColorUI);
 
+		_swatchH = 26;
 		_lightnessHandleH = 6;
 		_lightnessW = 20;
 		_buttonIconS = _height - 10;
@@ -138,6 +149,12 @@ public class ColorPicker extends Button {
 		pickerUIContainer.y = ThemeBase.stage.stageHeight * .5 - pickerUIContainer.height * .5;
 		ThemeBase.stage.addChild (pickerUIContainer);
 		mouseDown.addOnce (closeColorUI);
+		ThemeBase.onStageResize.add(resizeStage);
+	}
+
+	private function resizeStage (e:Event = null):void {
+		pickerUIContainer.x = ThemeBase.stage.stageWidth * .5 - pickerUIContainer.width * .5;
+		pickerUIContainer.y = ThemeBase.stage.stageHeight * .5 - pickerUIContainer.height * .5;
 	}
 
 	private function closeColorUI (e:MouseEvent):void {
@@ -153,28 +170,29 @@ public class ColorPicker extends Button {
 		lightnessHandle.stopDrag ();
 	}
 
-	private function onMainHandlePress (e:MouseEvent):void {
+	private function onpickerHandlePress (e:MouseEvent):void {
+		updateFromPosition ();
 		okButton.enabled = cancelButton.enabled = false;
 		pickerHandle.startDrag (true,new Rectangle (colorContainer.x,colorContainer.y,colorContainer.width,
 		                                            colorContainer.height));
 		onMove.add (updateFromPosition);
-		updateFromPosition ();
 	}
 
 	private function onsaturationContainerRelease (e:MouseEvent):void {
-		okButton.enabled = cancelButton.enabled = false;
-		pickerHandle.startDrag (true,new Rectangle (colorContainer.x,colorContainer.y,colorContainer.width,
-		                                            colorContainer.height));
-		onMove.add (updateFromPosition);
-		updateFromPosition ();
+		var targetP:Point = saturationContainer.localToGlobal(new Point(e.localX, e.localY));
+		var targety:Point = pickerUIContainer.globalToLocal(new Point(targetP.x, targetP.y));
+		pickerHandle.x = targety.x;
+		pickerHandle.y = targety.y;
+		
+		onpickerHandleDown.dispatch(e);
 	}
 
 	private function onlightnessContainerPress (e:MouseEvent):void {
-		lightnessHandle.y = e.localY;
-		lightnessHandle.startDrag (true,new Rectangle (lightnessContainer.x + (lightnessContainer.width * .5),
-		                                               lightnessContainer.y,0,lightnessContainer.height));
-		onMove.add (updateFromPosition);
-		updateFromPosition ();
+		var targetP:Point = lightnessContainer.localToGlobal(new Point(e.localX, e.localY));
+		var targety:Point = pickerUIContainer.globalToLocal(new Point(targetP.x, targetP.y));
+		lightnessHandle.y = targety.y;
+		
+		onlightnessHandleDown.dispatch(e);
 	}
 
 	private function onlightnessHandlePress (e:MouseEvent):void {
@@ -185,7 +203,7 @@ public class ColorPicker extends Button {
 	}
 
 	override protected function draw (e:Event):void {
-		var g:Graphics = previewSwatch.graphics;
+		var g:Graphics = previewIcon.graphics;
 		g.beginFill (0x00000f,.3);
 		g.drawRect (0,0,_buttonIconS,_buttonIconS);
 		g.endFill ();
@@ -193,22 +211,23 @@ public class ColorPicker extends Button {
 		super.draw (e);
 
 		var g:Graphics = lightnessHandle.graphics;
+		g.clear ();
 		g.beginFill (0xffffff,.1);
-		g.lineStyle (2,0x000000,1);
+		g.lineStyle (2,0x000000,1,true);
 		g.drawRect (- _lightnessW * .5,- (_lightnessHandleH * .5),_lightnessW,_lightnessHandleH);
 		g.endFill ();
 
 		var g:Graphics = pickerHandle.graphics;
 		g.clear ();
 		g.beginFill (0xffffff,.1);
-		g.lineStyle (2,0x000000,1);
+		g.lineStyle (2,0x000000,1,true);
 		g.drawCircle (0,0,_pickerHandleS * .5);
 		g.endFill ();
 
 		drawColorGamut ();
-		drawSaturationOverlay ();
 		drawLightnessContainer ();
-
+		drawSwatch();
+		
 		okButton.y = colorContainer.y + colorContainer.height;
 		okButton.x = colorContainer.x;
 		cancelButton.y = colorContainer.y + colorContainer.height;
@@ -216,33 +235,13 @@ public class ColorPicker extends Button {
 
 		lightnessHandle.x = lightnessContainer.x + (lightnessContainer.width * .5);
 		updateFromColor ();
-
-	}
-
-	protected function drawSaturationOverlay ():void {
-		var sw:Number = colorContainer.width;
-		var sh:Number = colorContainer.height;
-		saturationContainer.x = saturationContainer.y = _padding;
-
-		var g:Graphics = saturationContainer.graphics;
-		g.clear ();
-		if (sw > 0 && sh > 0) {
-			var colors:Array = [0x7F7F7F,0x7F7F7F];
-			var alphas:Array = [0,1];
-			var ratios:Array = [0,255];
-			var matr:Matrix = new Matrix ();
-			matr.createGradientBox (sw,sh,Math.PI / 2);
-			g.beginGradientFill (GradientType.LINEAR,colors,alphas,ratios,matr);
-			g.lineStyle (0,0,0);
-			g.drawRect (0,0,sw,sh);
-			g.endFill ();
-		}
 	}
 
 	protected function drawColorGamut ():void {
-		colorContainer.x = colorContainer.y = _padding;
+		colorContainer.x = _padding;
+		colorContainer.y = _padding+_swatchH;
 		var sw:Number = pickerUIContainer.width - _padding * 2 - _lightnessW;
-		var sh:Number = pickerUIContainer.height - _padding * 2 - _buttonHeight;
+		var sh:Number = ((pickerUIContainer.height-_swatchH)-(_padding * 2)-_buttonHeight);
 
 		var g:Graphics = colorContainer.graphics;
 		g.clear ();
@@ -258,12 +257,28 @@ public class ColorPicker extends Button {
 			g.drawRect (0,0,sw,sh);
 			g.endFill ();
 		}
+
+		saturationContainer.x = saturationContainer.y = colorContainer.x;
+		saturationContainer.y = _padding+_swatchH;
+		var g:Graphics = saturationContainer.graphics;
+		g.clear ();
+		if (sw > 0 && sh > 0) {
+			var colors:Array = [0x7F7F7F,0x7F7F7F];
+			var alphas:Array = [0,1];
+			var ratios:Array = [0,255];
+			var matr:Matrix = new Matrix ();
+			matr.createGradientBox (sw,sh,Math.PI / 2);
+			g.beginGradientFill (GradientType.LINEAR,colors,alphas,ratios,matr);
+			g.drawRect (0,0,sw,sh);
+			g.endFill ();
+		}
+		
 	}
 
 	protected function drawLightnessContainer ():void {
-		lightnessContainer.y = _padding;
+		lightnessContainer.y = _padding+_swatchH;
 		lightnessContainer.x = colorContainer.x + colorContainer.width;
-		var sh:Number = pickerUIContainer.height - _padding * 2 - _buttonHeight;
+		var sh:Number = pickerUIContainer.height - _padding * 2 - _buttonHeight-_swatchH;
 		var sw:Number = _lightnessW;
 
 		var g:Graphics = lightnessContainer.graphics;
@@ -280,11 +295,28 @@ public class ColorPicker extends Button {
 	}
 
 	protected function drawSwatch ():void {
-		var g:Graphics = previewSwatch.graphics;
+		var g:Graphics = previewIcon.graphics;
 		g.clear ();
 		g.beginFill (_color,1);
 		g.drawRect (0,0,_buttonIconS,_buttonIconS);
 		g.endFill ();
+		
+		var previewW:Number = ((_padding*2)+(colorContainer.width*.5)-(_lightnessW*.5));
+		var g:Graphics = previewSwatch.graphics;
+		g.clear ();
+		g.beginFill (_color,1);
+		g.drawRect (0,0,previewW,_swatchH);
+		g.endFill ();
+		previewSwatch.x = _padding;
+		previewSwatch.y = _padding;
+		
+		var g:Graphics = previousSwatch.graphics;
+		g.clear ();
+		g.beginFill (_previousColor,1);
+		g.drawRect (0,0,previewW,_height);
+		g.endFill ();	
+		previousSwatch.x = previewSwatch.x+previewSwatch.width;
+		previousSwatch.y = previewSwatch.y;
 	}
 
 	protected function calculateSaturatedHue ():void {
@@ -294,6 +326,7 @@ public class ColorPicker extends Button {
 	protected function updateFromPosition (e:MouseEvent = null):void {
 		_hue = translateHue ((pickerHandle.x - Math.floor (colorContainer.x)) / colorContainer.width);
 		_saturation = 1 - ((pickerHandle.y - Math.floor (colorContainer.y)) / colorContainer.height);
+		
 		calculateSaturatedHue ();
 
 		if (lightnessHandle.y - Math.floor (lightnessContainer.y) < lightnessContainer.height / 2) {
@@ -361,8 +394,8 @@ public class ColorPicker extends Button {
 
 		_hue = translateHue (h / 360);
 		_saturation = s;
+		
 		calculateSaturatedHue ();
-
 		drawLightnessContainer ();
 		drawSwatch ();
 	}
