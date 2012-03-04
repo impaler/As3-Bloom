@@ -1,5 +1,6 @@
 package bloom.components {
 
+import bloom.styles.ContainerStyle;
 import bloom.utils.ColorUtils;
 import bloom.core.ThemeBase;
 
@@ -37,7 +38,8 @@ public class ColorPicker extends Button {
 	protected var _valueChanged:Signal;
 	protected var _valueChangeLive:Signal;
 
-	protected var pickerUIContainer:Container;
+	protected var pickerUIWindow:Window;
+	protected var pickerUIContainer:FlowContainer;
 	protected var okButton:Button;
 	protected var cancelButton:Button;
 
@@ -68,36 +70,45 @@ public class ColorPicker extends Button {
 
 		_valueChanged = new Signal (ColorPicker);
 		_valueChangeLive = new Signal (uint);
-
-		pickerUIContainer = new Container (null);
-		okButton = new Button (pickerUIContainer,"Ok");
-		cancelButton = new Button (pickerUIContainer,"Cancel");
+		
+		pickerUIContainer = new FlowContainer();
+		pickerUIWindow = new Window (null,pickerUIContainer);
+		pickerUIWindow.liveResize = true;
+		pickerUIWindow.minWidth = 260;
+		pickerUIWindow.minHeight = 260;
+		pickerUIContainer.onResized.add( function():void{
+			draw(null);
+			updateFromColor(true);
+		});
+		
+		okButton = new Button (pickerUIWindow.content,"Ok");
+		cancelButton = new Button (pickerUIWindow.content,"Cancel");
 
 		previewSwatch = new Sprite ();
-		pickerUIContainer.addChild (previewSwatch);
+		pickerUIWindow.content.addChild (previewSwatch);
 		
 		previousSwatch = new Sprite ();
-		pickerUIContainer.addChild (previousSwatch);
+		pickerUIWindow.content.addChild (previousSwatch);
 		
 		previewIcon = new Sprite ();
 		icon = previewIcon;
 
 		colorContainer = new Sprite ();
-		pickerUIContainer.addChild (colorContainer);
+		pickerUIWindow.content.addChild (colorContainer);
 
 		saturationContainer = new Sprite ();
-		pickerUIContainer.addChild (saturationContainer);
+		pickerUIWindow.content.addChild (saturationContainer);
 
 		lightnessContainer = new Sprite ();
-		pickerUIContainer.addChild (lightnessContainer);
+		pickerUIWindow.content.addChild (lightnessContainer);
 
 		lightnessHandle = new Sprite ();
 		lightnessHandle.buttonMode = true;
-		pickerUIContainer.addChild (lightnessHandle);
+		pickerUIWindow.content.addChild (lightnessHandle);
 
 		pickerHandle = new Sprite ();
 		pickerHandle.buttonMode = true;
-		pickerUIContainer.addChild (pickerHandle);
+		pickerUIWindow.content.addChild (pickerHandle);
 
 		onMove = ThemeBase.onStageMouseMove;
 		onlightnessHandleDown = new NativeSignal (lightnessHandle,MouseEvent.MOUSE_DOWN);
@@ -113,7 +124,7 @@ public class ColorPicker extends Button {
 		onsaturationContainerDown.add (onsaturationContainerRelease);
 
 		okButton.mouseDown.add (okDown);
-		cancelButton.mouseDown.add (cancelColorUI);
+		cancelButton.mouseDown.add (cancelDown);
 
 		mouseDown.add (openColorUI);
 
@@ -125,7 +136,7 @@ public class ColorPicker extends Button {
 		_padding = 10;
 		_buttonHeight = okButton.height;
 
-		pickerUIContainer.size (300,200);
+		pickerUIWindow.size (300,200);
 
 		draw (null);
 
@@ -137,7 +148,7 @@ public class ColorPicker extends Button {
 		closeColorUI (null);
 	}
 
-	private function cancelColorUI (e:MouseEvent):void {
+	private function cancelDown (e:MouseEvent):void {
 		_color = _previousColor;
 		draw (null);
 		closeColorUI (null);
@@ -145,21 +156,22 @@ public class ColorPicker extends Button {
 
 	private function openColorUI (e:MouseEvent):void {
 		_previousColor = _color;
-		pickerUIContainer.x = ThemeBase.stage.stageWidth * .5 - pickerUIContainer.width * .5;
-		pickerUIContainer.y = ThemeBase.stage.stageHeight * .5 - pickerUIContainer.height * .5;
-		ThemeBase.stage.addChild (pickerUIContainer);
+		pickerUIWindow.x = ThemeBase.stage.stageWidth * .5 - pickerUIWindow.width * .5;
+		pickerUIWindow.y = ThemeBase.stage.stageHeight * .5 - pickerUIWindow.height * .5;
+		ThemeBase.stage.addChild (pickerUIWindow);
 		mouseDown.addOnce (closeColorUI);
 		ThemeBase.onStageResize.add(resizeStage);
 	}
 
 	private function resizeStage (e:Event = null):void {
-		pickerUIContainer.x = ThemeBase.stage.stageWidth * .5 - pickerUIContainer.width * .5;
-		pickerUIContainer.y = ThemeBase.stage.stageHeight * .5 - pickerUIContainer.height * .5;
+		pickerUIWindow.x = ThemeBase.stage.stageWidth * .5 - pickerUIWindow.width * .5;
+		pickerUIWindow.y = ThemeBase.stage.stageHeight * .5 - pickerUIWindow.height * .5;
 	}
 
 	private function closeColorUI (e:MouseEvent):void {
-		ThemeBase.stage.removeChild (pickerUIContainer);
+		ThemeBase.stage.removeChild (pickerUIWindow);
 		mouseDown.remove (closeColorUI);
+		ThemeBase.onStageResize.remove(resizeStage);
 	}
 
 	private function onMainHandleRelease (e:MouseEvent):void {
@@ -196,10 +208,10 @@ public class ColorPicker extends Button {
 	}
 
 	private function onlightnessHandlePress (e:MouseEvent):void {
+		updateFromPosition ();
 		lightnessHandle.startDrag (true,new Rectangle (lightnessContainer.x + (lightnessContainer.width * .5),
 		                                               lightnessContainer.y,0,lightnessContainer.height));
 		onMove.add (updateFromPosition);
-		updateFromPosition ();
 	}
 
 	override protected function draw (e:Event):void {
@@ -443,7 +455,14 @@ public class ColorPicker extends Button {
 		super.destroy ();
 
 		ThemeBase.onStageMouseUp.remove (onMainHandleRelease);
+		ThemeBase.onStageResize.remove(resizeStage);
 		onMove.remove (updateFromPosition);
+
+		_valueChanged.removeAll ();
+		_valueChanged = null;
+		_valueChangeLive.removeAll ();
+		_valueChangeLive = null;
+		
 		onlightnessContainerDown.removeAll ();
 		onlightnessContainerDown = null;
 		onlightnessHandleDown.removeAll ();
@@ -452,6 +471,12 @@ public class ColorPicker extends Button {
 		onpickerHandleDown = null;
 		onsaturationContainerDown.removeAll ();
 		onsaturationContainerDown = null;
+		
+		okButton.destroy();
+		cancelButton.destroy();
+		pickerUIWindow.destroy();
+		pickerUIContainer.destroy();
+		
 	}
 
 	///////////////////////////////////
