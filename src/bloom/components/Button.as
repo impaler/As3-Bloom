@@ -12,8 +12,8 @@ package bloom.components
 	 */
 	public class Button extends ButtonBase {
 		
-		private var _title:Label;
-		private var _icon:DisplayObject;
+		protected var _title:Label;
+		protected var _icon:DisplayObject;
 		
 		public function Button(p:DisplayObjectContainer = null, title:String = "") {
 			super(p);
@@ -24,7 +24,7 @@ package bloom.components
 			style = ThemeBase.theme.button;
 		}
 		
-		private function onTitleChanged(e:Event):void {
+		protected function onTitleChanged(e:Event):void {
 			if (_icon) {
 				_icon.x = (_width - _icon.width - _title.margin.left - _title.width) * 0.5;
 				_icon.y = (_height - _icon.height) * 0.5;
