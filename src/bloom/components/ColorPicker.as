@@ -1,6 +1,5 @@
 package bloom.components {
 
-import bloom.styles.ContainerStyle;
 import bloom.utils.ColorUtils;
 import bloom.core.ThemeBase;
 
@@ -71,6 +70,15 @@ public class ColorPicker extends Button {
 		_valueChanged = new Signal (ColorPicker);
 		_valueChangeLive = new Signal (uint);
 		
+		_swatchH = 26;
+		_lightnessHandleH = 6;
+		_lightnessW = 50;
+		_buttonIconS = _height - 10;
+		_pickerHandleS = 20;
+		_padding = 10;
+		_buttonHeight = okButton.height;
+		
+		//maybe extend Window Class instead here
 		pickerUIContainer = new FlowContainer();
 		pickerUIWindow = new Window (null,pickerUIContainer);
 		pickerUIWindow.liveResize = true;
@@ -125,19 +133,10 @@ public class ColorPicker extends Button {
 
 		okButton.mouseDown.add (okDown);
 		cancelButton.mouseDown.add (cancelDown);
-
 		mouseDown.add (openColorUI);
 
-		_swatchH = 26;
-		_lightnessHandleH = 6;
-		_lightnessW = 20;
-		_buttonIconS = _height - 10;
-		_pickerHandleS = 20;
-		_padding = 10;
-		_buttonHeight = okButton.height;
-
+		
 		pickerUIWindow.size (300,200);
-
 		draw (null);
 
 		color = _color;
@@ -149,17 +148,16 @@ public class ColorPicker extends Button {
 	}
 
 	private function cancelDown (e:MouseEvent):void {
-		_color = _previousColor;
-		draw (null);
+		color = _previousColor;
 		closeColorUI (null);
 	}
 
 	private function openColorUI (e:MouseEvent):void {
+		enabled = false;
 		_previousColor = _color;
 		pickerUIWindow.x = ThemeBase.stage.stageWidth * .5 - pickerUIWindow.width * .5;
 		pickerUIWindow.y = ThemeBase.stage.stageHeight * .5 - pickerUIWindow.height * .5;
 		ThemeBase.stage.addChild (pickerUIWindow);
-		mouseDown.addOnce (closeColorUI);
 		ThemeBase.onStageResize.add(resizeStage);
 	}
 
@@ -169,9 +167,10 @@ public class ColorPicker extends Button {
 	}
 
 	private function closeColorUI (e:MouseEvent):void {
+		enabled = true;
 		ThemeBase.stage.removeChild (pickerUIWindow);
-		mouseDown.remove (closeColorUI);
 		ThemeBase.onStageResize.remove(resizeStage);
+		mouseDown.remove (closeColorUI);
 	}
 
 	private function onMainHandleRelease (e:MouseEvent):void {
@@ -247,6 +246,8 @@ public class ColorPicker extends Button {
 
 		lightnessHandle.x = lightnessContainer.x + (lightnessContainer.width * .5);
 		updateFromColor ();
+		
+
 	}
 
 	protected function drawColorGamut ():void {
@@ -313,7 +314,8 @@ public class ColorPicker extends Button {
 		g.drawRect (0,0,_buttonIconS,_buttonIconS);
 		g.endFill ();
 		
-		var previewW:Number = ((_padding*2)+(colorContainer.width*.5)-(_lightnessW*.5));
+		var previewW:Number = (((_padding*2)+((pickerUIContainer.width - _lightnessW -_padding)*.5)));
+		
 		var g:Graphics = previewSwatch.graphics;
 		g.clear ();
 		g.beginFill (_color,1);

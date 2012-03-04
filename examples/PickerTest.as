@@ -4,12 +4,10 @@ package
 import bloom.components.*;
 import bloom.core.ThemeBase;
 import bloom.themes.BlueTheme;
+import bloom.utils.ColorUtils;
 
-import flash.display.Bitmap;
-import flash.display.BitmapData;
 import flash.display.Sprite;
 import flash.events.Event;
-import flash.events.MouseEvent;
 
 public class PickerTest extends Sprite {
 		
@@ -30,6 +28,7 @@ public class PickerTest extends Sprite {
 			
 //			var Picker:ColorPicker = new ColorPicker(this);
 			var Picker:ColorPicker = new ColorPicker(this, "Test Color");
+			Picker.color = ColorUtils.randomColor();
 			Picker.move(20,20);
 			
 		}
