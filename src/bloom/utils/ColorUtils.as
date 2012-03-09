@@ -12,10 +12,10 @@ package bloom.utils {
  * Class containing a variety of color utility methods.
  */
 public class ColorUtils {
-	
+
 	/**
 	 *  Return a random Color
-	 * 
+	 *
 	 * @return
 	 */
 	public static function randomColor ():uint {
@@ -116,39 +116,39 @@ public class ColorUtils {
 	public static function fade (color:uint,modifier:Number):Number {
 		return blend (color,0xFFFFFF,modifier);
 	}
-	
+
 	public static const WHITE:uint = 0xffffff;
-	
+
 	public static const LIGHT_GRAY:uint = 0xc0c0c0;
-	
+
 	public static const GRAY:uint = 0x808080;
-	
+
 	public static const DARK_GRAY:uint = 0x404040;
-	
+
 	public static const BLACK:uint = 0x000000;
-	
+
 	public static const RED:uint = 0xff0000;
-	
+
 	public static const PINK:uint = 0xffafaf;
-	
+
 	public static const ORANGE:uint = 0xffc800;
-	
+
 	public static const HALO_ORANGE:uint = 0xFFC200;
-	
+
 	public static const YELLOW:uint = 0xffff00;
-	
+
 	public static const GREEN:uint = 0x00ff00;
-	
+
 	public static const HALO_GREEN:uint = 0x80FF4D;
-	
+
 	public static const MAGENTA:uint = 0xff00ff;
-	
+
 	public static const CYAN:uint = 0x00ffff;
-	
+
 	public static const BLUE:uint = 0x0000ff;
-	
+
 	public static const HALO_BLUE:uint = 0x2BF5F5;
-	
+
 }
 
 }

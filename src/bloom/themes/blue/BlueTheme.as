@@ -1,19 +1,16 @@
-package bloom.themes.blue 
-{
+package bloom.themes.blue {
 
 import bloom.core.Theme;
-import bloom.themes.blue.*;
-	
-	/**
-	 * BlueTheme
-	 */
-	public class BlueTheme extends Theme {
-		
-		public function BlueTheme() {
-			disabledAlpha = 0.5;
-			buttonBase = BlueButtonBase;
-			
-			
+
+/**
+ * BlueTheme
+ */
+public class BlueTheme extends Theme {
+
+	public function BlueTheme () {
+		disabledAlpha = 0.5;
+		buttonBase = BlueButtonBase;
+
 //			_label = new BlueLabel();
 //			_button = new BlueButton();
 //			_buttonBase = new BlueButtonBase();
@@ -27,16 +24,16 @@ import bloom.themes.blue.*;
 //			_container = new BlueContainer();
 //			_scrollContainer = new BlueScrollContainer();
 //			_window = new BlueWindow();
-		}
-		
-		///////////////////////////////////
-		// toString
-		///////////////////////////////////
-		
-		public function toString():String {
-			return "[bloom.themes.BlueTheme]";
-		}
-		
 	}
+
+	///////////////////////////////////
+	// toString
+	///////////////////////////////////
+
+	public function toString ():String {
+		return "[bloom.themes.BlueTheme]";
+	}
+
+}
 
 }
