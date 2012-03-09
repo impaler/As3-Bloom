@@ -2,8 +2,8 @@ package
 {
 
 import bloom.components.*;
-import bloom.core.ThemeBase;
-import bloom.themes.BlueTheme;
+import bloom.core.OmniCore;
+import bloom.themes.blue.BlueTheme;
 import bloom.utils.ColorUtils;
 
 import flash.display.Sprite;
@@ -22,8 +22,8 @@ public class PickerTest extends Sprite {
 			stage.scaleMode = "noScale";
 			stage.align = "TL";
 			
-			ThemeBase.initialize(stage);
-			ThemeBase.theme = new BlueTheme();
+			OmniCore.initialize(stage);
+			OmniCore.theme = new BlueTheme();
 		
 			
 //			var Picker:ColorPicker = new ColorPicker(this);

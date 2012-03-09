@@ -1,19 +1,20 @@
 package bloom.components 
 {
-	import flash.display.DisplayObject;
-	import flash.display.DisplayObjectContainer;
-	import flash.display.Sprite;
-	import flash.events.Event;
-	import flash.events.MouseEvent;
-	import flash.geom.Rectangle;
-	
-	import org.osflash.signals.natives.NativeSignal;
-	
-	import bloom.core.ThemeBase;
-	import bloom.core.IObjectBase;
-	import bloom.styles.ScrollContainerStyle;
-	
-	/**
+
+import bloom.core.IObjectBase;
+import bloom.core.OmniCore;
+import bloom.components.ScrollContainerStyle;
+
+import flash.display.DisplayObject;
+import flash.display.DisplayObjectContainer;
+import flash.display.Sprite;
+import flash.events.Event;
+import flash.events.MouseEvent;
+import flash.geom.Rectangle;
+
+import org.osflash.signals.natives.NativeSignal;
+
+/**
 	 * ScrollContainer
 	 */
 	public class ScrollContainer extends FlowContainer {
@@ -60,7 +61,7 @@ package bloom.components
 			
 			h_eventAdded = v_eventAdded = false;
 			
-			style = ThemeBase.theme.scrollContainer;
+			style = OmniCore.theme.scrollContainer;
 			
 			h_scrollBar_enabled = v_scrollBar_enabled = true;
 			
@@ -70,8 +71,8 @@ package bloom.components
 			invalidate();
 		}
 		
-		override public function destroy():void {
-			super.destroy();
+		override public function dispose (gc:Boolean = false):void {
+			super.dispose (gc);
 			if (background) background.dispose();
 			background = null;
 			removeChild(_content);
@@ -80,10 +81,10 @@ package bloom.components
 			removeChild(_bg);
 			_bg = null;
 			if (h_scrollBar_enabled) removeChild(h_scrollBar);
-			h_scrollBar.destroy();
+			h_scrollBar.dispose (false);
 			h_scrollBar = null;
 			if (v_scrollBar_enabled) removeChild(v_scrollBar);
-			v_scrollBar.destroy();
+			v_scrollBar.dispose (false);
 			v_scrollBar = null;
 			v_mouseWheel.removeAll();
 			v_mouseWheel = null;
@@ -92,7 +93,7 @@ package bloom.components
 		}
 		
 		override protected function onThemeChanged():void {
-			style = ThemeBase.theme.scrollContainer;
+			style = OmniCore.theme.scrollContainer;
 		}
 		
 		public function getScrollBar(direction:int):ScrollBar {
@@ -216,7 +217,7 @@ package bloom.components
 			setContentSize(width, height);
 		}
 		
-		override protected function draw(e:Event):void {
+		override protected function draw (e:Event = null):void {
 			if (!_changed) return;
 			_changed = false;
 			

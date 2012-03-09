@@ -1,7 +1,7 @@
 package bloom.components {
 
+import bloom.core.OmniCore;
 import bloom.utils.ColorUtils;
-import bloom.core.ThemeBase;
 
 import flash.display.DisplayObjectContainer;
 import flash.display.GradientType;
@@ -85,7 +85,7 @@ public class ColorPicker extends Button {
 		pickerUIWindow.minWidth = 260;
 		pickerUIWindow.minHeight = 260;
 		pickerUIContainer.onResized.add( function():void{
-			draw(null);
+			draw (null);
 			updateFromColor(true);
 		});
 		
@@ -118,14 +118,14 @@ public class ColorPicker extends Button {
 		pickerHandle.buttonMode = true;
 		pickerUIWindow.content.addChild (pickerHandle);
 
-		onMove = ThemeBase.onStageMouseMove;
+		onMove = OmniCore.onStageMouseMove;
 		onlightnessHandleDown = new NativeSignal (lightnessHandle,MouseEvent.MOUSE_DOWN);
 		onpickerHandleDown = new NativeSignal (pickerHandle,MouseEvent.MOUSE_DOWN);
 		onsaturationContainerDown = new NativeSignal (saturationContainer,MouseEvent.MOUSE_DOWN);
 		onlightnessContainerDown = new NativeSignal (lightnessContainer,MouseEvent.MOUSE_DOWN);
 
 		onpickerHandleDown.add (onpickerHandlePress);
-		ThemeBase.onStageMouseUp.add (onMainHandleRelease);
+		OmniCore.onStageMouseUp.add (onMainHandleRelease);
 
 		onlightnessContainerDown.add (onlightnessContainerPress);
 		onlightnessHandleDown.add (onlightnessHandlePress);
@@ -155,21 +155,21 @@ public class ColorPicker extends Button {
 	private function openColorUI (e:MouseEvent):void {
 		enabled = false;
 		_previousColor = _color;
-		pickerUIWindow.x = ThemeBase.stage.stageWidth * .5 - pickerUIWindow.width * .5;
-		pickerUIWindow.y = ThemeBase.stage.stageHeight * .5 - pickerUIWindow.height * .5;
-		ThemeBase.stage.addChild (pickerUIWindow);
-		ThemeBase.onStageResize.add(resizeStage);
+		pickerUIWindow.x = OmniCore.stage.stageWidth * .5 - pickerUIWindow.width * .5;
+		pickerUIWindow.y = OmniCore.stage.stageHeight * .5 - pickerUIWindow.height * .5;
+		OmniCore.stage.addChild (pickerUIWindow);
+		OmniCore.onStageResize.add(resizeStage);
 	}
 
 	private function resizeStage (e:Event = null):void {
-		pickerUIWindow.x = ThemeBase.stage.stageWidth * .5 - pickerUIWindow.width * .5;
-		pickerUIWindow.y = ThemeBase.stage.stageHeight * .5 - pickerUIWindow.height * .5;
+		pickerUIWindow.x = OmniCore.stage.stageWidth * .5 - pickerUIWindow.width * .5;
+		pickerUIWindow.y = OmniCore.stage.stageHeight * .5 - pickerUIWindow.height * .5;
 	}
 
 	private function closeColorUI (e:MouseEvent):void {
 		enabled = true;
-		ThemeBase.stage.removeChild (pickerUIWindow);
-		ThemeBase.onStageResize.remove(resizeStage);
+		OmniCore.stage.removeChild (pickerUIWindow);
+		OmniCore.onStageResize.remove(resizeStage);
 		mouseDown.remove (closeColorUI);
 	}
 
@@ -213,7 +213,7 @@ public class ColorPicker extends Button {
 		onMove.add (updateFromPosition);
 	}
 
-	override protected function draw (e:Event):void {
+	override protected function draw (e:Event = null):void {
 		var g:Graphics = previewIcon.graphics;
 		g.beginFill (0x00000f,.3);
 		g.drawRect (0,0,_buttonIconS,_buttonIconS);
@@ -453,11 +453,11 @@ public class ColorPicker extends Button {
 		return uint ((b) | (g << 8) | (r << 16));
 	}
 
-	override public function destroy ():void {
-		super.destroy ();
+	override public function dispose (gc:Boolean = false):void {
+		super.dispose (gc);
 
-		ThemeBase.onStageMouseUp.remove (onMainHandleRelease);
-		ThemeBase.onStageResize.remove(resizeStage);
+		OmniCore.onStageMouseUp.remove (onMainHandleRelease);
+		OmniCore.onStageResize.remove(resizeStage);
 		onMove.remove (updateFromPosition);
 
 		_valueChanged.removeAll ();
@@ -474,10 +474,10 @@ public class ColorPicker extends Button {
 		onsaturationContainerDown.removeAll ();
 		onsaturationContainerDown = null;
 		
-		okButton.destroy();
-		cancelButton.destroy();
-		pickerUIWindow.destroy();
-		pickerUIContainer.destroy();
+		okButton.dispose (false);
+		cancelButton.dispose (false);
+		pickerUIWindow.dispose (false);
+		pickerUIContainer.dispose (false);
 		
 	}
 

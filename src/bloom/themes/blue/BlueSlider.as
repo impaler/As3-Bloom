@@ -3,8 +3,8 @@ package bloom.themes.blue
 	import flash.geom.Rectangle;
 	
 	import bloom.core.ScaleBitmap;
-	import bloom.styles.ButtonBaseStyle;
-	import bloom.styles.SliderStyle;
+	import bloom.components.ButtonBaseStyle;
+	import bloom.components.SliderStyle;
 	
 	/**
 	 * BlueSlider

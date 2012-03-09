@@ -1,14 +1,17 @@
 package 
 {
-	import flash.display.Bitmap;
+
+import bloom.core.StateConstants;
+
+import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
 	import bloom.components.*;
-	import bloom.core.ThemeBase;
-	import bloom.themes.BlueTheme;
+	import bloom.core.OmniCore;
+	import bloom.themes.blue.BlueTheme;
 	
 	public class Main extends Sprite {
 		
@@ -23,21 +26,24 @@ package
 			stage.scaleMode = "noScale";
 			stage.align = "TL";
 			
-			ThemeBase.initialize(stage);
-			ThemeBase.theme = new BlueTheme();
+			OmniCore.init(stage, BlueTheme);
 			
-			var flowContainer:FlowContainer = new FlowContainer(this, FlowContainer.VERTICALLY);
-			flowContainer.size(220, 620);
+//			var flowContainer:FlowContainer = new FlowContainer(this, FlowContainer.VERTICALLY);
+//			flowContainer.size(220, 620);
 			
-			var label:Label = new Label(flowContainer.content, "Label");
+//			var label:Label = new Label(flowContainer.content, "Label");
 			
-			var buttonBase:ButtonBase = new ButtonBase(flowContainer.content);
-			buttonBase = new ButtonBase(flowContainer.content);
-			buttonBase.state = ButtonBase.OVER;
-			buttonBase = new ButtonBase(flowContainer.content);
-			buttonBase.state = ButtonBase.DOWN;
 			
-			var button:Button = new Button(flowContainer.content, "One does not simply");
+			var buttonBase:ButtonBase = new ButtonBase(this);
+			
+			
+			
+//			buttonBase = new ButtonBase(flowContainer.content);
+//			buttonBase.state = StateConstants.OVER;
+//			buttonBase = new ButtonBase(flowContainer.content);
+//			buttonBase.state = StateConstants.DOWN;
+			
+	/*		var button:Button = new Button(flowContainer.content, "One does not simply");
 			button.icon = new Bitmap(new BitmapData(10, 10, false, 0xffff00));
 			button.size(200, 30);
 			button.mouseDown.add(function(e:MouseEvent):void {
@@ -102,7 +108,7 @@ package
 			window.header.content.addChild(new Label(null, "Window"));
 			window.header.update();
 			window.liveResize = true;
-			window.move(230, 120);
+			window.move(230, 120);*/
 		}
 		
 	}

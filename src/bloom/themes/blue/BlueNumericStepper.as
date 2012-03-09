@@ -3,9 +3,9 @@ package bloom.themes.blue
 	import flash.geom.Rectangle;
 	
 	import bloom.core.ScaleBitmap;
-	import bloom.styles.ButtonBaseStyle;
-	import bloom.styles.TextStyle;
-	import bloom.styles.NumericStepperStyle;
+	import bloom.components.ButtonBaseStyle;
+	import bloom.components.TextStyle;
+	import bloom.components.NumericStepperStyle;
 	
 	/**
 	 * BlueNumericStepper

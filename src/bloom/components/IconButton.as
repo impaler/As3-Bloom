@@ -1,12 +1,11 @@
 package bloom.components 
 {
-	import flash.display.DisplayObject;
-	import flash.display.DisplayObjectContainer;
-	import flash.events.Event;
-	
-	import bloom.styles.ButtonBaseStyle;
-	
-	/**
+
+import flash.display.DisplayObject;
+import flash.display.DisplayObjectContainer;
+import flash.events.Event;
+
+/**
 	 * IconButton
 	 */
 	public class IconButton extends ButtonBase {
@@ -19,8 +18,8 @@ package bloom.components
 			super(p);
 		}
 		
-		override public function destroy():void {
-			super.destroy();
+		override public function dispose (gc:Boolean = false):void {
+			super.dispose (gc);
 			removeIcons();
 			_iconNormal = null;
 			_iconOver = null;
@@ -33,8 +32,8 @@ package bloom.components
 			if (_iconDown && _iconDown.parent) removeChild(_iconDown);
 		}
 		
-		override protected function draw(e:Event):void {
-			super.draw(e);
+		override protected function draw (e:Event = null):void {
+			super.draw (e);
 			removeIcons();
 			switch(state){
 				case NORMAL:

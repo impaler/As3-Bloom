@@ -1,20 +1,20 @@
 package bloom.components 
 {
-	import flash.display.BitmapData;
-	import flash.display.DisplayObjectContainer;
-	import flash.display.Sprite;
-	import flash.events.Event;
-	import flash.events.MouseEvent;
-	import flash.geom.Rectangle;
-	
-	import org.osflash.signals.natives.NativeSignal;
-	
-	import bloom.core.Component;
-	import bloom.core.ScaleBitmap;
-	import bloom.core.ThemeBase;
-	import bloom.styles.WindowStyle;
-	
-	/**
+
+import bloom.core.Component;
+import bloom.core.OmniCore;
+import bloom.components.WindowStyle;
+
+import flash.display.BitmapData;
+import flash.display.DisplayObjectContainer;
+import flash.display.Sprite;
+import flash.events.Event;
+import flash.events.MouseEvent;
+import flash.geom.Rectangle;
+
+import org.osflash.signals.natives.NativeSignal;
+
+/**
 	 * Window
 	 */
 	public class Window extends Component {
@@ -83,7 +83,7 @@ package bloom.components
 			
 			_rect = new Rectangle();
 			
-			style = ThemeBase.theme.window;
+			style = OmniCore.theme.window;
 			
 			size(200, 100);
 		}
@@ -92,8 +92,8 @@ package bloom.components
             if (moveable) {
 				xOffset = e.stageX - this.x;
 				yOffset = e.stageY - this.y;
-				ThemeBase.onStageMouseMove.add(onWindowMouseMove);
-				ThemeBase.onStageMouseUp.add(onWindowMouseUp);
+				OmniCore.onStageMouseMove.add(onWindowMouseMove);
+				OmniCore.onStageMouseUp.add(onWindowMouseUp);
             }
         }
 		
@@ -104,15 +104,15 @@ package bloom.components
         }
 		
         private function onWindowMouseUp(event:MouseEvent):void {
-			ThemeBase.onStageMouseMove.remove(onWindowMouseMove);
-			ThemeBase.onStageMouseUp.remove(onWindowMouseUp);
+			OmniCore.onStageMouseMove.remove(onWindowMouseMove);
+			OmniCore.onStageMouseUp.remove(onWindowMouseUp);
         }
 		
         private function onScalerMouseDown(e:MouseEvent):void {
 			xOffset = e.stageX - _scaler.x;
 			yOffset = e.stageY - _scaler.y;
-			ThemeBase.onStageMouseMove.add(onScalerMouseMove);
-			ThemeBase.onStageMouseUp.add(onScalerMouseUp);
+			OmniCore.onStageMouseMove.add(onScalerMouseMove);
+			OmniCore.onStageMouseUp.add(onScalerMouseUp);
         }
 		
 		private function onScalerMouseMove(e:MouseEvent):void {
@@ -123,8 +123,8 @@ package bloom.components
 		}
 		
 		private function onScalerMouseUp(e:MouseEvent):void {
-			ThemeBase.onStageMouseMove.remove(onScalerMouseMove);
-			ThemeBase.onStageMouseUp.remove(onScalerMouseUp);
+			OmniCore.onStageMouseMove.remove(onScalerMouseMove);
+			OmniCore.onStageMouseUp.remove(onScalerMouseUp);
 			size(_scaler.x + _footerSize, _scaler.y + _footerSize);
 			_scaler.stopDrag();
 		}
@@ -158,8 +158,8 @@ package bloom.components
 			}
 		}
 		
-		override public function destroy():void {
-			super.destroy();
+		override public function dispose (gc:Boolean = false):void {
+			super.dispose (gc);
 			if (background) background.dispose();
 			background = null;
 			if (scaler) scaler.dispose();
@@ -168,12 +168,12 @@ package bloom.components
 			_scaler.graphics.clear();
 			removeChild(_scaler);
 			removeChild(_header);
-			_header.destroy();
+			_header.dispose (false);
 			removeChild(_footer);
-			_footer.destroy();
+			_footer.dispose (false);
 			if (_content) {
 				removeChild(_content);
-				_content.destroy();
+				_content.dispose (false);
 			}
 			onHeaderClicked.removeAll();
 			onHeaderClicked = null;
@@ -182,10 +182,10 @@ package bloom.components
 		}
 		
 		override protected function onThemeChanged():void {
-			style = ThemeBase.theme.window;
+			style = OmniCore.theme.window;
 		}
 		
-		override protected function draw(e:Event):void {
+		override protected function draw (e:Event = null):void {
 			if (!_changed) return;
 			_changed = false;
 			

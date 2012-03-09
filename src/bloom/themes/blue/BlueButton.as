@@ -3,8 +3,8 @@ package bloom.themes.blue
 	import flash.geom.Rectangle;
 	
 	import bloom.core.ScaleBitmap;
-	import bloom.styles.ButtonStyle;
-	import bloom.styles.TextStyle;
+	import bloom.components.ButtonStyle;
+	import bloom.components.TextStyle;
 	
 	/**
 	 * BlueButton

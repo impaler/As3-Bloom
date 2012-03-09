@@ -1,23 +1,24 @@
 package bloom.components 
 {
-	import flash.display.BitmapData;
-	import flash.display.DisplayObjectContainer;
-	import flash.events.Event;
-	import flash.events.FocusEvent;
-	import flash.events.MouseEvent;
-	import flash.events.TimerEvent;
-	import flash.text.TextFieldType;
-	import flash.utils.Timer;
-	
-	import org.osflash.signals.natives.NativeSignal;
-	import org.osflash.signals.Signal;
-	
-	import bloom.core.Component;
-	import bloom.core.TextBase;
-	import bloom.core.ThemeBase;
-	import bloom.styles.NumericStepperStyle;
-	
-	/**
+
+import bloom.core.Component;
+import bloom.core.TextBase;
+import bloom.core.OmniCore;
+import bloom.components.NumericStepperStyle;
+
+import flash.display.BitmapData;
+import flash.display.DisplayObjectContainer;
+import flash.events.Event;
+import flash.events.FocusEvent;
+import flash.events.MouseEvent;
+import flash.events.TimerEvent;
+import flash.text.TextFieldType;
+import flash.utils.Timer;
+
+import org.osflash.signals.Signal;
+import org.osflash.signals.natives.NativeSignal;
+
+/**
 	 * NumericStepper
 	 */
 	public class NumericStepper extends Component {
@@ -76,25 +77,25 @@ package bloom.components
 			
 			this.value = value;
 			
-			_style = ThemeBase.theme.numericStepper;
+			_style = OmniCore.theme.numericStepper;
 			size(100, 20);
 		}
 		
-		override public function destroy():void {
-			super.destroy();
+		override public function dispose (gc:Boolean = false):void {
+			super.dispose (gc);
 			if (background) background.dispose();
 			background = null;
 			
 			removeChild(_increase);
-			_increase.destroy();
+			_increase.dispose (false);
 			_increase = null;
 			
 			removeChild(_decrease);
-			_decrease.destroy();
+			_decrease.dispose (false);
 			_decrease = null;
 			
 			removeChild(_textBase);
-			_textBase.destroy();
+			_textBase.dispose (false);
 			_textBase = null;
 			
 			_mouseWheel.removeAll();
@@ -155,10 +156,10 @@ package bloom.components
 		}
 		
 		override protected function onThemeChanged():void {
-			style = ThemeBase.theme.numericStepper;
+			style = OmniCore.theme.numericStepper;
 		}
 		
-		override protected function draw(e:Event):void {
+		override protected function draw (e:Event = null):void {
 			if (!_changed) return;
 			_changed = false;
 			
@@ -219,7 +220,7 @@ package bloom.components
 		override public function set enabled(value:Boolean):void {
 			if (_enabled != value) {
 				_textBase.tabEnabled = _enabled = mouseEnabled = mouseChildren = value;
-				alpha = _enabled ? 1 : ThemeBase.theme.alpha;
+				alpha = _enabled ? 1 : OmniCore.theme.alpha;
 			}
 		}
 		

@@ -1,20 +1,21 @@
 package bloom.components 
 {
-	import flash.display.BitmapData;
-	import flash.display.DisplayObjectContainer;
-	import flash.display.Sprite;
-	import flash.events.Event;
-	import flash.events.MouseEvent;
-	import flash.geom.Rectangle;
-	
-	import org.osflash.signals.natives.NativeSignal;
-	import org.osflash.signals.Signal;
-	
-	import bloom.core.Component;
-	import bloom.core.ThemeBase;
-	import bloom.styles.SliderStyle;
-	
-	/**
+
+import bloom.core.Component;
+import bloom.core.OmniCore;
+import bloom.components.SliderStyle;
+
+import flash.display.BitmapData;
+import flash.display.DisplayObjectContainer;
+import flash.display.Sprite;
+import flash.events.Event;
+import flash.events.MouseEvent;
+import flash.geom.Rectangle;
+
+import org.osflash.signals.Signal;
+import org.osflash.signals.natives.NativeSignal;
+
+/**
 	 * Slider
 	 */
 	public class Slider extends Component {
@@ -59,7 +60,7 @@ package bloom.components
 			
 			_rect = new Rectangle(0, 0, 0, 0);
 			
-			_style = ThemeBase.theme.slider;
+			_style = OmniCore.theme.slider;
 			_type == VERTICALLY ? size(20, 100) : size(100, 20);
 			
 			_button.mouseDown.add(onMouseDown);
@@ -72,13 +73,13 @@ package bloom.components
 			_scrolling = new Signal(Slider);
 		}
 		
-		override public function destroy():void {
-			super.destroy();
+		override public function dispose (gc:Boolean = false):void {
+			super.dispose (gc);
 			if (background) background.dispose();
 			background = null;
 			
-			ThemeBase.onStageMouseMove.remove(onMouseMove);
-			ThemeBase.onStageMouseUp.remove(onMouseUp);
+			OmniCore.onStageMouseMove.remove(onMouseMove);
+			OmniCore.onStageMouseUp.remove(onMouseUp);
 			
 			_mouseWheel.removeAll();
 			_mouseWheel = null;
@@ -93,7 +94,7 @@ package bloom.components
 			_scrolling = null;
 			
 			removeChild(_button);
-			_button.destroy();
+			_button.dispose (false);
 			_button = null;
 			
 			removeChild(_bg);
@@ -104,10 +105,10 @@ package bloom.components
 		}
 		
 		override protected function onThemeChanged():void {
-			style = ThemeBase.theme.slider;
+			style = OmniCore.theme.slider;
 		}
 		
-		override protected function draw(e:Event):void {
+		override protected function draw(e:Event = null):void {
 			if (!_changed) return;
 			_changed = false;
 			
@@ -150,8 +151,8 @@ package bloom.components
 		
 		protected function onMouseDown(e:MouseEvent):void {
 			_button.startDrag(false, _rect);
-			ThemeBase.onStageMouseMove.add(onMouseMove);
-			ThemeBase.onStageMouseUp.add(onMouseUp);
+			OmniCore.onStageMouseMove.add(onMouseMove);
+			OmniCore.onStageMouseUp.add(onMouseUp);
 		}
 		
 		protected function onMouseMove(e:MouseEvent):void {
@@ -169,8 +170,8 @@ package bloom.components
 		protected function onMouseUp(e:MouseEvent):void {
 			_button.stopDrag();
 			_valueChanged.dispatch(this);
-			ThemeBase.onStageMouseMove.remove(onMouseMove);
-			ThemeBase.onStageMouseUp.remove(onMouseUp);
+			OmniCore.onStageMouseMove.remove(onMouseMove);
+			OmniCore.onStageMouseUp.remove(onMouseUp);
 		}
 		
 		protected function clickOnBg(e:MouseEvent):void {
@@ -181,8 +182,8 @@ package bloom.components
 			}
             _button.startDrag(false, _rect);
 			
-			ThemeBase.onStageMouseMove.add(onMouseMove);
-			ThemeBase.onStageMouseUp.add(onMouseUp);
+			OmniCore.onStageMouseMove.add(onMouseMove);
+			OmniCore.onStageMouseUp.add(onMouseUp);
 			
             e.updateAfterEvent();
 		}

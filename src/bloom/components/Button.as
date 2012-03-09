@@ -1,13 +1,14 @@
 package bloom.components 
 {
-	import flash.display.DisplayObjectContainer;
-	import flash.display.DisplayObject;
-	import flash.events.Event;
-	
-	import bloom.styles.ButtonStyle;
-	import bloom.core.ThemeBase;
-	
-	/**
+
+import bloom.core.OmniCore;
+import bloom.components.ButtonStyle;
+
+import flash.display.DisplayObject;
+import flash.display.DisplayObjectContainer;
+import flash.events.Event;
+
+/**
 	 * Button
 	 */
 	public class Button extends ButtonBase {
@@ -21,7 +22,7 @@ package bloom.components
 			_title = new Label(this, title);
 			_title.onTextChanged.add(onTitleChanged);
 			
-			style = ThemeBase.theme.button;
+			style = OmniCore.theme.button;
 		}
 		
 		protected function onTitleChanged(e:Event):void {
@@ -35,20 +36,20 @@ package bloom.components
 			_title.y = (_height - _title.height) * 0.5;
 		}
 		
-		override public function destroy():void {
-			super.destroy();
+		override public function dispose (gc:Boolean = false):void {
+			super.dispose (gc);
 			removeChild(_title);
-			_title.destroy();
+			_title.dispose (false);
 			_title = null;
 			if (_icon) removeChild(_icon);
 			_icon = null;
 		}
 		
 		override protected function onThemeChanged():void {
-			style = ThemeBase.theme.buttonBase;
+			style = OmniCore.theme.buttonBase;
 		}
 		
-		override protected function draw(e:Event):void {
+		override protected function draw (e:Event = null):void {
 			if (!_changed) return;
 			_changed = false;
 			

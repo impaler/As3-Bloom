@@ -1,17 +1,18 @@
 package bloom.components 
 {
-	import flash.display.BitmapData;
-	import flash.display.DisplayObjectContainer;
-	import flash.events.Event;
-	import flash.events.FocusEvent;
-	import flash.text.TextFieldType;
-	
-	import bloom.core.Component;
-	import bloom.core.TextBase;
-	import bloom.core.ThemeBase;
-	import bloom.styles.TextBoxStyle;
-	
-	/**
+
+import bloom.core.Component;
+import bloom.core.TextBase;
+import bloom.core.OmniCore;
+import bloom.components.TextBoxStyle;
+
+import flash.display.BitmapData;
+import flash.display.DisplayObjectContainer;
+import flash.events.Event;
+import flash.events.FocusEvent;
+import flash.text.TextFieldType;
+
+/**
 	 * TextBox
 	 */
 	public class TextBox extends Component {
@@ -44,7 +45,7 @@ package bloom.components
 			_scrollBar.valueChanged.add(onScrollBarChanged);
 			_scrollBar.scrolling.add(onScrollBarMove);
 			
-			_style = ThemeBase.theme.textBox;
+			_style = OmniCore.theme.textBox;
 			size(100, 100);
 		}
 		
@@ -53,27 +54,27 @@ package bloom.components
 			onTextChanged();
 		}
 		
-		override public function destroy():void {
-			super.destroy();
+		override public function dispose (gc:Boolean = false):void {
+			super.dispose (gc);
 			if (background) background.dispose();
 			background = null;
 			
 			removeChild(_textBase);
-			_textBase.destroy();
+			_textBase.dispose (false);
 			_textBase = null;
 			
 			removeChild(_scrollBar);
-			_scrollBar.destroy();
+			_scrollBar.dispose (false);
 			_scrollBar = null;
 			
 			graphics.clear();
 		}
 		
 		override protected function onThemeChanged():void {
-			style = ThemeBase.theme.textBox;
+			style = OmniCore.theme.textBox;
 		}
 		
-		override protected function draw(e:Event):void {
+		override protected function draw (e:Event = null):void {
 			if (!_changed) return;
 			_changed = false;
 			
@@ -150,7 +151,7 @@ package bloom.components
 		override public function set enabled(value:Boolean):void {
 			if (_enabled != value) {
 				_enabled = _textBase.tabEnabled = mouseEnabled = mouseChildren = value;
-				alpha = _enabled ? 1 : ThemeBase.theme.alpha;
+				alpha = _enabled ? 1 : OmniCore.theme.alpha;
 			}
 		}
 		

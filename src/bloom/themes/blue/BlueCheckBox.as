@@ -3,8 +3,8 @@ package bloom.themes.blue
 	import flash.geom.Rectangle;
 	
 	import bloom.core.ScaleBitmap;
-	import bloom.styles.CheckBoxStyle;
-	import bloom.styles.TextStyle;
+	import bloom.components.CheckBoxStyle;
+	import bloom.components.TextStyle;
 	
 	/**
 	 * BlueCheckBox

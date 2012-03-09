@@ -1,6 +1,6 @@
 package bloom.themes.blue 
 {
-	import bloom.styles.TextStyle;
+	import bloom.components.TextStyle;
 	
 	/**
 	 * BlueLabel

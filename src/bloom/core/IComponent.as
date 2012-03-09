@@ -1,15 +1,14 @@
 package bloom.core 
 {
-	import org.osflash.signals.Signal;
-	
-	/**
+
+/**
 	 * IComponent
 	 */
 	public interface IComponent extends IObjectBase {
 		
 		function drawDirectly():void;
 		
-		function destroy():void;
+		function dispose (gc:Boolean = false):void;
 		
 		function move(x:Number, y:Number):void;
 		

@@ -1,13 +1,14 @@
 package bloom.components 
 {
-	import flash.display.DisplayObjectContainer;
-	import flash.text.TextFieldAutoSize;
-	import flash.text.TextFieldType;
-	
-	import bloom.core.TextBase;
-	import bloom.core.ThemeBase;
-	
-	/**
+
+import bloom.core.TextBase;
+import bloom.core.OmniCore;
+
+import flash.display.DisplayObjectContainer;
+import flash.text.TextFieldAutoSize;
+import flash.text.TextFieldType;
+
+/**
 	 * Label
 	 */
 	public class Label extends TextBase {
@@ -22,16 +23,16 @@ package bloom.components
 			
 			this.text = text;
 			
-			style = ThemeBase.theme.label;
+			style = OmniCore.theme.label;
 		}
 		
-		override public function destroy():void {
-			super.destroy();
-			ThemeBase.onThemeChanged.remove(onThemeChanged);
+		override public function dispose (gc:Boolean = false):void {
+			super.dispose (gc);
+			OmniCore.onThemeChanged.remove(onThemeChanged);
 		}
 		
 		override protected function onThemeChanged():void {
-			style = ThemeBase.theme.label;
+			style = OmniCore.theme.label;
 		}
 		
 		///////////////////////////////////

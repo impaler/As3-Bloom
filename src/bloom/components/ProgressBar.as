@@ -1,17 +1,18 @@
 package bloom.components 
 {
-	import flash.display.BitmapData;
-	import flash.display.DisplayObjectContainer;
-	import flash.display.Shape;
-	import flash.events.Event;
-	
-	import org.osflash.signals.Signal;
-	
-	import bloom.core.Component;
-	import bloom.core.ThemeBase;
-	import bloom.styles.ProgressBarStyle;
-	
-	/**
+
+import bloom.core.Component;
+import bloom.core.OmniCore;
+import bloom.components.ProgressBarStyle;
+
+import flash.display.BitmapData;
+import flash.display.DisplayObjectContainer;
+import flash.display.Shape;
+import flash.events.Event;
+
+import org.osflash.signals.Signal;
+
+/**
 	 * ProgressBar
 	 */
 	public class ProgressBar extends Component {
@@ -35,12 +36,12 @@ package bloom.components
 			
 			_value = value;
 			
-			_style = ThemeBase.theme.progressBar;
+			_style = OmniCore.theme.progressBar;
 			size(200, 20);
 		}
 		
-		override public function destroy():void {
-			super.destroy();
+		override public function dispose (gc:Boolean = false):void {
+			super.dispose (gc);
 			if (bitmapData0) bitmapData0.dispose();
 			bitmapData0 = null;
 			if (bitmapData1) bitmapData1.dispose();
@@ -56,10 +57,10 @@ package bloom.components
 		}
 		
 		override protected function onThemeChanged():void {
-			style = ThemeBase.theme.progressBar;
+			style = OmniCore.theme.progressBar;
 		}
 		
-		override protected function draw(e:Event):void {
+		override protected function draw (e:Event = null):void {
 			if (!_changed) return;
 			_changed = false;
 			

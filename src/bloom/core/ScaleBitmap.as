@@ -25,6 +25,12 @@ package bloom.core {
         	super ( bmpData , pixelSnapping , smoothing );
 			_originalBitmap = bmpData.clone ();
 		}
+
+		public function dispose ():void {
+			_originalBitmap.dispose();
+			_originalBitmap = null;
+			_scale9Grid = null;
+		}
 		
 		/**
 		 * TODO: This function need to be tested.

@@ -3,7 +3,7 @@ package bloom.themes.blue
 	import flash.geom.Rectangle;
 	
 	import bloom.core.ScaleBitmap;
-	import bloom.styles.ContainerStyle;
+	import bloom.components.ContainerStyle;
 	
 	/**
 	 * BlueContainer

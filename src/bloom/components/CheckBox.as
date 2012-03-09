@@ -1,18 +1,19 @@
 package bloom.components 
 {
-	import flash.display.BitmapData;
-	import flash.display.DisplayObjectContainer;
-	import flash.events.Event;
-	import flash.events.MouseEvent;
-	
-	import org.osflash.signals.natives.NativeSignal;
-	import org.osflash.signals.Signal;
-	
-	import bloom.core.Component;
-	import bloom.core.ThemeBase;
-	import bloom.styles.CheckBoxStyle;
-	
-	/**
+
+import bloom.core.Component;
+import bloom.core.OmniCore;
+import bloom.components.CheckBoxStyle;
+
+import flash.display.BitmapData;
+import flash.display.DisplayObjectContainer;
+import flash.events.Event;
+import flash.events.MouseEvent;
+
+import org.osflash.signals.Signal;
+import org.osflash.signals.natives.NativeSignal;
+
+/**
 	 * CheckBox
 	 */
 	public class CheckBox extends Component {
@@ -41,7 +42,7 @@ package bloom.components
 			
 			_valueChanged = new Signal(CheckBox);
 			
-			_style = ThemeBase.theme.checkBox;
+			_style = OmniCore.theme.checkBox;
 			size(100, 20);
 		}
 		
@@ -49,12 +50,12 @@ package bloom.components
 			_title.move(_height + _title.margin.left, (_height - _title.height) / 2);
 		}
 		
-		override public function destroy():void {
-			super.destroy();
+		override public function dispose (gc:Boolean = false):void {
+			super.dispose (gc);
 			if (background) background.dispose();
 			background = null;
 			removeChild(_title);
-			_title.destroy();
+			_title.dispose (false);
 			_title = null;
 			_mouseClick.removeAll();
 			_mouseClick = null;
@@ -63,10 +64,10 @@ package bloom.components
 		}
 		
 		override protected function onThemeChanged():void {
-			style = ThemeBase.theme.checkBox;
+			style = OmniCore.theme.checkBox;
 		}
 		
-		override protected function draw(e:Event):void {
+		override protected function draw (e:Event = null):void {
 			if (!_changed) return;
 			_changed = false;
 			

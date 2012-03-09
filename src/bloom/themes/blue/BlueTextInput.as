@@ -3,8 +3,8 @@ package bloom.themes.blue
 	import flash.geom.Rectangle;
 	
 	import bloom.core.ScaleBitmap;
-	import bloom.styles.TextInputStyle;
-	import bloom.styles.TextStyle;
+	import bloom.components.TextInputStyle;
+	import bloom.components.TextStyle;
 	
 	/**
 	 * BlueTextInput

@@ -1,13 +1,14 @@
 package bloom.components 
 {
-	import flash.display.DisplayObject;
-	import flash.display.DisplayObjectContainer;
-	import flash.events.Event;
-	
-	import bloom.core.ThemeBase;
-	import bloom.styles.ToggleButtonStyle;
-	
-	/**
+
+import bloom.core.OmniCore;
+import bloom.components.ToggleButtonStyle;
+
+import flash.display.DisplayObject;
+import flash.display.DisplayObjectContainer;
+import flash.events.Event;
+
+/**
 	 * ToggleButton
 	 */
 	public class ToggleButton extends CheckBox {
@@ -16,7 +17,7 @@ package bloom.components
 		
 		public function ToggleButton(p:DisplayObjectContainer=null, title:String="", value:Boolean=false) {
 			super(p, title, value);
-			style = ThemeBase.theme.toggleButton;
+			style = OmniCore.theme.toggleButton;
 			size(120, 30);
 		}
 		
@@ -32,10 +33,10 @@ package bloom.components
 		}
 		
 		override protected function onThemeChanged():void {
-			style = ThemeBase.theme.toggleButton;
+			style = OmniCore.theme.toggleButton;
 		}
 		
-		override protected function draw(e:Event):void {
+		override protected function draw (e:Event = null):void {
 			if (!_changed) return;
 			_changed = false;
 			

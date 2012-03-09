@@ -3,10 +3,10 @@ package bloom.themes.blue
 	import flash.geom.Rectangle;
 	
 	import bloom.core.ScaleBitmap;
-	import bloom.styles.ButtonBaseStyle;
-	import bloom.styles.SliderStyle;
-	import bloom.styles.TextBoxStyle;
-	import bloom.styles.TextStyle;
+	import bloom.components.ButtonBaseStyle;
+	import bloom.components.SliderStyle;
+	import bloom.components.TextBoxStyle;
+	import bloom.components.TextStyle;
 	
 	/**
 	 * BlueTextBox

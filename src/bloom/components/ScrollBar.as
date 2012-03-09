@@ -3,7 +3,7 @@ package bloom.components
 	import flash.display.DisplayObjectContainer;
 	import flash.events.MouseEvent;
 	
-	import bloom.core.ThemeBase;
+	import bloom.core.OmniCore;
 	
 	/**
 	 * ScrollBar
@@ -77,8 +77,8 @@ package bloom.components
 				value = (mouseY - (_button.height >> 1)) / _rect.height * _max;
 			}
             _button.startDrag(false, _rect);
-			ThemeBase.onStageMouseMove.add(onMouseMove);
-			ThemeBase.onStageMouseUp.add(onMouseUp);
+			OmniCore.onStageMouseMove.add(onMouseMove);
+			OmniCore.onStageMouseUp.add(onMouseUp);
 			
             e.updateAfterEvent();
 		}

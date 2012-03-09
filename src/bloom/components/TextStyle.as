@@ -1,4 +1,4 @@
-package bloom.styles 
+package bloom.components 
 {
 	import flash.text.TextFormat;
 	

@@ -1,16 +1,16 @@
 package bloom.core 
 {
-	import flash.display.DisplayObjectContainer;
-	import flash.events.Event;
-	import flash.events.FocusEvent;
-	import flash.text.TextField;
-	
-	import org.osflash.signals.natives.NativeSignal;
-	
-	import bloom.core.ThemeBase;
-	import bloom.styles.TextStyle;
-	
-	/**
+
+import bloom.components.TextStyle;
+
+import flash.display.DisplayObjectContainer;
+import flash.events.Event;
+import flash.events.FocusEvent;
+import flash.text.TextField;
+
+import org.osflash.signals.natives.NativeSignal;
+
+/**
 	 * TextBase
 	 */
 	public class TextBase extends TextField implements IComponent {
@@ -33,7 +33,7 @@ package bloom.core
 			
 			_onTextChanged = new NativeSignal(this, Event.CHANGE, Event);
 			
-			ThemeBase.onThemeChanged.add(onThemeChanged);
+			OmniCore.onThemeChanged.add(onThemeChanged);
 		}
 		
 		public function move(x:Number, y:Number):void {
@@ -50,8 +50,8 @@ package bloom.core
 			
 		}
 		
-		public function destroy():void {
-			ThemeBase.onThemeChanged.remove(onThemeChanged);
+		public function dispose (gc:Boolean = false):void {
+			OmniCore.onThemeChanged.remove(onThemeChanged);
 			_style = null;
 			_onTextChanged.removeAll();
 			_onTextChanged = null;
@@ -90,7 +90,7 @@ package bloom.core
 		public function set enabled(value:Boolean):void {
 			if (_enabled != value) {
 				_enabled = tabEnabled = mouseEnabled = value;
-				alpha = _enabled ? 1 : ThemeBase.theme.alpha;
+				alpha = _enabled ? 1 : OmniCore.theme.alpha;
 			}
 		}
 		
