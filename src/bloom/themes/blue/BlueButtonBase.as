@@ -1,10 +1,10 @@
 package bloom.themes.blue {
 
+import bloom.brush.BMPBrush;
+import bloom.controls.ButtonBaseStyle;
 import bloom.core.ScaleBitmap;
 import bloom.core.StateConstants;
-import bloom.components.ButtonBaseStyle;
 
-import flash.display.Graphics;
 import flash.geom.Rectangle;
 
 /**
@@ -21,36 +21,40 @@ public class BlueButtonBase extends ButtonBaseStyle {
 	[Embed(source="assets/button_down.png")]
 	private static var bm2:Class;
 
+	private var _scaleBitmaps:Vector.<ScaleBitmap> = new Vector.<ScaleBitmap> (3,true);
+
 	public function BlueButtonBase () {
-		normal = new ScaleBitmap (new bm0 ().bitmapData);
+
+		var normal:ScaleBitmap = new ScaleBitmap (new bm0 ().bitmapData);
 		normal.scale9Grid = new Rectangle (15,15,70,14);
-		stateCollection[StateConstants.NORMAL] = normal;
 
-		over = new ScaleBitmap (new bm1 ().bitmapData);
+		var over:ScaleBitmap = new ScaleBitmap (new bm1 ().bitmapData);
 		over.scale9Grid = new Rectangle (15,15,70,14);
-		stateCollection[StateConstants.OVER] = over;
 
-		down = new ScaleBitmap (new bm2 ().bitmapData);
+		var down:ScaleBitmap = new ScaleBitmap (new bm2 ().bitmapData);
 		down.scale9Grid = new Rectangle (15,15,70,14);
-		stateCollection[StateConstants.DOWN] = down;
+
+		_scaleBitmaps[StateConstants.NORMAL] = normal;
+		_scaleBitmaps[StateConstants.OVER] = over;
+		_scaleBitmaps[StateConstants.DOWN] = down;
+		background = new BMPBrush (_scaleBitmaps);
+
 	}
-	
 
 	///////////////////////////////////
 	// Dispose
 	///////////////////////////////////
 
 	override public function dispose (gc:Boolean = false):void {
-		normal.dispose ();
-		normal = null;
-		over.dispose ();
-		over = null;
-		down.dispose ();
-		down = null;
-		
-		super.dispose(gc);
+		for each(var bitmap:ScaleBitmap in _scaleBitmaps) {
+			bitmap.dispose ();
+			bitmap = null;
+		}
+		_scaleBitmaps = null;
+
+		super.dispose (gc);
 	}
-	
+
 	///////////////////////////////////
 	// toString
 	///////////////////////////////////
