@@ -42,7 +42,7 @@ import org.osflash.signals.natives.NativeSignal;
 			
 			_valueChanged = new Signal(CheckBox);
 			
-			_style = OmniCore.theme.checkBox;
+			_style = OmniCore.defaultTheme.checkBox;
 			size(100, 20);
 		}
 		
@@ -64,7 +64,7 @@ import org.osflash.signals.natives.NativeSignal;
 		}
 		
 		override protected function onThemeChanged():void {
-			style = OmniCore.theme.checkBox;
+			style = OmniCore.defaultTheme.checkBox;
 		}
 		
 		override protected function draw (e:Event = null):void {

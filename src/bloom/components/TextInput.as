@@ -34,7 +34,7 @@ import flash.text.TextFieldType;
 			_textBase.onFocusedIn.add(onFocusedIn);
 			_textBase.onFocusedOut.add(onFocusedOut);
 			
-			style = OmniCore.theme.textInput;
+			style = OmniCore.defaultTheme.textInput;
 			size(100, 20);
 		}
 		
@@ -48,7 +48,7 @@ import flash.text.TextFieldType;
 		}
 		
 		override protected function onThemeChanged():void {
-			style = OmniCore.theme.textInput;
+			style = OmniCore.defaultTheme.textInput;
 		}
 		
 		override protected function draw (e:Event = null):void {
@@ -94,7 +94,7 @@ import flash.text.TextFieldType;
 		override public function set enabled(value:Boolean):void {
 			if (_enabled != value) {
 				_textBase.tabEnabled = _enabled = mouseEnabled = mouseChildren = value;
-				alpha = _enabled ? 1 : OmniCore.theme.alpha;
+				alpha = _enabled ? 1 : OmniCore.defaultTheme.alpha;
 			}
 		}
 		

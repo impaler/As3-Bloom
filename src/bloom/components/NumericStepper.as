@@ -77,7 +77,7 @@ import org.osflash.signals.natives.NativeSignal;
 			
 			this.value = value;
 			
-			_style = OmniCore.theme.numericStepper;
+			_style = OmniCore.defaultTheme.numericStepper;
 			size(100, 20);
 		}
 		
@@ -156,7 +156,7 @@ import org.osflash.signals.natives.NativeSignal;
 		}
 		
 		override protected function onThemeChanged():void {
-			style = OmniCore.theme.numericStepper;
+			style = OmniCore.defaultTheme.numericStepper;
 		}
 		
 		override protected function draw (e:Event = null):void {
@@ -220,7 +220,7 @@ import org.osflash.signals.natives.NativeSignal;
 		override public function set enabled(value:Boolean):void {
 			if (_enabled != value) {
 				_textBase.tabEnabled = _enabled = mouseEnabled = mouseChildren = value;
-				alpha = _enabled ? 1 : OmniCore.theme.alpha;
+				alpha = _enabled ? 1 : OmniCore.defaultTheme.alpha;
 			}
 		}
 		

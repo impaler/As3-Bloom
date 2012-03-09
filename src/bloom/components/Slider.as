@@ -60,7 +60,7 @@ import org.osflash.signals.natives.NativeSignal;
 			
 			_rect = new Rectangle(0, 0, 0, 0);
 			
-			_style = OmniCore.theme.slider;
+			_style = OmniCore.defaultTheme.slider;
 			_type == VERTICALLY ? size(20, 100) : size(100, 20);
 			
 			_button.mouseDown.add(onMouseDown);
@@ -105,7 +105,7 @@ import org.osflash.signals.natives.NativeSignal;
 		}
 		
 		override protected function onThemeChanged():void {
-			style = OmniCore.theme.slider;
+			style = OmniCore.defaultTheme.slider;
 		}
 		
 		override protected function draw(e:Event = null):void {

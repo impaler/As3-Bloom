@@ -26,22 +26,19 @@ public class ButtonBase extends InteractiveComponent {
 		mouseOver.add (onMouseOver);
 		mouseDown.add (onMouseDown);
 
-		_style = OmniCore.theme.buttonBaseStyle as IStyle;
+		_style = OmniCore.defaultTheme.buttonBaseStyle as IStyle;
 		size (120,30);
 	}
 
 	override protected function onThemeChanged ():void {
-		style = OmniCore.theme.buttonBaseStyle;
+		style = OmniCore.defaultTheme.buttonBaseStyle;
 	}
 
 	override protected function draw (e:Event = null):void {
 		if (! _changed) return;
 		_changed = false;
 
-		var style:BaseStyle = _style as ButtonBaseStyle;
-
-		style.drawStyle (state,this.graphics,getDimensionObject);
-
+		buttonBaseStyle.drawStyle (state,graphics,getDimensionObject);
 	}
 
 	protected function onMouseOver (e:MouseEvent):void {
@@ -92,6 +89,10 @@ public class ButtonBase extends InteractiveComponent {
 
 	public function get mouseUp ():NativeSignal {
 		return OmniCore.onStageMouseUp;
+	}
+	
+	public function get buttonBaseStyle ():ButtonBaseStyle {
+		return _style as ButtonBaseStyle;
 	}
 
 	///////////////////////////////////

@@ -22,7 +22,7 @@ import flash.events.Event;
 			_title = new Label(this, title);
 			_title.onTextChanged.add(onTitleChanged);
 			
-			style = OmniCore.theme.button;
+			style = OmniCore.defaultTheme.button;
 		}
 		
 		protected function onTitleChanged(e:Event):void {
@@ -46,7 +46,7 @@ import flash.events.Event;
 		}
 		
 		override protected function onThemeChanged():void {
-			style = OmniCore.theme.buttonBase;
+			style = OmniCore.defaultTheme.buttonBase;
 		}
 		
 		override protected function draw (e:Event = null):void {

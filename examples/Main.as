@@ -33,9 +33,15 @@ import flash.display.Bitmap;
 			
 //			var label:Label = new Label(flowContainer.content, "Label");
 			
+			var RedButtonBase:ButtonBaseStyle = new ButtonBaseStyle();
+//			RedButtonBase.down
+			
 			
 			var buttonBase:ButtonBase = new ButtonBase(this);
 			
+			var buttonBase:ButtonBase = new ButtonBase(this);
+			buttonBase.y = 60;
+			buttonBase.style = RedButtonBase;
 			
 			
 //			buttonBase = new ButtonBase(flowContainer.content);

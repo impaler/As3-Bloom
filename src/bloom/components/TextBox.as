@@ -45,7 +45,7 @@ import flash.text.TextFieldType;
 			_scrollBar.valueChanged.add(onScrollBarChanged);
 			_scrollBar.scrolling.add(onScrollBarMove);
 			
-			_style = OmniCore.theme.textBox;
+			_style = OmniCore.defaultTheme.textBox;
 			size(100, 100);
 		}
 		
@@ -71,7 +71,7 @@ import flash.text.TextFieldType;
 		}
 		
 		override protected function onThemeChanged():void {
-			style = OmniCore.theme.textBox;
+			style = OmniCore.defaultTheme.textBox;
 		}
 		
 		override protected function draw (e:Event = null):void {
@@ -151,7 +151,7 @@ import flash.text.TextFieldType;
 		override public function set enabled(value:Boolean):void {
 			if (_enabled != value) {
 				_enabled = _textBase.tabEnabled = mouseEnabled = mouseChildren = value;
-				alpha = _enabled ? 1 : OmniCore.theme.alpha;
+				alpha = _enabled ? 1 : OmniCore.defaultTheme.alpha;
 			}
 		}
 		

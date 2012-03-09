@@ -90,7 +90,7 @@ import org.osflash.signals.natives.NativeSignal;
 		public function set enabled(value:Boolean):void {
 			if (_enabled != value) {
 				_enabled = tabEnabled = mouseEnabled = value;
-				alpha = _enabled ? 1 : OmniCore.theme.alpha;
+				alpha = _enabled ? 1 : OmniCore.defaultTheme.alpha;
 			}
 		}
 		

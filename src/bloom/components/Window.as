@@ -83,7 +83,7 @@ import org.osflash.signals.natives.NativeSignal;
 			
 			_rect = new Rectangle();
 			
-			style = OmniCore.theme.window;
+			style = OmniCore.defaultTheme.window;
 			
 			size(200, 100);
 		}
@@ -182,7 +182,7 @@ import org.osflash.signals.natives.NativeSignal;
 		}
 		
 		override protected function onThemeChanged():void {
-			style = OmniCore.theme.window;
+			style = OmniCore.defaultTheme.window;
 		}
 		
 		override protected function draw (e:Event = null):void {

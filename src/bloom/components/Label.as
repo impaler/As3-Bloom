@@ -23,7 +23,7 @@ import flash.text.TextFieldType;
 			
 			this.text = text;
 			
-			style = OmniCore.theme.label;
+			style = OmniCore.defaultTheme.label;
 		}
 		
 		override public function dispose (gc:Boolean = false):void {
@@ -32,7 +32,7 @@ import flash.text.TextFieldType;
 		}
 		
 		override protected function onThemeChanged():void {
-			style = OmniCore.theme.label;
+			style = OmniCore.defaultTheme.label;
 		}
 		
 		///////////////////////////////////

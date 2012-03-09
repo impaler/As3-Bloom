@@ -36,7 +36,7 @@ import org.osflash.signals.Signal;
 			
 			_value = value;
 			
-			_style = OmniCore.theme.progressBar;
+			_style = OmniCore.defaultTheme.progressBar;
 			size(200, 20);
 		}
 		
@@ -57,7 +57,7 @@ import org.osflash.signals.Signal;
 		}
 		
 		override protected function onThemeChanged():void {
-			style = OmniCore.theme.progressBar;
+			style = OmniCore.defaultTheme.progressBar;
 		}
 		
 		override protected function draw (e:Event = null):void {

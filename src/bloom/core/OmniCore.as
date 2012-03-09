@@ -22,10 +22,10 @@ package bloom.core
 		private static var _onStageMouseMove:NativeSignal;
 		private static var _onStageMouseLeave:NativeSignal;
 		
-		private static var _theme:Theme;
+		private static var _defaultTheme:Theme;
 		
 		public static function init(stage:Stage, theme:Class):void {
-			_theme = new theme() as Theme;
+			_defaultTheme = new theme() as Theme;
 			
 			_stage = stage;
 			_onStageDraw = new NativeSignal(_stage, Event.RENDER, Event);
@@ -39,14 +39,14 @@ package bloom.core
 		// getter/setters
 		///////////////////////////////////
 		
-		public static function get theme():Theme {
-			return _theme;
+		public static function get defaultTheme():Theme {
+			return _defaultTheme;
 		}
 		
-		public static function set theme(value:Theme):void {
-			if (_theme != value) {
-				_theme = value;
-				if(_theme)_onThemeChanged.dispatch();
+		public static function set defaultTheme(value:Theme):void {
+			if (_defaultTheme != value) {
+				_defaultTheme = value;
+				if(_defaultTheme)_onThemeChanged.dispatch();
 			}
 		}
 		

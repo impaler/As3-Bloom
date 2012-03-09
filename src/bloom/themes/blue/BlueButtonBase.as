@@ -22,7 +22,6 @@ public class BlueButtonBase extends ButtonBaseStyle {
 	private static var bm2:Class;
 
 	public function BlueButtonBase () {
-
 		normal = new ScaleBitmap (new bm0 ().bitmapData);
 		normal.scale9Grid = new Rectangle (15,15,70,14);
 		stateCollection[StateConstants.NORMAL] = normal;
@@ -35,19 +34,7 @@ public class BlueButtonBase extends ButtonBaseStyle {
 		down.scale9Grid = new Rectangle (15,15,70,14);
 		stateCollection[StateConstants.DOWN] = down;
 	}
-
-	override public function drawStyle (state:int,target:*,args:*):void {
-
-		var targetGraphics:Graphics = target as Graphics;
-		var graphic:ScaleBitmap = stateCollection[state] as ScaleBitmap;
-
-		targetGraphics.clear ();
-		graphic.setSize (args.width,args.height);
-		targetGraphics.beginBitmapFill (graphic.bitmapData);
-		targetGraphics.drawRect (0,0,args.width,args.height);
-		targetGraphics.endFill ();
-
-	}
+	
 
 	///////////////////////////////////
 	// Dispose
@@ -69,7 +56,7 @@ public class BlueButtonBase extends ButtonBaseStyle {
 	///////////////////////////////////
 
 	override public function toString ():String {
-		return "[bloom.styles.ButtonBaseStyle]";
+		return "[bloom.styles.BlueButtonBase]";
 	}
 
 }

@@ -23,7 +23,7 @@ public class PickerTest extends Sprite {
 			stage.align = "TL";
 			
 			OmniCore.initialize(stage);
-			OmniCore.theme = new BlueTheme();
+			OmniCore.defaultTheme = new BlueTheme();
 		
 			
 //			var Picker:ColorPicker = new ColorPicker(this);

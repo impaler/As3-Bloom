@@ -61,7 +61,7 @@ import org.osflash.signals.natives.NativeSignal;
 			
 			h_eventAdded = v_eventAdded = false;
 			
-			style = OmniCore.theme.scrollContainer;
+			style = OmniCore.defaultTheme.scrollContainer;
 			
 			h_scrollBar_enabled = v_scrollBar_enabled = true;
 			
@@ -93,7 +93,7 @@ import org.osflash.signals.natives.NativeSignal;
 		}
 		
 		override protected function onThemeChanged():void {
-			style = OmniCore.theme.scrollContainer;
+			style = OmniCore.defaultTheme.scrollContainer;
 		}
 		
 		public function getScrollBar(direction:int):ScrollBar {

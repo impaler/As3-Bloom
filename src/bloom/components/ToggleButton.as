@@ -17,7 +17,7 @@ import flash.events.Event;
 		
 		public function ToggleButton(p:DisplayObjectContainer=null, title:String="", value:Boolean=false) {
 			super(p, title, value);
-			style = OmniCore.theme.toggleButton;
+			style = OmniCore.defaultTheme.toggleButton;
 			size(120, 30);
 		}
 		
@@ -33,7 +33,7 @@ import flash.events.Event;
 		}
 		
 		override protected function onThemeChanged():void {
-			style = OmniCore.theme.toggleButton;
+			style = OmniCore.defaultTheme.toggleButton;
 		}
 		
 		override protected function draw (e:Event = null):void {

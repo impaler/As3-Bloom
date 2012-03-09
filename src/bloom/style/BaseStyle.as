@@ -1,7 +1,9 @@
 package bloom.style {
 
 import bloom.core.IStyle;
+import bloom.core.ScaleBitmap;
 
+import flash.display.Graphics;
 import flash.system.System;
 import flash.utils.Dictionary;
 
@@ -17,8 +19,54 @@ public class BaseStyle implements IStyle {
 	}
 
 	public function drawStyle (state:int,target:*,args:*):void {
+		var drawMethod:* = stateCollection[state];
+
+		if (drawMethod is ScaleBitmap) {
+			drawBitmap (ScaleBitmap (drawMethod),target,args);
+		}
 
 	}
+
+	protected function drawBitmap (graphic:ScaleBitmap,target:*,args:*):void {
+		var targetGraphics:Graphics = target as Graphics;
+		targetGraphics.clear ();
+		graphic.setSize (args.width,args.height);
+		targetGraphics.beginBitmapFill (graphic.bitmapData);
+		targetGraphics.drawRect (0,0,args.width,args.height);
+		targetGraphics.endFill ();
+	}
+
+	protected function drawColorFill (graphic:ScaleBitmap,target:*,args:*):void {
+//		var targetGraphics:Graphics = target as Graphics;
+//		targetGraphics.clear ();
+//		graphic.setSize (args.width,args.height);
+//		targetGraphics.beginBitmapFill (graphic.bitmapData);
+//		targetGraphics.drawRect (0,0,args.width,args.height);
+//		targetGraphics.endFill ();
+	}
+
+	protected function drawDisplayAsset (graphic:ScaleBitmap,target:*,args:*):void {
+//		var targetGraphics:Graphics = target as Graphics;
+//		targetGraphics.clear ();
+//		graphic.setSize (args.width,args.height);
+//		targetGraphics.beginBitmapFill (graphic.bitmapData);
+//		targetGraphics.drawRect (0,0,args.width,args.height);
+//		targetGraphics.endFill ();
+
+	}
+
+	protected function drawMethod (graphic:ScaleBitmap,target:*,args:*):void {
+//		var targetGraphics:Graphics = target as Graphics;
+//		targetGraphics.clear ();
+//		graphic.setSize (args.width,args.height);
+//		targetGraphics.beginBitmapFill (graphic.bitmapData);
+//		targetGraphics.drawRect (0,0,args.width,args.height);
+//		targetGraphics.endFill ();
+	}
+
+	///////////////////////////////////
+	// Dispose
+	///////////////////////////////////
 
 	public function dispose (gc:Boolean = false):void {
 		_stateCollection = null;
@@ -32,7 +80,7 @@ public class BaseStyle implements IStyle {
 	///////////////////////////////////
 	// toString
 	///////////////////////////////////
-	
+
 	public function toString ():String {
 		return "[bloom.styles.BaseStyle]";
 	}
