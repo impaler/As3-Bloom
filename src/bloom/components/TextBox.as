@@ -53,17 +53,17 @@ package bloom.components
 			onTextChanged();
 		}
 		
-		override public function destroy():void {
-			super.destroy();
+		override public function dispose():void {
+			super.dispose();
 			if (background) background.dispose();
 			background = null;
 			
 			removeChild(_textBase);
-			_textBase.destroy();
+			_textBase.dispose();
 			_textBase = null;
 			
 			removeChild(_scrollBar);
-			_scrollBar.destroy();
+			_scrollBar.dispose();
 			_scrollBar = null;
 			
 			graphics.clear();

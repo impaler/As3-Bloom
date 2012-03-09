@@ -453,8 +453,8 @@ public class ColorPicker extends Button {
 		return uint ((b) | (g << 8) | (r << 16));
 	}
 
-	override public function destroy ():void {
-		super.destroy ();
+	override public function dispose ():void {
+		super.dispose ();
 
 		ThemeBase.onStageMouseUp.remove (onMainHandleRelease);
 		ThemeBase.onStageResize.remove(resizeStage);
@@ -474,10 +474,10 @@ public class ColorPicker extends Button {
 		onsaturationContainerDown.removeAll ();
 		onsaturationContainerDown = null;
 		
-		okButton.destroy();
-		cancelButton.destroy();
-		pickerUIWindow.destroy();
-		pickerUIContainer.destroy();
+		okButton.dispose();
+		cancelButton.dispose();
+		pickerUIWindow.dispose();
+		pickerUIContainer.dispose();
 		
 	}
 

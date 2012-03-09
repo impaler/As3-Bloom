@@ -35,10 +35,10 @@ package bloom.components
 			_title.y = (_height - _title.height) * 0.5;
 		}
 		
-		override public function destroy():void {
-			super.destroy();
+		override public function dispose():void {
+			super.dispose();
 			removeChild(_title);
-			_title.destroy();
+			_title.dispose();
 			_title = null;
 			if (_icon) removeChild(_icon);
 			_icon = null;

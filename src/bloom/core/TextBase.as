@@ -50,7 +50,7 @@ package bloom.core
 			
 		}
 		
-		public function destroy():void {
+		public function dispose():void {
 			ThemeBase.onThemeChanged.remove(onThemeChanged);
 			_style = null;
 			_onTextChanged.removeAll();

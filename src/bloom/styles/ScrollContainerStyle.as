@@ -6,9 +6,7 @@ package bloom.styles
 	/**
 	 * ScrollContainerStyle
 	 */
-	public class ScrollContainerStyle implements IStyle {
-		
-		public var background:ScaleBitmap;
+	public class ScrollContainerStyle extends ContainerStyle {
 		
 		public var h_scrollBar:SliderStyle;
 		public var v_scrollBar:SliderStyle;
@@ -21,7 +19,7 @@ package bloom.styles
 		// toString
 		///////////////////////////////////
 		
-		public function toString():String {
+		override public function toString():String {
 			return "[bloom.styles.ScrollContainerStyle]";
 		}
 		

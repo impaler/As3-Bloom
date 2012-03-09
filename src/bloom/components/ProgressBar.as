@@ -39,8 +39,8 @@ package bloom.components
 			size(200, 20);
 		}
 		
-		override public function destroy():void {
-			super.destroy();
+		override public function dispose():void {
+			super.dispose();
 			if (bitmapData0) bitmapData0.dispose();
 			bitmapData0 = null;
 			if (bitmapData1) bitmapData1.dispose();

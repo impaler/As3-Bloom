@@ -35,6 +35,10 @@ package bloom.themes
 		
 		function get window():WindowStyle;
 		
+		function get tabBoxContent():TabBoxContentStyle;
+		
+		function get accordionContent():AccordionContentStyle;
+		
 	}
 	
 }

@@ -19,8 +19,8 @@ package bloom.components
 			super(p);
 		}
 		
-		override public function destroy():void {
-			super.destroy();
+		override public function dispose():void {
+			super.dispose();
 			removeIcons();
 			_iconNormal = null;
 			_iconOver = null;

@@ -70,8 +70,8 @@ package bloom.components
 			invalidate();
 		}
 		
-		override public function destroy():void {
-			super.destroy();
+		override public function dispose():void {
+			super.dispose();
 			if (background) background.dispose();
 			background = null;
 			removeChild(_content);
@@ -80,10 +80,10 @@ package bloom.components
 			removeChild(_bg);
 			_bg = null;
 			if (h_scrollBar_enabled) removeChild(h_scrollBar);
-			h_scrollBar.destroy();
+			h_scrollBar.dispose();
 			h_scrollBar = null;
 			if (v_scrollBar_enabled) removeChild(v_scrollBar);
-			v_scrollBar.destroy();
+			v_scrollBar.dispose();
 			v_scrollBar = null;
 			v_mouseWheel.removeAll();
 			v_mouseWheel = null;

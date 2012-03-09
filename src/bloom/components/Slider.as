@@ -72,8 +72,8 @@ package bloom.components
 			_scrolling = new Signal(Slider);
 		}
 		
-		override public function destroy():void {
-			super.destroy();
+		override public function dispose():void {
+			super.dispose();
 			if (background) background.dispose();
 			background = null;
 			
@@ -93,7 +93,7 @@ package bloom.components
 			_scrolling = null;
 			
 			removeChild(_button);
-			_button.destroy();
+			_button.dispose();
 			_button = null;
 			
 			removeChild(_bg);

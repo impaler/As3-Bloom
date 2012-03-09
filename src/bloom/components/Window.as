@@ -158,8 +158,8 @@ package bloom.components
 			}
 		}
 		
-		override public function destroy():void {
-			super.destroy();
+		override public function dispose():void {
+			super.dispose();
 			if (background) background.dispose();
 			background = null;
 			if (scaler) scaler.dispose();
@@ -168,12 +168,12 @@ package bloom.components
 			_scaler.graphics.clear();
 			removeChild(_scaler);
 			removeChild(_header);
-			_header.destroy();
+			_header.dispose();
 			removeChild(_footer);
-			_footer.destroy();
+			_footer.dispose();
 			if (_content) {
 				removeChild(_content);
-				_content.destroy();
+				_content.dispose();
 			}
 			onHeaderClicked.removeAll();
 			onHeaderClicked = null;

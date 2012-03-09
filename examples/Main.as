@@ -7,7 +7,9 @@ package
 	import flash.events.MouseEvent;
 	
 	import bloom.components.*;
+	import bloom.core.ScaleBitmap;
 	import bloom.core.ThemeBase;
+	import bloom.styles.ContainerStyle;
 	import bloom.themes.BlueTheme;
 	
 	public class Main extends Sprite {
@@ -95,7 +97,60 @@ package
 			scrollContainer.getScrollBar(FlowContainer.HORIZONTALLY).height = 30;
 			scrollContainer.getScrollBar(FlowContainer.VERTICALLY).width = 30;
 			
+			var accordion:Accordion = new Accordion(this);
+			accordion.multiSelect = true;
+			accordion.move(230, 230);
+			
+			var accordionContent:AccordionContent = new AccordionContent("Part 0");
+			accordionContent.width = 200;
+			accordionContent.content.height = 50;
+			accordionContent.content.addChild(new Button(null, "Button"));
+			accordionContent.content.update();
+			accordion.addContent(accordionContent);
+			
+			accordionContent = new AccordionContent("Part 1");
+			accordionContent.width = 200;
+			accordionContent.content.height = 100;
+			accordionContent.content.addChild(new CheckBox(null, "CheckBox"));
+			accordionContent.content.update();
+			accordion.addContent(accordionContent);
+			
+			accordionContent = new AccordionContent("Part 2");
+			accordionContent.width = 200;
+			accordionContent.content.height = 40;
+			accordionContent.content.addChild(new ToggleButton(null, "ToggleButton"));
+			accordionContent.content.update();
+			accordion.addContent(accordionContent);
+			
+			accordion.update();
+			
+			var tabBox:TabBox = new TabBox(this);
+			tabBox.move(340, 10);
+			tabBox.size(300, 100);
+			
+			var tabBoxContent:TabBoxContent = new TabBoxContent("Part 0");
+			tabBoxContent.content.addChild(new Button(null, "Button"));
+			tabBoxContent.content.update();
+			tabBox.addContent(tabBoxContent);
+			
+			tabBoxContent = new TabBoxContent("Part 1");
+			tabBoxContent.content.addChild(new CheckBox(null, "CheckBox"));
+			tabBoxContent.content.update();
+			tabBox.addContent(tabBoxContent);
+			
+			tabBoxContent = new TabBoxContent("Part 2");
+			tabBoxContent.title.icon = new Bitmap(new BitmapData(10, 10, false, 0xffff00));
+			tabBoxContent.content.addChild(new ToggleButton(null, "ToggleButton"));
+			tabBoxContent.content.update();
+			tabBox.addContent(tabBoxContent);
+			
+			tabBox.header.update();
+			
+			var style:ContainerStyle = new ContainerStyle();
+			style.background = new ScaleBitmap(new BitmapData(1, 1, false, 0xCCCCCC));
+			
 			flowContainer = new FlowContainer();
+			flowContainer.style = style;
 			flowContainer.margin.reset(0, 8, 0, 8);
 			
 			var window:Window = new Window(this, flowContainer);

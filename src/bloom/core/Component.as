@@ -56,7 +56,7 @@ package bloom.core
 			draw(null);
 		}
 		
-		public function destroy():void {
+		public function dispose():void {
 			ThemeBase.onThemeChanged.remove(onThemeChanged);
 			ThemeBase.onStageDraw.remove(draw);
 			if (parent) parent.removeChild(this);

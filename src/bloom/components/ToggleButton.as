@@ -31,6 +31,14 @@ package bloom.components
 			_title.y = (_height - _title.height) * 0.5;
 		}
 		
+		override public function dispose():void {
+			super.dispose();
+			if (_icon) {
+				if (_icon.parent) removeChild(_icon);
+				_icon = null;
+			}
+		}
+		
 		override protected function onThemeChanged():void {
 			style = ThemeBase.theme.toggleButton;
 		}

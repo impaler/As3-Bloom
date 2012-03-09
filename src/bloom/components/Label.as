@@ -25,8 +25,8 @@ package bloom.components
 			style = ThemeBase.theme.label;
 		}
 		
-		override public function destroy():void {
-			super.destroy();
+		override public function dispose():void {
+			super.dispose();
 			ThemeBase.onThemeChanged.remove(onThemeChanged);
 		}
 		

@@ -23,6 +23,8 @@ package bloom.themes
 			_container = new BlueContainer();
 			_scrollContainer = new BlueScrollContainer();
 			_window = new BlueWindow();
+			_tabBoxContent = new BlueTabBoxContent();
+			_accordionContent = new BlueAccordionContent();
 		}
 		
 		///////////////////////////////////

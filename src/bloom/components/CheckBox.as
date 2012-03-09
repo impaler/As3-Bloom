@@ -49,12 +49,12 @@ package bloom.components
 			_title.move(_height + _title.margin.left, (_height - _title.height) / 2);
 		}
 		
-		override public function destroy():void {
-			super.destroy();
+		override public function dispose():void {
+			super.dispose();
 			if (background) background.dispose();
 			background = null;
 			removeChild(_title);
-			_title.destroy();
+			_title.dispose();
 			_title = null;
 			_mouseClick.removeAll();
 			_mouseClick = null;

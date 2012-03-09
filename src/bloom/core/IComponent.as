@@ -9,7 +9,7 @@ package bloom.core
 		
 		function drawDirectly():void;
 		
-		function destroy():void;
+		function dispose():void;
 		
 		function move(x:Number, y:Number):void;
 		

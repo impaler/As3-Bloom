@@ -80,21 +80,21 @@ package bloom.components
 			size(100, 20);
 		}
 		
-		override public function destroy():void {
-			super.destroy();
+		override public function dispose():void {
+			super.dispose();
 			if (background) background.dispose();
 			background = null;
 			
 			removeChild(_increase);
-			_increase.destroy();
+			_increase.dispose();
 			_increase = null;
 			
 			removeChild(_decrease);
-			_decrease.destroy();
+			_decrease.dispose();
 			_decrease = null;
 			
 			removeChild(_textBase);
-			_textBase.destroy();
+			_textBase.dispose();
 			_textBase = null;
 			
 			_mouseWheel.removeAll();

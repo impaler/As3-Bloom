@@ -22,6 +22,8 @@ package bloom.themes
 		protected var _container:ContainerStyle;
 		protected var _scrollContainer:ScrollContainerStyle;
 		protected var _window:WindowStyle;
+		protected var _tabBoxContent:TabBoxContentStyle;
+		protected var _accordionContent:AccordionContentStyle;
 		
 		public function Theme() {
 			
@@ -85,6 +87,14 @@ package bloom.themes
 		
 		public function get window():WindowStyle {
 			return _window;
+		}
+		
+		public function get tabBoxContent():TabBoxContentStyle {
+			return _tabBoxContent;
+		}
+		
+		public function get accordionContent():AccordionContentStyle {
+			return _accordionContent;
 		}
 		
 		///////////////////////////////////

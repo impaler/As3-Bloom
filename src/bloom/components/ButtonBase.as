@@ -49,8 +49,8 @@ package bloom.components
 			size(120, 30);
 		}
 		
-		override public function destroy():void {
-			super.destroy();
+		override public function dispose():void {
+			super.dispose();
 			_mouseUp.remove(onMouseUp);
 			_mouseOver.removeAll();
 			_mouseOver = null;
