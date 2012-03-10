@@ -1,15 +1,11 @@
-package bloom.containers {
+package bloom.style.containers {
 
-import bloom.brush.ComponentBackgroundBaseStyle;
+import bloom.style.ComponentBackgroundBaseStyle;
 
 /**
  * ContainerStyle
  */
 public class ContainerStyle extends ComponentBackgroundBaseStyle {
-
-	public function ContainerStyle () {
-
-	}
 
 	///////////////////////////////////
 	// toString
@@ -17,9 +13,6 @@ public class ContainerStyle extends ComponentBackgroundBaseStyle {
 
 	override public function toString ():String {
 		return "[bloom.styles.ContainerStyle]";
-	}
-
-	override public function dispose (gc:Boolean = false):void {
 	}
 
 }

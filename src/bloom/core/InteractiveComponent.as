@@ -88,6 +88,14 @@ public class InteractiveComponent extends Component {
 		_mouseClick = value;
 	}
 
+	public function get mouseUp ():NativeSignal {
+		return OmniCore.onStageMouseUp;
+	}
+
+	public function get mouseLeave ():NativeSignal {
+		return OmniCore.onStageMouseLeave;
+	}
+
 	///////////////////////////////////
 	// toString
 	///////////////////////////////////

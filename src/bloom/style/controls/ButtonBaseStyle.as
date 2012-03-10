@@ -1,6 +1,6 @@
-package bloom.controls {
+package bloom.style.controls {
 
-import bloom.brush.ComponentBackgroundBaseStyle;
+import bloom.style.ComponentBackgroundBaseStyle;
 
 /**
  * ButtonBaseStyle

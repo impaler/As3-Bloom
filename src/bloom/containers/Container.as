@@ -1,10 +1,16 @@
 package bloom.containers {
 
 import bloom.core.Component;
+import bloom.core.IComponent;
+import bloom.core.OmniCore;
+import bloom.style.containers.ContainerStyle;
 
 import flash.display.BitmapData;
+import flash.display.DisplayObject;
 import flash.display.DisplayObjectContainer;
+import flash.display.Sprite;
 import flash.events.Event;
+import flash.geom.Rectangle;
 
 /**
  * Container
@@ -12,21 +18,24 @@ import flash.events.Event;
 public class Container extends Component {
 
 	protected var background:BitmapData;
+	protected var container:Sprite;
+	private var _maskContent:Boolean;
 
 	public function Container (p:DisplayObjectContainer = null) {
 		super (p);
-//			_style = ThemeBase.theme.container;
-		size (100,100);
-	}
-
-	override public function dispose (gc:Boolean = false):void {
-		super.dispose (gc);
-		if (background) background.dispose ();
-		background = null;
+		container = this;
 	}
 
 	override protected function onThemeChanged ():void {
-//			style = ThemeBase.theme.container;
+		_style = OmniCore.defaultTheme.containerStyle;
+		super.onThemeChanged ();
+	}
+
+	public function addContent (content:IComponent):void {
+		if (content is IComponent) {
+			content.drawDirectly ();
+			container.addChild (DisplayObject (content));
+		}
 	}
 
 	override protected function draw (e:Event = null):void {
@@ -35,8 +44,19 @@ public class Container extends Component {
 
 		containerStyle.background.update (_state,this,getDimensionObject);
 
+		positionContent ();
+
+		applyMask ();
+
 	}
 
+	private function applyMask ():void {
+		_maskContent ? container.scrollRect = new Rectangle (0,0,_width,_height) : container.scrollRect = null;
+	}
+
+	public function positionContent ():void {
+
+	}
 
 	///////////////////////////////////
 	// getter/setters
@@ -44,6 +64,27 @@ public class Container extends Component {
 
 	public function get containerStyle ():ContainerStyle {
 		return _style as ContainerStyle;
+	}
+
+	public function get maskContent ():Boolean {
+		return _maskContent;
+	}
+
+	public function set maskContent (value:Boolean):void {
+		if (value != _maskContent) {
+			_maskContent = value;
+			applyMask ();
+		}
+	}
+
+///////////////////////////////////
+	// Dispose
+	///////////////////////////////////
+
+	override public function dispose (gc:Boolean = false):void {
+		super.dispose (gc);
+		if (background) background.dispose ();
+		background = null;
 	}
 
 	///////////////////////////////////

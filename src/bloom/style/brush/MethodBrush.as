@@ -1,4 +1,4 @@
-package bloom.brush {
+package bloom.style.brush {
 
 public class MethodBrush extends Brush {
 

@@ -1,4 +1,4 @@
-package bloom.brush {
+package bloom.style {
 
 import bloom.core.IStyle;
 

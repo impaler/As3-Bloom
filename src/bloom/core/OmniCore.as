@@ -44,7 +44,7 @@ public class OmniCore {
 
 	public static function set defaultTheme (value:Theme):void {
 		if (_defaultTheme != value) {
-			_defaultTheme.dispose(true);
+			_defaultTheme.dispose (true);
 			_defaultTheme = value;
 			_onDefaultThemeChanged.dispatch ();
 		}

@@ -1,6 +1,7 @@
 package bloom.controls {
 
 import bloom.core.OmniCore;
+import bloom.style.controls.ButtonStyle;
 
 import flash.display.DisplayObject;
 import flash.display.DisplayObjectContainer;
@@ -47,7 +48,6 @@ public class Button extends ButtonBase {
 		_icon = null;
 	}
 
-
 	override protected function draw (e:Event = null):void {
 		if (! _changed) return;
 
@@ -71,7 +71,6 @@ public class Button extends ButtonBase {
 		}
 		_title.y = (_height - _title.height) * 0.5;
 	}
-
 
 //	private function drawIcon ():void {
 //		switch (state) {

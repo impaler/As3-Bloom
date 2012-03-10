@@ -19,44 +19,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package bloom.brush {
+package bloom.style.brush {
 
-import bloom.core.Component;
-import bloom.core.ScaleBitmap;
+/**
+ * Brush
+ *
+ *
+ */
+public class Brush {
 
-public class BMPBrush extends Brush {
+	public function update (state:int,value:*,args:Object = null):void {
 
-	public var bitmap:Vector.<ScaleBitmap>;
-
-	public function BMPBrush (bitmap:Vector.<ScaleBitmap> = null) {
-		this.bitmap = bitmap;
 	}
 
-	override public function update (state:int,value:*,args:Object = null):void {
-		var scale:ScaleBitmap = ScaleBitmap (bitmap[state]).clone ();
-		scale.setSize (args.width,args.height);
+	public function dispose ():void {
 
-		var _value:Component = value as Component;
-		_value.graphics.clear ();
-		_value.graphics.beginBitmapFill (scale.bitmapData);
-		_value.graphics.drawRect (0,0,args.width,args.height);
-		_value.graphics.endFill ();
 	}
 
 	///////////////////////////////////
 	// toString
 	///////////////////////////////////
 
-	override public function toString ():String {
-		return "[bloom.brushes.BMPBrush]";
-	}
-
-	override public function dispose ():void {
-		for each(var image:ScaleBitmap in bitmap) {
-			image.dispose ();
-			image = null;
-		}
-		bitmap = null;
+	public function toString ():String {
+		return "[bloom.brushes.Brush]";
 	}
 
 }

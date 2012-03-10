@@ -11,6 +11,7 @@ public class BlueTheme extends Theme {
 		disabledAlpha = 0.5;
 		buttonBase = BlueButtonBase;
 		button = BlueButton;
+		container = BlueContainer;
 
 //			_label = new BlueLabel();
 

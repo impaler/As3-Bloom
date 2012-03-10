@@ -1,10 +1,5 @@
 package {
 
-import bloom.controls.*;
-import bloom.core.OmniCore;
-import bloom.themes.blue.BlueTheme;
-import bloom.utils.ColorUtils;
-
 import flash.display.Sprite;
 import flash.events.Event;
 

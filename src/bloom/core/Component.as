@@ -1,6 +1,6 @@
 package bloom.core {
 
-import bloom.brush.ComponentBaseStyle;
+import bloom.style.ComponentBaseStyle;
 
 import flash.display.DisplayObjectContainer;
 import flash.display.Sprite;
@@ -27,7 +27,7 @@ public class Component extends Sprite implements IComponent {
 
 	protected var _style:ComponentBaseStyle;
 	protected var _onResized:Signal;
-	protected var _margin:Padding;
+	protected var _padding:Padding;
 
 	public function Component (p:DisplayObjectContainer = null) {
 		super ();
@@ -39,9 +39,10 @@ public class Component extends Sprite implements IComponent {
 
 		if (p) p.addChild (this);
 
-		createAssets();
+		createAssets ();
 		onThemeChanged ();
-		initalizeDefaultStyle ();
+		initializeDefaultStyle ();
+		enableSignals ();
 
 		OmniCore.onDefaultThemeChanged.add (onThemeChanged);
 	}
@@ -72,8 +73,8 @@ public class Component extends Sprite implements IComponent {
 		}
 	}
 
-	public function initalizeDefaultStyle ():void {
-		_state = StateConstants.ACTIVE;
+	public function initializeDefaultStyle ():void {
+		_state = ComponentConstants.ACTIVE;
 		size (_style.defaultWidth,_style.defaultHeight);
 	}
 
@@ -95,7 +96,7 @@ public class Component extends Sprite implements IComponent {
 	}
 
 	public function onMarginChanged ():void {
-		if (_margin) {
+		if (_padding) {
 			_changed = true;
 			invalidate ();
 		}
@@ -148,10 +149,10 @@ public class Component extends Sprite implements IComponent {
 			_enabled = mouseEnabled = mouseChildren = value;
 
 			if (_enabled) {
-				_state = StateConstants.ACTIVE;
+				_state = ComponentConstants.ACTIVE;
 				enableSignals ();
 			} else {
-				_state = StateConstants.DISABLED;
+				_state = ComponentConstants.DISABLED;
 				disableSignals ();
 			}
 			_changed = true;
@@ -172,17 +173,24 @@ public class Component extends Sprite implements IComponent {
 			_style = value;
 			_changed = true;
 			invalidate ();
-			if ( _customStyleAuto ) _customStyle = true;
-			OmniCore.onDefaultThemeChanged.remove(onThemeChanged);
+			if (_customStyleAuto) _customStyle = true;
+			OmniCore.onDefaultThemeChanged.remove (onThemeChanged);
 		}
 	}
 
 	public function get padding ():Padding {
-		if (_margin == null) {
-			_margin = new Padding ();
-			_margin.onResized.add (onMarginChanged);
+		if (_padding == null) {
+			_padding = new Padding ();
+			_padding.onResized.add (onMarginChanged);
 		}
-		return _margin;
+		return _padding;
+	}
+
+	public function set padding (value:Padding):void {
+		if (value != _padding) {
+			_padding = value;
+			onMarginChanged ();
+		}
 	}
 
 	public function get getDimensionObject ():Object {
@@ -223,7 +231,7 @@ public class Component extends Sprite implements IComponent {
 	///////////////////////////////////
 
 	public function dispose (gc:Boolean = false):void {
-		trace("dispose");
+		trace ("dispose");
 
 		if (parent) parent.removeChild (this);
 
@@ -233,14 +241,11 @@ public class Component extends Sprite implements IComponent {
 
 		OmniCore.onStageDraw.remove (draw);
 
-		if (_margin != null) _margin.dispose ();
-		_margin = null;
+		if (_padding != null) _padding.dispose ();
+		_padding = null;
 
 		if (gc) System.gc ();
 	}
-
-
-
 
 }
 

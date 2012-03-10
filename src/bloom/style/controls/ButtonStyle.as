@@ -1,6 +1,6 @@
-package bloom.controls {
+package bloom.style.controls {
 
-import bloom.brush.TextBrush;
+import bloom.style.brush.TextBrush;
 
 /**
  * ButtonStyle

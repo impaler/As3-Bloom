@@ -1,32 +1,33 @@
 package bloom.controls {
 
-import bloom.brush.ComponentBaseStyle;
-import bloom.core.IStyle;
+import bloom.core.ComponentConstants;
 import bloom.core.InteractiveComponent;
 import bloom.core.OmniCore;
-import bloom.core.StateConstants;
+import bloom.core.Padding;
+import bloom.style.controls.ButtonBaseStyle;
 
 import flash.display.DisplayObjectContainer;
 import flash.events.Event;
 import flash.events.MouseEvent;
-
-import org.osflash.signals.natives.NativeSignal;
 
 /**
  * ButtonBase
  */
 public class ButtonBase extends InteractiveComponent {
 
+	protected var _isDown:Boolean = false;
+
 	public function ButtonBase (p:DisplayObjectContainer = null) {
-		super (p);
 		buttonMode = true;
 		tabEnabled = false;
 
-		enableSignals();
+		super (p);
+
+		padding = new Padding (2,2,2,2);
 	}
 
 	override public function enableSignals ():void {
-		mouseOver.add (onMouseOver);
+		mouseOver.addOnce (onMouseOver);
 		mouseDown.add (onMouseDown);
 	}
 
@@ -36,51 +37,59 @@ public class ButtonBase extends InteractiveComponent {
 	}
 
 	override protected function onThemeChanged ():void {
-		_style = OmniCore.defaultTheme.buttonBaseStyle as ComponentBaseStyle;
-		super.onThemeChanged();
+		_style = OmniCore.defaultTheme.buttonBaseStyle;
+		super.onThemeChanged ();
 	}
 
 	override protected function draw (e:Event = null):void {
 		if (! _changed) return;
 		_changed = false;
+
 		buttonBaseStyle.background.update (_state,this,getDimensionObject);
 	}
 
-	protected function onMouseOver (e:MouseEvent):void {
-		if (_state != StateConstants.OVER) {
-			_state = StateConstants.OVER;
+	public function onMouseOver (e:MouseEvent):void {
+		if (_state != ComponentConstants.OVER) {
+			_state = ComponentConstants.OVER;
 			_changed = true;
 			invalidate ();
-			mouseOut.add (onMouseOut);
+			mouseOut.addOnce (onMouseOut);
 		}
 	}
 
 	protected function onMouseDown (e:MouseEvent):void {
-		if (_state != StateConstants.ACTIVATED) {
-			_state = StateConstants.ACTIVATED;
+		if (_state != ComponentConstants.ACTIVATED) {
+			_state = ComponentConstants.ACTIVATED;
+			_isDown = true;
 			_changed = true;
 			invalidate ();
-			mouseUp.add (onMouseUp);
-			mouseOver.remove (onMouseOver);
+			mouseUp.addOnce (onMouseUp);
 		}
 	}
 
 	protected function onMouseUp (e:MouseEvent):void {
-		_state = StateConstants.ACTIVE;
+		_state = ComponentConstants.ACTIVE;
+		//check if the cursor is still over the button
+		mouseOut.numListeners > 0 ? _state = ComponentConstants.OVER : _state = ComponentConstants.ACTIVE;
 		_changed = true;
+		_isDown = false;
 		invalidate ();
-		mouseOver.add (onMouseOver);
-		mouseOut.remove (onMouseOut);
-		mouseUp.remove (onMouseUp);
+		mouseOver.addOnce (onMouseOver);
 	}
 
-	protected function onMouseOut (e:MouseEvent):void {
-		if (_state != StateConstants.ACTIVATED) onMouseUp (e);
+	public function onMouseOut (e:MouseEvent):void {
+		if (_state != ComponentConstants.ACTIVATED || _state != ComponentConstants.OVER) {
+			if (! _isDown) onMouseUp (e);
+		}
 	}
 
 	///////////////////////////////////
 	// getter/setters
 	///////////////////////////////////
+
+	public function get buttonBaseStyle ():ButtonBaseStyle {
+		return _style as ButtonBaseStyle;
+	}
 
 	public function get state ():int {
 		return _state;
@@ -90,14 +99,6 @@ public class ButtonBase extends InteractiveComponent {
 		_state = value;
 		_changed = true;
 		invalidate ();
-	}
-
-	public function get mouseUp ():NativeSignal {
-		return OmniCore.onStageMouseUp;
-	}
-
-	public function get buttonBaseStyle ():ButtonBaseStyle {
-		return _style as ButtonBaseStyle;
 	}
 
 	///////////////////////////////////

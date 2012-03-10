@@ -1,6 +1,5 @@
 package bloom.controls {
 
-import bloom.core.OmniCore;
 import bloom.core.TextBase;
 
 import flash.display.DisplayObjectContainer;
@@ -25,13 +24,16 @@ public class Label extends TextBase {
 //		style = OmniCore.defaultTheme.label;
 	}
 
-	override public function dispose (gc:Boolean = false):void {
-		super.dispose (gc);
-		OmniCore.onDefaultThemeChanged.remove (onThemeChanged);
-	}
-
 	override protected function onThemeChanged ():void {
 //		style = OmniCore.defaultTheme.label;
+	}
+
+	///////////////////////////////////
+	// Dispose
+	///////////////////////////////////
+
+	override public function dispose (gc:Boolean = false):void {
+		super.dispose (gc);
 	}
 
 	///////////////////////////////////

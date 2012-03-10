@@ -1,11 +1,11 @@
 package bloom.themes.blue {
 
-import bloom.brush.BMPBrush;
-import bloom.brush.TextBrush;
-import bloom.controls.ButtonStyle;
-import bloom.controls.TextStyle;
+import bloom.core.ComponentConstants;
 import bloom.core.ScaleBitmap;
-import bloom.core.StateConstants;
+import bloom.style.brush.BMPBrush;
+import bloom.style.brush.TextBrush;
+import bloom.style.controls.ButtonStyle;
+import bloom.style.controls.TextStyle;
 import bloom.utils.ColorUtils;
 
 import flash.geom.Rectangle;
@@ -57,10 +57,10 @@ public class BlueButton extends ButtonStyle {
 		title_disabled.textFormat.bold = true;
 
 		var data:Vector.<TextStyle> = new Vector.<TextStyle> (4,true);
-		data[StateConstants.ACTIVE] = title_normal;
-		data[StateConstants.OVER] = title_over;
-		data[StateConstants.ACTIVATED] = title_down;
-		data[StateConstants.DISABLED] = title_disabled;
+		data[ComponentConstants.ACTIVE] = title_normal;
+		data[ComponentConstants.OVER] = title_over;
+		data[ComponentConstants.ACTIVATED] = title_down;
+		data[ComponentConstants.DISABLED] = title_disabled;
 		buttonText = new TextBrush (data);
 
 		var normal:ScaleBitmap = new ScaleBitmap (new bm0 ().bitmapData);
@@ -76,10 +76,10 @@ public class BlueButton extends ButtonStyle {
 		disabled.scale9Grid = new Rectangle (15,15,70,14);
 		disabled.alpha = .2;
 
-		_scaleBitmaps[StateConstants.ACTIVE] = normal;
-		_scaleBitmaps[StateConstants.OVER] = over;
-		_scaleBitmaps[StateConstants.ACTIVATED] = down;
-		_scaleBitmaps[StateConstants.DISABLED] = disabled;
+		_scaleBitmaps[ComponentConstants.ACTIVE] = normal;
+		_scaleBitmaps[ComponentConstants.OVER] = over;
+		_scaleBitmaps[ComponentConstants.ACTIVATED] = down;
+		_scaleBitmaps[ComponentConstants.DISABLED] = disabled;
 		background = new BMPBrush (_scaleBitmaps);
 
 		defaultWidth = 300;

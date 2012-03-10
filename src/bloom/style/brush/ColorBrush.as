@@ -1,4 +1,4 @@
-package bloom.brush {
+package bloom.style.brush {
 
 import flash.display.Graphics;
 import flash.display.Sprite;
@@ -13,7 +13,7 @@ public class ColorBrush extends Brush {
 	}
 
 	override public function update (state:int,value:*,args:Object = null):void {
-		var _value:Graphics = Sprite(value).graphics;
+		var _value:Graphics = Sprite (value).graphics;
 
 		_value.clear ();
 		_value.beginFill (colors[state]);

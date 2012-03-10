@@ -30,12 +30,6 @@ public class Padding {
 		this._right = right;
 	}
 
-
-
-
-
-
-
 	public function get onResized ():Signal {
 		if (_onResized == null) _onResized = new Signal ();
 		return _onResized;
@@ -76,21 +70,12 @@ public class Padding {
 		_right = value;
 	}
 
-
-
-
 	public function dispose (gc:Boolean = false):void {
 		if (_onResized != null)_onResized.removeAll ();
 		_onResized = null;
 
 		if (gc) System.gc ();
 	}
-
-
-
-
-
-
 
 	///////////////////////////////////
 	// toString

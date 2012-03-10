@@ -1,9 +1,9 @@
 package bloom.themes.blue {
 
-import bloom.brush.BMPBrush;
-import bloom.controls.ButtonBaseStyle;
+import bloom.core.ComponentConstants;
 import bloom.core.ScaleBitmap;
-import bloom.core.StateConstants;
+import bloom.style.brush.BMPBrush;
+import bloom.style.controls.ButtonBaseStyle;
 
 import flash.geom.Rectangle;
 
@@ -39,12 +39,12 @@ public class BlueButtonBase extends ButtonBaseStyle {
 
 		var disabled:ScaleBitmap = new ScaleBitmap (new bm3 ().bitmapData);
 		disabled.scale9Grid = new Rectangle (15,15,70,14);
-		disabled.alpha =.2;
+		disabled.alpha = .2;
 
-		_scaleBitmaps[StateConstants.ACTIVE] = normal;
-		_scaleBitmaps[StateConstants.OVER] = over;
-		_scaleBitmaps[StateConstants.ACTIVATED] = down;
-		_scaleBitmaps[StateConstants.DISABLED] = disabled;
+		_scaleBitmaps[ComponentConstants.ACTIVE] = normal;
+		_scaleBitmaps[ComponentConstants.OVER] = over;
+		_scaleBitmaps[ComponentConstants.ACTIVATED] = down;
+		_scaleBitmaps[ComponentConstants.DISABLED] = disabled;
 		background = new BMPBrush (_scaleBitmaps);
 
 		defaultWidth = 100;

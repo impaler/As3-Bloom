@@ -1,6 +1,6 @@
 package bloom.core {
 
-import bloom.controls.TextStyle;
+import bloom.style.controls.TextStyle;
 
 import flash.display.DisplayObjectContainer;
 import flash.events.Event;
@@ -61,7 +61,7 @@ public class TextBase extends TextField implements IComponent {
 	public function dispose (gc:Boolean = false):void {
 		OmniCore.onDefaultThemeChanged.remove (onThemeChanged);
 		_style = null;
-		_onTextChanged.removeAll ();
+		if (_onTextChanged) _onTextChanged.removeAll ();
 		_onTextChanged = null;
 		if (_onFocusedIn) _onFocusedIn.removeAll ();
 		_onFocusedIn = null;
@@ -103,7 +103,7 @@ public class TextBase extends TextField implements IComponent {
 	}
 
 	public function get padding ():Padding {
-		if(!_padding ) _padding= new Padding ();
+		if (! _padding) _padding = new Padding ();
 		return _padding;
 	}
 

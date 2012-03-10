@@ -1,4 +1,6 @@
-package bloom.brush {
+package bloom.style {
+
+import bloom.style.brush.Brush;
 
 /**
  * ComponentBaseStyle
@@ -12,10 +14,9 @@ public class ComponentBackgroundBaseStyle extends ComponentBaseStyle {
 	///////////////////////////////////
 
 	override public function dispose (gc:Boolean = false):void {
-		background.dispose();
+		background.dispose ();
 		background = null;
 	}
-
 
 	///////////////////////////////////
 	// toString
