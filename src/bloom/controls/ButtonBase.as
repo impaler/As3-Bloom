@@ -22,8 +22,6 @@ public class ButtonBase extends InteractiveComponent {
 		tabEnabled = false;
 
 		super (p);
-
-		padding = new Padding (2,2,2,2);
 	}
 
 	override public function enableSignals ():void {

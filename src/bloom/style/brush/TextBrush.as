@@ -1,21 +1,24 @@
 package bloom.style.brush {
 
 import bloom.core.TextBase;
-import bloom.style.controls.TextStyle;
+
+import flash.text.TextFormat;
 
 public class TextBrush extends Brush {
 
-	public var textStyle:Vector.<TextStyle>;
+	public var textStyle:Vector.<TextFormat>;
 
-	public function TextBrush (bitmap:Vector.<TextStyle> = null) {
-		this.textStyle = bitmap;
+	public function TextBrush (textFormats:Vector.<TextFormat> = null) {
+		this.textStyle = textFormats;
 	}
 
 	override public function update (state:int,value:*,args:Object = null):void {
-		var style:TextStyle = textStyle[state];
-
 		var _text:TextBase = value as TextBase;
-		_text.style = style;
+
+		var defaultTextformy:TextFormat = TextFormat (textStyle[state]);
+		_text.defaultTextFormat = defaultTextformy;
+		_text.setTextFormat (defaultTextformy);
+
 	}
 
 	///////////////////////////////////
@@ -23,11 +26,11 @@ public class TextBrush extends Brush {
 	///////////////////////////////////
 
 	override public function toString ():String {
-		return "[bloom.brushes.BMPBrush]";
+		return "[bloom.brushes.TextBrush]";
 	}
 
 	override public function dispose ():void {
-
+		textStyle = null;
 	}
 
 }

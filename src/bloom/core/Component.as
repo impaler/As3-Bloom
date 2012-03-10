@@ -19,7 +19,6 @@ public class Component extends Sprite implements IComponent {
 	protected var _changed:Boolean = false;
 	protected var _customStyle:Boolean = false;
 	protected var _customStyleAuto:Boolean = true;
-	protected var _created:Boolean = false;
 
 	protected var _state:int;
 	protected var _width:Number = 0;
@@ -41,10 +40,11 @@ public class Component extends Sprite implements IComponent {
 
 		createAssets ();
 		onThemeChanged ();
-		initializeDefaultStyle ();
+		initDefaultStyle ();
 		enableSignals ();
 
-		OmniCore.onDefaultThemeChanged.add (onThemeChanged);
+		if (OmniCore.monitorThemeChange)
+			OmniCore.onDefaultThemeChanged.add (onThemeChanged);
 	}
 
 	protected function createAssets ():void {
@@ -73,7 +73,7 @@ public class Component extends Sprite implements IComponent {
 		}
 	}
 
-	public function initializeDefaultStyle ():void {
+	public function initDefaultStyle ():void {
 		_state = ComponentConstants.ACTIVE;
 		size (_style.defaultWidth,_style.defaultHeight);
 	}
@@ -174,7 +174,15 @@ public class Component extends Sprite implements IComponent {
 			_changed = true;
 			invalidate ();
 			if (_customStyleAuto) _customStyle = true;
-			OmniCore.onDefaultThemeChanged.remove (onThemeChanged);
+			if (OmniCore.monitorThemeChange)
+				OmniCore.onDefaultThemeChanged.remove (onThemeChanged);
+		}
+	}
+
+	public function set styleInternal (value:ComponentBaseStyle):void {
+		if (_style != value) {
+			_style = value;
+			invalidate ();
 		}
 	}
 
@@ -237,7 +245,8 @@ public class Component extends Sprite implements IComponent {
 
 		if (_onResized != null)_onResized.removeAll ();
 		_onResized = null;
-		OmniCore.onDefaultThemeChanged.remove (onThemeChanged);
+		if (OmniCore.monitorThemeChange)
+			OmniCore.onDefaultThemeChanged.remove (onThemeChanged);
 
 		OmniCore.onStageDraw.remove (draw);
 

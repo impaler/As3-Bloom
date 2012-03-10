@@ -23,12 +23,12 @@ public class Button extends ButtonBase {
 
 	override public function enableSignals ():void {
 		super.enableSignals ();
-		_title.onTextChanged.add (onTitleChanged);
+		_title.onTextChanged.add (positionTitleandIcon);
 	}
 
 	override public function disableSignals ():void {
 		super.enableSignals ();
-		_title.onTextChanged.remove (onTitleChanged);
+		_title.onTextChanged.remove (positionTitleandIcon);
 	}
 
 	override protected function createAssets ():void {
@@ -37,15 +37,10 @@ public class Button extends ButtonBase {
 
 	override protected function onThemeChanged ():void {
 		_style = OmniCore.defaultTheme.buttonStyle as ButtonStyle;
-	}
-
-	override public function dispose (gc:Boolean = false):void {
-		super.dispose (gc);
-		removeChild (_title);
-		_title.dispose (false);
-		_title = null;
-		if (_icon) removeChild (_icon);
-		_icon = null;
+		if (_style) {
+			_changed = true;
+			invalidate ();
+		}
 	}
 
 	override protected function draw (e:Event = null):void {
@@ -56,12 +51,14 @@ public class Button extends ButtonBase {
 		buttonStyle.background.update (_state,this,getDimensionObject);
 		buttonStyle.buttonText.update (_state,_title,getDimensionObject);
 
-		onTitleChanged (null);
+//		_title.state = _state;
+
+		positionTitleandIcon ();
 
 //		drawIcon();
 	}
 
-	protected function onTitleChanged (e:Event):void {
+	protected function positionTitleandIcon (e:Event = null):void {
 		if (_icon) {
 			_icon.x = (_width - _icon.width - _title.padding.left - _title.width) * 0.5;
 			_icon.y = (_height - _icon.height) * 0.5;
@@ -116,13 +113,22 @@ public class Button extends ButtonBase {
 			_icon = value;
 			if (_icon) {
 				addChild (_icon);
-				onTitleChanged (null);
+				positionTitleandIcon (null);
 			}
 		}
 	}
 
 	public function get title ():Label {
 		return _title;
+	}
+
+	override public function dispose (gc:Boolean = false):void {
+		super.dispose (gc);
+		removeChild (_title);
+		_title.dispose (false);
+		_title = null;
+		if (_icon) removeChild (_icon);
+		_icon = null;
 	}
 
 	///////////////////////////////////

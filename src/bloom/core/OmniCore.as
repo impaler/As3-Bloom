@@ -20,11 +20,13 @@ public class OmniCore {
 	private static var _onStageMouseMove:NativeSignal;
 	private static var _onStageMouseLeave:NativeSignal;
 
-	private static var _onDefaultThemeChanged:Signal = new Signal ();
+	private static var _onDefaultThemeChanged:Signal;
+	private static var _monitorThemeChange:Boolean = false;
 	private static var _defaultTheme:Theme;
 
-	public static function init (stage:Stage,theme:Class):void {
+	public static function init (stage:Stage,theme:Class,monitorTheme:Boolean = false):void {
 		_defaultTheme = new theme () as Theme;
+		monitorThemeChange = monitorTheme;
 
 		_stage = stage;
 		_onStageDraw = new NativeSignal (_stage,Event.RENDER,Event);
@@ -44,9 +46,11 @@ public class OmniCore {
 
 	public static function set defaultTheme (value:Theme):void {
 		if (_defaultTheme != value) {
-			_defaultTheme.dispose (true);
-			_defaultTheme = value;
-			_onDefaultThemeChanged.dispatch ();
+			if (monitorThemeChange) {
+				_defaultTheme.dispose (true);
+				_defaultTheme = value;
+				_onDefaultThemeChanged.dispatch ();
+			}
 		}
 	}
 
@@ -78,5 +82,23 @@ public class OmniCore {
 		return _stage;
 	}
 
+	public static function get monitorThemeChange ():Boolean {
+		return _monitorThemeChange;
+	}
+
+	public static function set monitorThemeChange (value:Boolean):void {
+		if (value != _monitorThemeChange) {
+			_monitorThemeChange = value;
+
+			if (_monitorThemeChange) {
+				_onDefaultThemeChanged = new Signal ();
+			} else {
+				if (_onDefaultThemeChanged) _onDefaultThemeChanged.removeAll ();
+				_onDefaultThemeChanged = null;
+			}
+
+		}
+
+	}
 }
 }

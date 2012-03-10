@@ -1,19 +1,14 @@
 package bloom.style.controls {
 
 import bloom.core.IStyle;
-
-import flash.text.TextFormat;
+import bloom.style.brush.Brush;
 
 /**
  * TextStyle
  */
 public class TextStyle implements IStyle {
 
-	public var textFormat:TextFormat;
-
-	public function TextStyle (format:TextFormat = null) {
-		textFormat = format ? format : new TextFormat ();
-	}
+	public var textStyleBrush:Brush;
 
 	///////////////////////////////////
 	// toString
@@ -24,10 +19,10 @@ public class TextStyle implements IStyle {
 	}
 
 	public function dispose (gc:Boolean = false):void {
+		textStyleBrush.dispose ();
+		textStyleBrush = null;
 	}
 
-	public function update (state:int,value:*,args:Object = null):void {
-	}
 }
 
 }

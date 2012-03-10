@@ -1,13 +1,13 @@
 package bloom.style.controls {
 
-import bloom.style.brush.TextBrush;
+import bloom.style.brush.Brush;
 
 /**
  * ButtonStyle
  */
 public class ButtonStyle extends ButtonBaseStyle {
 
-	public var buttonText:TextBrush;
+	public var buttonText:Brush;
 
 	///////////////////////////////////
 	// toString

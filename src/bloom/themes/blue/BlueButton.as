@@ -3,6 +3,7 @@ package bloom.themes.blue {
 import bloom.core.ComponentConstants;
 import bloom.core.ScaleBitmap;
 import bloom.style.brush.BMPBrush;
+import bloom.style.brush.Brush;
 import bloom.style.brush.TextBrush;
 import bloom.style.controls.ButtonStyle;
 import bloom.style.controls.TextStyle;
@@ -32,36 +33,8 @@ public class BlueButton extends ButtonStyle {
 	public function BlueButton () {
 		super ();
 
-		var title_normal:TextStyle = new TextStyle ();
-		title_normal.textFormat.font = "Verdana";
-		title_normal.textFormat.size = 12;
-		title_normal.textFormat.color = 0xffffff;
-		title_normal.textFormat.bold = false;
-
-		var title_over:TextStyle = new TextStyle ();
-		title_over.textFormat.font = "Verdana";
-		title_over.textFormat.size = 12;
-		title_over.textFormat.color = 0xffffff;
-		title_over.textFormat.bold = true;
-
-		var title_down:TextStyle = new TextStyle ();
-		title_down.textFormat.font = "Verdana";
-		title_down.textFormat.size = 12;
-		title_down.textFormat.color = 0x000000;
-		title_down.textFormat.bold = true;
-
-		var title_disabled:TextStyle = new TextStyle ();
-		title_disabled.textFormat.font = "Verdana";
-		title_disabled.textFormat.size = 12;
-		title_disabled.textFormat.color = ColorUtils.LIGHT_GRAY;
-		title_disabled.textFormat.bold = true;
-
-		var data:Vector.<TextStyle> = new Vector.<TextStyle> (4,true);
-		data[ComponentConstants.ACTIVE] = title_normal;
-		data[ComponentConstants.OVER] = title_over;
-		data[ComponentConstants.ACTIVATED] = title_down;
-		data[ComponentConstants.DISABLED] = title_disabled;
-		buttonText = new TextBrush (data);
+		var textBrush:BlueLabel = new BlueLabel ();
+		buttonText = textBrush.textStyleBrush as Brush;
 
 		var normal:ScaleBitmap = new ScaleBitmap (new bm0 ().bitmapData);
 		normal.scale9Grid = new Rectangle (15,15,70,14);

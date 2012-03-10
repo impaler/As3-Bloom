@@ -19,7 +19,7 @@ public class Container extends Component {
 
 	protected var background:BitmapData;
 	protected var container:Sprite;
-	private var _maskContent:Boolean;
+	protected var _maskContent:Boolean;
 
 	public function Container (p:DisplayObjectContainer = null) {
 		super (p);
@@ -29,6 +29,11 @@ public class Container extends Component {
 	override protected function onThemeChanged ():void {
 		_style = OmniCore.defaultTheme.containerStyle;
 		super.onThemeChanged ();
+	}
+
+	override public function initDefaultStyle ():void {
+		super.initDefaultStyle ();
+		_maskContent = containerStyle.maskContent;
 	}
 
 	public function addContent (content:IComponent):void {
@@ -45,9 +50,7 @@ public class Container extends Component {
 		containerStyle.background.update (_state,this,getDimensionObject);
 
 		positionContent ();
-
 		applyMask ();
-
 	}
 
 	private function applyMask ():void {
@@ -55,7 +58,6 @@ public class Container extends Component {
 	}
 
 	public function positionContent ():void {
-
 	}
 
 	///////////////////////////////////
@@ -77,7 +79,7 @@ public class Container extends Component {
 		}
 	}
 
-///////////////////////////////////
+	///////////////////////////////////
 	// Dispose
 	///////////////////////////////////
 

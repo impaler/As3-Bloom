@@ -24,12 +24,23 @@ public class TextBase extends TextField implements IComponent {
 	protected var _onFocusedOut:NativeSignal;
 	protected var _onTextScroll:NativeSignal;
 
+	private var _state:int;
+
 	public function TextBase (p:DisplayObjectContainer = null) {
 		super ();
 
 		if (p) p.addChild (this);
 
-		OmniCore.onDefaultThemeChanged.add (onThemeChanged);
+		onThemeChanged ();
+
+		state = ComponentConstants.ACTIVE;
+
+		if (OmniCore.monitorThemeChange)
+			OmniCore.onDefaultThemeChanged.add (onThemeChanged);
+	}
+
+	protected function onThemeChanged ():void {
+		style = OmniCore.defaultTheme.textStyle;
 	}
 
 	public function onAddedToStage (e:Event):void {
@@ -55,11 +66,12 @@ public class TextBase extends TextField implements IComponent {
 	}
 
 	public function drawDirectly ():void {
-
+		_style.textStyleBrush.update (_state,this);
 	}
 
 	public function dispose (gc:Boolean = false):void {
-		OmniCore.onDefaultThemeChanged.remove (onThemeChanged);
+		if (OmniCore.monitorThemeChange)
+			OmniCore.onDefaultThemeChanged.remove (onThemeChanged);
 		_style = null;
 		if (_onTextChanged) _onTextChanged.removeAll ();
 		_onTextChanged = null;
@@ -67,10 +79,6 @@ public class TextBase extends TextField implements IComponent {
 		_onFocusedIn = null;
 		if (_onFocusedOut) _onFocusedOut.removeAll ();
 		_onFocusedOut = null;
-	}
-
-	protected function onThemeChanged ():void {
-
 	}
 
 	///////////////////////////////////
@@ -85,9 +93,19 @@ public class TextBase extends TextField implements IComponent {
 		if (_style != value) {
 			_style = value;
 			if (_style) {
-				defaultTextFormat = _style.textFormat;
-				setTextFormat (defaultTextFormat);
+				drawDirectly ();
 			}
+		}
+	}
+
+	public function get state ():int {
+		return _state;
+	}
+
+	public function set state (value:int):void {
+		if (value != _state) {
+			_state = value;
+			drawDirectly ();
 		}
 	}
 

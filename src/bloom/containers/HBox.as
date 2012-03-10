@@ -9,8 +9,6 @@ public class HBox extends Container {
 
 	public function HBox (p:DisplayObjectContainer = null) {
 		super (p);
-		container = this;
-//		maskContent = true;
 	}
 
 	override public function positionContent ():void {

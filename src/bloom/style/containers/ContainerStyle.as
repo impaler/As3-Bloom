@@ -7,6 +7,8 @@ import bloom.style.ComponentBackgroundBaseStyle;
  */
 public class ContainerStyle extends ComponentBackgroundBaseStyle {
 
+	public var maskContent:Boolean;
+
 	///////////////////////////////////
 	// toString
 	///////////////////////////////////

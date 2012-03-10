@@ -50,8 +50,8 @@ public class Slider extends Component {
 		super (p);
 	}
 
-	override public function initializeDefaultStyle ():void {
-		super.initializeDefaultStyle ();
+	override public function initDefaultStyle ():void {
+		super.initDefaultStyle ();
 		_type == ComponentConstants.VERTICALLY ? size (20,100) : size (100,20);
 	}
 
@@ -80,8 +80,9 @@ public class Slider extends Component {
 	}
 
 	override protected function onThemeChanged ():void {
-		style = OmniCore.defaultTheme.sliderStyle;
-		_button.style = sliderStyle.button;
+		styleInternal = OmniCore.defaultTheme.sliderStyle;
+		_button.styleInternal = sliderStyle.button;
+
 		super.onThemeChanged ();
 	}
 

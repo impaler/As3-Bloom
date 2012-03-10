@@ -20,12 +20,6 @@ public class Label extends TextBase {
 		selectable = mouseEnabled = tabEnabled = false;
 
 		this.text = text;
-
-//		style = OmniCore.defaultTheme.label;
-	}
-
-	override protected function onThemeChanged ():void {
-//		style = OmniCore.defaultTheme.label;
 	}
 
 	///////////////////////////////////

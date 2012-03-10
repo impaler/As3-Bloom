@@ -13,7 +13,7 @@ public class Theme {
 
 	public var disabledAlpha:Number = 0.5;
 
-	private var _label:*;
+	private var _textStyle:*;
 	private var _button:*;
 	private var _buttonBase:*;
 	private var _checkBox:*;
@@ -31,12 +31,12 @@ public class Theme {
 	// Component Getter Setters
 	///////////////////////////////////
 
-	public function set label (value:Class):void {
-		_label = new value ();
+	public function set textStyle (value:Class):void {
+		_textStyle = new value ();
 	}
 
-	public function get labelStyle ():* {
-		return _label;
+	public function get textStyle ():* {
+		return _textStyle;
 	}
 
 	///////////////////////////////////
@@ -164,8 +164,8 @@ public class Theme {
 	///////////////////////////////////
 
 	public function dispose (gc:Boolean = false):void {
-		if (_label != null)IStyle (_label).dispose ();
-		_label = null;
+		if (_textStyle != null)IStyle (_textStyle).dispose ();
+		_textStyle = null;
 		if (_button != null)IStyle (_button).dispose ();
 		_button = null;
 		if (_buttonBase != null)IStyle (_buttonBase).dispose ();
