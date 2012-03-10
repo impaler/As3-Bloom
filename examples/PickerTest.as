@@ -20,13 +20,13 @@ public class PickerTest extends Sprite {
 		stage.scaleMode = "noScale";
 		stage.align = "TL";
 
-		OmniCore.initialize (stage);
-		OmniCore.defaultTheme = new BlueTheme ();
+//		OmniCore.initialize (stage);
+//		OmniCore.defaultTheme = new BlueTheme ();
 
 //			var Picker:ColorPicker = new ColorPicker(this);
-		var Picker:ColorPicker = new ColorPicker (this,"Test Color");
-		Picker.color = ColorUtils.randomColor ();
-		Picker.move (20,20);
+//		var Picker:ColorPicker = new ColorPicker (this,"Test Color");
+//		Picker.color = ColorUtils.randomColor ();
+//		Picker.move (20,20);
 
 	}
 

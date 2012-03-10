@@ -10,9 +10,10 @@ public class BlueTheme extends Theme {
 	public function BlueTheme () {
 		disabledAlpha = 0.5;
 		buttonBase = BlueButtonBase;
+		button = BlueButton;
 
 //			_label = new BlueLabel();
-//			_button = new BlueButton();
+
 //			_buttonBase = new BlueButtonBase();
 //			_checkBox = new BlueCheckBox();
 //			_textInput = new BlueTextInput();

@@ -1,18 +1,13 @@
 package bloom.controls {
 
+import bloom.brush.TextBrush;
 
 /**
  * ButtonStyle
  */
 public class ButtonStyle extends ButtonBaseStyle {
 
-	public var title_normal:TextStyle;
-	public var title_over:TextStyle;
-	public var title_down:TextStyle;
-
-	public function ButtonStyle () {
-
-	}
+	public var buttonText:TextBrush;
 
 	///////////////////////////////////
 	// toString

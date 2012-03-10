@@ -14,13 +14,13 @@ public class OmniCore {
 
 	private static var _stage:Stage;
 
-	private static var _onThemeChanged:Signal = new Signal ();
 	private static var _onStageDraw:NativeSignal;
 	private static var _onStageResize:NativeSignal;
 	private static var _onStageMouseUp:NativeSignal;
 	private static var _onStageMouseMove:NativeSignal;
 	private static var _onStageMouseLeave:NativeSignal;
 
+	private static var _onDefaultThemeChanged:Signal = new Signal ();
 	private static var _defaultTheme:Theme;
 
 	public static function init (stage:Stage,theme:Class):void {
@@ -44,13 +44,14 @@ public class OmniCore {
 
 	public static function set defaultTheme (value:Theme):void {
 		if (_defaultTheme != value) {
+			_defaultTheme.dispose(true);
 			_defaultTheme = value;
-			if (_defaultTheme)_onThemeChanged.dispatch ();
+			_onDefaultThemeChanged.dispatch ();
 		}
 	}
 
-	public static function get onThemeChanged ():Signal {
-		return _onThemeChanged;
+	public static function get onDefaultThemeChanged ():Signal {
+		return _onDefaultThemeChanged;
 	}
 
 	public static function get onStageDraw ():NativeSignal {

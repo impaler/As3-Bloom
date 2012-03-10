@@ -2,10 +2,13 @@ package {
 
 import bloom.controls.*;
 import bloom.core.OmniCore;
+import bloom.themes.black.BlackTheme;
+import bloom.themes.blue.BlueButtonBase;
 import bloom.themes.blue.BlueTheme;
 
 import flash.display.Sprite;
 import flash.events.Event;
+import flash.events.MouseEvent;
 
 public class Main extends Sprite {
 
@@ -13,13 +16,44 @@ public class Main extends Sprite {
 		if (stage) init (); else addEventListener (Event.ADDED_TO_STAGE,init);
 	}
 
+	private var _buttonDisable:ButtonBase;
+
 	private function init (e:Event = null):void {
 		removeEventListener (Event.ADDED_TO_STAGE,init);
 		stage.showDefaultContextMenu = false;
 		stage.scaleMode = "noScale";
 		stage.align = "TL";
 
-		OmniCore.init (stage,BlueTheme);
+		OmniCore.init (stage,BlackTheme);
+//		OmniCore.init (stage,BlueTheme);
+
+
+		_buttonDisable = new Button (this,"wow");
+
+		var buttonBase:ButtonBase = new ButtonBase (this);
+		buttonBase.mouseDown.add(
+		function(e:MouseEvent):void{
+			_buttonDisable.enabled ? _buttonDisable.enabled = false : _buttonDisable.enabled = true;
+//			removeChild(_buttonDisable);
+			OmniCore.defaultTheme = new BlueTheme();
+		}
+		);
+
+		_buttonDisable.y = 60;
+		_buttonDisable.x = 60;
+		_buttonDisable.width = 60;
+
+		var fgsdgdf:ButtonBase = new ButtonBase (this);
+		fgsdgdf.style = new BlueButtonBase();
+		fgsdgdf.y = 90;
+		fgsdgdf.mouseDown.add(
+		function(e:MouseEvent):void{
+			_buttonDisable.enabled ? _buttonDisable.enabled = false : _buttonDisable.enabled = true;
+//			removeChild(_buttonDisable);
+			OmniCore.defaultTheme = new BlackTheme();
+		}
+		);
+
 
 //			var flowContainer:FlowContainer = new FlowContainer(this, FlowContainer.VERTICALLY);
 //			flowContainer.size(220, 620);
@@ -29,16 +63,23 @@ public class Main extends Sprite {
 //			var RedButtonBase:ButtonBaseStyle = new ButtonBaseStyle();
 //			RedButtonBase.down
 
-		var buttonBase:ButtonBase = new ButtonBase (this);
 
-		var buttonBase:ButtonBase = new ButtonBase (this);
-		buttonBase.y = 60;
+
+
+
+
+
+
+
 //			buttonBase.style = RedButtonBase;
 
 //			buttonBase = new ButtonBase(flowContainer.content);
 //			buttonBase.state = StateConstants.OVER;
 //			buttonBase = new ButtonBase(flowContainer.content);
 //			buttonBase.state = StateConstants.DOWN;
+
+
+
 
 		/*		var button:Button = new Button(flowContainer.content, "One does not simply");
 		 button.icon = new Bitmap(new BitmapData(10, 10, false, 0xffff00));

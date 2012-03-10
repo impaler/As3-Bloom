@@ -39,7 +39,7 @@ public class BMPBrush extends Brush {
 		var _value:Component = value as Component;
 		_value.graphics.clear ();
 		_value.graphics.beginBitmapFill (scale.bitmapData);
-		_value.graphics.drawRect (args.x,args.y,args.width,args.height);
+		_value.graphics.drawRect (0,0,args.width,args.height);
 		_value.graphics.endFill ();
 	}
 

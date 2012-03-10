@@ -27,18 +27,15 @@ public class ScaleBitmap extends Bitmap {
 	}
 
 	public function dispose ():void {
-		_originalBitmap.dispose ();
+		if ( _originalBitmap != null)
+			_originalBitmap.dispose ();
 		_originalBitmap = null;
 		_scale9Grid = null;
 	}
 
-	/**
-	 * TODO: This function need to be tested.
-	 * @return
-	 */
 	public function clone ():ScaleBitmap {
 		var result:ScaleBitmap = new ScaleBitmap (_originalBitmap.clone (),pixelSnapping,smoothing);
-		result.scale9Grid = _scale9Grid;
+		result.scale9Grid = new Rectangle(_scale9Grid.x , _scale9Grid.y , _scale9Grid.width,_scale9Grid.height);
 		result.setSize (width,height);
 		return result;
 	}

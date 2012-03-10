@@ -1,5 +1,6 @@
 package bloom.brush {
 
+import bloom.controls.TextStyle;
 import bloom.core.TextBase;
 
 public class TextBrush extends Brush {
@@ -25,8 +26,8 @@ public class TextBrush extends Brush {
 		return "[bloom.brushes.BMPBrush]";
 	}
 
-	override public function destroy ():void {
-		textStyle = null;
+	override public function dispose ():void {
+
 	}
 
 }

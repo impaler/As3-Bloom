@@ -33,15 +33,17 @@ public class Container extends Component {
 		if (! _changed) return;
 		_changed = false;
 
-//			var style:ContainerStyle = _style as ContainerStyle;
-//			if (background) background.dispose();
+		containerStyle.background.update (_state,this,getDimensionObject);
 
-//			graphics.clear();
-//			style.background.setSize(_width, _height);
-//			background = style.background.bitmapData.clone();
-//			graphics.beginBitmapFill(background);
-//			graphics.drawRect(0, 0, _width, _height);
-//			graphics.endFill();
+	}
+
+
+	///////////////////////////////////
+	// getter/setters
+	///////////////////////////////////
+
+	public function get containerStyle ():ContainerStyle {
+		return _style as ContainerStyle;
 	}
 
 	///////////////////////////////////

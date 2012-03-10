@@ -9,7 +9,7 @@ public interface IStyle {
 
 	function toString ():String;
 
-	function update (state:int,value:*,args:Object = null):void;
+//	function update (state:int,value:*,args:Object = null):void;
 
 }
 

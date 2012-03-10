@@ -1,13 +1,11 @@
 package bloom.containers {
 
-import bloom.core.ScaleBitmap;
+import bloom.brush.ComponentBackgroundBaseStyle;
 
 /**
  * ContainerStyle
  */
-public class ContainerStyle implements IStyle {
-
-	public var background:ScaleBitmap;
+public class ContainerStyle extends ComponentBackgroundBaseStyle {
 
 	public function ContainerStyle () {
 
@@ -17,9 +15,13 @@ public class ContainerStyle implements IStyle {
 	// toString
 	///////////////////////////////////
 
-	public function toString ():String {
+	override public function toString ():String {
 		return "[bloom.styles.ContainerStyle]";
 	}
+
+	override public function dispose (gc:Boolean = false):void {
+	}
+
 }
 
 }

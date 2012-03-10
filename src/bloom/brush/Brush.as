@@ -24,7 +24,7 @@ package bloom.brush {
 /**
  * Brush
  *
- * @author sindney
+ *
  */
 public class Brush {
 

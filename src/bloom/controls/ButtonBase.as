@@ -1,5 +1,6 @@
 package bloom.controls {
 
+import bloom.brush.ComponentBaseStyle;
 import bloom.core.IStyle;
 import bloom.core.InteractiveComponent;
 import bloom.core.OmniCore;
@@ -18,25 +19,30 @@ public class ButtonBase extends InteractiveComponent {
 
 	public function ButtonBase (p:DisplayObjectContainer = null) {
 		super (p);
-
 		buttonMode = true;
 		tabEnabled = false;
 
+		enableSignals();
+	}
+
+	override public function enableSignals ():void {
 		mouseOver.add (onMouseOver);
 		mouseDown.add (onMouseDown);
+	}
 
-		_style = OmniCore.defaultTheme.buttonBaseStyle as IStyle;
-		size (120,30);
+	override public function disableSignals ():void {
+		mouseOver.remove (onMouseOver);
+		mouseDown.remove (onMouseDown);
 	}
 
 	override protected function onThemeChanged ():void {
-		style = OmniCore.defaultTheme.buttonBaseStyle;
+		_style = OmniCore.defaultTheme.buttonBaseStyle as ComponentBaseStyle;
+		super.onThemeChanged();
 	}
 
 	override protected function draw (e:Event = null):void {
 		if (! _changed) return;
 		_changed = false;
-
 		buttonBaseStyle.background.update (_state,this,getDimensionObject);
 	}
 
@@ -50,8 +56,8 @@ public class ButtonBase extends InteractiveComponent {
 	}
 
 	protected function onMouseDown (e:MouseEvent):void {
-		if (_state != StateConstants.DOWN) {
-			_state = StateConstants.DOWN;
+		if (_state != StateConstants.ACTIVATED) {
+			_state = StateConstants.ACTIVATED;
 			_changed = true;
 			invalidate ();
 			mouseUp.add (onMouseUp);
@@ -60,7 +66,7 @@ public class ButtonBase extends InteractiveComponent {
 	}
 
 	protected function onMouseUp (e:MouseEvent):void {
-		_state = StateConstants.NORMAL;
+		_state = StateConstants.ACTIVE;
 		_changed = true;
 		invalidate ();
 		mouseOver.add (onMouseOver);
@@ -69,7 +75,7 @@ public class ButtonBase extends InteractiveComponent {
 	}
 
 	protected function onMouseOut (e:MouseEvent):void {
-		if (_state != StateConstants.DOWN) onMouseUp (e);
+		if (_state != StateConstants.ACTIVATED) onMouseUp (e);
 	}
 
 	///////////////////////////////////

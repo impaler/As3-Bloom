@@ -1,30 +1,17 @@
 package bloom.controls {
 
-import bloom.brush.Brush;
-import bloom.core.IStyle;
+import bloom.brush.ComponentBackgroundBaseStyle;
 
 /**
  * ButtonBaseStyle
  */
-public class ButtonBaseStyle implements IStyle {
-
-	public var background:Brush;
-
-	public function update (state:int,value:*,args:Object = null):void {
-	}
-
-	///////////////////////////////////
-	// Dispose
-	///////////////////////////////////
-
-	public function dispose (gc:Boolean = false):void {
-	}
+public class ButtonBaseStyle extends ComponentBackgroundBaseStyle {
 
 	///////////////////////////////////
 	// toString
 	///////////////////////////////////
 
-	public function toString ():String {
+	override public function toString ():String {
 		return "[bloom.styles.ButtonBaseStyle]";
 	}
 

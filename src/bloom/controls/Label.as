@@ -22,16 +22,16 @@ public class Label extends TextBase {
 
 		this.text = text;
 
-		style = OmniCore.defaultTheme.label;
+//		style = OmniCore.defaultTheme.label;
 	}
 
 	override public function dispose (gc:Boolean = false):void {
 		super.dispose (gc);
-		OmniCore.onThemeChanged.remove (onThemeChanged);
+		OmniCore.onDefaultThemeChanged.remove (onThemeChanged);
 	}
 
 	override protected function onThemeChanged ():void {
-		style = OmniCore.defaultTheme.label;
+//		style = OmniCore.defaultTheme.label;
 	}
 
 	///////////////////////////////////

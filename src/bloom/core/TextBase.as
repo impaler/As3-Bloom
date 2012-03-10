@@ -16,7 +16,7 @@ public class TextBase extends TextField implements IComponent {
 
 	protected var _style:TextStyle;
 
-	protected var _margin:Margin;
+	protected var _padding:Padding;
 	protected var _enabled:Boolean = true;
 
 	protected var _onTextChanged:NativeSignal;
@@ -27,12 +27,21 @@ public class TextBase extends TextField implements IComponent {
 	public function TextBase (p:DisplayObjectContainer = null) {
 		super ();
 
-		_margin = new Margin ();
 		if (p) p.addChild (this);
 
-		_onTextChanged = new NativeSignal (this,Event.CHANGE,Event);
+		OmniCore.onDefaultThemeChanged.add (onThemeChanged);
+	}
 
-		OmniCore.onThemeChanged.add (onThemeChanged);
+	public function onAddedToStage (e:Event):void {
+	}
+
+	public function onMarginChanged ():void {
+	}
+
+	public function enableSignals ():void {
+	}
+
+	public function disableSignals ():void {
 	}
 
 	public function move (x:Number,y:Number):void {
@@ -50,7 +59,7 @@ public class TextBase extends TextField implements IComponent {
 	}
 
 	public function dispose (gc:Boolean = false):void {
-		OmniCore.onThemeChanged.remove (onThemeChanged);
+		OmniCore.onDefaultThemeChanged.remove (onThemeChanged);
 		_style = null;
 		_onTextChanged.removeAll ();
 		_onTextChanged = null;
@@ -89,15 +98,17 @@ public class TextBase extends TextField implements IComponent {
 	public function set enabled (value:Boolean):void {
 		if (_enabled != value) {
 			_enabled = tabEnabled = mouseEnabled = value;
-			alpha = _enabled ? 1 : OmniCore.defaultTheme.alpha;
+//			alpha = _enabled ? 1 : OmniCore.defaultTheme.alpha;
 		}
 	}
 
-	public function get margin ():Margin {
-		return _margin;
+	public function get padding ():Padding {
+		if(!_padding ) _padding= new Padding ();
+		return _padding;
 	}
 
 	public function get onTextChanged ():NativeSignal {
+		if (! _onTextChanged) _onTextChanged = new NativeSignal (this,Event.CHANGE,Event);
 		return _onTextChanged;
 	}
 

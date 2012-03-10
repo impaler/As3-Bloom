@@ -1,9 +1,19 @@
 package bloom.core {
 
+import flash.events.Event;
+
 /**
  * IComponent
  */
 public interface IComponent extends IObjectBase {
+
+	function onAddedToStage (e:Event):void;
+
+	function onMarginChanged ():void ;
+
+	function enableSignals ():void;
+
+	function disableSignals ():void ;
 
 	function drawDirectly ():void;
 

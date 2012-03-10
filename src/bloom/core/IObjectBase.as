@@ -21,7 +21,7 @@ public interface IObjectBase {
 
 	function get height ():Number;
 
-	function get margin ():Margin;
+	function get padding ():Padding;
 
 }
 
