@@ -11,7 +11,7 @@ public class HBox extends Container {
 		super (p);
 	}
 
-	override public function positionContent ():void {
+	override public function layoutContent ():void {
 		var last:Number = 0;
 		var object:DisplayObject;
 		var component:IObjectBase;

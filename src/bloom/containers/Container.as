@@ -23,7 +23,8 @@ public class Container extends Component {
 
 	public function Container (p:DisplayObjectContainer = null) {
 		super (p);
-		container = this;
+		container = new Sprite ();
+		addChild (container);
 	}
 
 	override protected function onThemeChanged ():void {
@@ -38,8 +39,8 @@ public class Container extends Component {
 
 	public function addContent (content:IComponent):void {
 		if (content is IComponent) {
-			content.drawDirectly ();
 			container.addChild (DisplayObject (content));
+			content.drawDirectly ();
 		}
 	}
 
@@ -47,17 +48,27 @@ public class Container extends Component {
 		if (! _changed) return;
 		_changed = false;
 
-		containerStyle.background.update (_state,this,getDimensionObject);
-
-		positionContent ();
+		layoutContent ();
 		applyMask ();
+
+		if (_maskContent) {
+			containerStyle.background.update (_state,this,getDimensionObject);
+		} else {
+			var dimensions:Object = new Object ();
+			dimensions.x = container.x;
+			dimensions.y = container.y;
+			dimensions.width = container.width;
+			dimensions.height = container.height;
+			containerStyle.background.update (_state,container,dimensions);
+		}
+
 	}
 
 	private function applyMask ():void {
 		_maskContent ? container.scrollRect = new Rectangle (0,0,_width,_height) : container.scrollRect = null;
 	}
 
-	public function positionContent ():void {
+	public function layoutContent ():void {
 	}
 
 	///////////////////////////////////

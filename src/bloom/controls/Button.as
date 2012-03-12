@@ -2,6 +2,7 @@ package bloom.controls {
 
 import bloom.core.OmniCore;
 import bloom.style.controls.ButtonStyle;
+import bloom.text.Label;
 
 import flash.display.DisplayObject;
 import flash.display.DisplayObjectContainer;

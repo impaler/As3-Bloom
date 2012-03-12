@@ -3,6 +3,7 @@ package {
 import bloom.containers.HBox;
 import bloom.controls.*;
 import bloom.core.OmniCore;
+import bloom.text.Label;
 import bloom.themes.dark.DarkTheme;
 
 import flash.display.Sprite;
@@ -26,7 +27,8 @@ public class Main extends Sprite {
 //		OmniCore.init (stage,BlueTheme);
 
 		var containerTest:HBox = new HBox (this);
-//		containerTest.width = 200;
+		containerTest.maskContent = false;
+		containerTest.width = 200;
 //		containerTest.height = 10;
 		containerTest.addContent (new Slider ());
 		containerTest.addContent (new Label (null,"test"));

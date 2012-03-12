@@ -1,4 +1,4 @@
-package bloom.controls {
+package bloom.text {
 
 import bloom.core.TextBase;
 

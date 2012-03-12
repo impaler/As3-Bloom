@@ -49,7 +49,7 @@ public class FlowBox extends Container {
 		}
 	}
 
-	override public function positionContent ():void {
+	override public function layoutContent ():void {
 		_LayoutComponent.minWidth = _width;
 		_LayoutComponent.minHeight = _height;
 		_LayoutComponent.maxContentWidth = _width;

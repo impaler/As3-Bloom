@@ -90,10 +90,10 @@ public class Slider extends Component {
 		if (! _changed) return;
 		_changed = false;
 
-		sliderStyle.background.update (_state,this,getDimensionObject);
+		positionButton ();
 		_button.drawDirectly ();
 
-		positionButton ();
+		sliderStyle.background.update (_state,this,getDimensionObject);
 	}
 
 	protected function positionButton ():void {
