@@ -12,15 +12,10 @@ public class FlowBox extends Container {
 
 	protected var _LayoutComponent:HLayout;
 
-//	protected var marginX:Number = 0;
-//	protected var marginY = 0;
-//	protected var offsetX = 0;
-//	protected var offsetY = 0;
-//	protected var maxItemsPerRow = 0;
-//	private var _hGap = 5;
-//	private var _vGap = 5;
-//	private var _hAlign = Align.CENTER;
-//	private var _vAlign = Align.TOP;
+	private var _hGap = 5;
+	private var _vGap = 5;
+	private var _hAlign = Align.CENTER;
+	private var _vAlign = Align.TOP;
 
 	public function FlowBox (p:DisplayObjectContainer = null) {
 		super (p);
@@ -30,22 +25,22 @@ public class FlowBox extends Container {
 		super.createAssets ();
 
 		_LayoutComponent = new HLayout ();
-		_LayoutComponent.marginX = 0;
-		_LayoutComponent.marginY = 0;
-		_LayoutComponent.offsetX = 0;
-		_LayoutComponent.offsetY = 0;
-		_LayoutComponent.maxItemsPerRow = 0;
-		_LayoutComponent.hGap = 5;
-		_LayoutComponent.vGap = 5;
-		_LayoutComponent.hAlign = Align.CENTER;
-		_LayoutComponent.vAlign = Align.TOP;
+//		_LayoutComponent.marginX = 0;
+//		_LayoutComponent.marginY = 0;
+//		_LayoutComponent.offsetX = 0;
+//		_LayoutComponent.offsetY = 0;
+//		_LayoutComponent.maxItemsPerRow = 0;
+		_LayoutComponent.hGap = _hGap;
+		_LayoutComponent.vGap = _vGap;
+		_LayoutComponent.hAlign = _hAlign;
+		_LayoutComponent.vAlign = _vAlign;
 	}
 
-	override public function addContent (content:IComponent):void {
-		if (content is IComponent) {
-			content.drawDirectly ();
-			_LayoutComponent.add (content);
-			container.addChild (DisplayObject (content));
+	override public function addContent (value:IComponent):void {
+		if (value is IComponent) {
+			value.drawDirectly ();
+			_LayoutComponent.add (value);
+			content.addChild (DisplayObject (value));
 		}
 	}
 
@@ -54,7 +49,7 @@ public class FlowBox extends Container {
 		_LayoutComponent.minHeight = _height;
 		_LayoutComponent.maxContentWidth = _width;
 
-		_LayoutComponent.layout (container);
+		_LayoutComponent.layout (content);
 	}
 
 	public function set hGap (value):void {

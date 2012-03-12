@@ -18,13 +18,19 @@ import flash.geom.Rectangle;
 public class Container extends Component {
 
 	protected var background:BitmapData;
-	protected var container:Sprite;
+	protected var _content:Sprite;
 	protected var _maskContent:Boolean;
+	protected var _bgEnabled:Boolean = true;
 
 	public function Container (p:DisplayObjectContainer = null) {
 		super (p);
-		container = new Sprite ();
-		addChild (container);
+	}
+
+	override protected function createAssets ():void {
+		super.createAssets ();
+
+		_content = new Sprite ();
+		addChild (_content);
 	}
 
 	override protected function onThemeChanged ():void {
@@ -37,10 +43,11 @@ public class Container extends Component {
 		_maskContent = containerStyle.maskContent;
 	}
 
-	public function addContent (content:IComponent):void {
-		if (content is IComponent) {
-			container.addChild (DisplayObject (content));
-			content.drawDirectly ();
+	public function addContent (value:IComponent):void {
+		if (value is IComponent) {
+			_content.addChild (DisplayObject (value));
+			value.drawDirectly ();
+			drawDirectly ();
 		}
 	}
 
@@ -51,21 +58,23 @@ public class Container extends Component {
 		layoutContent ();
 		applyMask ();
 
-		if (_maskContent) {
-			containerStyle.background.update (_state,this,getDimensionObject);
-		} else {
-			var dimensions:Object = new Object ();
-			dimensions.x = container.x;
-			dimensions.y = container.y;
-			dimensions.width = container.width;
-			dimensions.height = container.height;
-			containerStyle.background.update (_state,container,dimensions);
+		if (_bgEnabled) {
+			if (_maskContent) {
+				containerStyle.background.update (_state,this,getDimensionObject);
+			} else {
+				var dimensions:Object = new Object ();
+				dimensions.x = _content.x;
+				dimensions.y = _content.y;
+				dimensions.width = _content.width;
+				dimensions.height = _content.height;
+				containerStyle.background.update (_state,_content,dimensions);
+			}
 		}
 
 	}
 
 	private function applyMask ():void {
-		_maskContent ? container.scrollRect = new Rectangle (0,0,_width,_height) : container.scrollRect = null;
+		_maskContent ? _content.scrollRect = new Rectangle (0,0,_width,_height) : _content.scrollRect = null;
 	}
 
 	public function layoutContent ():void {
@@ -90,6 +99,12 @@ public class Container extends Component {
 		}
 	}
 
+	public function get content ():Sprite {
+		return _content;
+	}
+
+	public function set bgEnabled (bg:Boolean):void {_bgEnabled = bg;}
+
 	///////////////////////////////////
 	// Dispose
 	///////////////////////////////////
@@ -98,6 +113,8 @@ public class Container extends Component {
 		super.dispose (gc);
 		if (background) background.dispose ();
 		background = null;
+		removeChild (_content);
+		_content = null;
 	}
 
 	///////////////////////////////////

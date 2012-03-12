@@ -15,10 +15,10 @@ public class HBox extends Container {
 		var last:Number = 0;
 		var object:DisplayObject;
 		var component:IObjectBase;
-		var i:int, j:int = container.numChildren;
+		var i:int, j:int = content.numChildren;
 
 		for (i = 0; i < j; i ++) {
-			object = container.getChildAt (i);
+			object = content.getChildAt (i);
 
 			if (object is IObjectBase) {
 				component = object as IObjectBase;
@@ -27,6 +27,14 @@ public class HBox extends Container {
 				last = component.x + component.width + component.padding.right;
 			}
 		}
+	}
+
+	override public function get width ():Number {
+		return content.width;
+	}
+
+	override public function get height ():Number {
+		return content.height;
 	}
 
 }

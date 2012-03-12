@@ -7,6 +7,7 @@ import bloom.style.controls.SliderStyle;
 
 import flash.display.BitmapData;
 import flash.display.DisplayObjectContainer;
+import flash.display.Sprite;
 import flash.events.Event;
 import flash.events.MouseEvent;
 import flash.geom.Rectangle;
@@ -37,11 +38,14 @@ public class Slider extends Component {
 
 	protected var _valueChanged:Signal;
 	protected var _scrolling:Signal;
+	protected var _bg:Sprite;
 
 	public function Slider (p:DisplayObjectContainer = null,type:int = 0,value:Number = 0,max:Number = 100,
 	                        min:Number = 0) {
 		tabChildren = tabEnabled = false;
 
+		_bg = new Sprite ();
+		addChild (_bg);
 		_type = type;
 		_max = max;
 		_min = min;
@@ -73,7 +77,7 @@ public class Slider extends Component {
 		_rect = new Rectangle (0,0,0,0);
 
 		_mouseWheel = new NativeSignal (this,MouseEvent.MOUSE_WHEEL,MouseEvent);
-		_bgMouseDown = new NativeSignal (this,MouseEvent.MOUSE_DOWN,MouseEvent);
+		_bgMouseDown = new NativeSignal (_bg,MouseEvent.MOUSE_DOWN,MouseEvent);
 
 		_valueChanged = new Signal (Slider);
 		_scrolling = new Signal (Slider);
@@ -93,7 +97,7 @@ public class Slider extends Component {
 		positionButton ();
 		_button.drawDirectly ();
 
-		sliderStyle.background.update (_state,this,getDimensionObject);
+		sliderStyle.background.update (_state,_bg,getDimensionObject);
 	}
 
 	protected function positionButton ():void {
