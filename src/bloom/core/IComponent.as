@@ -23,9 +23,15 @@ public interface IComponent extends IObjectBase {
 
 	function size (w:Number,h:Number):void;
 
+	function set state (value:int):void;
+
 	function set enabled (value:Boolean):void;
 
 	function get enabled ():Boolean;
+
+	function get state ():int;
+
+	function get getDimensionObject ():ObjectBase;
 
 	function toString ():String;
 }

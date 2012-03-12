@@ -92,7 +92,7 @@ public class Component extends Sprite implements IComponent {
 	public function onAddedToStage (e:Event):void {
 		OmniCore.onStageDraw.add (draw);
 		invalidate ();
-		visible = true;
+		this.visible = true;
 	}
 
 	public function onMarginChanged ():void {
@@ -201,12 +201,13 @@ public class Component extends Sprite implements IComponent {
 		}
 	}
 
-	public function get getDimensionObject ():Object {
-		var dimensions:Object = new Object ();
+	public function get getDimensionObject ():ObjectBase {
+		var dimensions:ObjectBase = new ObjectBase ();
 		dimensions.x = this.x;
 		dimensions.y = this.y;
 		dimensions.width = this.width;
 		dimensions.height = this.height;
+		dimensions.padding = this.padding;
 		return dimensions;
 	}
 
@@ -224,6 +225,17 @@ public class Component extends Sprite implements IComponent {
 
 	public function set customStyleAuto (value:Boolean):void {
 		_customStyleAuto = value;
+	}
+
+	public function set state (value:int):void {
+		if (value != _state) {
+			_state = value;
+			drawDirectly ();
+		}
+	}
+
+	public function get state ():int {
+		return _state;
 	}
 
 	///////////////////////////////////

@@ -1,26 +1,27 @@
-package bloom.themes.dark {
+package bloom.themes.darkBasic {
 
 import bloom.core.ComponentConstants;
 import bloom.style.brush.ColorBrush;
-import bloom.style.containers.ContainerStyle;
+import bloom.style.controls.ButtonBaseStyle;
 import bloom.utils.ColorUtils;
 
 /**
- * DarkContainer
+ * DarkButtonBase
  */
-public class DarkContainer extends ContainerStyle {
+public class DarkButtonBase extends ButtonBaseStyle {
 
-	private var _scaleBitmaps:Vector.<uint> = new Vector.<uint> (2,true);
+	private var _scaleBitmaps:Vector.<uint> = new Vector.<uint> (4,true);
 
-	public function DarkContainer () {
-		_scaleBitmaps[ComponentConstants.ACTIVE] = ColorUtils.DARK_GRAY;
+	public function DarkButtonBase () {
+		_scaleBitmaps[ComponentConstants.ACTIVE] = ColorUtils.BLACK;
+		_scaleBitmaps[ComponentConstants.OVER] = 0x303030;
+		_scaleBitmaps[ComponentConstants.ACTIVATED] = ColorUtils.RED;
 		_scaleBitmaps[ComponentConstants.DISABLED] = ColorUtils.LIGHT_GRAY;
 		background = new ColorBrush (_scaleBitmaps);
 
-		defaultWidth = 300;
-		defaultHeight = 360;
+		defaultWidth = 40;
+		defaultHeight = 40;
 
-		maskContent = true;
 	}
 
 	///////////////////////////////////
@@ -37,7 +38,7 @@ public class DarkContainer extends ContainerStyle {
 	///////////////////////////////////
 
 	override public function toString ():String {
-		return "[bloom.styles.DarkContainer]";
+		return "[bloom.styles.DarkButtonBase]";
 	}
 
 }

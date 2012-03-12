@@ -2,6 +2,7 @@ package bloom.containers {
 
 import bloom.core.Component;
 import bloom.core.IComponent;
+import bloom.core.ObjectBase;
 import bloom.core.OmniCore;
 import bloom.style.containers.ContainerStyle;
 
@@ -62,7 +63,7 @@ public class Container extends Component {
 			if (_maskContent) {
 				containerStyle.background.update (_state,this,getDimensionObject);
 			} else {
-				var dimensions:Object = new Object ();
+				var dimensions:ObjectBase = new ObjectBase ();
 				dimensions.x = _content.x;
 				dimensions.y = _content.y;
 				dimensions.width = _content.width;

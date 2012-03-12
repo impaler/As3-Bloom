@@ -1,5 +1,6 @@
 package bloom.style {
 
+import bloom.core.IComponent;
 import bloom.style.brush.Brush;
 
 /**
@@ -8,6 +9,10 @@ import bloom.style.brush.Brush;
 public class ComponentBackgroundBaseStyle extends ComponentBaseStyle {
 
 	public var background:Brush;
+
+	override public function update (value:IComponent):void {
+		background.update (value.state,value,value.getDimensionObject);
+	}
 
 	///////////////////////////////////
 	// Dispose

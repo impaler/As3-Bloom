@@ -1,13 +1,13 @@
-package bloom.themes.dark {
+package bloom.themes.darkBasic {
 
 import bloom.core.Theme;
 
 /**
  * DarkTheme
  */
-public class DarkTheme extends Theme {
+public class DarkBasicTheme extends Theme {
 
-	public function DarkTheme () {
+	public function DarkBasicTheme () {
 		disabledAlpha = 0.5;
 
 		buttonBase = DarkButtonBase;

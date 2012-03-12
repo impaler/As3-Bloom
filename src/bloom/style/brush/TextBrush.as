@@ -1,5 +1,6 @@
 package bloom.style.brush {
 
+import bloom.core.ObjectBase;
 import bloom.core.TextBase;
 
 import flash.text.TextFormat;
@@ -12,7 +13,7 @@ public class TextBrush extends Brush {
 		this.textStyle = textFormats;
 	}
 
-	override public function update (state:int,value:*,args:Object = null):void {
+	override public function update (state:int,value:*,args:ObjectBase = null):void {
 		var _text:TextBase = value as TextBase;
 
 		var defaultTextformy:TextFormat = TextFormat (textStyle[state]);

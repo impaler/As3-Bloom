@@ -1,5 +1,6 @@
 package bloom.style.controls {
 
+import bloom.core.IComponent;
 import bloom.core.IStyle;
 import bloom.style.brush.Brush;
 
@@ -10,17 +11,20 @@ public class TextStyle implements IStyle {
 
 	public var textStyleBrush:Brush;
 
+	public function update (value:IComponent):void {
+	}
+
+	public function dispose (gc:Boolean = false):void {
+		textStyleBrush.dispose ();
+		textStyleBrush = null;
+	}
+
 	///////////////////////////////////
 	// toString
 	///////////////////////////////////
 
 	public function toString ():String {
 		return "[bloom.styles.TextStyle]";
-	}
-
-	public function dispose (gc:Boolean = false):void {
-		textStyleBrush.dispose ();
-		textStyleBrush = null;
 	}
 
 }

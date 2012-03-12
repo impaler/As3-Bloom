@@ -1,29 +1,26 @@
-package bloom.themes.dark {
+package bloom.themes.darkBasic {
 
 import bloom.core.ComponentConstants;
 import bloom.style.brush.ColorBrush;
-import bloom.style.controls.SliderStyle;
+import bloom.style.containers.ContainerStyle;
 import bloom.utils.ColorUtils;
 
 /**
- * DarkSlider
+ * DarkContainer
  */
-public class DarkSlider extends SliderStyle {
+public class DarkContainer extends ContainerStyle {
 
-	private var _scaleBitmaps:Vector.<uint> = new Vector.<uint> (4,true);
+	private var _scaleBitmaps:Vector.<uint> = new Vector.<uint> (2,true);
 
-	public function DarkSlider () {
-		_scaleBitmaps[ComponentConstants.ACTIVE] = ColorUtils.GRAY;
-		_scaleBitmaps[ComponentConstants.OVER] = 0x303030;
-		_scaleBitmaps[ComponentConstants.ACTIVATED] = ColorUtils.RED;
+	public function DarkContainer () {
+		_scaleBitmaps[ComponentConstants.ACTIVE] = ColorUtils.DARK_GRAY;
 		_scaleBitmaps[ComponentConstants.DISABLED] = ColorUtils.LIGHT_GRAY;
 		background = new ColorBrush (_scaleBitmaps);
 
-		defaultWidth = 40;
-		defaultHeight = 40;
+		defaultWidth = 300;
+		defaultHeight = 360;
 
-		button = new DarkButton ();
-
+		maskContent = true;
 	}
 
 	///////////////////////////////////
@@ -40,7 +37,7 @@ public class DarkSlider extends SliderStyle {
 	///////////////////////////////////
 
 	override public function toString ():String {
-		return "[bloom.styles.DarkSlider]";
+		return "[bloom.styles.DarkContainer]";
 	}
 
 }

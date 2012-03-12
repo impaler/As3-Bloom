@@ -1,5 +1,7 @@
 package bloom.style.brush {
 
+import bloom.core.ObjectBase;
+
 public class MethodBrush extends Brush {
 
 	public var methods:Vector.<Function>;
@@ -9,7 +11,7 @@ public class MethodBrush extends Brush {
 		this.methods = methods;
 	}
 
-	override public function update (state:int,value:*,args:Object = null):void {
+	override public function update (state:int,value:*,args:ObjectBase = null):void {
 		var methodToPerform:Function = methods[state];
 		methodToPerform (value,args);
 	}

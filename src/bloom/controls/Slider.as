@@ -44,8 +44,6 @@ public class Slider extends Component {
 	                        min:Number = 0) {
 		tabChildren = tabEnabled = false;
 
-		_bg = new Sprite ();
-		addChild (_bg);
 		_type = type;
 		_max = max;
 		_min = min;
@@ -57,6 +55,13 @@ public class Slider extends Component {
 	override public function initDefaultStyle ():void {
 		super.initDefaultStyle ();
 		_type == ComponentConstants.VERTICALLY ? size (20,100) : size (100,20);
+	}
+
+	override protected function onThemeChanged ():void {
+		styleInternal = OmniCore.defaultTheme.sliderStyle;
+		_button.styleInternal = sliderStyle.button;
+
+		super.onThemeChanged ();
 	}
 
 	override public function enableSignals ():void {
@@ -72,6 +77,9 @@ public class Slider extends Component {
 	}
 
 	override protected function createAssets ():void {
+		_bg = new Sprite ();
+		addChild (_bg);
+
 		_button = new ButtonBase (this);
 
 		_rect = new Rectangle (0,0,0,0);
@@ -81,13 +89,6 @@ public class Slider extends Component {
 
 		_valueChanged = new Signal (Slider);
 		_scrolling = new Signal (Slider);
-	}
-
-	override protected function onThemeChanged ():void {
-		styleInternal = OmniCore.defaultTheme.sliderStyle;
-		_button.styleInternal = sliderStyle.button;
-
-		super.onThemeChanged ();
 	}
 
 	override protected function draw (e:Event = null):void {

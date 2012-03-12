@@ -1,5 +1,6 @@
 package bloom.style {
 
+import bloom.core.IComponent;
 import bloom.core.IStyle;
 
 /**
@@ -10,12 +11,14 @@ public class ComponentBaseStyle implements IStyle {
 	public var defaultWidth:Number;
 	public var defaultHeight:Number;
 
+	public function update (value:IComponent):void {
+	}
+
 	///////////////////////////////////
 	// Dispose
 	///////////////////////////////////
 
 	public function dispose (gc:Boolean = false):void {
-
 	}
 
 	///////////////////////////////////

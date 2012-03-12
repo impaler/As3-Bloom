@@ -27,11 +27,13 @@ public class ButtonBase extends InteractiveComponent {
 	override public function enableSignals ():void {
 		mouseOver.addOnce (onMouseOver);
 		mouseDown.add (onMouseDown);
+		super.enableSignals ();
 	}
 
 	override public function disableSignals ():void {
 		mouseOver.remove (onMouseOver);
 		mouseDown.remove (onMouseDown);
+		super.disableSignals ();
 	}
 
 	override protected function onThemeChanged ():void {
@@ -43,7 +45,7 @@ public class ButtonBase extends InteractiveComponent {
 		if (! _changed) return;
 		_changed = false;
 
-		buttonBaseStyle.background.update (_state,this,getDimensionObject);
+		buttonBaseStyle.update (this);
 	}
 
 	public function onMouseOver (e:MouseEvent):void {
@@ -87,16 +89,6 @@ public class ButtonBase extends InteractiveComponent {
 
 	public function get buttonBaseStyle ():ButtonBaseStyle {
 		return _style as ButtonBaseStyle;
-	}
-
-	public function get state ():int {
-		return _state;
-	}
-
-	public function set state (value:int):void {
-		_state = value;
-		_changed = true;
-		invalidate ();
 	}
 
 	///////////////////////////////////

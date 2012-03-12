@@ -145,6 +145,16 @@ public class TextBase extends TextField implements IComponent {
 		return _onTextScroll;
 	}
 
+	public function get getDimensionObject ():ObjectBase {
+		var dimensions:ObjectBase = new ObjectBase ();
+		dimensions.x = this.x;
+		dimensions.y = this.y;
+		dimensions.width = this.width;
+		dimensions.height = this.height;
+		dimensions.padding = this.padding;
+		return dimensions;
+	}
+
 	///////////////////////////////////
 	// toString
 	///////////////////////////////////

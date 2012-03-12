@@ -14,7 +14,7 @@ public class FlowBox extends Container {
 
 	private var _hGap = 5;
 	private var _vGap = 5;
-	private var _hAlign = Align.CENTER;
+	private var _hAlign = Align.LEFT;
 	private var _vAlign = Align.TOP;
 
 	public function FlowBox (p:DisplayObjectContainer = null) {
@@ -25,11 +25,11 @@ public class FlowBox extends Container {
 		super.createAssets ();
 
 		_LayoutComponent = new HLayout ();
-//		_LayoutComponent.marginX = 0;
-//		_LayoutComponent.marginY = 0;
-//		_LayoutComponent.offsetX = 0;
-//		_LayoutComponent.offsetY = 0;
-//		_LayoutComponent.maxItemsPerRow = 0;
+		_LayoutComponent.marginX = 0;
+		_LayoutComponent.marginY = 0;
+		_LayoutComponent.offsetX = 0;
+		_LayoutComponent.offsetY = 0;
+		_LayoutComponent.maxItemsPerRow = 0;
 		_LayoutComponent.hGap = _hGap;
 		_LayoutComponent.vGap = _vGap;
 		_LayoutComponent.hAlign = _hAlign;

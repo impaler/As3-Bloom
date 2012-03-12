@@ -22,6 +22,7 @@
 package bloom.style.brush {
 
 import bloom.core.Component;
+import bloom.core.ObjectBase;
 import bloom.core.ScaleBitmap;
 
 public class BMPBrush extends Brush {
@@ -32,7 +33,7 @@ public class BMPBrush extends Brush {
 		this.bitmap = bitmap;
 	}
 
-	override public function update (state:int,value:*,args:Object = null):void {
+	override public function update (state:int,value:*,args:ObjectBase = null):void {
 		var scale:ScaleBitmap = ScaleBitmap (bitmap[state]).clone ();
 		scale.setSize (args.width,args.height);
 

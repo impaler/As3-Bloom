@@ -16,10 +16,24 @@ public class Button extends ButtonBase {
 	protected var _titleLabel:String;
 	protected var _title:Label;
 	protected var _icon:DisplayObject;
+	protected var _iconPadding:Number;
 
 	public function Button (p:DisplayObjectContainer = null,title:String = "") {
 		_titleLabel = title;
 		super (p);
+	}
+
+	override public function initDefaultStyle ():void {
+		super.initDefaultStyle ();
+		_iconPadding = 12;
+	}
+
+	override protected function onThemeChanged ():void {
+		_style = OmniCore.defaultTheme.buttonStyle as ButtonStyle;
+		if (_style) {
+			_changed = true;
+			invalidate ();
+		}
 	}
 
 	override public function enableSignals ():void {
@@ -34,14 +48,6 @@ public class Button extends ButtonBase {
 
 	override protected function createAssets ():void {
 		_title = new Label (this,_titleLabel);
-	}
-
-	override protected function onThemeChanged ():void {
-		_style = OmniCore.defaultTheme.buttonStyle as ButtonStyle;
-		if (_style) {
-			_changed = true;
-			invalidate ();
-		}
 	}
 
 	override protected function draw (e:Event = null):void {
@@ -61,9 +67,17 @@ public class Button extends ButtonBase {
 
 	protected function positionTitleandIcon (e:Event = null):void {
 		if (_icon) {
-			_icon.x = (_width - _icon.width - _title.padding.left - _title.width) * 0.5;
+			if (_icon.height > _height)
+				_icon.height = _height - 6;
+
+			_icon.x = _iconPadding;
 			_icon.y = (_height - _icon.height) * 0.5;
-			_title.x = _icon.x + _icon.width + _title.padding.left;
+			if (_titleLabel != "") {
+				_title.x = _icon.x + _icon.width + _iconPadding + _title.padding.left;
+			} else {
+				_icon.x = _width * .5 - _icon.width * .5;
+			}
+
 		} else {
 			_title.x = (_width - _title.width) * 0.5;
 		}

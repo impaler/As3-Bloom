@@ -21,6 +21,8 @@
  */
 package bloom.style.brush {
 
+import bloom.core.ObjectBase;
+
 /**
  * Brush
  *
@@ -28,7 +30,7 @@ package bloom.style.brush {
  */
 public class Brush {
 
-	public function update (state:int,value:*,args:Object = null):void {
+	public function update (state:int,value:*,args:ObjectBase = null):void {
 
 	}
 

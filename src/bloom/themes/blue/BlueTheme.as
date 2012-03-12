@@ -1,7 +1,7 @@
 package bloom.themes.blue {
 
 import bloom.core.Theme;
-import bloom.themes.dark.DarkLabel;
+import bloom.themes.darkBasic.DarkLabel;
 
 /**
  * BlueTheme

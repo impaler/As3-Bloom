@@ -1,4 +1,4 @@
-package bloom.themes.dark {
+package bloom.themes.darkBasic {
 
 import bloom.core.ComponentConstants;
 import bloom.style.brush.Brush;

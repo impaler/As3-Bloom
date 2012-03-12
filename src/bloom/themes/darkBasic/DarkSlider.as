@@ -1,19 +1,19 @@
-package bloom.themes.dark {
+package bloom.themes.darkBasic {
 
 import bloom.core.ComponentConstants;
 import bloom.style.brush.ColorBrush;
-import bloom.style.controls.ButtonBaseStyle;
+import bloom.style.controls.SliderStyle;
 import bloom.utils.ColorUtils;
 
 /**
- * DarkButtonBase
+ * DarkSlider
  */
-public class DarkButtonBase extends ButtonBaseStyle {
+public class DarkSlider extends SliderStyle {
 
 	private var _scaleBitmaps:Vector.<uint> = new Vector.<uint> (4,true);
 
-	public function DarkButtonBase () {
-		_scaleBitmaps[ComponentConstants.ACTIVE] = ColorUtils.BLACK;
+	public function DarkSlider () {
+		_scaleBitmaps[ComponentConstants.ACTIVE] = ColorUtils.GRAY;
 		_scaleBitmaps[ComponentConstants.OVER] = 0x303030;
 		_scaleBitmaps[ComponentConstants.ACTIVATED] = ColorUtils.RED;
 		_scaleBitmaps[ComponentConstants.DISABLED] = ColorUtils.LIGHT_GRAY;
@@ -21,6 +21,8 @@ public class DarkButtonBase extends ButtonBaseStyle {
 
 		defaultWidth = 40;
 		defaultHeight = 40;
+
+		button = new DarkButton ();
 
 	}
 
@@ -38,7 +40,7 @@ public class DarkButtonBase extends ButtonBaseStyle {
 	///////////////////////////////////
 
 	override public function toString ():String {
-		return "[bloom.styles.DarkButtonBase]";
+		return "[bloom.styles.DarkSlider]";
 	}
 
 }
