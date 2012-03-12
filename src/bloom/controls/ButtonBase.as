@@ -12,6 +12,9 @@ import flash.events.MouseEvent;
 
 /**
  * ButtonBase
+ *
+ * @description A Generic Button Component intended to be extended upon
+ *
  */
 public class ButtonBase extends InteractiveComponent {
 
@@ -36,9 +39,9 @@ public class ButtonBase extends InteractiveComponent {
 		super.disableSignals ();
 	}
 
-	override protected function onThemeChanged ():void {
+	override protected function onStyleChanged ():void {
 		_style = OmniCore.defaultTheme.buttonBaseStyle;
-		super.onThemeChanged ();
+		super.onStyleChanged ();
 	}
 
 	override protected function draw (e:Event = null):void {
@@ -92,20 +95,20 @@ public class ButtonBase extends InteractiveComponent {
 	}
 
 	///////////////////////////////////
-	// toString
-	///////////////////////////////////
-
-	public override function toString ():String {
-		return "[bloom.components.ButtonBase]";
-	}
-
-	///////////////////////////////////
 	// Dispose
 	///////////////////////////////////
 
 	override public function dispose (gc:Boolean = false):void {
 		mouseUp.remove (onMouseUp);
 		super.dispose (gc);
+	}
+
+	///////////////////////////////////
+	// toString
+	///////////////////////////////////
+
+	public override function toString ():String {
+		return "[bloom.components.ButtonBase]";
 	}
 
 }

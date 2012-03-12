@@ -52,16 +52,16 @@ public class Slider extends Component {
 		super (p);
 	}
 
-	override public function initDefaultStyle ():void {
+	override protected function initDefaultStyle ():void {
 		super.initDefaultStyle ();
 		_type == ComponentConstants.VERTICALLY ? size (20,100) : size (100,20);
 	}
 
-	override protected function onThemeChanged ():void {
+	override protected function onStyleChanged ():void {
 		styleInternal = OmniCore.defaultTheme.sliderStyle;
 		_button.styleInternal = sliderStyle.button;
 
-		super.onThemeChanged ();
+		super.onStyleChanged ();
 	}
 
 	override public function enableSignals ():void {
@@ -89,6 +89,8 @@ public class Slider extends Component {
 
 		_valueChanged = new Signal (Slider);
 		_scrolling = new Signal (Slider);
+
+		super.createAssets ();
 	}
 
 	override protected function draw (e:Event = null):void {

@@ -15,6 +15,9 @@ import flash.geom.Rectangle;
 
 /**
  * Container
+ *
+ * @description A Layout Container to arrange items intended to be extended with layout logic
+ *
  */
 public class Container extends Component {
 
@@ -34,12 +37,12 @@ public class Container extends Component {
 		addChild (_content);
 	}
 
-	override protected function onThemeChanged ():void {
+	override protected function onStyleChanged ():void {
 		_style = OmniCore.defaultTheme.containerStyle;
-		super.onThemeChanged ();
+		super.onStyleChanged ();
 	}
 
-	override public function initDefaultStyle ():void {
+	override protected function initDefaultStyle ():void {
 		super.initDefaultStyle ();
 		_maskContent = containerStyle.maskContent;
 	}
@@ -112,6 +115,7 @@ public class Container extends Component {
 
 	override public function dispose (gc:Boolean = false):void {
 		super.dispose (gc);
+
 		if (background) background.dispose ();
 		background = null;
 		removeChild (_content);

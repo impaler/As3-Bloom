@@ -1,13 +1,19 @@
 package {
 
-import bloom.containers.HBox;
-import bloom.controls.*;
 import bloom.core.OmniCore;
-import bloom.text.Label;
-import bloom.themes.dark.DarkTheme;
+import bloom.themes.blue.BlueTheme;
+import bloom.themes.darkBasic.DarkBasicTheme;
+
+import com.demonsters.debugger.MonsterDebugger;
 
 import flash.display.Sprite;
 import flash.events.Event;
+
+import theme_previewer.tabs.TabButtons;
+
+import theme_previewer.tabs.TabContainers;
+
+import theme_previewer.tabs.TabSliders;
 
 public class Main extends Sprite {
 
@@ -15,42 +21,192 @@ public class Main extends Sprite {
 		if (stage) init (); else addEventListener (Event.ADDED_TO_STAGE,init);
 	}
 
-	private var _buttonDisable:ButtonBase;
-
 	private function init (e:Event = null):void {
 		removeEventListener (Event.ADDED_TO_STAGE,init);
 		stage.showDefaultContextMenu = false;
 		stage.scaleMode = "noScale";
 		stage.align = "TL";
 
-		OmniCore.init (stage,DarkTheme);
+		OmniCore.init (stage,DarkBasicTheme);
 //		OmniCore.init (stage,BlueTheme);
 
-		var containerTest:HBox = new HBox (this);
-		containerTest.maskContent = false;
-		containerTest.width = 200;
-//		containerTest.height = 10;
-		containerTest.addContent (new Slider ());
-		containerTest.addContent (new Label (null,"test"));
-		containerTest.addContent (new Label (null,"test"));
-		containerTest.addContent (new ButtonBase ());
-		containerTest.addContent (new Label (null,"test"));
-		containerTest.addContent (new ButtonBase ());
-		containerTest.addContent (new Label (null,"test"));
-		containerTest.addContent (new ButtonBase ());
-		containerTest.addContent (new ButtonBase ());
-		containerTest.addContent (new ButtonBase ());
-		containerTest.addContent (new ButtonBase ());
-		containerTest.addContent (new ButtonBase ());
-		containerTest.addContent (new ButtonBase ());
-		containerTest.addContent (new ButtonBase ());
-		containerTest.addContent (new ButtonBase ());
-		containerTest.addContent (new ButtonBase ());
-		containerTest.addContent (new ButtonBase ());
-		containerTest.addContent (new ButtonBase ());
-		containerTest.addContent (new ButtonBase ());
-		containerTest.addContent (new ButtonBase ());
-		containerTest.addContent (new ButtonBase ());
+		MonsterDebugger.initialize (this);
+		MonsterDebugger.trace (this,"Hello World!");
+
+//		var thing:TabContainers = new TabContainers ();
+//		addChild (thing);
+
+		var thing:TabButtons = new TabButtons ();
+		addChild (thing);
+
+//		var thing:TabScrollContainers = new TabScrollContainers();
+//		addChild(thing);
+
+//		var thing:TabSliders = new TabSliders ();
+//		addChild (thing);
+
+		/*
+
+
+
+
+
+		 */
+		/*
+
+		 var containerTest:FlowBox = new FlowBox ();
+		 containerTest.maskContent = false;
+
+		 //		trace(containerTest.width);
+		 containerTest.addContent (new Slider ());
+		 containerTest.addContent (new Label (null,"test"));
+		 containerTest.addContent (new Label (null,"test"));
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new Label (null,"test"));
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new Label (null,"test"));
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 //		trace(containerTest.width);
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 //		trace(containerTest.width);
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 //		trace(containerTest.width);
+
+
+
+		 var Scroll:ScrollContainer = new ScrollContainer(this);
+		 Scroll.addContent(containerTest);
+		 Scroll.size(200,200);
+
+
+
+
+		 */
+		/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+		 var containerTest:HBox = new HBox ();
+		 containerTest.maskContent = false;
+		 containerTest.bgEnabled = false;
+
+		 //		trace(containerTest.width);
+		 containerTest.addContent (new Slider ());
+		 containerTest.addContent (new Label (null,"test"));
+		 //		containerTest.addContent (new Label (null,"test"));
+		 //		containerTest.addContent (new ButtonBase ());
+		 //		containerTest.addContent (new Label (null,"test"));
+		 //		containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new Label (null,"test"));
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 //		containerTest.addContent (new ButtonBase ());
+		 //		containerTest.addContent (new ButtonBase ());
+		 //		containerTest.addContent (new ButtonBase ());
+		 //		containerTest.addContent (new ButtonBase ());
+		 //		containerTest.addContent (new ButtonBase ());
+		 //		containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 //		trace(containerTest.width);
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 //		trace(containerTest.width);
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 containerTest.addContent (new ButtonBase ());
+		 //		trace(containerTest.width);
+
+
+
+		 var Scroll:ScrollContainer = new ScrollContainer(this);
+		 Scroll.addContent(containerTest);
+		 Scroll.size(200,200);
+
+
+
+
+
+
+
+		 var VBoxTest:VBox = new VBox ();
+		 VBoxTest.maskContent = false;
+		 //		VBoxTest.width = 200;
+		 //		VBoxTest.height = 10;
+		 //		trace(VBoxTest.width);
+		 VBoxTest.bgEnabled = false;
+
+		 VBoxTest.addContent (new Slider ());
+		 VBoxTest.addContent (new Label (null,"test"));
+		 VBoxTest.addContent (new Label (null,"test"));
+		 VBoxTest.addContent (new ButtonBase ());
+		 VBoxTest.addContent (new Label (null,"test"));
+		 VBoxTest.addContent (new ButtonBase ());
+		 VBoxTest.addContent (new Label (null,"test"));
+		 VBoxTest.addContent (new ButtonBase ());
+		 VBoxTest.addContent (new ButtonBase ());
+		 //		VBoxTest.addContent (new ButtonBase ());
+		 VBoxTest.addContent (new ButtonBase ());
+		 //		VBoxTest.addContent (new ButtonBase ());
+		 VBoxTest.addContent (new ButtonBase ());
+		 //		VBoxTest.addContent (new ButtonBase ());
+		 //		VBoxTest.addContent (new ButtonBase ());
+		 //		VBoxTest.addContent (new ButtonBase ());
+		 //		trace(VBoxTest.width);
+		 //		VBoxTest.addContent (new ButtonBase ());
+		 //		VBoxTest.addContent (new ButtonBase ());
+		 //		trace(VBoxTest.width);
+		 //		VBoxTest.addContent (new ButtonBase ());
+		 //		VBoxTest.addContent (new ButtonBase ());
+		 //		VBoxTest.addContent (new ButtonBase ());
+		 //		trace(VBoxTest.width);
+
+
+		 var Scroll:ScrollContainer = new ScrollContainer(this);
+		 Scroll.addContent(VBoxTest);
+		 Scroll.size(200,200);
+		 Scroll.move(200,0);
+
+
+		 */
+
+//		trace(Scroll.width);
+//		trace(Scroll.content.width);
+
+//		Scroll.setContentSize(2, containerTest.content.height);
+
+//		trace(containerTest.width);
 
 //		_buttonDisable = new Button (this,"wow");
 

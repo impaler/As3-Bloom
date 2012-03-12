@@ -8,6 +8,9 @@ import org.osflash.signals.natives.NativeSignal;
 
 /**
  * InteractiveComponent
+ *
+ * @description A Generic Interactive Component intended to be extended upon
+ *
  */
 public class InteractiveComponent extends Component {
 
@@ -20,22 +23,6 @@ public class InteractiveComponent extends Component {
 
 	public function InteractiveComponent (p:DisplayObjectContainer = null) {
 		super (p);
-	}
-
-	override public function dispose (gc:Boolean = false):void {
-		if (_mouseOver != null) _mouseOver.removeAll ();
-		_mouseOver = null;
-
-		if (_mouseDown != null) _mouseDown.removeAll ();
-		_mouseDown = null;
-
-		if (_mouseOut != null) _mouseOut.removeAll ();
-		_mouseOut = null;
-
-		if (_mouseClick != null) _mouseClick.removeAll ();
-		_mouseClick = null;
-
-		super.dispose (gc);
 	}
 
 	///////////////////////////////////
@@ -94,6 +81,26 @@ public class InteractiveComponent extends Component {
 
 	public function get mouseLeave ():NativeSignal {
 		return OmniCore.onStageMouseLeave;
+	}
+
+	///////////////////////////////////
+	// Dispose
+	///////////////////////////////////
+
+	override public function dispose (gc:Boolean = false):void {
+		if (_mouseOver != null) _mouseOver.removeAll ();
+		_mouseOver = null;
+
+		if (_mouseDown != null) _mouseDown.removeAll ();
+		_mouseDown = null;
+
+		if (_mouseOut != null) _mouseOut.removeAll ();
+		_mouseOut = null;
+
+		if (_mouseClick != null) _mouseClick.removeAll ();
+		_mouseClick = null;
+
+		super.dispose (gc);
 	}
 
 	///////////////////////////////////

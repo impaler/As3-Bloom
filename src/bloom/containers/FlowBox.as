@@ -8,6 +8,17 @@ import flash.display.DisplayObjectContainer;
 import org.as3commons.ui.layout.HLayout;
 import org.as3commons.ui.layout.constants.Align;
 
+/**
+ * FlowBox
+ *
+ * @description A Layout Container to arrange items in advanced grid layouts
+ *
+ * @info advanced Grid Layout provided by kakenbok
+ *
+ * @see https://github.com/AS3Commons/as3commons-ui
+ * @see http://www.apache.org/licenses/LICENSE-2.0 for use of HLayout
+ *
+ */
 public class FlowBox extends Container {
 
 	protected var _LayoutComponent:HLayout;
@@ -52,6 +63,10 @@ public class FlowBox extends Container {
 		_LayoutComponent.layout (content);
 	}
 
+	///////////////////////////////////
+	// getter/setters
+	///////////////////////////////////
+
 	public function set hGap (value):void {
 		_LayoutComponent.hGap = value;
 	}
@@ -67,6 +82,24 @@ public class FlowBox extends Container {
 	public function set vAlign (value):void {
 		_LayoutComponent.vAlign = value;
 	}
+
+	///////////////////////////////////
+	// Dispose
+	///////////////////////////////////
+
+	override public function dispose (gc:Boolean = false):void {
+		super.dispose (gc);
+		_LayoutComponent = null;
+	}
+
+	///////////////////////////////////
+	// toString
+	///////////////////////////////////
+
+	public override function toString ():String {
+		return "[bloom.components.FlowBox]";
+	}
+
 }
 
 }

@@ -10,6 +10,9 @@ import flash.events.Event;
 
 /**
  * Button
+ *
+ * @description A Generic Button Component that has Text Label and Icon support
+ *
  */
 public class Button extends ButtonBase {
 
@@ -23,12 +26,12 @@ public class Button extends ButtonBase {
 		super (p);
 	}
 
-	override public function initDefaultStyle ():void {
+	override protected function initDefaultStyle ():void {
 		super.initDefaultStyle ();
 		_iconPadding = 12;
 	}
 
-	override protected function onThemeChanged ():void {
+	override protected function onStyleChanged ():void {
 		_style = OmniCore.defaultTheme.buttonStyle as ButtonStyle;
 		if (_style) {
 			_changed = true;
@@ -37,17 +40,18 @@ public class Button extends ButtonBase {
 	}
 
 	override public function enableSignals ():void {
-		super.enableSignals ();
 		_title.onTextChanged.add (positionTitleandIcon);
+		super.enableSignals ();
 	}
 
 	override public function disableSignals ():void {
-		super.enableSignals ();
 		_title.onTextChanged.remove (positionTitleandIcon);
+		super.disableSignals ();
 	}
 
 	override protected function createAssets ():void {
 		_title = new Label (this,_titleLabel);
+		super.createAssets ();
 	}
 
 	override protected function draw (e:Event = null):void {
@@ -84,32 +88,6 @@ public class Button extends ButtonBase {
 		_title.y = (_height - _title.height) * 0.5;
 	}
 
-//	private function drawIcon ():void {
-//		switch (state) {
-//			case StateConstants.ACTIVE:
-//				if (_iconNormal) {
-//					_iconNormal.x = (_width - _iconNormal.width) * 0.5;
-//					_iconNormal.y = (_height - _iconNormal.height) * 0.5;
-//					addChild (_iconNormal);
-//				}
-//				break;
-//			case StateConstants.OVER:
-//				if (_iconOver) {
-//					_iconOver.x = (_width - _iconOver.width) * 0.5;
-//					_iconOver.y = (_height - _iconOver.height) * 0.5;
-//					addChild (_iconOver);
-//				}
-//				break;
-//			case StateConstants.ACTIVATED:
-//				if (_iconDown) {
-//					_iconDown.x = (_width - _iconDown.width) * 0.5;
-//					_iconDown.y = (_height - _iconDown.height) * 0.5;
-//					addChild (_iconDown);
-//				}
-//				break;
-//		}
-//	}
-
 	///////////////////////////////////
 	// getter/setters
 	///////////////////////////////////
@@ -136,6 +114,10 @@ public class Button extends ButtonBase {
 	public function get title ():Label {
 		return _title;
 	}
+
+	///////////////////////////////////
+	// Dispose
+	///////////////////////////////////
 
 	override public function dispose (gc:Boolean = false):void {
 		super.dispose (gc);

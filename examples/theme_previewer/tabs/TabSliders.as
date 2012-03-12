@@ -1,10 +1,8 @@
 package theme_previewer.tabs {
 
 import bloom.containers.VBox;
-import bloom.controls.ButtonBase;
 import bloom.controls.Slider;
 import bloom.core.ComponentConstants;
-import bloom.themes.darkBasic.DarkButtonBase;
 
 import flash.display.Sprite;
 
@@ -18,13 +16,6 @@ public class TabSliders extends Sprite {
 		Content.addContent (HSlider);
 		Content.addContent (VSlider);
 
-	}
-
-	public function createIconButtonTest ():ButtonBase {
-		var IconButton:ButtonBase = new ButtonBase ();
-		IconButton.size (10,10);
-		IconButton.style = new DarkButtonBase ();
-		return IconButton;
 	}
 
 }

@@ -12,6 +12,9 @@ import org.osflash.signals.natives.NativeSignal;
 
 /**
  * Component
+ *
+ * @description Provides the basic design pattern for all Components
+ *
  */
 public class Component extends Sprite implements IComponent {
 
@@ -33,32 +36,47 @@ public class Component extends Sprite implements IComponent {
 
 		visible = false;
 
-		var temp:NativeSignal = new NativeSignal (this,Event.ADDED_TO_STAGE,Event);
-		temp.addOnce (onAddedToStage);
-
 		if (p) p.addChild (this);
 
 		createAssets ();
-		onThemeChanged ();
+		onStyleChanged ();
 		initDefaultStyle ();
 		enableSignals ();
 
 		if (OmniCore.monitorThemeChange)
-			OmniCore.onDefaultThemeChanged.add (onThemeChanged);
+			OmniCore.onDefaultThemeChanged.add (onStyleChanged);
 	}
+
+	///////////////////////////////////
+	// Base Component Methods
+	///////////////////////////////////
 
 	protected function createAssets ():void {
-
+		var temp:NativeSignal = new NativeSignal (this,Event.ADDED_TO_STAGE,Event);
+		temp.addOnce (onAddedToStage);
 	}
 
-	public function move (x:Number,y:Number):void {
-		this.x = x;
-		this.y = y;
+	protected function onStyleChanged ():void {
+		if (_style) {
+			_changed = true;
+			invalidate ();
+		}
 	}
 
-	public function size (width:Number,height:Number):void {
-		this.width = width;
-		this.height = height;
+	protected function initDefaultStyle ():void {
+		_state = ComponentConstants.ACTIVE;
+		size (_style.defaultWidth,_style.defaultHeight);
+	}
+
+	///////////////////////////////////
+	// Draw Methods
+	///////////////////////////////////
+
+	protected function draw (e:Event = null):void {
+	}
+
+	protected static function invalidate ():void {
+		if (OmniCore.stage) OmniCore.stage.invalidate ();
 	}
 
 	public function drawDirectly ():void {
@@ -66,27 +84,14 @@ public class Component extends Sprite implements IComponent {
 		draw (null);
 	}
 
-	protected function onThemeChanged ():void {
-		if (_style) {
-			_changed = true;
-			invalidate ();
-		}
+	///////////////////////////////////
+	// Signal Methods
+	///////////////////////////////////
+
+	public function enableSignals ():void {
 	}
 
-	public function initDefaultStyle ():void {
-		_state = ComponentConstants.ACTIVE;
-		size (_style.defaultWidth,_style.defaultHeight);
-	}
-
-	protected function draw (e:Event = null):void {
-
-	}
-
-	/**
-	 * This invalidates the stage with ThemeBase.onStageDraw being called to draw the component
-	 */
-	protected static function invalidate ():void {
-		if (OmniCore.stage) OmniCore.stage.invalidate ();
+	public function disableSignals ():void {
 	}
 
 	public function onAddedToStage (e:Event):void {
@@ -102,15 +107,19 @@ public class Component extends Sprite implements IComponent {
 		}
 	}
 
-	public function enableSignals ():void {
-	}
-
-	public function disableSignals ():void {
-	}
-
 	///////////////////////////////////
 	// getter/setters
 	///////////////////////////////////
+
+	public function move (x:Number,y:Number):void {
+		this.x = x;
+		this.y = y;
+	}
+
+	public function size (width:Number,height:Number):void {
+		this.width = width;
+		this.height = height;
+	}
 
 	override public function set width (value:Number):void {
 		if (_width != value) {
@@ -175,7 +184,7 @@ public class Component extends Sprite implements IComponent {
 			invalidate ();
 			if (_customStyleAuto) _customStyle = true;
 			if (OmniCore.monitorThemeChange)
-				OmniCore.onDefaultThemeChanged.remove (onThemeChanged);
+				OmniCore.onDefaultThemeChanged.remove (onStyleChanged);
 		}
 	}
 
@@ -239,14 +248,6 @@ public class Component extends Sprite implements IComponent {
 	}
 
 	///////////////////////////////////
-	// toString
-	///////////////////////////////////
-
-	override public function toString ():String {
-		return "[bloom.core.Component]";
-	}
-
-	///////////////////////////////////
 	// Dispose
 	///////////////////////////////////
 
@@ -258,7 +259,7 @@ public class Component extends Sprite implements IComponent {
 		if (_onResized != null)_onResized.removeAll ();
 		_onResized = null;
 		if (OmniCore.monitorThemeChange)
-			OmniCore.onDefaultThemeChanged.remove (onThemeChanged);
+			OmniCore.onDefaultThemeChanged.remove (onStyleChanged);
 
 		OmniCore.onStageDraw.remove (draw);
 
@@ -266,6 +267,14 @@ public class Component extends Sprite implements IComponent {
 		_padding = null;
 
 		if (gc) System.gc ();
+	}
+
+	///////////////////////////////////
+	// toString
+	///////////////////////////////////
+
+	override public function toString ():String {
+		return "[bloom.core.Component]";
 	}
 
 }
