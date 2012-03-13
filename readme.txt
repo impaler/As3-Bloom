@@ -1,23 +1,42 @@
 ----------------------------------------------------------------
-AS3 Bloom
+AS3 Bloom GUI Framework
 
+Bloom is a light weight user interface framework for developers.
+Bloom utilises a user friendly api and theme system.
+
+There are currently two main versions of Bloom being worked on.
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+BloomLite - https://bitbucket.org/sindney/bloomlite/
+A speed first branch of as3-bloom ui framework.
+
+----------------------------------------------------------------
+
+Bloom - https://github.com/impaler/As3-Bloom/tree/2.x-dev
+A branch focused on features for more complicated use cases
+and application requirements.
+
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+Contributors are sindney, impaler.
+
+sidney's website and project page;
 http://sindney.com/project/bloom
-https://github.com/impaler/As3-Bloom
 
-By sindney, impaler
 ----------------------------------------------------------------
-A light weight user interface framework for developers.
+
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-Recommended Stable Version  	- 1.0.1 r2
-Current Development Version 	- https://github.com/impaler/As3-Bloom/tree/2.x-dev
+Current recommended stable version  	- 1.0.1 r2
 ----------------------------------------------------------------
 
 History
 
 Version 1.0.1 r2
  - Margin Bug, SelectList
- 
+
 Version 1.0.0 r1
  - ThemeBase.Text_Button_Over/Text_Button_Down/List_Selected added.
 
