@@ -1,10 +1,9 @@
 package bloom.components.containers {
 
+import bloom.components.style.components.containers.ContainerStyle;
 import bloom.core.Component;
 import bloom.core.IComponent;
-import bloom.core.ObjectBase;
 import bloom.core.OmniCore;
-import bloom.components.style.components.containers.ContainerStyle;
 
 import flash.display.BitmapData;
 import flash.display.DisplayObject;
@@ -24,12 +23,19 @@ public class Container extends Component {
 	protected var background:BitmapData;
 	protected var _content:Sprite;
 	protected var _hasContent:Boolean = false;
-
+	protected var _contentPadding:Number;
 	protected var _maskContent:Boolean = false;
+	protected var _autoSize:Boolean = false;
 	protected var _bgEnabled:Boolean = true;
 
 	public function Container (p:DisplayObjectContainer = null) {
 		super (p);
+	}
+
+	override protected function initDefaultStyle ():void {
+		_contentPadding = containerStyle.contentPadding;
+
+		super.initDefaultStyle ();
 	}
 
 	override protected function createAssets ():void {
@@ -48,8 +54,24 @@ public class Container extends Component {
 		if (value is IComponent) {
 			_hasContent = true;
 			value.drawDirectly ();
+
+			trace(_content.width);
+
 			_content.addChild (DisplayObject (value));
+
 			drawDirectly ();
+		}
+	}
+
+	public function removeContent (value:IComponent):void {
+		if (value is IComponent) {
+			//todo
+//			if ( value.parent ==  this)
+//
+//			_hasContent = true;
+//			value.drawDirectly ();
+//			_content.removeChild (DisplayObject (value));
+//			drawDirectly ();
 		}
 	}
 
@@ -61,7 +83,18 @@ public class Container extends Component {
 		applyMask ();
 
 		if (_bgEnabled) {
+//			if ( _maskContent ) {
 			containerStyle.background.update (_state,this,getDimensionObject);
+//			} else {
+//				var dimensions:ObjectBase = new ObjectBase ();
+//				dimensions.x = this.x;
+//				dimensions.y = this.y;
+//				dimensions.width = _width;
+//				dimensions.height = _height;
+//				dimensions.padding = this.padding;
+//				containerStyle.background.update (_state,this,dimensions);
+//			}
+
 		}
 
 	}
@@ -79,6 +112,17 @@ public class Container extends Component {
 
 	public function get containerStyle ():ContainerStyle {
 		return _style as ContainerStyle;
+	}
+
+	public function get autoSize ():Boolean {
+		return _autoSize;
+	}
+
+	public function set autoSize (value:Boolean):void {
+		if (value != _autoSize) {
+			_autoSize = value;
+			drawDirectly ();
+		}
 	}
 
 	public function get maskContent ():Boolean {
@@ -99,22 +143,36 @@ public class Container extends Component {
 	public function set bgEnabled (bg:Boolean):void {_bgEnabled = bg;}
 
 	override public function get width ():Number {
-		if ( !_hasContent ) {
+		if (! _autoSize) {
 			return super.width;
 		} else {
-			return content.width + (containerStyle.contentPadding *2);
+			return _content.width + (containerStyle.contentPadding * 2);
 		}
 	}
 
 	override public function get height ():Number {
-		if ( !_hasContent ) {
+		if (! _autoSize) {
 			return super.height;
 		} else {
-			return content.height + (containerStyle.contentPadding *2);
+			return _content.height + (containerStyle.contentPadding * 2);
+
 		}
 	}
 
-	///////////////////////////////////
+	public function get contentPadding ():Number {
+		return _contentPadding;
+	}
+
+	public function set contentPadding (value:Number):void {
+		if (_contentPadding != value) {
+			_contentPadding = value;
+
+			_changed = true;
+			invalidate ();
+		}
+	}
+
+///////////////////////////////////
 	// Dispose
 	///////////////////////////////////
 

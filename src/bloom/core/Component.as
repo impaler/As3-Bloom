@@ -124,6 +124,7 @@ public class Component extends Sprite implements IComponent {
 	override public function set width (value:Number):void {
 		if (_width != value) {
 			_width = value;
+
 			_changed = true;
 			invalidate ();
 			onResized.dispatch ();
@@ -137,6 +138,7 @@ public class Component extends Sprite implements IComponent {
 	override public function set height (value:Number):void {
 		if (_height != value) {
 			_height = value;
+
 			_changed = true;
 			invalidate ();
 			onResized.dispatch ();
