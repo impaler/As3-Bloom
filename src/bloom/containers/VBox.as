@@ -22,20 +22,21 @@ public class VBox extends Container {
 
 			if (object is IObjectBase) {
 				component = object as IObjectBase;
-				component.x = component.padding.left;
-				component.y = last + component.padding.top;
-				last = component.y + component.height + component.padding.bottom;
+				component.x = containerStyle.contentPadding;
+				component.y = last + containerStyle.contentPadding;
+				last = component.y + component.height;
 			}
 		}
 	}
 
-	override public function get width ():Number {
-		return content.width;
+	override public function get height ():Number {
+		if ( !_hasContent ) {
+			return super.height;
+		} else {
+			return content.height + (containerStyle.contentPadding *2);
+		}
 	}
 
-	override public function get height ():Number {
-		return content.height;
-	}
 
 }
 }

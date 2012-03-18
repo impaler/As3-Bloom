@@ -9,6 +9,7 @@ import bloom.containers.HBox;
 import bloom.containers.ScrollContainer;
 import bloom.containers.VBox;
 import bloom.controls.ButtonBase;
+import bloom.utils.ComponentUtils;
 
 import flash.display.Sprite;
 
@@ -16,8 +17,9 @@ public class TabScrollContainers extends Sprite {
 	public function TabScrollContainers () {
 
 		var VScrollContent:HBox = new HBox ();
+		VScrollContent.maskContent=false;
 		for (var i:int = 0; i < 20; i ++) {
-			VScrollContent.addContent (new ButtonBase ());
+			VScrollContent.addContent (ComponentUtils.createIconButtonTest ());
 		}
 
 		var VScroll:ScrollContainer = new ScrollContainer ();
@@ -26,17 +28,19 @@ public class TabScrollContainers extends Sprite {
 
 		var HScrollContent:VBox = new VBox ();
 		for (var i:int = 0; i < 20; i ++) {
-			HScrollContent.addContent (new ButtonBase ());
+			HScrollContent.addContent (ComponentUtils.createIconButtonTest ());
 		}
 
 		var HScroll:ScrollContainer = new ScrollContainer ();
 		HScroll.addContent (HScrollContent);
 		HScroll.size (160,300);
 
+
+
 		var GridScrollContent:FlowBox = new FlowBox ();
 		GridScrollContent.size (600,600);
 		for (var i:int = 0; i < 100; i ++) {
-			GridScrollContent.addContent (new ButtonBase ());
+			GridScrollContent.addContent (ComponentUtils.createIconButtonTest ());
 		}
 
 		var GridScroll:ScrollContainer = new ScrollContainer ();

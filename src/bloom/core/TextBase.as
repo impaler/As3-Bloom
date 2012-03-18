@@ -40,7 +40,7 @@ public class TextBase extends TextField implements IComponent {
 	}
 
 	protected function onThemeChanged ():void {
-		style = OmniCore.defaultTheme.textStyle;
+		style = OmniCore.defaultTheme.text;
 	}
 
 	public function onAddedToStage (e:Event):void {

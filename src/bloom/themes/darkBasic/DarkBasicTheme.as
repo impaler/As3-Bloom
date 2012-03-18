@@ -14,7 +14,8 @@ public class DarkBasicTheme extends Theme {
 		button = DarkButton;
 		container = DarkContainer;
 		slider = DarkSlider;
-		textStyle = DarkLabel;
+		text = DarkLabel;
+		window = DarkWindow;
 
 	}
 

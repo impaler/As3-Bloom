@@ -1,7 +1,6 @@
 package bloom.themes.blue {
 
 import bloom.core.Theme;
-import bloom.themes.darkBasic.DarkLabel;
 
 /**
  * BlueTheme
@@ -15,7 +14,8 @@ public class BlueTheme extends Theme {
 		button = BlueButton;
 		container = BlueContainer;
 		slider = BlueSlider;
-		textStyle = DarkLabel;
+		text = BlueLabel;
+		window = BlueWindow;
 
 	}
 

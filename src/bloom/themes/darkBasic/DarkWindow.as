@@ -1,18 +1,18 @@
-package bloom.themes.blue {
+package bloom.themes.darkBasic {
 
 import bloom.core.ComponentConstants;
 import bloom.style.brush.ColorBrush;
-import bloom.style.containers.ContainerStyle;
+import bloom.style.containers.WindowStyle;
 import bloom.utils.ColorUtils;
 
 /**
- * BlueContainer
+ * BlueWindow
  */
-public class BlueContainer extends ContainerStyle {
+public class DarkWindow extends WindowStyle {
 
 	private var _backgroundColors:Vector.<uint> = new Vector.<uint> (2,true);
 
-	public function BlueContainer () {
+	public function DarkWindow () {
 		_backgroundColors[ComponentConstants.ACTIVE] = ColorUtils.BLACK;
 		_backgroundColors[ComponentConstants.DISABLED] = ColorUtils.LIGHT_GRAY;
 		background = new ColorBrush (_backgroundColors);
@@ -20,7 +20,14 @@ public class BlueContainer extends ContainerStyle {
 		defaultWidth = 300;
 		defaultHeight = 500;
 
-		contentPadding = 10;
+		headerSize = 30;
+		footerSize = 30;
+		scrollbarSize = 30;
+
+		maxWidth = Number.MAX_VALUE;
+		minWidth = 100;
+		maxHeight = Number.MAX_VALUE;
+		minHeight = 100;
 	}
 
 	///////////////////////////////////
@@ -28,7 +35,7 @@ public class BlueContainer extends ContainerStyle {
 	///////////////////////////////////
 
 	override public function dispose (gc:Boolean = false):void {
-		_backgroundColors = null;
+		background = null;
 		super.dispose (gc);
 	}
 

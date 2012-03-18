@@ -20,7 +20,7 @@ public class DarkContainer extends ContainerStyle {
 		defaultWidth = 300;
 		defaultHeight = 360;
 
-		maskContent = true;
+		contentPadding = 10;
 	}
 
 	///////////////////////////////////

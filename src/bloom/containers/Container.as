@@ -23,7 +23,9 @@ public class Container extends Component {
 
 	protected var background:BitmapData;
 	protected var _content:Sprite;
-	protected var _maskContent:Boolean;
+	protected var _hasContent:Boolean = false;
+
+	protected var _maskContent:Boolean = false;
 	protected var _bgEnabled:Boolean = true;
 
 	public function Container (p:DisplayObjectContainer = null) {
@@ -42,15 +44,11 @@ public class Container extends Component {
 		super.onStyleChanged ();
 	}
 
-	override protected function initDefaultStyle ():void {
-		super.initDefaultStyle ();
-		_maskContent = containerStyle.maskContent;
-	}
-
 	public function addContent (value:IComponent):void {
 		if (value is IComponent) {
-			_content.addChild (DisplayObject (value));
+			_hasContent = true;
 			value.drawDirectly ();
+			_content.addChild (DisplayObject (value));
 			drawDirectly ();
 		}
 	}
@@ -63,16 +61,16 @@ public class Container extends Component {
 		applyMask ();
 
 		if (_bgEnabled) {
-			if (_maskContent) {
+//			if (_maskContent) {
 				containerStyle.background.update (_state,this,getDimensionObject);
-			} else {
-				var dimensions:ObjectBase = new ObjectBase ();
-				dimensions.x = _content.x;
-				dimensions.y = _content.y;
-				dimensions.width = _content.width;
-				dimensions.height = _content.height;
-				containerStyle.background.update (_state,_content,dimensions);
-			}
+//			} else {
+//				var dimensions:ObjectBase = new ObjectBase ();
+//				dimensions.x = _content.x;
+//				dimensions.y = _content.y;
+//				dimensions.width = _content.width;
+//				dimensions.height = _content.height;
+//				containerStyle.background.update (_state,_content,dimensions);
+//			}
 		}
 
 	}
@@ -108,6 +106,23 @@ public class Container extends Component {
 	}
 
 	public function set bgEnabled (bg:Boolean):void {_bgEnabled = bg;}
+
+	override public function get width ():Number {
+		if ( !_hasContent ) {
+			return super.width;
+		} else {
+			return content.width;
+		}
+	}
+
+	override public function get height ():Number {
+		if ( !_hasContent ) {
+			return super.height;
+		} else {
+			return content.height;
+		}
+	}
+
 
 	///////////////////////////////////
 	// Dispose

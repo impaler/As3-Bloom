@@ -12,8 +12,10 @@ import flash.events.Event;
 import theme_previewer.tabs.TabButtons;
 
 import theme_previewer.tabs.TabContainers;
+import theme_previewer.tabs.TabScrollContainers;
 
 import theme_previewer.tabs.TabSliders;
+import theme_previewer.tabs.TabWindowTest;
 
 public class Main extends Sprite {
 
@@ -27,18 +29,22 @@ public class Main extends Sprite {
 		stage.scaleMode = "noScale";
 		stage.align = "TL";
 
-		OmniCore.init (stage,DarkBasicTheme);
-//		OmniCore.init (stage,BlueTheme);
+//		OmniCore.init (stage,DarkBasicTheme);
 
-		MonsterDebugger.initialize (this);
-		MonsterDebugger.trace (this,"Hello World!");
+		OmniCore.init (stage,BlueTheme);
+
+//		MonsterDebugger.initialize (this);
+//		MonsterDebugger.trace (this,"Hello World!");
 
 //		var thing:TabContainers = new TabContainers ();
 //		addChild (thing);
 
-		var thing:TabButtons = new TabButtons ();
-		addChild (thing);
+//		var thing:TabButtons = new TabButtons ();
+//		addChild (thing);
 
+		var thing:TabWindowTest = new TabWindowTest();
+		addChild(thing);
+//
 //		var thing:TabScrollContainers = new TabScrollContainers();
 //		addChild(thing);
 

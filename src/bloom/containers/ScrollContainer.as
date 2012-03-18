@@ -35,7 +35,7 @@ public class ScrollContainer extends Container {
 		super (p);
 	}
 
-	override public function initDefaultStyle ():void {
+	override protected function initDefaultStyle ():void {
 		super.initDefaultStyle ();
 		v_scrollBar.autoHide = false;
 		v_scrollBar.step = 20;
@@ -212,6 +212,14 @@ public class ScrollContainer extends Container {
 		v_mouseWheel = null;
 		h_mouseWheel.removeAll ();
 		h_mouseWheel = null;
+	}
+
+	override public function get width ():Number {
+		return _width;
+	}
+
+	override public function get height ():Number {
+		return _height;
 	}
 
 	///////////////////////////////////

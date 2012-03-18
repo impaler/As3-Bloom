@@ -22,20 +22,19 @@ public class HBox extends Container {
 
 			if (object is IObjectBase) {
 				component = object as IObjectBase;
-				component.x = last + component.padding.left;
-				component.y = component.padding.top;
-				last = component.x + component.width + component.padding.right;
+				component.x = last + containerStyle.contentPadding;
+				component.y = containerStyle.contentPadding;
+				last = component.x + component.width;
 			}
 		}
 	}
 
 	override public function get width ():Number {
-		return content.width;
+		if ( !_hasContent ) {
+			return super.width;
+		} else {
+			return content.width + (containerStyle.contentPadding *2);
+		}
 	}
-
-	override public function get height ():Number {
-		return content.height;
-	}
-
 }
 }
