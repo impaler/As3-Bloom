@@ -2,10 +2,10 @@ package bloom.themes.blue {
 
 import bloom.core.ComponentConstants;
 import bloom.core.ScaleBitmap;
-import bloom.style.brush.BMPBrush;
-import bloom.style.brush.ColorBrush;
-import bloom.style.controls.ButtonBaseStyle;
-import bloom.style.controls.SliderStyle;
+import bloom.components.style.brush.BMPBrush;
+import bloom.components.style.brush.ColorBrush;
+import bloom.components.style.components.controls.ButtonBaseStyle;
+import bloom.components.style.components.controls.SliderStyle;
 import bloom.utils.ColorUtils;
 
 import flash.geom.Rectangle;

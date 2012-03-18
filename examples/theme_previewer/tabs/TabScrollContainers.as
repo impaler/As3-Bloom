@@ -4,11 +4,11 @@
  */
 package theme_previewer.tabs {
 
-import bloom.containers.FlowBox;
-import bloom.containers.HBox;
-import bloom.containers.ScrollContainer;
-import bloom.containers.VBox;
-import bloom.controls.ButtonBase;
+import bloom.components.containers.FlowBox;
+import bloom.components.containers.HBox;
+import bloom.components.containers.ScrollContainer;
+import bloom.components.containers.VBox;
+import bloom.components.controls.ButtonBase;
 import bloom.utils.ComponentUtils;
 
 import flash.display.Sprite;

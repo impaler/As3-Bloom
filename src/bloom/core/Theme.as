@@ -199,7 +199,7 @@ public class Theme {
 	///////////////////////////////////
 
 	public static function toString ():String {
-		return "[bloom.style.default.ThemeBase]";
+		return "[bloom.components.style.default.ThemeBase]";
 	}
 
 }

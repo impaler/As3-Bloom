@@ -1,12 +1,12 @@
 package theme_previewer.tabs {
 
-import bloom.containers.FlowBox;
-import bloom.containers.HBox;
-import bloom.containers.VBox;
-import bloom.controls.ButtonBase;
+import bloom.components.containers.FlowBox;
+import bloom.components.containers.HBox;
+import bloom.components.containers.VBox;
+import bloom.components.controls.ButtonBase;
 import bloom.core.ComponentConstants;
-import bloom.style.brush.ColorBrush;
-import bloom.style.controls.ButtonBaseStyle;
+import bloom.components.style.brush.ColorBrush;
+import bloom.components.style.components.controls.ButtonBaseStyle;
 import bloom.utils.ColorUtils;
 import bloom.utils.ComponentUtils;
 

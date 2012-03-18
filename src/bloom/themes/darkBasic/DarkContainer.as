@@ -1,8 +1,8 @@
 package bloom.themes.darkBasic {
 
 import bloom.core.ComponentConstants;
-import bloom.style.brush.ColorBrush;
-import bloom.style.containers.ContainerStyle;
+import bloom.components.style.brush.ColorBrush;
+import bloom.components.style.components.containers.ContainerStyle;
 import bloom.utils.ColorUtils;
 
 /**

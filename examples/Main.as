@@ -29,7 +29,7 @@ public class Main extends Sprite {
 		stage.scaleMode = "noScale";
 		stage.align = "TL";
 
-//		OmniCore.init (stage,DarkBasicTheme);
+		OmniCore.init (stage,DarkBasicTheme);
 
 		OmniCore.init (stage,BlueTheme);
 
@@ -42,14 +42,14 @@ public class Main extends Sprite {
 //		var thing:TabButtons = new TabButtons ();
 //		addChild (thing);
 
-		var thing:TabWindowTest = new TabWindowTest();
-		addChild(thing);
+//		var thing:TabWindowTest = new TabWindowTest();
+//		addChild(thing);
 //
 //		var thing:TabScrollContainers = new TabScrollContainers();
 //		addChild(thing);
 
-//		var thing:TabSliders = new TabSliders ();
-//		addChild (thing);
+		var thing:TabSliders = new TabSliders ();
+		addChild (thing);
 
 		/*
 

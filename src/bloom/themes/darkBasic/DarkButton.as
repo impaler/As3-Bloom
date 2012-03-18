@@ -1,9 +1,9 @@
 package bloom.themes.darkBasic {
 
 import bloom.core.ComponentConstants;
-import bloom.style.brush.Brush;
-import bloom.style.brush.ColorBrush;
-import bloom.style.controls.ButtonStyle;
+import bloom.components.style.brush.Brush;
+import bloom.components.style.brush.ColorBrush;
+import bloom.components.style.components.controls.ButtonStyle;
 import bloom.utils.ColorUtils;
 
 /**
@@ -23,7 +23,7 @@ public class DarkButton extends ButtonStyle {
 		var textBrush:DarkLabel = new DarkLabel ();
 		buttonText = textBrush.textStyleBrush as Brush;
 
-		defaultWidth = 300;
+		defaultWidth = 120;
 		defaultHeight = 40;
 	}
 

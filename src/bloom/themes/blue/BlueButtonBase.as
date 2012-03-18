@@ -2,8 +2,8 @@ package bloom.themes.blue {
 
 import bloom.core.ComponentConstants;
 import bloom.core.ScaleBitmap;
-import bloom.style.brush.BMPBrush;
-import bloom.style.controls.ButtonBaseStyle;
+import bloom.components.style.brush.BMPBrush;
+import bloom.components.style.components.controls.ButtonBaseStyle;
 
 import flash.geom.Rectangle;
 

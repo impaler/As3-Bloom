@@ -1,6 +1,6 @@
 package bloom.core {
 
-import bloom.style.ComponentBaseStyle;
+import bloom.components.style.components.ComponentBaseStyle;
 
 import flash.display.DisplayObjectContainer;
 import flash.display.Sprite;

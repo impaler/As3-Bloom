@@ -1,8 +1,8 @@
 package bloom.themes.blue {
 
 import bloom.core.ComponentConstants;
-import bloom.style.brush.TextBrush;
-import bloom.style.controls.TextStyle;
+import bloom.components.style.brush.TextBrush;
+import bloom.components.style.components.text.TextStyle;
 import bloom.utils.ColorUtils;
 
 import flash.text.TextFormat;

@@ -1,8 +1,8 @@
 package bloom.themes.blue {
 
 import bloom.core.ComponentConstants;
-import bloom.style.brush.ColorBrush;
-import bloom.style.containers.WindowStyle;
+import bloom.components.style.brush.ColorBrush;
+import bloom.components.style.components.containers.WindowStyle;
 import bloom.utils.ColorUtils;
 
 /**
@@ -25,9 +25,9 @@ public class BlueWindow extends WindowStyle {
 		scrollbarSize = 30;
 
 		maxWidth = Number.MAX_VALUE;
-		minWidth = 100;
+		minWidth = 260;
 		maxHeight = Number.MAX_VALUE;
-		minHeight = 100;
+		minHeight = 260;
 	}
 
 	///////////////////////////////////

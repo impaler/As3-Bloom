@@ -1,6 +1,6 @@
 package bloom.core {
 
-import bloom.style.controls.TextStyle;
+import bloom.components.style.components.text.TextStyle;
 
 import flash.display.DisplayObjectContainer;
 import flash.events.Event;
