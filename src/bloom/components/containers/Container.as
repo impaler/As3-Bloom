@@ -28,6 +28,7 @@ public class Container extends Component {
 	protected var _autoSize:Boolean = true;
 	protected var _bgEnabled:Boolean = true;
 	protected var _bg:Sprite;
+	protected var _objects:Vector.<IComponent>;
 
 	public function Container (p:DisplayObjectContainer = null) {
 		super (p);
@@ -40,12 +41,15 @@ public class Container extends Component {
 	}
 
 	override protected function createAssets ():void {
+		_objects = new Vector.<IComponent>();
+
 		super.createAssets ();
 
 		_bg = new Sprite ();
-		addChild (_bg);
 
+		addChild (_bg);
 		_content = new Sprite ();
+
 		addChild (_content);
 	}
 
@@ -56,11 +60,10 @@ public class Container extends Component {
 
 	public function addContent (value:IComponent):void {
 		if (value is IComponent) {
+			_objects.push (value);
+
 			_hasContent = true;
 			value.drawDirectly ();
-
-			trace(_content.width);
-
 			_content.addChild (DisplayObject (value));
 
 			drawDirectly ();
@@ -69,14 +72,17 @@ public class Container extends Component {
 
 	public function removeContent (value:IComponent):void {
 		if (value is IComponent) {
-			//todo
-//			if ( value.parent ==  this)
-//
-//			_hasContent = true;
-//			value.drawDirectly ();
-//			_content.removeChild (DisplayObject (value));
-//			drawDirectly ();
+			var index:int = _objects.indexOf (value);
+			if (index != - 1) removeContentAt (index);
 		}
+	}
+
+	public function removeContentAt (index:int):IComponent {
+		var result:IComponent = _objects[index] as IComponent;
+		if (result) {
+			_content.removeChild (DisplayObject (result));
+		}
+		return result;
 	}
 
 	override protected function draw (e:Event = null):void {
@@ -151,7 +157,11 @@ public class Container extends Component {
 		if (! _autoSize) {
 			return super.width;
 		} else {
+//			if (! _hasContent) {
+//				return _width;
+//			} else {
 			return _content.width + (containerStyle.contentPadding * 2);
+//			}
 		}
 	}
 
@@ -159,8 +169,11 @@ public class Container extends Component {
 		if (! _autoSize) {
 			return super.height;
 		} else {
+//			if (! _hasContent) {
+//				return _height;
+//			} else {
 			return _content.height + (containerStyle.contentPadding * 2);
-
+//			}
 		}
 	}
 

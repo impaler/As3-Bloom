@@ -33,7 +33,8 @@ public class VBox extends Container {
 				if (object is IObjectBase) {
 					component = object as IObjectBase;
 					var XPos:Number;
-					XPos = ((Widths[0] * .5) - (component.width * .5)) + _contentPadding;
+					XPos = _contentPadding;
+//					XPos = ((Widths[0] * .5) - (component.width * .5)) + _contentPadding;
 					component.x = XPos;
 					component.y = last + _contentPadding;
 					last = component.y + component.height;

@@ -91,18 +91,23 @@ public class ScrollContainer extends Container {
 		setContentSize (content.width,content.height);
 	}
 
-	public function setScrollBar (horizontal:Boolean,vertical:Boolean):void {
+	public function setScrollBar (horizontal:Boolean = true,vertical:Boolean=true):void {
 		h_scrollBar_enabled = horizontal;
 		v_scrollBar_enabled = vertical;
 
 		if (horizontal) {
 			if (vertical) {
+
 				_rect.width = _width - v_scrollBar.width;
-				_rect.height = _height - h_scrollBar.height;
 				h_scrollBar.width = _width - v_scrollBar.width;
+
+				_rect.height = _height - h_scrollBar.height;
 				v_scrollBar.height = _height - h_scrollBar.height;
+
 				h_scrollBar.y = v_scrollBar.height;
 				v_scrollBar.x = h_scrollBar.width;
+
+
 				if (h_eventAdded) {
 					h_eventAdded = false;
 					h_mouseWheel.remove (h_scrollBar.onMouseWheel);
@@ -116,6 +121,7 @@ public class ScrollContainer extends Container {
 					v_mouseWheel.add (v_scrollBar.onMouseWheel);
 				}
 				if (! v_scrollBar.parent) addChild (v_scrollBar);
+
 			} else {
 				_rect.width = _width;
 				_rect.height = _height - h_scrollBar.height;
@@ -166,7 +172,24 @@ public class ScrollContainer extends Container {
 		h_scrollBar.pageSize = _rect.width;
 		v_scrollBar.pageSize = _rect.height;
 
+
+
+
+//		h_scrollBar.drawDirectly();
+
+
+
+//		_rect.height = _height;
+//		v_scrollBar.height = _height;
+
 		content.scrollRect = _rect;
+
+
+//		if ( !h_scrollBar.visible ) {
+//			_rect.width = _width;
+//			h_scrollBar.width = _width;
+//		}
+//
 	}
 
 	public function setContentSize (width:Number,height:Number):void {

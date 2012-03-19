@@ -16,13 +16,13 @@ import flash.events.Event;
  */
 public class Button extends ButtonBase {
 
-	protected var _titleLabel:String;
+	protected var _titleText:String;
 	protected var _title:Label;
 	protected var _icon:DisplayObject;
 	protected var _iconPadding:Number;
 
 	public function Button (p:DisplayObjectContainer = null,title:String = "") {
-		_titleLabel = title;
+		_titleText = title;
 		super (p);
 	}
 
@@ -50,19 +50,15 @@ public class Button extends ButtonBase {
 	}
 
 	override protected function createAssets ():void {
-		_title = new Label (this,_titleLabel);
+		_title = new Label (this,_titleText);
 		super.createAssets ();
 	}
 
 	override protected function draw (e:Event = null):void {
 		if (! _changed) return;
-
 		_changed = false;
 
-		buttonStyle.background.update (_state,this,getDimensionObject);
-		buttonStyle.buttonText.update (_state,_title,getDimensionObject);
-
-//		_title.state = _state;
+		buttonStyle.update (this);
 
 		positionTitleandIcon ();
 
@@ -76,7 +72,7 @@ public class Button extends ButtonBase {
 
 			_icon.x = _iconPadding;
 			_icon.y = (_height - _icon.height) * 0.5;
-			if (_titleLabel != "") {
+			if (_titleText != "") {
 				_title.x = _icon.x + _icon.width + _iconPadding + _title.padding.left;
 			} else {
 				_icon.x = _width * .5 - _icon.width * .5;

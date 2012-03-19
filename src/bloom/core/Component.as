@@ -36,12 +36,12 @@ public class Component extends Sprite implements IComponent {
 
 		visible = false;
 
-		if (p) p.addChild (this);
-
 		createAssets ();
 		onStyleChanged ();
 		initDefaultStyle ();
 		enableSignals ();
+
+		if (p) p.addChild (this);
 
 		if (OmniCore.monitorThemeChange)
 			OmniCore.onDefaultThemeChanged.add (onStyleChanged);

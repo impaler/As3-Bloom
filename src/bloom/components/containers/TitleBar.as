@@ -53,6 +53,7 @@ public class TitleBar extends Container {
 		this.titleText = _titleText;
 		this.closeable = _closeable;
 
+
 		_state = ComponentConstants.ACTIVE;
 		size (_style.defaultWidth,_style.defaultHeight);
 	}
@@ -73,8 +74,10 @@ public class TitleBar extends Container {
 
 	override public function layoutContent ():void {
 		if ( _title ) {
+			_title.width = this.width - _buttonBox.width - _buttonsPadding;
+			_title.height = height;
 			_title.x = _buttonsPadding;
-			_title.y = (_height*.5)-(_title.height*.5);
+//			_title.y = (_height*.5)-(_title.height*.5);
 		}
 
 		_buttonBox.height = _height;
@@ -82,8 +85,11 @@ public class TitleBar extends Container {
 		_buttonBox.y = (_height*.5)-(_buttonBox.height*.5);
 	}
 
-	private function get title ():Label {
-		if (!_title) _title = new Label (this,_titleText);
+	internal function get title ():Label {
+		if (!_title) {
+			_title = new Label (this,_titleText);
+			_title.maskContent = true;
+		}
 		return _title;
 	}
 

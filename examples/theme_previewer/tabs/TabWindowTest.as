@@ -23,7 +23,7 @@ public class TabWindowTest extends Sprite {
 		HScroll.addContent (HScrollContent);
 		HScroll.size (300,80);
 
-		var WindowHBox:Window = new Window ("",HScrollContent,false);
+		var WindowHBox:Window = new Window ("Horizontal Content Scroll Window",HScrollContent,false);
 		WindowHBox.liveResize = true;
 //		WindowHBox.addScrollContent (HScrollContent);
 
@@ -38,7 +38,7 @@ public class TabWindowTest extends Sprite {
 		VScroll.addContent (VScrollContent);
 		VScroll.size (300,80);
 
-		var WindowVBox:Window = new Window ("",VScrollContent,false);
+		var WindowVBox:Window = new Window ("Vertical Content Scroll Window",VScrollContent,false);
 //		WindowVBox.addScrollContent (VScrollContent);
 
 

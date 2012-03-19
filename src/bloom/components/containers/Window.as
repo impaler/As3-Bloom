@@ -58,6 +58,8 @@ public class Window extends Component {
 
 	private var _restoreWindow:ObjectBase;
 
+	private var onHeaderMaximize:NativeSignal;
+
 	public function Window (title:String = "",content:Container = null,autoOpen:Boolean = true,moveable:Boolean = true,
 	                        resizeable:Boolean = true) {
 		_windowOpen = false;
@@ -159,6 +161,11 @@ public class Window extends Component {
 		_header.tabEnabled = false;
 		_header.closeButton.mouseDown.add(closeWindow);
 		_header.maximizeButton.mouseDown.add(onMaximize);
+
+
+		_header.bg.doubleClickEnabled = true;
+		onHeaderMaximize = new NativeSignal (_header.bg,MouseEvent.DOUBLE_CLICK,MouseEvent);
+		onHeaderMaximize.add(onMaximize);
 
 		_footer = new HBox (this);
 		_footer.customStyle = true;
@@ -285,8 +292,8 @@ public class Window extends Component {
 		var footerX:Number = 0;
 		var footerY:Number = _headerSize + (_scrollContainer ? _scrollContainer.height + _scrollContainer.padding.top + _scrollContainer.padding.bottom : 0);
 
-		_footer.move (footerX,footerY);
 		_footer.size (_width,_footerSize);
+		_footer.move (footerX,footerY);
 		_scaler.x = _width - _footerSize;
 		_scaler.y = _height - _footerSize;
 	}
@@ -316,7 +323,7 @@ public class Window extends Component {
 	private function set title (title:String):void {
 		if ( title != _titleText ) {
 			_titleText = title;
-
+			_header.title.text = _titleText;
 		}
 	}
 

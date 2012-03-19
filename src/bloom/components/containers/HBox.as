@@ -33,7 +33,8 @@ public class HBox extends Container {
 				if (object is IObjectBase) {
 					component = object as IObjectBase;
 					var YPos:Number;
-					YPos = ((Heights[0] * .5) - (component.height * .5)) + _contentPadding;
+					YPos = _contentPadding;
+//					YPos = ((Heights[0] * .5) - (component.height * .5)) + _contentPadding;
 					component.x = last + _contentPadding;
 					component.y = YPos;
 					last = component.x + component.width;

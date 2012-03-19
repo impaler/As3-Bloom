@@ -8,7 +8,7 @@ import com.demonsters.debugger.MonsterDebugger;
 import flash.display.Sprite;
 import flash.events.Event;
 
-import theme_previewer.tabs.TabWindowTest;
+import theme_previewer.tabs.*;
 
 public class Main extends Sprite {
 
@@ -28,14 +28,14 @@ public class Main extends Sprite {
 		MonsterDebugger.initialize (this);
 		MonsterDebugger.trace (this,"Hello World!");
 
-//		var thing:TabContainers = new TabContainers ();
-//		addChild (thing);
+		var thing:TabContainers = new TabContainers ();
+		addChild (thing);
 
 //		var thing:TabButtons = new TabButtons ();
 //		addChild (thing);
 
-		var thing:TabWindowTest = new TabWindowTest();
-		addChild(thing);
+//		var thing:TabWindowTest = new TabWindowTest();
+//		addChild(thing);
 
 //		var thing:TabScrollContainers = new TabScrollContainers();
 //		addChild(thing);
@@ -43,10 +43,8 @@ public class Main extends Sprite {
 //		var thing:TabSliders = new TabSliders ();
 //		addChild (thing);
 
-
 //		var thing:TitleBar = new TitleBar("Title Bar Title");
 //		addChild(thing);
-//
 
 	}
 

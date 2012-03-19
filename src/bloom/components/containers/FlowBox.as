@@ -25,7 +25,7 @@ public class FlowBox extends Container {
 
 	private var _hGap = 5;
 	private var _vGap = 5;
-	private var _hAlign = Align.LEFT;
+	private var _hAlign = Align.CENTER;
 	private var _vAlign = Align.TOP;
 
 	public function FlowBox (p:DisplayObjectContainer = null) {
@@ -61,6 +61,8 @@ public class FlowBox extends Container {
 		_LayoutComponent.maxContentWidth = _width;
 
 		_LayoutComponent.layout (content);
+
+		content.x = content.y = contentPadding;
 	}
 
 	///////////////////////////////////

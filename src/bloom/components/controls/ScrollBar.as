@@ -55,6 +55,7 @@ public class ScrollBar extends Slider {
 	protected function refresh ():void {
 		_max = Math.max (_contentSize - _pageSize,0);
 		if (_max > 0) {
+			this.visible = true;
 			if (_type == ComponentConstants.HORIZONTALLY) {
 				_realSize = (_pageSize * _width) / (_max + _pageSize);
 				_button.size (Math.max (_realSize,_minSize),_height);
@@ -75,7 +76,13 @@ public class ScrollBar extends Slider {
 			_rect.height = 0;
 			_button.move (0,0);
 			_button.size (0,0);
-			if (_autoHide) graphics.clear ();
+
+
+				this.visible = false;
+//			if (_autoHide) graphics.clear ();
+
+
+
 			_working = false;
 		}
 	}

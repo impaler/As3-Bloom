@@ -9,7 +9,7 @@ public class ComponentUtils {
 
 	public static function createIconButtonTest ():ButtonBase {
 		var IconButton:ButtonBase = new ButtonBase ();
-		IconButton.size (50,50);
+		IconButton.size (20,20);
 		var IconStyle:ButtonBaseStyle = new ButtonBaseStyle ();
 		var _scaleBitmaps:Vector.<uint> = new Vector.<uint> (4,true);
 		_scaleBitmaps[ComponentConstants.ACTIVE] = ColorUtils.randomColor ();
