@@ -7,9 +7,9 @@ import bloom.components.style.components.controls.ButtonBaseStyle;
 
 public class ComponentUtils {
 
-	public static function createIconButtonTest ():ButtonBase {
+	public static function createIconButtonTest (width:Number=20,height:Number=20):ButtonBase {
 		var IconButton:ButtonBase = new ButtonBase ();
-		IconButton.size (20,20);
+		IconButton.size (width,height);
 		var IconStyle:ButtonBaseStyle = new ButtonBaseStyle ();
 		var _scaleBitmaps:Vector.<uint> = new Vector.<uint> (4,true);
 		_scaleBitmaps[ComponentConstants.ACTIVE] = ColorUtils.randomColor ();

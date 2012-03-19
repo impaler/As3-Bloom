@@ -47,11 +47,14 @@ public class FlowBox extends Container {
 		_LayoutComponent.vAlign = _vAlign;
 	}
 
-	override public function addContent (value:IComponent):void {
+	override public function addContent (value:IComponent):IComponent {
 		if (value is IComponent) {
 			value.drawDirectly ();
 			_LayoutComponent.add (value);
 			content.addChild (DisplayObject (value));
+			return value;
+		} else {
+			return null;
 		}
 	}
 

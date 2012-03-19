@@ -28,7 +28,7 @@ public class Container extends Component {
 	protected var _autoSize:Boolean = true;
 	protected var _bgEnabled:Boolean = true;
 	protected var _bg:Sprite;
-	protected var _objects:Vector.<IComponent>;
+	protected var _objects:Array;
 
 	public function Container (p:DisplayObjectContainer = null) {
 		super (p);
@@ -41,7 +41,7 @@ public class Container extends Component {
 	}
 
 	override protected function createAssets ():void {
-		_objects = new Vector.<IComponent>();
+		_objects = new Array();
 
 		super.createAssets ();
 
@@ -58,7 +58,7 @@ public class Container extends Component {
 		super.onStyleChanged ();
 	}
 
-	public function addContent (value:IComponent):void {
+	public function addContent (value:IComponent):IComponent {
 		if (value is IComponent) {
 			_objects.push (value);
 
@@ -67,13 +67,19 @@ public class Container extends Component {
 			_content.addChild (DisplayObject (value));
 
 			drawDirectly ();
+
+			return value;
+		} else {
+			return null;
 		}
+
 	}
 
 	public function removeContent (value:IComponent):void {
 		if (value is IComponent) {
-			var index:int = _objects.indexOf (value);
-			if (index != - 1) removeContentAt (index);
+			var index:int = _objects.indexOf (value,0);
+			if (index != - 1)
+				removeContentAt (index);
 		}
 	}
 
@@ -81,6 +87,9 @@ public class Container extends Component {
 		var result:IComponent = _objects[index] as IComponent;
 		if (result) {
 			_content.removeChild (DisplayObject (result));
+			_objects[index] = null;
+			result.dispose();
+			drawDirectly();
 		}
 		return result;
 	}
