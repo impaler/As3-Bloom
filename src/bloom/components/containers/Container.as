@@ -25,8 +25,9 @@ public class Container extends Component {
 	protected var _hasContent:Boolean = false;
 	protected var _contentPadding:Number;
 	protected var _maskContent:Boolean = false;
-	protected var _autoSize:Boolean = false;
+	protected var _autoSize:Boolean = true;
 	protected var _bgEnabled:Boolean = true;
+	protected var _bg:Sprite;
 
 	public function Container (p:DisplayObjectContainer = null) {
 		super (p);
@@ -40,6 +41,9 @@ public class Container extends Component {
 
 	override protected function createAssets ():void {
 		super.createAssets ();
+
+		_bg = new Sprite ();
+		addChild (_bg);
 
 		_content = new Sprite ();
 		addChild (_content);
@@ -84,7 +88,8 @@ public class Container extends Component {
 
 		if (_bgEnabled) {
 //			if ( _maskContent ) {
-			containerStyle.background.update (_state,this,getDimensionObject);
+			containerStyle.background.update (_state,_bg,getDimensionObject);
+//			containerStyle.background.update (_state,this,getDimensionObject);
 //			} else {
 //				var dimensions:ObjectBase = new ObjectBase ();
 //				dimensions.x = this.x;
@@ -172,7 +177,11 @@ public class Container extends Component {
 		}
 	}
 
-///////////////////////////////////
+	public function get bg ():Sprite {
+		return _bg;
+	}
+
+	///////////////////////////////////
 	// Dispose
 	///////////////////////////////////
 

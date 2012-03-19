@@ -4,6 +4,7 @@ import bloom.core.ObjectBase;
 
 import flash.display.Graphics;
 import flash.display.Sprite;
+import flash.sampler._getInvocationCount;
 
 public class ColorBrush extends Brush {
 
@@ -19,6 +20,7 @@ public class ColorBrush extends Brush {
 
 		_value.clear ();
 		_value.beginFill (colors[state]);
+//		_value.beginFill (colors[state],.2);
 		_value.drawRect (0,0,args.width,args.height);
 		_value.endFill ();
 	}

@@ -18,7 +18,6 @@ public class HBox extends Container {
 		var i:int, j:int = content.numChildren;
 
 		if (_autoSize) {
-
 			var Heights:Array = new Array ();
 			for (i = 0; i < j; i ++) {
 				object = content.getChildAt (i);
@@ -33,10 +32,8 @@ public class HBox extends Container {
 
 				if (object is IObjectBase) {
 					component = object as IObjectBase;
-
 					var YPos:Number;
 					YPos = ((Heights[0] * .5) - (component.height * .5)) + _contentPadding;
-
 					component.x = last + _contentPadding;
 					component.y = YPos;
 					last = component.x + component.width;
@@ -46,7 +43,6 @@ public class HBox extends Container {
 		} else {
 			for (i = 0; i < j; i ++) {
 				object = content.getChildAt (i);
-
 				if (object is IObjectBase) {
 					component = object as IObjectBase;
 					component.x = last + containerStyle.contentPadding;

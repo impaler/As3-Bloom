@@ -14,6 +14,7 @@ public class WindowStyle extends ComponentBackgroundBaseStyle {
 	public var minWidth:Number;
 	public var maxHeight:Number;
 	public var minHeight:Number;
+	public var titleBar:TitleBarStyle;
 
 	///////////////////////////////////
 	// toString

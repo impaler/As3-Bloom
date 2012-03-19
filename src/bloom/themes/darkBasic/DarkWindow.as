@@ -1,5 +1,7 @@
 package bloom.themes.darkBasic {
 
+import bloom.components.style.brush.Brush;
+import bloom.components.style.components.containers.TitleBarStyle;
 import bloom.core.ComponentConstants;
 import bloom.components.style.brush.ColorBrush;
 import bloom.components.style.components.containers.WindowStyle;
@@ -11,6 +13,8 @@ import bloom.utils.ColorUtils;
 public class DarkWindow extends WindowStyle {
 
 	private var _backgroundColors:Vector.<uint> = new Vector.<uint> (2,true);
+	private var _headerBackgroundColors:Vector.<uint> = new Vector.<uint> (2,true);
+	private var _headerBackground:Brush;
 
 	public function DarkWindow () {
 		_backgroundColors[ComponentConstants.ACTIVE] = ColorUtils.BLACK;
@@ -28,6 +32,15 @@ public class DarkWindow extends WindowStyle {
 		minWidth = 100;
 		maxHeight = Number.MAX_VALUE;
 		minHeight = 100;
+
+		_headerBackgroundColors[ComponentConstants.ACTIVE] = ColorUtils.DARK_GRAY;
+		_headerBackgroundColors[ComponentConstants.DISABLED] = ColorUtils.LIGHT_GRAY;
+		_headerBackground = new ColorBrush (_headerBackgroundColors);
+		titleBar = new TitleBarStyle();
+		titleBar.background = _headerBackground;
+		titleBar.defaultWidth = 300;
+		titleBar.defaultHeight = 30;
+
 	}
 
 	///////////////////////////////////

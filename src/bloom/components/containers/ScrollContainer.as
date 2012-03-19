@@ -29,7 +29,6 @@ public class ScrollContainer extends Container {
 	private var v_eventAdded:Boolean;
 
 	private var _rect:Rectangle;
-	private var _bg:Sprite;
 
 	public function ScrollContainer (p:DisplayObjectContainer = null) {
 		super (p);
@@ -63,8 +62,8 @@ public class ScrollContainer extends Container {
 	}
 
 	override protected function createAssets ():void {
-		_bg = new Sprite ();
-		addChild (_bg);
+//		_bg = new Sprite ();
+//		addChild (_bg);
 
 		super.createAssets ();
 
@@ -83,7 +82,7 @@ public class ScrollContainer extends Container {
 		if (! _changed) return;
 		_changed = false;
 
-		containerStyle.background.update (_state,_bg,getDimensionObject);
+		containerStyle.background.update (_state,bg,getDimensionObject);
 		setScrollBar (h_scrollBar_enabled,v_scrollBar_enabled);
 	}
 

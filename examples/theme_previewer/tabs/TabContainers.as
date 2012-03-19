@@ -15,6 +15,39 @@ import flash.display.Sprite;
 public class TabContainers extends Sprite {
 	public function TabContainers () {
 
+		var HScrollContent:VBox = new VBox (this);
+//		var HScrollContent:HBox = new HBox (this);
+//		HScrollContent.height = 500;
+//		HScrollContent.width = 200;
+		HScrollContent.bgEnabled = true;
+		HScrollContent.maskContent = false;
+		HScrollContent.autoSize = true;
+		HScrollContent.y = 20;
+		HScrollContent.x = 20;
+
+//		var IconButton:ButtonBase = ComponentUtils.createIconButtonTest();
+//		IconButton.height = 200;
+//		IconButton.width = 200;
+		HScrollContent.addContent(ComponentUtils.createIconButtonTest());
+		HScrollContent.addContent(ComponentUtils.createIconButtonTest());
+		HScrollContent.addContent(ComponentUtils.createIconButtonTest());
+		HScrollContent.addContent(ComponentUtils.createIconButtonTest());
+//		HScrollContent.addContent(IconButton);
+		HScrollContent.drawDirectly();
+
+//		var VScrollContent:VBox = new VBox (this);
+//		VScrollContent.height = 50;
+//		VScrollContent.width = 50;
+//		VScrollContent.move(0,HScrollContent.height);
+
+
+
+
+
+
+
+/*
+
 		var VScrollContent:HBox = new HBox ();
 		for (var i:int = 0; i < 10; i ++) {
 			VScrollContent.addContent (ComponentUtils.createIconButtonTest ());
@@ -38,6 +71,11 @@ public class TabContainers extends Sprite {
 		Content.addContent (HScrollContent);
 		Content.addContent (VScrollContent);
 		Content.addContent (TestFlowBox);
+
+*/
+
+
+
 	}
 
 }
