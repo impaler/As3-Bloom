@@ -1,8 +1,8 @@
 package bloom.themes.blue {
 
 import bloom.core.ComponentConstants;
-import bloom.components.style.brush.ColorBrush;
-import bloom.components.style.components.containers.WindowStyle;
+import bloom.style.brush.ColorBrush;
+import bloom.style.components.containers.WindowStyle;
 import bloom.utils.ColorUtils;
 
 /**

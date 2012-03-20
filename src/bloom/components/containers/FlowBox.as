@@ -39,7 +39,7 @@ public class FlowBox extends Container {
 		_LayoutComponent.marginX = 0;
 		_LayoutComponent.marginY = 0;
 		_LayoutComponent.offsetX = 0;
-		_LayoutComponent.offsetY = 0;
+		_LayoutComponent.offsetY = contentPadding;
 		_LayoutComponent.maxItemsPerRow = 0;
 		_LayoutComponent.hGap = _hGap;
 		_LayoutComponent.vGap = _vGap;
@@ -49,6 +49,8 @@ public class FlowBox extends Container {
 
 	override public function addContent (value:IComponent):IComponent {
 		if (value is IComponent) {
+			_objects.push (value);
+
 			value.drawDirectly ();
 			_LayoutComponent.add (value);
 			content.addChild (DisplayObject (value));
@@ -58,14 +60,43 @@ public class FlowBox extends Container {
 		}
 	}
 
+	override public function removeContent (value:IComponent):IComponent {
+		if (value is IComponent) {
+			var index:int = _objects.indexOf (value,0);
+			if (index != - 1) {
+				return removeContentAt (index);
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
+
+	override public function removeContentAt (index:int):IComponent {
+		var result:IComponent = _objects[index] as IComponent;
+		if (result) {
+			_content.removeChild (DisplayObject (result));
+			_LayoutComponent.remove (result);
+
+			_objects[index] = null;
+			result.dispose ();
+
+			drawDirectly ();
+		}
+		return result;
+	}
+
 	override public function layoutContent ():void {
 		_LayoutComponent.minWidth = _width;
-		_LayoutComponent.minHeight = _height;
-		_LayoutComponent.maxContentWidth = _width;
+		_LayoutComponent.minHeight = _height - contentPadding;
+		_LayoutComponent.maxContentWidth = _width - contentPadding;
+
+		content.x = 0;
+		content.y = contentPadding;
 
 		_LayoutComponent.layout (content);
 
-		content.x = content.y = contentPadding;
 	}
 
 	///////////////////////////////////

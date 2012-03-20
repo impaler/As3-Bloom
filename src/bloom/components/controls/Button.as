@@ -1,7 +1,7 @@
 package bloom.components.controls {
 
 import bloom.core.OmniCore;
-import bloom.components.style.components.controls.ButtonStyle;
+import bloom.style.components.controls.ButtonStyle;
 import bloom.components.text.Label;
 
 import flash.display.DisplayObject;

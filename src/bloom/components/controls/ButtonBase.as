@@ -4,7 +4,7 @@ import bloom.core.ComponentConstants;
 import bloom.core.InteractiveComponent;
 import bloom.core.OmniCore;
 import bloom.core.Padding;
-import bloom.components.style.components.controls.ButtonBaseStyle;
+import bloom.style.components.controls.ButtonBaseStyle;
 
 import flash.display.DisplayObjectContainer;
 import flash.events.Event;

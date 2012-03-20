@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package bloom.components.style.brush {
+package bloom.style.brush {
 
 import bloom.core.Component;
 import bloom.core.ObjectBase;

@@ -1,8 +1,8 @@
-package bloom.components.style.components.text {
+package bloom.style.components.text {
 
 import bloom.core.IComponent;
 import bloom.core.IStyle;
-import bloom.components.style.brush.Brush;
+import bloom.style.brush.Brush;
 
 /**
  * TextStyle

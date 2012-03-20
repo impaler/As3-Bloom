@@ -2,8 +2,8 @@ package bloom.utils {
 
 import bloom.components.controls.ButtonBase;
 import bloom.core.ComponentConstants;
-import bloom.components.style.brush.ColorBrush;
-import bloom.components.style.components.controls.ButtonBaseStyle;
+import bloom.style.brush.ColorBrush;
+import bloom.style.components.controls.ButtonBaseStyle;
 
 public class ComponentUtils {
 

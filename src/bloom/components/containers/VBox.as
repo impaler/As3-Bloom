@@ -17,7 +17,7 @@ public class VBox extends Container {
 		var component:IObjectBase;
 		var i:int, j:int = content.numChildren;
 
-		if (_autoSize) {
+		if (_autoHeight) {
 			var Widths:Array = new Array ();
 			for (i = 0; i < j; i ++) {
 				object = content.getChildAt (i);
@@ -25,7 +25,7 @@ public class VBox extends Container {
 				Widths.push (component.width);
 			}
 			Widths.sort (Array.DESCENDING);
-			if (_autoSize) this.width = Widths[0] + (_contentPadding * 2);
+			if (_autoHeight) this.width = Widths[0] + (_contentPadding * 2);
 
 			for (i = 0; i < j; i ++) {
 				object = content.getChildAt (i);

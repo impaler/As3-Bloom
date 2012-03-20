@@ -1,6 +1,6 @@
-package bloom.components.style.components.containers {
+package bloom.style.components.containers {
 
-import bloom.components.style.components.ComponentBackgroundBaseStyle;
+import bloom.style.components.ComponentBackgroundBaseStyle;
 
 /**
  * WindowStyle

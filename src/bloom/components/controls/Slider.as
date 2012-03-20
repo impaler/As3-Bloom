@@ -3,7 +3,7 @@ package bloom.components.controls {
 import bloom.core.Component;
 import bloom.core.ComponentConstants;
 import bloom.core.OmniCore;
-import bloom.components.style.components.controls.SliderStyle;
+import bloom.style.components.controls.SliderStyle;
 
 import flash.display.BitmapData;
 import flash.display.DisplayObjectContainer;

@@ -1,6 +1,6 @@
 package bloom.components.containers {
 
-import bloom.components.style.components.containers.ContainerStyle;
+import bloom.style.components.containers.ContainerStyle;
 import bloom.core.Component;
 import bloom.core.IComponent;
 import bloom.core.OmniCore;
@@ -25,7 +25,8 @@ public class Container extends Component {
 	protected var _hasContent:Boolean = false;
 	protected var _contentPadding:Number;
 	protected var _maskContent:Boolean = false;
-	protected var _autoSize:Boolean = true;
+	protected var _autoWidth:Boolean = true;
+	protected var _autoHeight:Boolean = true;
 	protected var _bgEnabled:Boolean = true;
 	protected var _bg:Sprite;
 	protected var _objects:Array;
@@ -36,12 +37,11 @@ public class Container extends Component {
 
 	override protected function initDefaultStyle ():void {
 		_contentPadding = containerStyle.contentPadding;
-
 		super.initDefaultStyle ();
 	}
 
 	override protected function createAssets ():void {
-		_objects = new Array();
+		_objects = new Array ();
 
 		super.createAssets ();
 
@@ -75,11 +75,16 @@ public class Container extends Component {
 
 	}
 
-	public function removeContent (value:IComponent):void {
+	public function removeContent (value:IComponent):IComponent {
 		if (value is IComponent) {
 			var index:int = _objects.indexOf (value,0);
-			if (index != - 1)
-				removeContentAt (index);
+			if (index != - 1) {
+				return removeContentAt (index);
+			} else {
+				return null;
+			}
+		} else {
+			return null;
 		}
 	}
 
@@ -88,8 +93,10 @@ public class Container extends Component {
 		if (result) {
 			_content.removeChild (DisplayObject (result));
 			_objects[index] = null;
-			result.dispose();
-			drawDirectly();
+			result.dispose ();
+
+			drawDirectly ();
+			onResized.dispatch();
 		}
 		return result;
 	}
@@ -134,13 +141,24 @@ public class Container extends Component {
 		return _style as ContainerStyle;
 	}
 
-	public function get autoSize ():Boolean {
-		return _autoSize;
+	public function get autoHeight ():Boolean {
+		return _autoHeight;
 	}
 
-	public function set autoSize (value:Boolean):void {
-		if (value != _autoSize) {
-			_autoSize = value;
+	public function set autoHeight (value:Boolean):void {
+		if (value != _autoHeight) {
+			_autoHeight = value;
+			drawDirectly ();
+		}
+	}
+
+	public function get autoWidth ():Boolean {
+		return _autoWidth;
+	}
+
+	public function set autoWidth (value:Boolean):void {
+		if (value != _autoWidth) {
+			_autoWidth = value;
 			drawDirectly ();
 		}
 	}
@@ -163,19 +181,25 @@ public class Container extends Component {
 	public function set bgEnabled (bg:Boolean):void {_bgEnabled = bg;}
 
 	override public function get width ():Number {
-		if (! _autoSize) {
+		if (! _autoWidth) {
 			return super.width;
 		} else {
 //			if (! _hasContent) {
 //				return _width;
 //			} else {
-			return _content.width + (containerStyle.contentPadding * 2);
+			var wValue:Number = (_content.width + (containerStyle.contentPadding * 2));
+			if ( wValue > _width) {
+				return wValue;
+			} else {
+				return _width;
+			}
+
 //			}
 		}
 	}
 
 	override public function get height ():Number {
-		if (! _autoSize) {
+		if (! _autoHeight) {
 			return super.height;
 		} else {
 //			if (! _hasContent) {
@@ -214,6 +238,7 @@ public class Container extends Component {
 		background = null;
 		removeChild (_content);
 		_content = null;
+		_objects = null;
 	}
 
 	///////////////////////////////////

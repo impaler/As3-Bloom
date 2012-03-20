@@ -1,4 +1,4 @@
-package bloom.components.style.components {
+package bloom.style.components {
 
 import bloom.core.IComponent;
 import bloom.core.IStyle;

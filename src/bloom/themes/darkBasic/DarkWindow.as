@@ -1,10 +1,10 @@
 package bloom.themes.darkBasic {
 
-import bloom.components.style.brush.Brush;
-import bloom.components.style.components.containers.TitleBarStyle;
+import bloom.style.brush.Brush;
+import bloom.style.components.containers.TitleBarStyle;
 import bloom.core.ComponentConstants;
-import bloom.components.style.brush.ColorBrush;
-import bloom.components.style.components.containers.WindowStyle;
+import bloom.style.brush.ColorBrush;
+import bloom.style.components.containers.WindowStyle;
 import bloom.utils.ColorUtils;
 
 /**

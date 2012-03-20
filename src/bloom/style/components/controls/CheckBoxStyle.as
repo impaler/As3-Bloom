@@ -1,7 +1,7 @@
-package bloom.components.style.components.controls {
+package bloom.style.components.controls {
 
 import bloom.components.controls.ToggleButton;
-import bloom.components.style.brush.Brush;
+import bloom.style.brush.Brush;
 import bloom.core.IComponent;
 
 /**

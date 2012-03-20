@@ -2,7 +2,7 @@ package bloom.components.containers {
 
 import bloom.components.controls.Button;
 import bloom.components.controls.ButtonBase;
-import bloom.components.style.components.containers.WindowStyle;
+import bloom.style.components.containers.WindowStyle;
 import bloom.core.Component;
 import bloom.core.ComponentConstants;
 import bloom.core.ObjectBase;

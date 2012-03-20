@@ -1,4 +1,4 @@
-package bloom.components.style.brush {
+package bloom.style.brush {
 
 import bloom.core.ObjectBase;
 import bloom.core.TextBase;

@@ -17,7 +17,7 @@ public class HBox extends Container {
 		var component:IObjectBase;
 		var i:int, j:int = content.numChildren;
 
-		if (_autoSize) {
+		if (_autoWidth) {
 			var Heights:Array = new Array ();
 			for (i = 0; i < j; i ++) {
 				object = content.getChildAt (i);
@@ -25,7 +25,7 @@ public class HBox extends Container {
 				Heights.push (component.height);
 			}
 			Heights.sort (Array.DESCENDING);
-			if (_autoSize) this.height = Heights[0] + (_contentPadding * 2);
+			if (_autoWidth) this.height = Heights[0] + (_contentPadding * 2);
 
 			for (i = 0; i < j; i ++) {
 				object = content.getChildAt (i);

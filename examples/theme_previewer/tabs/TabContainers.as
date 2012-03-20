@@ -1,9 +1,6 @@
 package theme_previewer.tabs {
 
-import bloom.components.containers.Container;
-import bloom.components.containers.FlowBox;
-import bloom.components.containers.HBox;
-import bloom.components.containers.VBox;
+import bloom.components.containers.*;
 import bloom.components.controls.ButtonBase;
 import bloom.core.IComponent;
 import bloom.utils.ComponentUtils;
@@ -16,36 +13,43 @@ public class TabContainers extends Sprite {
 //		var Content:HBox = new HBox (this);
 		var Content:VBox = new VBox (this);
 		Content.contentPadding = 0;
-		Content.autoSize = true;
+		Content.autoWidth = true;
+		Content.autoHeight = true;
 		Content.bgEnabled = false;
 
-		var fsfs:VBox = new VBox (this);
+		var fsfs:VBox = new VBox ();
 		for (var i:int = 0; i < 10; i ++) {
-			addRemoveHandler (fsfs.addContent (new ButtonBase()), fsfs);
+			addRemoveHandler (fsfs.addContent (ComponentUtils.createIconButtonTest ()), fsfs);
 		}
 		Content.addContent (fsfs);
 
-		var HScrollContent:HBox = new HBox (this);
+		var HScrollContent:HBox = new HBox ();
 		for (var i:int = 0; i < 10; i ++) {
 			HScrollContent.addContent (ComponentUtils.createIconButtonTest ());
 		}
 		Content.addContent (HScrollContent);
 
-		var VScrollContent:VBox = new VBox (this);
+		var VScrollContent:VBox = new VBox ();
 		for (var i:int = 0; i < 10; i ++) {
 			VScrollContent.addContent (ComponentUtils.createIconButtonTest ());
 		}
 		Content.addContent (VScrollContent);
 
+
 		var TestFlowBox:FlowBox = new FlowBox ();
 		TestFlowBox.hGap = 0;
 		TestFlowBox.vGap = 0;
 		TestFlowBox.width = 100;
+		TestFlowBox.height = 100;
+		TestFlowBox.autoHeight = true;
+		TestFlowBox.autoWidth = false;
 		for (var i:int = 0; i < 13; i ++) {
-			TestFlowBox.addContent (ComponentUtils.createIconButtonTest ());
+//			TestFlowBox.addContent (ComponentUtils.createIconButtonTest ());
+			addRemoveHandler (TestFlowBox.addContent (ComponentUtils.createIconButtonTest ()), TestFlowBox);
 		}
 
 		Content.addContent (TestFlowBox);
+
 
 		Content.move (30,30);
 

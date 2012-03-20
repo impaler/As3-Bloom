@@ -1,7 +1,7 @@
 package bloom.themes.darkBasic {
 
-import bloom.components.style.brush.ColorBrush;
-import bloom.components.style.components.controls.ButtonStyle;
+import bloom.style.brush.ColorBrush;
+import bloom.style.components.controls.ButtonStyle;
 import bloom.core.ComponentConstants;
 import bloom.utils.ColorUtils;
 

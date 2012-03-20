@@ -1,9 +1,9 @@
-package bloom.components.style.components {
+package bloom.style.components {
 
-import bloom.components.style.*;
+import bloom.style.*;
 
 import bloom.core.IComponent;
-import bloom.components.style.brush.Brush;
+import bloom.style.brush.Brush;
 
 /**
  * ComponentBaseStyle
