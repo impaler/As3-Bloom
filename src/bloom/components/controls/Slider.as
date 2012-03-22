@@ -38,7 +38,7 @@ public class Slider extends Component {
 
 	protected var _valueChanged:Signal;
 	protected var _scrolling:Signal;
-	protected var _bg:Sprite;
+	private var _bg:Sprite;
 
 	public function Slider (p:DisplayObjectContainer = null,type:int = 0,value:Number = 0,max:Number = 100,
 	                        min:Number = 0) {
@@ -98,9 +98,8 @@ public class Slider extends Component {
 		_changed = false;
 
 		positionButton ();
-		_button.drawDirectly ();
-
-		sliderStyle.background.update (_state,_bg,getDimensionObject);
+//		_button.drawDirectly ();
+		sliderStyle.update (this);
 	}
 
 	protected function positionButton ():void {
@@ -259,7 +258,11 @@ public class Slider extends Component {
 		return _mouseWheel;
 	}
 
-	///////////////////////////////////
+	public function get bg ():Sprite {
+		return _bg;
+	}
+
+///////////////////////////////////
 	// Dispose
 	///////////////////////////////////
 

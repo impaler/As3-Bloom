@@ -92,10 +92,9 @@ public class FlowBox extends Container {
 		_LayoutComponent.minHeight = _height - contentPadding;
 		_LayoutComponent.maxContentWidth = _width - contentPadding;
 
-		content.x = 0;
-		content.y = contentPadding;
-
 		_LayoutComponent.layout (content);
+
+		content.y = contentPadding;
 
 	}
 

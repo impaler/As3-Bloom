@@ -170,6 +170,8 @@ public class Window extends Component {
 		_footer = new HBox (this);
 		_footer.customStyle = true;
 		_footer.tabEnabled = false;
+		_footer.autoWidth = false;
+		_footer.autoHeight = false;
 
 		_scaler = new ButtonBase ();
 		_scaler.buttonMode = true;
@@ -274,6 +276,7 @@ public class Window extends Component {
 
 	public function update ():void {
 		_header.size (_width,_headerSize);
+
 		if (_contentContainer) {
 
 			var contentWidth:Number = _width - _contentContainer.padding.left - contentContainer.padding.right;

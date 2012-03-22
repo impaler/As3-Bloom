@@ -28,14 +28,14 @@ public class Main extends Sprite {
 		MonsterDebugger.initialize (this);
 		MonsterDebugger.trace (this,"Hello World!");
 
-		var thing:TabContainers = new TabContainers ();
-		addChild (thing);
+//		var thing:TabContainers = new TabContainers ();
+//		addChild (thing);
 
 //		var thing:TabButtons = new TabButtons ();
 //		addChild (thing);
 
-//		var thing:TabWindowTest = new TabWindowTest();
-//		addChild(thing);
+		var thing:TabWindowTest = new TabWindowTest();
+		addChild(thing);
 
 //		var thing:TabScrollContainers = new TabScrollContainers();
 //		addChild(thing);
@@ -46,6 +46,11 @@ public class Main extends Sprite {
 //		var thing:TitleBar = new TitleBar("Title Bar Title");
 //		addChild(thing);
 
+//		var thing:SortableList = new SortableList(this);
+//		addChild(thing);
+//		for (var i:int = 0; i < 10; i ++) {
+//			thing.addContent (ComponentUtils.createIconButtonTest (200));
+//		}
 	}
 
 }

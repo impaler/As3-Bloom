@@ -1,9 +1,9 @@
 package bloom.components.containers {
 
-import bloom.style.components.containers.ContainerStyle;
 import bloom.core.Component;
 import bloom.core.IComponent;
 import bloom.core.OmniCore;
+import bloom.style.components.containers.ContainerStyle;
 
 import flash.display.BitmapData;
 import flash.display.DisplayObject;
@@ -22,12 +22,12 @@ public class Container extends Component {
 
 	protected var background:BitmapData;
 	protected var _content:Sprite;
-	protected var _hasContent:Boolean = false;
+	private var _hasContent:Boolean ;
 	protected var _contentPadding:Number;
 	protected var _maskContent:Boolean = false;
 	protected var _autoWidth:Boolean = true;
 	protected var _autoHeight:Boolean = true;
-	protected var _bgEnabled:Boolean = true;
+	private var _bgEnabled:Boolean = true;
 	protected var _bg:Sprite;
 	protected var _objects:Array;
 
@@ -37,6 +37,7 @@ public class Container extends Component {
 
 	override protected function initDefaultStyle ():void {
 		_contentPadding = containerStyle.contentPadding;
+		hasContent = false;
 		super.initDefaultStyle ();
 	}
 
@@ -62,7 +63,7 @@ public class Container extends Component {
 		if (value is IComponent) {
 			_objects.push (value);
 
-			_hasContent = true;
+			hasContent = true;
 			value.drawDirectly ();
 			_content.addChild (DisplayObject (value));
 
@@ -92,11 +93,12 @@ public class Container extends Component {
 		var result:IComponent = _objects[index] as IComponent;
 		if (result) {
 			_content.removeChild (DisplayObject (result));
-			_objects[index] = null;
 			result.dispose ();
 
+			_objects[index] = null;
+
 			drawDirectly ();
-			onResized.dispatch();
+			onResized.dispatch ();
 		}
 		return result;
 	}
@@ -108,22 +110,7 @@ public class Container extends Component {
 		layoutContent ();
 		applyMask ();
 
-		if (_bgEnabled) {
-//			if ( _maskContent ) {
-			containerStyle.background.update (_state,_bg,getDimensionObject);
-//			containerStyle.background.update (_state,this,getDimensionObject);
-//			} else {
-//				var dimensions:ObjectBase = new ObjectBase ();
-//				dimensions.x = this.x;
-//				dimensions.y = this.y;
-//				dimensions.width = _width;
-//				dimensions.height = _height;
-//				dimensions.padding = this.padding;
-//				containerStyle.background.update (_state,this,dimensions);
-//			}
-
-		}
-
+		containerStyle.update (this);
 	}
 
 	private function applyMask ():void {
@@ -180,21 +167,16 @@ public class Container extends Component {
 
 	public function set bgEnabled (bg:Boolean):void {_bgEnabled = bg;}
 
+	public function get bgEnabled ():Boolean {
+		return _bgEnabled;
+	}
+
 	override public function get width ():Number {
 		if (! _autoWidth) {
 			return super.width;
 		} else {
-//			if (! _hasContent) {
-//				return _width;
-//			} else {
 			var wValue:Number = (_content.width + (containerStyle.contentPadding * 2));
-			if ( wValue > _width) {
-				return wValue;
-			} else {
-				return _width;
-			}
-
-//			}
+			return wValue;
 		}
 	}
 
@@ -202,11 +184,8 @@ public class Container extends Component {
 		if (! _autoHeight) {
 			return super.height;
 		} else {
-//			if (! _hasContent) {
-//				return _height;
-//			} else {
-			return _content.height + (containerStyle.contentPadding * 2);
-//			}
+			var hValue:Number = (_content.height + (containerStyle.contentPadding * 2));
+			return hValue;
 		}
 	}
 
@@ -227,7 +206,15 @@ public class Container extends Component {
 		return _bg;
 	}
 
-	///////////////////////////////////
+	public function get hasContent ():Boolean {
+		return _hasContent;
+	}
+
+	public function set hasContent (value:Boolean):void {
+		_hasContent = value;
+	}
+
+///////////////////////////////////
 	// Dispose
 	///////////////////////////////////
 

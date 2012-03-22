@@ -31,7 +31,6 @@ public class TitleBar extends Container {
 		_titleText = titleText;
 
 		super ();
-
 	}
 
 	///////////////////////////////////
@@ -64,7 +63,8 @@ public class TitleBar extends Container {
 		_buttonBox = new HBox(this);
 //		_buttonBox.maskContent = false;
 		_buttonBox.bgEnabled = false;
-		_buttonBox.autoSize = true;
+		_buttonBox.autoHeight = true;
+		_buttonBox.autoWidth = true;
 		_buttonBox.contentPadding = _buttonsPadding;
 
 //		_icon = new Sprite ();
@@ -84,6 +84,10 @@ public class TitleBar extends Container {
 		_buttonBox.x = _width-_buttonBox.width;
 		_buttonBox.y = (_height*.5)-(_buttonBox.height*.5);
 	}
+
+	///////////////////////////////////
+	// getter/setters
+	///////////////////////////////////
 
 	internal function get title ():Label {
 		if (!_title) {
@@ -180,7 +184,22 @@ public class TitleBar extends Container {
 		title.text = _titleText;
 	}
 
+	///////////////////////////////////
+	// Dispose
+	///////////////////////////////////
 
+	override public function dispose (gc:Boolean = false):void {
+		super.dispose (gc);
+
+	}
+
+	///////////////////////////////////
+	// toString
+	///////////////////////////////////
+
+	public override function toString ():String {
+		return "[bloom.components.TitleBar]";
+	}
 
 }
 }

@@ -1,7 +1,6 @@
 package bloom.components.controls {
 
 import bloom.core.ComponentConstants;
-import bloom.core.ComponentConstants;
 import bloom.core.OmniCore;
 
 import flash.display.DisplayObjectContainer;
@@ -36,21 +35,8 @@ public class ScrollBar extends Slider {
 		_changed = false;
 
 		refresh ();
-//		positionButton ();
-
-		sliderStyle.background.update (_state,_bg,getDimensionObject);
-
-//		_button.y = 0;
-
+		sliderStyle.update (this);
 	}
-
-//	override protected function positionButton ():void {
-//		if (_type == ComponentConstants.HORIZONTALLY) {
-//			_button.move ((_value - _min) / (_max - _min) * _rect.width,0);
-//		} else {
-//			_button.move (0, (_value - _min) / (_max - _min) * _rect.height);
-//		}
-//	}
 
 	protected function refresh ():void {
 		_max = Math.max (_contentSize - _pageSize,0);
@@ -77,11 +63,8 @@ public class ScrollBar extends Slider {
 			_button.move (0,0);
 			_button.size (0,0);
 
-
-				this.visible = false;
+			this.visible = false;
 //			if (_autoHide) graphics.clear ();
-
-
 
 			_working = false;
 		}
@@ -104,6 +87,8 @@ public class ScrollBar extends Slider {
 	}
 
 	override protected function onBgMouseDown (e:MouseEvent):void {
+		trace ("bg");
+
 		if (_type == ComponentConstants.HORIZONTALLY) {
 			_value = (mouseX - (_button.width >> 1)) / _rect.width * _max;
 		} else {

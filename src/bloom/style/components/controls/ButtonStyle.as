@@ -13,7 +13,6 @@ public class ButtonStyle extends ButtonBaseStyle {
 
 	override public function update (value:IComponent):void {
 		var button:Button = value as Button;
-
 		background.update (button.state,button,button.getDimensionObject);
 		buttonText.update(button.state, button.title);
 	}

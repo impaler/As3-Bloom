@@ -22,7 +22,7 @@ public class DarkSlider extends SliderStyle {
 		defaultWidth = 40;
 		defaultHeight = 40;
 
-		button = new DarkButton ();
+		button = new DarkButtonBase ();
 
 	}
 

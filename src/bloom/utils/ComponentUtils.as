@@ -7,7 +7,7 @@ import bloom.style.components.controls.ButtonBaseStyle;
 
 public class ComponentUtils {
 
-	public static function createIconButtonTest (width:Number=20,height:Number=20):ButtonBase {
+	public static function createIconButtonTest (width:Number=200,height:Number=200):ButtonBase {
 		var IconButton:ButtonBase = new ButtonBase ();
 		IconButton.size (width,height);
 		var IconStyle:ButtonBaseStyle = new ButtonBaseStyle ();

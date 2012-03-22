@@ -6,7 +6,6 @@ import bloom.core.ComponentConstants;
 import bloom.core.IComponent;
 
 import flash.display.DisplayObjectContainer;
-import flash.display.Sprite;
 import flash.events.Event;
 import flash.events.MouseEvent;
 import flash.geom.Rectangle;
@@ -82,16 +81,17 @@ public class ScrollContainer extends Container {
 		if (! _changed) return;
 		_changed = false;
 
-		containerStyle.background.update (_state,bg,getDimensionObject);
+		containerStyle.update (this);
 		setScrollBar (h_scrollBar_enabled,v_scrollBar_enabled);
 	}
 
-	override public function addContent (value:IComponent):void {
-		super.addContent (value);
+	override public function addContent (value:IComponent):IComponent {
+		var comp:IComponent = super.addContent (value);
 		setContentSize (content.width,content.height);
+		return comp;
 	}
 
-	public function setScrollBar (horizontal:Boolean = true,vertical:Boolean=true):void {
+	public function setScrollBar (horizontal:Boolean = true,vertical:Boolean = true):void {
 		h_scrollBar_enabled = horizontal;
 		v_scrollBar_enabled = vertical;
 
@@ -106,7 +106,6 @@ public class ScrollContainer extends Container {
 
 				h_scrollBar.y = v_scrollBar.height;
 				v_scrollBar.x = h_scrollBar.width;
-
 
 				if (h_eventAdded) {
 					h_eventAdded = false;
@@ -172,24 +171,7 @@ public class ScrollContainer extends Container {
 		h_scrollBar.pageSize = _rect.width;
 		v_scrollBar.pageSize = _rect.height;
 
-
-
-
-//		h_scrollBar.drawDirectly();
-
-
-
-//		_rect.height = _height;
-//		v_scrollBar.height = _height;
-
 		content.scrollRect = _rect;
-
-
-//		if ( !h_scrollBar.visible ) {
-//			_rect.width = _width;
-//			h_scrollBar.width = _width;
-//		}
-//
 	}
 
 	public function setContentSize (width:Number,height:Number):void {
