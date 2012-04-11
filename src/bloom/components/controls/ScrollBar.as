@@ -46,13 +46,13 @@ public class ScrollBar extends Slider {
 				_realSize = (_pageSize * _width) / (_max + _pageSize);
 				_button.size (Math.max (_realSize,_minSize),_height);
 				_rect.width = Math.ceil (_width - _button.width);
-				_button.x = _value / _max * _rect.width;
+				_button.x = Math.max(_value / _max * _rect.width,0);
 				if (_button.x + _button.width > _width) _button.x = _width - _button.width;
 			} else {
 				_realSize = (_pageSize * _height) / (_max + _pageSize);
 				_button.size (_width,Math.max (_realSize,_minSize));
 				_rect.height = Math.ceil (_height - _button.height);
-				_button.y = _value / _max * _rect.height;
+				_button.y = Math.max(_value / _max * _rect.height,0);
 				if (_button.y + _button.height > _height) _button.y = _height - _button.height;
 			}
 			_working = true;
