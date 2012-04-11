@@ -2,7 +2,7 @@ package bloom.themes.blue {
 
 import bloom.core.ComponentConstants;
 import bloom.core.ScaleBitmap;
-import bloom.style.brush.BMPBrush;
+import bloom.style.brush.BMPScale9Brush;
 import bloom.style.brush.ColorBrush;
 import bloom.style.components.controls.ButtonBaseStyle;
 import bloom.style.components.controls.SliderStyle;
@@ -55,7 +55,7 @@ public class BlueSlider extends SliderStyle {
 		_sliderButtonBitmaps[ComponentConstants.OVER] = over;
 		_sliderButtonBitmaps[ComponentConstants.ACTIVATED] = down;
 		_sliderButtonBitmaps[ComponentConstants.DISABLED] = disabled;
-		var _backgroundBrush = new BMPBrush (_sliderButtonBitmaps);
+		var _backgroundBrush = new BMPScale9Brush (_sliderButtonBitmaps);
 
 		var sliderButton:ButtonBaseStyle = new ButtonBaseStyle ();
 		sliderButton.background = _backgroundBrush;

@@ -25,22 +25,23 @@ import bloom.core.Component;
 import bloom.core.ObjectBase;
 import bloom.core.ScaleBitmap;
 
-import flash.display.Bitmap;
+import flash.display.Sprite;
 
-public class BMPBrush extends Brush {
+public class BMPScale9Brush extends Brush {
 
-	public var bitmap:Vector.<Bitmap>;
+	public var bitmap:Vector.<ScaleBitmap>;
 
-	public function BMPBrush (bitmap:Vector.<Bitmap> = null) {
+	public function BMPScale9Brush (bitmap:Vector.<ScaleBitmap> = null) {
 		this.bitmap = bitmap;
 	}
 
 	override public function update (state:int,value:*,args:ObjectBase = null):void {
-		var bitmap:Bitmap = Bitmap (bitmap[state]);
+		var scale:ScaleBitmap = ScaleBitmap (bitmap[state]).clone ();
+		scale.setSize (args.width,args.height);
 
-		var _value:Component = value as Component;
+		var _value:Sprite = value as Sprite;
 		_value.graphics.clear ();
-		_value.graphics.beginBitmapFill (bitmap.bitmapData.clone (),null,false,true);
+		_value.graphics.beginBitmapFill (scale.bitmapData,null,false,true);
 		_value.graphics.drawRect (0,0,args.width,args.height);
 		_value.graphics.endFill ();
 	}
@@ -62,7 +63,7 @@ public class BMPBrush extends Brush {
 	///////////////////////////////////
 
 	override public function toString ():String {
-		return "[bloom.brushes.BMPBrush]";
+		return "[bloom.brushes.BMPScale9Brush]";
 	}
 
 }

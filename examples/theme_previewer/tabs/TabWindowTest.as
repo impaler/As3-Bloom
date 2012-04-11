@@ -5,6 +5,7 @@ import bloom.components.containers.ScrollContainer;
 import bloom.components.containers.VBox;
 import bloom.components.containers.Window;
 import bloom.components.controls.Button;
+import bloom.components.controls.ToggleButton;
 import bloom.utils.ComponentUtils;
 
 import flash.display.Sprite;
@@ -14,31 +15,43 @@ public class TabWindowTest extends Sprite {
 
 
 
-		var HScrollContent:HBox = new HBox ();
-		for (var i:int = 0; i < 20; i ++) {
-			HScrollContent.addContent (ComponentUtils.createIconButtonTest ());
-		}
+		var HScrollContent:VBox = new VBox ();
+//		for (var i:int = 0; i < 20; i ++) {
+//			HScrollContent.addContent (ComponentUtils.createIconButtonTest ());
+//		}
+
+
+		var Maximizeable:ToggleButton = new ToggleButton(null,"Maximizable", true);
+		HScrollContent.addContent(Maximizeable);
+
+		var Minimizeable:ToggleButton = new ToggleButton(null,"Minimizeable", true);
+		HScrollContent.addContent(Minimizeable);
+
+		var Closeable:ToggleButton = new ToggleButton(null,"Closeable", false);
+		HScrollContent.addContent(Closeable);
 
 		var HScroll:ScrollContainer = new ScrollContainer ();
 		HScroll.addContent (HScrollContent);
-		HScroll.size (300,80);
+//		HScroll.size (300,80);
 
-		var WindowHBox:Window = new Window ("Horizontal Content Scroll Window",HScrollContent,false);
+		var WindowHBox:Window = new Window ("Horizontal Content Scroll Window",HScrollContent,true);
 		WindowHBox.liveResize = true;
+		WindowHBox.size(300,450);
+//		WindowHBox.maxWidth
 //		WindowHBox.addScrollContent (HScrollContent);
 
 
 
 		var VScrollContent:VBox = new VBox ();
 		for (var i:int = 0; i < 20; i ++) {
-			VScrollContent.addContent (ComponentUtils.createIconButtonTest ());
+			VScrollContent.addContent (ComponentUtils.createTestButton ());
 		}
 
 		var VScroll:ScrollContainer = new ScrollContainer ();
 		VScroll.addContent (VScrollContent);
-		VScroll.size (300,80);
+//		VScroll.size (300,80);
 
-		var WindowVBox:Window = new Window ("Vertical Content Scroll Window",VScrollContent,false);
+		var WindowVBox:Window = new Window ("Vertical Content Scroll Window",VScrollContent,true);
 //		WindowVBox.addScrollContent (VScrollContent);
 
 

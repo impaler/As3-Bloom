@@ -20,11 +20,10 @@ public class ToggleButton extends Button {
 	protected var _valueChanged:Signal;
 	protected var _value:Boolean;
 
-	public function ToggleButton (p:DisplayObjectContainer = null,title:String = "",value:Boolean = false) {
-		_value = value;
-
+	public function ToggleButton (p:DisplayObjectContainer = null,title:String = "",defaultValue:Boolean = false) {
 		super (p,title);
 
+		value = defaultValue;
 		tabChildren = tabEnabled = false;
 		buttonMode = true;
 	}
@@ -34,7 +33,8 @@ public class ToggleButton extends Button {
 	///////////////////////////////////
 
 	override protected function onStyleChanged ():void {
-		_style = OmniCore.defaultTheme.checkBoxStyle;
+		_style = OmniCore.defaultTheme.toggleButtonStyle;
+
 		super.onStyleChanged ();
 	}
 
@@ -92,10 +92,6 @@ public class ToggleButton extends Button {
 
 	}
 
-	protected function onTitleChanged (e:Event):void {
-		_title.move (_height + _title.padding.left,(_height - _title.height) / 2);
-	}
-
 	///////////////////////////////////
 	// Draw Methods
 	///////////////////////////////////
@@ -105,6 +101,8 @@ public class ToggleButton extends Button {
 		_changed = false;
 
 		buttonStyle.update (this);
+
+		positionTitleandIcon();
 	}
 
 	///////////////////////////////////
@@ -122,7 +120,6 @@ public class ToggleButton extends Button {
 	public function set value (value:Boolean):void {
 		if (_value != value) {
 			_value = value;
-
 			_value ? _state = ComponentConstants.ACTIVATED : _state = ComponentConstants.ACTIVE;
 
 			_changed = true;

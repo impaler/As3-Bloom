@@ -17,8 +17,8 @@ public class DarkContainer extends ContainerStyle {
 		_scaleBitmaps[ComponentConstants.DISABLED] = ColorUtils.LIGHT_GRAY;
 		background = new ColorBrush (_scaleBitmaps);
 
-		defaultWidth = 300;
-		defaultHeight = 360;
+		defaultWidth = 200;
+		defaultHeight = 200;
 
 		contentPadding = 10;
 	}

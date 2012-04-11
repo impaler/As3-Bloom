@@ -16,7 +16,7 @@ public class Theme {
 	private var _text:*;
 	private var _button:*;
 	private var _buttonBase:*;
-	private var _checkBox:*;
+	private var _toggleButton:*;
 	private var _textInput:*;
 	private var _flowContainerStyle:*;
 	private var _numericStepper:*;
@@ -26,6 +26,7 @@ public class Theme {
 	private var _scrollContainer:*;
 	private var _window:*;
 	private var _formStyle:*;
+	private var _checkBoxButton:*;
 
 	///////////////////////////////////
 	// Component Getter Setters
@@ -61,12 +62,22 @@ public class Theme {
 
 	///////////////////////////////////
 
-	public function set checkBox (value:Class):void {
-		_checkBox = new value ();
+	public function set toggleButton (value:Class):void {
+		_toggleButton = new value ();
 	}
 
-	public function get checkBoxStyle ():* {
-		return _checkBox;
+	public function get toggleButtonStyle ():* {
+		return _toggleButton;
+	}
+
+	///////////////////////////////////
+
+	public function set checkBoxButton (value:Class):void {
+		_checkBoxButton = new value ();
+	}
+
+	public function get checkBoxButtonStyle ():* {
+		return _checkBoxButton;
 	}
 
 	///////////////////////////////////
@@ -170,8 +181,8 @@ public class Theme {
 		_button = null;
 		if (_buttonBase != null)IStyle (_buttonBase).dispose ();
 		_buttonBase = null;
-		if (_checkBox != null)IStyle (_checkBox).dispose ();
-		_checkBox = null;
+		if (_toggleButton != null)IStyle (_toggleButton).dispose ();
+		_toggleButton = null;
 		if (_textInput != null)IStyle (_textInput).dispose ();
 		_textInput = null;
 

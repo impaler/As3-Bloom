@@ -2,7 +2,7 @@ package bloom.themes.blue {
 
 import bloom.core.ComponentConstants;
 import bloom.core.ScaleBitmap;
-import bloom.style.brush.BMPBrush;
+import bloom.style.brush.BMPScale9Brush;
 import bloom.style.components.controls.ButtonBaseStyle;
 
 import flash.geom.Rectangle;
@@ -45,7 +45,7 @@ public class BlueButtonBase extends ButtonBaseStyle {
 		_scaleBitmaps[ComponentConstants.OVER] = over;
 		_scaleBitmaps[ComponentConstants.ACTIVATED] = down;
 		_scaleBitmaps[ComponentConstants.DISABLED] = disabled;
-		background = new BMPBrush (_scaleBitmaps);
+		background = new BMPScale9Brush (_scaleBitmaps);
 
 		defaultWidth = 100;
 		defaultHeight = 40;

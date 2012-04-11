@@ -16,7 +16,8 @@ public class DarkBasicTheme extends Theme {
 		slider = DarkSlider;
 		text = DarkLabel;
 		window = DarkWindow;
-		checkBox = DarkCheckBox;
+		toggleButton = DarkToggleButton;
+		checkBoxButton = DarkCheckBoxButton;
 
 	}
 

@@ -16,7 +16,8 @@ public class BlueTheme extends Theme {
 		slider = BlueSlider;
 		text = BlueLabel;
 		window = BlueWindow;
-
+		toggleButton = BlueToggleButton;
+		checkBoxButton = BlueCheckBoxButton;
 	}
 
 	///////////////////////////////////

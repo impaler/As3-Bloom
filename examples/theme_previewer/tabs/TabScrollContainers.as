@@ -19,7 +19,7 @@ public class TabScrollContainers extends Sprite {
 		var VScrollContent:HBox = new HBox ();
 		VScrollContent.maskContent=false;
 		for (var i:int = 0; i < 20; i ++) {
-			VScrollContent.addContent (ComponentUtils.createIconButtonTest ());
+			VScrollContent.addContent (ComponentUtils.createTestButton ());
 		}
 
 		var VScroll:ScrollContainer = new ScrollContainer ();
@@ -28,7 +28,7 @@ public class TabScrollContainers extends Sprite {
 
 		var HScrollContent:VBox = new VBox ();
 		for (var i:int = 0; i < 20; i ++) {
-			HScrollContent.addContent (ComponentUtils.createIconButtonTest ());
+			HScrollContent.addContent (ComponentUtils.createTestButton ());
 		}
 
 		var HScroll:ScrollContainer = new ScrollContainer ();
@@ -40,7 +40,7 @@ public class TabScrollContainers extends Sprite {
 		var GridScrollContent:FlowBox = new FlowBox ();
 		GridScrollContent.size (600,600);
 		for (var i:int = 0; i < 100; i ++) {
-			GridScrollContent.addContent (ComponentUtils.createIconButtonTest ());
+			GridScrollContent.addContent (ComponentUtils.createTestButton ());
 		}
 
 		var GridScroll:ScrollContainer = new ScrollContainer ();

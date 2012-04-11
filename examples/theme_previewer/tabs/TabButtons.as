@@ -20,10 +20,10 @@ public class TabButtons extends Sprite {
 		var ButtonLabel:Button = new Button (null,"ButtonExtended");
 
 		var ButtonLabelIcon:Button = new Button (null,"ButtonLabelIcon");
-		ButtonLabelIcon.icon = ComponentUtils.createIconButtonTest ();
+		ButtonLabelIcon.icon = ComponentUtils.createTestButton ();
 
 		var ButtonIcon:Button = new Button (null);
-		ButtonIcon.icon = ComponentUtils.createIconButtonTest ();
+		ButtonIcon.icon = ComponentUtils.createTestButton ();
 
 		var Content:VBox = new VBox (this);
 		Content.addContent (ButtonBasic);

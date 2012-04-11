@@ -12,7 +12,7 @@ import flash.events.Event;
 		private var _headerSize:Number;
         private var _headerPadding:Number;
 
-		private var _group:CheckBoxGroup;
+		private var _group:ToggleGroup;
 
 		private var _header:Container;
 		private var _target:TabBoxContent;
@@ -120,7 +120,7 @@ import flash.events.Event;
 			}
 		}
 
-		private function onTabChanged(object:CheckBoxGroup):void {
+		private function onTabChanged(object:ToggleGroup):void {
 			if (_target) {
 				_target.title.mouseEnabled = true;
 				_content.removeChild(_target.content);

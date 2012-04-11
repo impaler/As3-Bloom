@@ -19,19 +19,19 @@ public class TabContainers extends Sprite {
 
 		var fsfs:VBox = new VBox ();
 		for (var i:int = 0; i < 10; i ++) {
-			addRemoveHandler (fsfs.addContent (ComponentUtils.createIconButtonTest ()), fsfs);
+			addRemoveHandler (fsfs.addContent (ComponentUtils.createTestButton ()), fsfs);
 		}
 		Content.addContent (fsfs);
 
 		var HScrollContent:HBox = new HBox ();
 		for (var i:int = 0; i < 10; i ++) {
-			HScrollContent.addContent (ComponentUtils.createIconButtonTest ());
+			HScrollContent.addContent (ComponentUtils.createTestButton ());
 		}
 		Content.addContent (HScrollContent);
 
 		var VScrollContent:VBox = new VBox ();
 		for (var i:int = 0; i < 10; i ++) {
-			VScrollContent.addContent (ComponentUtils.createIconButtonTest ());
+			VScrollContent.addContent (ComponentUtils.createTestButton ());
 		}
 		Content.addContent (VScrollContent);
 
@@ -45,7 +45,7 @@ public class TabContainers extends Sprite {
 		TestFlowBox.autoWidth = false;
 		for (var i:int = 0; i < 13; i ++) {
 //			TestFlowBox.addContent (ComponentUtils.createIconButtonTest ());
-			addRemoveHandler (TestFlowBox.addContent (ComponentUtils.createIconButtonTest ()), TestFlowBox);
+			addRemoveHandler (TestFlowBox.addContent (ComponentUtils.createTestButton ()), TestFlowBox);
 		}
 
 		Content.addContent (TestFlowBox);

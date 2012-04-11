@@ -1,12 +1,11 @@
 package bloom.components.containers {
 
-import bloom.components.controls.Button;
 import bloom.components.controls.ButtonBase;
-import bloom.style.components.containers.WindowStyle;
 import bloom.core.Component;
 import bloom.core.ComponentConstants;
 import bloom.core.ObjectBase;
 import bloom.core.OmniCore;
+import bloom.style.components.containers.WindowStyle;
 
 import flash.events.Event;
 import flash.events.MouseEvent;
@@ -22,43 +21,33 @@ import org.osflash.signals.natives.NativeSignal;
  */
 public class Window extends Component {
 
-	public var liveResize:Boolean;
-	public var _autoOpen:Boolean;
+	protected var _liveResize:Boolean;
+	protected var _autoOpen:Boolean;
+	protected var _moveable:Boolean;
+	protected var _resizeable:Boolean;
+	protected var _titleText:String;
+	protected var _maxWidth:Number;
+	protected var _minWidth:Number;
+	protected var _maxHeight:Number;
+	protected var _minHeight:Number;
+	protected var _headerSize:Number;
+	protected var _footerSize:Number;
+	protected var _windowOpen:Boolean;
+	protected var _rect:Rectangle;
+	protected var _xOffset:Number;
+	protected var _yOffset:Number;
+	protected var _maximized:Boolean;
+	protected var _restoreWindow:ObjectBase;
 
-	private var _moveable:Boolean;
-	private var _resizeable:Boolean;
+	protected var _header:TitleBar;
+	protected var _footer:Container;
+	protected var _scaler:ButtonBase;
+	protected var _contentContainer:Container;
+	protected var _scrollContainer:ScrollContainer;
 
-	private var _titleText:String;
-
-	private var _maxWidth:Number;
-	private var _minWidth:Number;
-	private var _maxHeight:Number;
-	private var _minHeight:Number;
-
-	private var _headerSize:Number;
-	private var _footerSize:Number;
-
-	private var _rect:Rectangle;
-	private var _windowOpen:Boolean;
-
-	private var _header:TitleBar;
-	private var _contentContainer:Container;
-	private var _footer:Container;
-
-	private var _scaler:ButtonBase;
-
-	private var onHeaderClicked:NativeSignal;
-	private var onScalerClicked:NativeSignal;
-
-	private var xOffset:Number;
-	private var yOffset:Number;
-
-	private var _scrollContainer:ScrollContainer;
-	private var _maximized:Boolean;
-
-	private var _restoreWindow:ObjectBase;
-
-	private var onHeaderMaximize:NativeSignal;
+	protected var onHeaderClicked:NativeSignal;
+	protected var onScalerClicked:NativeSignal;
+	protected var onHeaderMaximize:NativeSignal;
 
 	public function Window (title:String = "",content:Container = null,autoOpen:Boolean = true,moveable:Boolean = true,
 	                        resizeable:Boolean = true) {
@@ -79,6 +68,7 @@ public class Window extends Component {
 	public function openWindow (e:* = null):void {
 		OmniCore.stage.addChild (this);
 		_windowOpen = true;
+		positionBehaviour ();
 	}
 
 	public function closeWindow (e:* = null):void {
@@ -96,38 +86,48 @@ public class Window extends Component {
 		_scrollContainer = new ScrollContainer ();
 		addChild (_scrollContainer);
 
-//		_scrollContainer.setScrollBar (true,true);
+		_scrollContainer.setScrollBar (true,true);
 		_scrollContainer.getScrollBar (ComponentConstants.HORIZONTALLY).height = windowStyle.scrollbarSize;
 		_scrollContainer.getScrollBar (ComponentConstants.VERTICALLY).width = windowStyle.scrollbarSize;
 		_scrollContainer.addContent (_contentContainer);
 		_scrollContainer.drawDirectly ();
 	}
 
-	public function onMaximize(e:*=null) :void {
-		if (!_maximized) {
+	public function onMaximize (e:* = null):void {
+		if (! _maximized) {
 			_maximized = true;
 			_restoreWindow = getDimensionObject;
 
-			OmniCore.onStageResize.add(maximize);
+			OmniCore.onStageResize.add (maximize);
 			onHeaderClicked.remove (onStartWindowDrag);
 			onScalerClicked.remove (onScalerMouseDown);
-			maximize();
+			maximize ();
 
 		} else {
 			_maximized = false;
-			OmniCore.onStageResize.remove(maximize);
+			OmniCore.onStageResize.remove (maximize);
 			onHeaderClicked.add (onStartWindowDrag);
 			onScalerClicked.add (onScalerMouseDown);
 
-			move(_restoreWindow.x,_restoreWindow.y);
-			size(_restoreWindow.width, _restoreWindow.height);
+			move (_restoreWindow.x,_restoreWindow.y);
+			size (_restoreWindow.width,_restoreWindow.height);
 		}
 
 	}
 
-	public function maximize (e:*=null):void {
-		move(0,0);
-		size(OmniCore.stage.stageWidth, OmniCore.stage.stageHeight);
+	public function maximize (e:* = null):void {
+		move (0,0);
+		size (OmniCore.stage.stageWidth,OmniCore.stage.stageHeight);
+	}
+
+	public function positionBehaviour ():void {
+		setToCentreTop ();
+	}
+
+	public function setToCentreTop (topPadding:Number = 30):void {
+		var Xpos:Number = ((OmniCore.stage.stageWidth * .5) - (this.width * .5));
+		move (Xpos,topPadding);
+
 	}
 
 	///////////////////////////////////
@@ -143,12 +143,16 @@ public class Window extends Component {
 		_minHeight = windowStyle.minHeight;
 		_headerSize = windowStyle.headerSize;
 		_footerSize = windowStyle.footerSize;
-		liveResize = false;
-		_maximized=false;
+		_liveResize = false;
+		_maximized = false;
 	}
 
 	override protected function onStyleChanged ():void {
+
 		_style = OmniCore.defaultTheme.windowStyle;
+		_scaler.style = windowStyle.scaler;
+		_scaler.size(windowStyle.scaler.defaultWidth, windowStyle.scaler.defaultHeight);
+
 		super.onStyleChanged ();
 	}
 
@@ -156,16 +160,15 @@ public class Window extends Component {
 		super.createAssets ();
 
 		_header = new TitleBar ();
-		addChild(_header);
+		addChild (_header);
 		_header.customStyle = true;
 		_header.tabEnabled = false;
-		_header.closeButton.mouseDown.add(closeWindow);
-		_header.maximizeButton.mouseDown.add(onMaximize);
-
-
+		_header.closeButton.mouseDown.add (closeWindow);
+		_header.maximizeButton.mouseDown.add (onMaximize);
 		_header.bg.doubleClickEnabled = true;
+
 		onHeaderMaximize = new NativeSignal (_header.bg,MouseEvent.DOUBLE_CLICK,MouseEvent);
-		onHeaderMaximize.add(onMaximize);
+		onHeaderMaximize.add (onMaximize);
 
 		_footer = new HBox (this);
 		_footer.customStyle = true;
@@ -174,6 +177,7 @@ public class Window extends Component {
 		_footer.autoHeight = false;
 
 		_scaler = new ButtonBase ();
+		_scaler.customStyle = true;
 		_scaler.buttonMode = true;
 		_scaler.tabEnabled = false;
 
@@ -203,16 +207,16 @@ public class Window extends Component {
 
 	private function onStartWindowDrag (e:MouseEvent):void {
 		if (moveable) {
-			xOffset = e.stageX - this.x;
-			yOffset = e.stageY - this.y;
+			_xOffset = e.stageX - this.x;
+			_yOffset = e.stageY - this.y;
 			OmniCore.onStageMouseMove.add (onWindowMouseMove);
 			OmniCore.onStageMouseUp.add (onWindowMouseUp);
 		}
 	}
 
 	private function onWindowMouseMove (e:MouseEvent):void {
-		this.x = e.stageX - xOffset;
-		this.y = e.stageY - yOffset;
+		this.x = e.stageX - _xOffset;
+		this.y = e.stageY - _yOffset;
 		e.updateAfterEvent ();
 	}
 
@@ -222,16 +226,16 @@ public class Window extends Component {
 	}
 
 	private function onScalerMouseDown (e:MouseEvent):void {
-		xOffset = e.stageX - _scaler.x;
-		yOffset = e.stageY - _scaler.y;
+		_xOffset = e.stageX - _scaler.x;
+		_yOffset = e.stageY - _scaler.y;
 		OmniCore.onStageMouseMove.add (onScalerMouseMove);
 		OmniCore.onStageMouseUp.add (onScalerMouseUp);
 	}
 
 	private function onScalerMouseMove (e:MouseEvent):void {
-		_scaler.x = e.stageX - xOffset;
-		_scaler.y = e.stageY - yOffset;
-		if (liveResize) size (_scaler.x + _footerSize,_scaler.y + _footerSize);
+		_scaler.x = e.stageX - _xOffset;
+		_scaler.y = e.stageY - _yOffset;
+		if (_liveResize) size (_scaler.x + _footerSize,_scaler.y + _footerSize);
 		e.updateAfterEvent ();
 	}
 
@@ -250,27 +254,7 @@ public class Window extends Component {
 		if (! _changed) return;
 		_changed = false;
 
-//			var style:WindowStyle = _style as WindowStyle;
-//			if (background) background.dispose();
-//			if (scaler) scaler.dispose();
-//
-//			_header.style = style.header;
-//			_footer.style = style.footer;
-//
-//			graphics.clear();
-//			style.background.setSize(_width, _height - _headerSize - _footerSize);
-//			background = style.background.bitmapData.clone();
-//			graphics.beginBitmapFill(background);
-//			graphics.drawRect(0, _headerSize, _width, _height - _headerSize - _footerSize);
-//			graphics.endFill();
-//
-//			_scaler.graphics.clear();
-//			style.scaler.setSize(_footerSize, _footerSize);
-//			scaler = style.scaler.bitmapData.clone();
-//			_scaler.graphics.beginBitmapFill(scaler);
-//			_scaler.graphics.drawRect(0, 0, _footerSize, _footerSize);
-//			_scaler.graphics.endFill();
-
+		windowStyle.update(this);
 		update ();
 	}
 
@@ -324,7 +308,7 @@ public class Window extends Component {
 	}
 
 	private function set title (title:String):void {
-		if ( title != _titleText ) {
+		if (title != _titleText) {
 			_titleText = title;
 			_header.title.text = _titleText;
 		}
@@ -451,7 +435,15 @@ public class Window extends Component {
 		}
 	}
 
-	///////////////////////////////////
+	public function get scaler ():ButtonBase {
+		return _scaler;
+	}
+
+	public function get scrollContainer ():ScrollContainer {
+		return _scrollContainer;
+	}
+
+///////////////////////////////////
 	// Dispose
 	///////////////////////////////////
 
@@ -483,6 +475,7 @@ public class Window extends Component {
 		return "[bloom.components.Window]";
 	}
 
+	public function set liveResize (liveResize:Boolean):void {_liveResize = liveResize;}
 }
 
 }

@@ -1,7 +1,5 @@
 package bloom.style.components {
 
-import bloom.style.*;
-
 import bloom.core.IComponent;
 import bloom.style.brush.Brush;
 

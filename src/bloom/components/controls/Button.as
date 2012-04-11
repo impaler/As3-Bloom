@@ -1,8 +1,9 @@
 package bloom.components.controls {
 
+import bloom.components.text.Label;
 import bloom.core.OmniCore;
 import bloom.style.components.controls.ButtonStyle;
-import bloom.components.text.Label;
+import bloom.utils.ComponentUtils;
 
 import flash.display.DisplayObject;
 import flash.display.DisplayObjectContainer;
@@ -21,14 +22,15 @@ public class Button extends ButtonBase {
 	protected var _icon:DisplayObject;
 	protected var _iconPadding:Number;
 
-	public function Button (p:DisplayObjectContainer = null,title:String = "") {
+	public function Button (p:DisplayObjectContainer = null,title:String = "",defaultIcon:DisplayObject = null) {
 		_titleText = title;
 		super (p);
+		if (defaultIcon) icon = defaultIcon;
 	}
 
 	override protected function initDefaultStyle ():void {
 		super.initDefaultStyle ();
-		_iconPadding = 12;
+		_iconPadding = 8;
 	}
 
 	override protected function onStyleChanged ():void {
@@ -67,11 +69,10 @@ public class Button extends ButtonBase {
 
 	protected function positionTitleandIcon (e:Event = null):void {
 		if (_icon) {
-			if (_icon.height > _height)
-				_icon.height = _height - 6;
-
+			ComponentUtils.resizeProportionaly (_icon,width,height - (_iconPadding * 2));
 			_icon.x = _iconPadding;
 			_icon.y = (_height - _icon.height) * 0.5;
+
 			if (_titleText != "") {
 				_title.x = _icon.x + _icon.width + _iconPadding + _title.padding.left;
 			} else {
@@ -81,6 +82,7 @@ public class Button extends ButtonBase {
 		} else {
 			_title.x = (_width - _title.width) * 0.5;
 		}
+
 		_title.y = (_height - _title.height) * 0.5;
 	}
 

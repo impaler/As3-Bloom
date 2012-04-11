@@ -1,16 +1,16 @@
 package bloom.themes.darkBasic {
 
+import bloom.core.ComponentConstants;
 import bloom.style.brush.ColorBrush;
 import bloom.style.components.controls.ButtonStyle;
-import bloom.core.ComponentConstants;
 import bloom.utils.ColorUtils;
 
 /**
- * DarkCheckBox
+ * DarkToggleButton
  */
-public class DarkCheckBox extends ButtonStyle {
+public class DarkCheckBoxButton extends ButtonStyle {
 
-	public function DarkCheckBox () {
+	public function DarkCheckBoxButton () {
 
 		var backgroundColors:Vector.<uint> = new Vector.<uint> (4,true);
 		backgroundColors[ComponentConstants.ACTIVE] = ColorUtils.BLACK;
@@ -31,7 +31,7 @@ public class DarkCheckBox extends ButtonStyle {
 	///////////////////////////////////
 
 	override public function toString ():String {
-		return "[bloom.styles.DarkButton]";
+		return "[bloom.styles.DarkToggleButton]";
 	}
 
 }

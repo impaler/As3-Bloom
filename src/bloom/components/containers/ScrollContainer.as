@@ -81,7 +81,7 @@ public class ScrollContainer extends Container {
 		if (! _changed) return;
 		_changed = false;
 
-		containerStyle.update (this);
+//		containerStyle.update (this);
 		setScrollBar (h_scrollBar_enabled,v_scrollBar_enabled);
 	}
 

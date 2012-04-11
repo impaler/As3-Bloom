@@ -1,7 +1,11 @@
 package {
 
+import bloom.components.controls.Button;
+import bloom.components.controls.ToggleButton;
 import bloom.core.OmniCore;
+import bloom.themes.blue.BlueTheme;
 import bloom.themes.darkBasic.DarkBasicTheme;
+import bloom.utils.ComponentUtils;
 
 import com.demonsters.debugger.MonsterDebugger;
 
@@ -27,6 +31,14 @@ public class Main extends Sprite {
 
 		MonsterDebugger.initialize (this);
 		MonsterDebugger.trace (this,"Hello World!");
+
+
+//		var butn:Button = new Button(this, "test icon");
+//		var butn:ToggleButton = new ToggleButton(this, "test icon");
+//		butn.icon = ComponentUtils.createTestIcon(100,100);
+//		butn.icon = ComponentUtils.createTestIcon(10,10);
+//		butn.width = 240;
+
 
 //		var thing:TabContainers = new TabContainers ();
 //		addChild (thing);

@@ -9,15 +9,15 @@ import org.osflash.signals.Signal;
 /**
  * CheckBoxGroup
  */
-public class CheckBoxGroup extends Signal {
+public class ToggleGroup extends Signal {
 
 	private var _content:Array;
 
 	private var _index:int;
 	private var _target:ToggleButton;
 
-	public function CheckBoxGroup (index:int,...rest) {
-		super (CheckBoxGroup);
+	public function ToggleGroup (index:int,...rest) {
+		super (ToggleGroup);
 
 		_index = index;
 
