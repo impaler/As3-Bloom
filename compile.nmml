@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+
+    <meta title="Omni Components" package="omni.examples.components" version="0.0.3" />
+
+   	<app file="HelloWorld" main="omni.examples.components.HelloWorld" path="export" />
+
+    <window width="600" height="600" fps="60" background="0x1133ff"/>
+    <window orientation="landscape" vsync="true" antialiasing="0" if="cpp" />
+    
+    <classpath name="source" />
+
+    <assets path="assets/themes" />
+    <assets path="assets/tests" />
+            
+    <icon name="assets/nme.svg" />
+
+    <haxelib name="nme" />
+    <haxelib name="actuate" />
+    <!--<haxelib name="tilelayer" />-->
+    <haxelib name="hxcpp" />
+    <haxedef name="HXCPP_DEBUGGER" />
+
+   	<ndll name="std" />
+   	<ndll name="regexp" />
+   	<ndll name="zlib" />
+   	<ndll name="nme" haxelib="nme" />
+
+    <set name="js-modern" />
+    <set name="dead-code-elimination" />
+    
+</project>
